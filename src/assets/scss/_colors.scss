@@ -1,0 +1,87 @@
+// ---------- Base ----------
+:root {
+	// Elementary
+	--color-light: #ffffff;
+	--color-light-faded: #eeeeee;
+	--color-dark: #0d0f11;
+	--color-dark-faded: #202b35;
+
+	// Brand
+	--color-primary: #0b3567;
+	--color-primary-contrast: #fefefe;
+	--color-primary-variant: #ade8f4;
+	--color-primary-variant-contrast: #1a2129;
+	--color-secondary: #bbadff;
+	--color-secondary-contrast: #160a22;
+	--color-secondary-variant: #c4c7ff;
+	--color-secondary-variant-contrast: #18192e;
+
+	// Helpers
+	--color-transparent: transparent;
+	--color-hyperlink: #56abff;
+	--color-divider: #d2d0d0;
+	--color-disabled: #a1a1a1;
+	--color-offline: #e8eae6;
+
+	// Indicators
+	--color-error: #ff7878;
+	--color-error-variant: #fc9a9a;
+	--color-success: #71e2b2;
+	--color-success-variant: #96f8cf;
+	--color-warning: #ffcc1d;
+	--color-warning-variant: #fad459;
+	--color-information: #8dc6ff;
+	--color-information-variant: #a6ccf1;
+}
+
+// ---------- Semantic Colors - CSS Variables ----------
+:root {
+	// Elementary
+	--color-background: var(--color-light);
+	--color-background-faded: var(--color-light-faded);
+	--color-contrast: var(--color-dark);
+	--color-contrast-faded: var(--color-dark-faded);
+}
+// @media (prefers-color-scheme: dark) {
+// 	:root {
+// 		// Elementary
+// 		--color-background: var(--color-dark);
+// 		--color-background-faded: var(--color-dark-faded);
+// 		--color-contrast: var(--color-light);
+// 		--color-contrast-faded: var(--color-light-faded);
+// 	}
+// }
+
+// ---------- SCSS Variables ----------
+// Elementary
+$color-background: var(--color-background);
+$color-background-faded: var(--color-background-faded);
+$color-contrast: var(--color-contrast);
+$color-contrast-faded: var(--color-contrast-faded);
+
+// Brand
+$color-primary: var(--color-primary);
+$color-primary-contrast: var(--color-primary-contrast);
+$color-primary-variant: var(--color-primary-variant);
+$color-primary-variant-contrast: var(--color-primary-variant-contrast);
+$color-secondary: var(--color-secondary);
+$color-secondary-contrast: var(--color-secondary-contrast);
+$color-secondary-variant: var(--color-secondary-variant);
+$color-secondary-variant-contrast: var(--color-secondary-variant-contrast);
+
+// Helpers
+$color-transparent: var(--color-transparent);
+$color-hyperlink: var(--color-hyperlink);
+$color-divider: var(--color-divider);
+$color-disabled: var(--color-disabled);
+$color-offline: var(--color-offline);
+
+// Indicators
+$color-error: var(--color-error);
+$color-error-variant: var(--color-error-variant);
+$color-success: var(--color-success);
+$color-success-variant: var(--color-success-variant);
+$color-warning: var(--color-warning);
+$color-warning-variant: var(--color-warning-variant);
+$color-information: var(--color-information);
+$color-information-variant: var(--color-information-variant);

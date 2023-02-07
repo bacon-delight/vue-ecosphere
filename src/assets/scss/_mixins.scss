@@ -1,0 +1,85 @@
+// Scrollbar
+@mixin scrollbar-vertical {
+	&::-webkit-scrollbar-track {
+		background: $color-transparent;
+	}
+
+	&::-webkit-scrollbar {
+		width: 6px;
+		background-color: $color-transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $color-information;
+		border-radius: 16px;
+	}
+}
+
+// Hue Modifiers
+@mixin hue-background-modifiers {
+	&--primary {
+		background: $color-primary;
+	}
+
+	&--primary-variant {
+		background: $color-primary-variant;
+	}
+
+	&--secondary {
+		background: $color-secondary;
+	}
+
+	&--secondary-variant {
+		background: $color-secondary-variant;
+	}
+
+	&--error {
+		background: $color-error;
+	}
+
+	&--success {
+		background: $color-success;
+	}
+
+	&--warning {
+		background: $color-warning;
+	}
+
+	&--information {
+		background: $color-information;
+	}
+}
+
+@mixin hue-color-modifiers {
+	&--primary {
+		color: $color-primary;
+	}
+
+	&--primary-variant {
+		color: $color-primary-variant;
+	}
+
+	&--secondary {
+		color: $color-secondary;
+	}
+
+	&--secondary-variant {
+		color: $color-secondary-variant;
+	}
+
+	&--error {
+		color: $color-error;
+	}
+
+	&--success {
+		color: $color-success;
+	}
+
+	&--warning {
+		color: $color-warning;
+	}
+
+	&--information {
+		color: $color-information;
+	}
+}
