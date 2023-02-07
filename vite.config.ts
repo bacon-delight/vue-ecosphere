@@ -5,10 +5,17 @@ import path from "node:path";
 
 export default defineConfig(({ mode }) => {
 	process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-	console.log(process.env.VITE_PACKAGE_MODE);
 
 	return {
-		plugins: [vue()],
+		plugins: [
+			vue({
+				template: {
+					transformAssetUrls: {
+						includeAbsolute: false,
+					},
+				},
+			}),
+		],
 		resolve: {
 			alias: {
 				"@": fileURLToPath(new URL("./src", import.meta.url)),
