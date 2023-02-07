@@ -1,6 +1,6 @@
 <template lang="pug">
 .layout
-	SidebarNavigation(:options="options")
+	SidebarNavigation.layout__sidebar(:options="options")
 	.layout__body
 		.layout__navbar Navbar
 		.layout__content
@@ -39,8 +39,13 @@ export default defineComponent({
 		overflow: hidden;
 	}
 
+	&__sidebar {
+		min-width: 200px;
+	}
+
 	&__content {
 		overflow-y: auto;
+		@include scrollbar-vertical;
 	}
 }
 </style>

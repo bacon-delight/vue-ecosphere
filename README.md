@@ -1,52 +1,72 @@
-# vue-ecosphere
+<p align="center"><img src="public/logo.png" width="128" /></p>
+<h3 align="center">Ecosphere Design System | Ecosphere 设计系统</h3>
+<p  align="center">A modern lightweight design system, built on the principles of minimalism with inspirations from Scandinavian architecture, handcrafted for data intensive applications.</p>
 
-This template should help get you started developing with Vue 3 in Vite.
+<p align="center">
+<img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/bacon-delight/vue-ecosphere?label=Maintainability&style=flat-square">
+<img alt="Code Climate technical debt" src="https://img.shields.io/codeclimate/tech-debt/bacon-delight/vue-ecosphere?label=Technical%20Debt&style=flat-square">
+<img alt="Snyk Vulnerabilities for GitHub Repo" src="https://img.shields.io/snyk/vulnerabilities/github/bacon-delight/vue-ecosphere?label=Vulnerabilities&style=flat-square">
+<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/bacon-delight/vue-ecosphere?label=Languages&style=flat-square">
+</p>
 
-## Recommended IDE Setup
+<p align="center">
+  <a href="https://www.npmjs.com/package/vue-ecosphere">
+    <img alt="NPM" src="https://nodei.co/npm/vue-ecosphere.png?downloads=true">
+  </a>
+</p>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Translations:
 
-## Type Support for `.vue` Imports in TS
+-   [中文版](#中文版)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+##### Resources:
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+-   [Figma Kit](https://www.figma.com/community/file/1198179297726846102)
+-   [Homepage](https://ecosphere.dev/)
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+<br/>
 
-## Customize configuration
+### Usage
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+Install
 
 ```sh
-npm install
+npm install vue-ecosphere
 ```
 
-### Compile and Hot-Reload for Development
+Import the plugin in `main.js`
 
-```sh
-npm run dev
+```js
+import { createApp } from "vue";
+import Ecosphere from "vue-ecosphere";
+
+const app = createApp(App);
+app.use(Ecosphere);
+app.mount("#app");
 ```
 
-### Type-Check, Compile and Minify for Production
+<br/>
+
+# 中文版
+
+> 我在学习中文，但是我的中文还不好。请原谅我的错误。:sweat_smile:
+
+### 用法
+
+安装
 
 ```sh
-npm run build
+# 最新稳定版
+npm install vue-ecosphere
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+在`main.js`中添加一些
 
-```sh
-npm run test:unit
-```
+```js
+import { createApp } from "vue";
+import Ecosphere from "vue-ecosphere";
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+const app = createApp(App);
+app.use(Ecosphere);
+app.mount("#app");
 ```

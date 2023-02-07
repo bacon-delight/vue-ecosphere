@@ -3,10 +3,10 @@ import type { menu_item } from "@/plugin/utilities/types.interface";
 const navigation_options: menu_item[] = [
 	{
 		label: "Introduction",
+		active: true,
 	},
 	{
 		label: "Installation",
-		active: true,
 	},
 	{
 		label: "Configuration",
