@@ -52,6 +52,14 @@
 // 	}
 // }
 
+body.ecosphere-dark {
+	// Elementary
+	--color-background: var(--color-dark);
+	--color-background-faded: var(--color-dark-faded);
+	--color-contrast: var(--color-light);
+	--color-contrast-faded: var(--color-light-faded);
+}
+
 // ---------- SCSS Variables ----------
 // Elementary
 $color-background: var(--color-background);

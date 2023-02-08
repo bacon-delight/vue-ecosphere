@@ -1,12 +1,19 @@
 import type { menu_item } from "@/plugin/utilities/types.interface";
+import router from "@/router/index";
 
 const navigation_options: menu_item[] = [
 	{
 		label: "Introduction",
-		active: true,
+		active: router.currentRoute.value.path === "/introduction",
+		action: () => {
+			router.push("/introduction");
+		},
 	},
 	{
 		label: "Installation",
+		action: () => {
+			router.push("/installation");
+		},
 	},
 	{
 		label: "Configuration",
@@ -53,57 +60,6 @@ const navigation_options: menu_item[] = [
 			},
 			{
 				label: "Link",
-			},
-		],
-	},
-	{
-		label: "Data Entry",
-		expanded: true,
-		children: [
-			{
-				label: "Input",
-			},
-			{
-				label: "Textarea",
-			},
-			{
-				label: "Dropdown",
-			},
-			{
-				label: "Radio",
-			},
-			{
-				label: "Checkbox",
-			},
-			{
-				label: "Switch",
-			},
-		],
-	},
-	{
-		label: "Configuration",
-	},
-	{
-		label: "Data Entry",
-		expanded: true,
-		children: [
-			{
-				label: "Input",
-			},
-			{
-				label: "Textarea",
-			},
-			{
-				label: "Dropdown",
-			},
-			{
-				label: "Radio",
-			},
-			{
-				label: "Checkbox",
-			},
-			{
-				label: "Switch",
 			},
 		],
 	},

@@ -10,14 +10,19 @@ const router = createRouter({
 			component: LandingPage,
 		},
 		{
-			path: "/introduction",
-			name: "IntroductionLayout",
+			path: "/",
+			name: "CommonLayout",
 			component: () => import("../views/CommonLayout.vue"),
 			children: [
 				{
-					path: "",
+					path: "/introduction",
 					name: "Introduction",
 					component: () => import("../views/IntroductionPage.vue"),
+				},
+				{
+					path: "/installation",
+					name: "Installation",
+					component: () => import("../views/InstallationPage.vue"),
 				},
 			],
 		},

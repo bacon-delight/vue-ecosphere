@@ -11,3 +11,8 @@ export type hue =
 	| "success"
 	| "warning"
 	| "information";
+
+export interface unknown_object {
+	// eslint-disable-next-line
+	[key: string]: any;
+}

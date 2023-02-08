@@ -4,8 +4,14 @@ RouterView
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import colors from "@/plugin/utilities/defaults/colors";
 
-export default defineComponent({});
+export default defineComponent({
+	mounted() {
+		// this.$ecosphere.theming.setColors(colors);
+		console.log(this.$route);
+	},
+});
 </script>
 
 <style lang="scss" scoped>

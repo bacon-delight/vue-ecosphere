@@ -66,6 +66,9 @@ export default defineComponent({
 			if (this.option.children) {
 				this.showChildren = !this.showChildren;
 			}
+			if (this.option.action) {
+				this.option.action();
+			}
 		},
 	},
 	mounted() {
@@ -83,6 +86,7 @@ export default defineComponent({
 	padding: 0.25rem 0.5rem;
 	border-radius: $border-radius-standard;
 	cursor: pointer;
+	transition: $transition-standard;
 
 	&__label {
 		white-space: nowrap;
@@ -126,7 +130,8 @@ export default defineComponent({
 	&__bar {
 		border-radius: $border-radius-standard;
 		width: 0.25rem;
-		@include hue-background-modifiers;
+		// @include hue-background-modifiers;
+		background: $color-divider;
 	}
 }
 </style>

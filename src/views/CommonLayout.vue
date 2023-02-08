@@ -11,16 +11,17 @@
 import { defineComponent } from "vue";
 import SidebarNavigation from "@/plugin/navigation/SidebarNavigation.vue";
 import navigation_options from "@/assets/utilities/navigation_options";
+import type { menu_item } from "@/plugin/utilities/types.interface";
 
 export default defineComponent({
 	name: "CommonLayout",
 	components: {
 		SidebarNavigation,
 	},
-	data() {
-		return {
-			options: navigation_options,
-		};
+	computed: {
+		options(): menu_item[] {
+			return navigation_options;
+		},
 	},
 });
 </script>
