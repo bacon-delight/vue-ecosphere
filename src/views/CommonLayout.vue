@@ -2,7 +2,8 @@
 .layout
 	SidebarNavigation.layout__sidebar(:options="options", :skeleton="true")
 	.layout__body
-		NavigationBar.layout__navbar(:options="[]", :branding="branding")
+		.layout__navbar
+			NavigationBar(:options="[]", :branding="branding")
 		.layout__content
 			router-view
 </template>
@@ -39,7 +40,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .layout {
 	height: 100vh;
 	width: 100vw;
@@ -52,6 +53,7 @@ export default defineComponent({
 	}
 
 	&__body {
+		height: 100%;
 		display: grid;
 		grid-template-rows: min-content 1fr;
 		overflow: hidden;
@@ -68,6 +70,42 @@ export default defineComponent({
 	&__content {
 		overflow-y: auto;
 		@include scrollbar-vertical;
+	}
+}
+
+.wrapper {
+	display: block;
+	width: $reading-width-standard;
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 1rem;
+
+	&__title {
+		@include header-2;
+	}
+
+	&__body {
+		display: block;
+	}
+}
+
+.section {
+	margin: 1rem 0 1.5rem;
+
+	&__title {
+		@include header-4;
+	}
+
+	&__subtitle {
+		@include header-6;
+	}
+
+	&__flex {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 1rem;
+		row-gap: 1rem;
+		align-items: center;
 	}
 }
 </style>

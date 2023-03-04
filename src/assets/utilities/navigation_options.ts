@@ -89,6 +89,10 @@ function navigation_options(): menu_item[] {
 			children: [
 				{
 					label: "Button",
+					active: router.currentRoute.value.path === "/button",
+					action: () => {
+						router.push("/button");
+					},
 				},
 				{
 					label: "Link",

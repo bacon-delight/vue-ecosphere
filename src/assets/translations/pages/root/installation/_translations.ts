@@ -1,8 +1,9 @@
 import content_en from "./en.md?raw";
+import interpolateLiterals from "@/assets/translations/interpolateLiterals";
 
 const en = {
 	title: "Installation",
-	content: content_en,
+	content: interpolateLiterals(content_en),
 };
 
 export default function translations(locale: string) {

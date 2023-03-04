@@ -62,6 +62,10 @@ body.ecosphere-dark {
 
 // ---------- SCSS Variables ----------
 // Elementary
+$color-light: var(--color-light);
+$color-light-faded: var(--color-light-faded);
+$color-dark: var(--color-dark);
+$color-dark-faded: var(--color-dark-faded);
 $color-background: var(--color-background);
 $color-background-faded: var(--color-background-faded);
 $color-contrast: var(--color-contrast);

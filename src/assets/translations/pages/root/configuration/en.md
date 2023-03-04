@@ -2,7 +2,7 @@ Once the plugin is imported, you'll have access to a global property `$ecosphere
 
 #### Theme Helpers
 
-```
+```bash
 $ecosphere.theming
 ```
 

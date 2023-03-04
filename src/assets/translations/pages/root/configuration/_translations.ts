@@ -1,15 +1,10 @@
 import content_en from "./en.md?raw";
-// import content_zh from "./zh.md?raw";
+import interpolateLiterals from "@/assets/translations/interpolateLiterals";
 
 const en = {
-	title: "Introduction",
-	content: content_en,
+	title: "Configuration",
+	content: interpolateLiterals(content_en),
 };
-
-// const zh = {
-// 	title: "Introduction ZH",
-// 	content: content_zh,
-// };
 
 export default function translations(locale: string) {
 	switch (locale) {

@@ -16,6 +16,48 @@
 }
 
 // Hue Modifiers
+@mixin hue-modifiers {
+	&--primary {
+		background: $color-primary;
+		color: $color-primary-variant;
+	}
+
+	&--primary-variant {
+		background: $color-primary-variant;
+		color: $color-primary;
+	}
+
+	&--secondary {
+		background: $color-secondary;
+		color: $color-secondary-variant;
+	}
+
+	&--secondary-variant {
+		background: $color-secondary-variant;
+		color: $color-secondary;
+	}
+
+	&--error {
+		background: $color-error;
+		color: $color-error-variant;
+	}
+
+	&--success {
+		background: $color-success;
+		color: $color-success-variant;
+	}
+
+	&--warning {
+		background: $color-warning;
+		color: $color-warning-variant;
+	}
+
+	&--information {
+		background: $color-information;
+		color: $color-information-variant;
+	}
+}
+
 @mixin hue-background-modifiers {
 	&--primary {
 		background: $color-primary;

@@ -37,6 +37,12 @@ const router = createRouter({
 					name: "Types",
 					component: () => import("../views/root/TypesPage.vue"),
 				},
+				{
+					path: "/button",
+					name: "Button",
+					component: () =>
+						import("../views/call_to_actions/ButtonPage.vue"),
+				},
 			],
 		},
 	],

@@ -17,20 +17,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.wrapper {
-	display: block;
-	width: $reading-width-standard;
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 1rem;
-
-	&__title {
-		@include header-2;
-	}
-
-	&__body {
-		display: block;
-	}
-}
-</style>
+<style lang="scss" scoped></style>

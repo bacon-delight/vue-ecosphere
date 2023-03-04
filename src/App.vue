@@ -13,10 +13,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.wrapper {
-	height: 100vh;
-	overflow: hidden;
-	background: $color-background-faded;
-}
-</style>
+<style lang="scss" scoped></style>
