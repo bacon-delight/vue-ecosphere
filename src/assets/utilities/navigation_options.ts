@@ -28,6 +28,14 @@ function navigation_options(): menu_item[] {
 			},
 		},
 		{
+			label: "Types",
+			icon: "ri-code-s-slash-line",
+			active: router.currentRoute.value.path === "/types",
+			action: () => {
+				router.push("/types");
+			},
+		},
+		{
 			label: "Design Language",
 			icon: "ri-pencil-line",
 			expanded: true,

@@ -20,7 +20,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .wrapper {
 	display: block;
-	width: 600px;
+	width: $reading-width-standard;
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 1rem;

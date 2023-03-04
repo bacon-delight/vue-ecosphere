@@ -4,7 +4,7 @@
 
 $font-general: "Work Sans", -apple-system, sans-serif;
 $font-serif: "Libre Baskerville", serif;
-$font-monospace: "Courier New", monospace;
+$font-monospace: "Roboto Mono", monospace;
 
 @mixin font-light {
 	font-family: $font-general;

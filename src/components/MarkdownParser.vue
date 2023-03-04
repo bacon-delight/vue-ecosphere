@@ -1,10 +1,11 @@
 <template lang="pug">
-.markdown(v-html="parsedContent")
+markdown.markdown(:source="content")
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
-import { marked } from "marked";
+import markdown from "vue3-markdown-it";
+import "highlight.js/styles/obsidian.css";
 
 export default defineComponent({
 	name: "MarkdownParser",
@@ -14,10 +15,8 @@ export default defineComponent({
 			default: "# Markdown",
 		},
 	},
-	computed: {
-		parsedContent() {
-			return marked(this.content);
-		},
+	components: {
+		markdown,
 	},
 });
 </script>
@@ -46,7 +45,76 @@ export default defineComponent({
 		@include header-6;
 	}
 	p {
+		margin: 0.5rem 0;
 		@include font-light;
+	}
+	code {
+		padding: 0 0.5rem;
+		@include font-monospace;
+		color: $color-contrast;
+		background: $color-background;
+		border-radius: $border-radius-standard;
+		border: 1px solid $color-offline;
+		font-size: 0.85em;
+	}
+
+	a {
+		text-decoration: none;
+		color: $color-hyperlink;
+
+		code {
+			color: $color-hyperlink;
+		}
+	}
+
+	.class_ {
+		color: $color-success;
+	}
+
+	.hljs-keyword {
+		color: $color-contrast;
+	}
+
+	.hljs-string {
+		color: $color-hyperlink;
+	}
+
+	table {
+		width: 100%;
+		margin: 1rem auto;
+		min-width: 500px;
+		overflow-x: auto;
+	}
+
+	th {
+		@include header-6;
+		text-align: left;
+	}
+
+	td {
+		@include font-light;
+	}
+
+	tr {
+		box-shadow: 0 -1px 0 rgba(#868686, 0.3) inset;
+	}
+
+	th,
+	td {
+		padding: 0.25rem 0.5rem;
+		min-width: 100px;
+
+		// &:last-child {
+		// 	min-width: 200px;
+		// }
+
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
 	}
 }
 </style>

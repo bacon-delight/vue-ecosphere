@@ -26,6 +26,17 @@ const router = createRouter({
 					component: () =>
 						import("../views/root/InstallationPage.vue"),
 				},
+				{
+					path: "/configuration",
+					name: "Configuration",
+					component: () =>
+						import("../views/root/ConfigurationPage.vue"),
+				},
+				{
+					path: "/types",
+					name: "Types",
+					component: () => import("../views/root/TypesPage.vue"),
+				},
 			],
 		},
 	],

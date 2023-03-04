@@ -23,7 +23,7 @@ export default defineComponent({
 	data() {
 		return {
 			branding: {
-				logo: "logo.png",
+				logo: "./logo.png",
 				label: this.$t("title"),
 				action: () => {
 					this.$router.push("/");

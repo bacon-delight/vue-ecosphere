@@ -18,6 +18,7 @@ export interface unknown_object {
 	[key: string]: any;
 }
 
+// Plugin Type Definition
 export interface ecosphere {
 	theming: {
 		setTheme: (theme?: theme) => void;
