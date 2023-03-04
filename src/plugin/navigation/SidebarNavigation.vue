@@ -1,6 +1,11 @@
 <template lang="pug">
-.menu
-	MenuItem(v-for="option in options", :option="option")
+.sidebar
+	MenuItem(
+		v-for="option in options",
+		:option="option",
+		:hue="hue",
+		:skeleton="skeleton"
+	)
 </template>
 
 <script lang="ts">
@@ -24,6 +29,10 @@ export default defineComponent({
 			type: String as PropType<theme>,
 			default: "auto",
 		},
+		skeleton: {
+			type: Boolean as PropType<boolean>,
+			default: true,
+		},
 	},
 	components: {
 		MenuItem,
@@ -32,7 +41,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.menu {
+.sidebar {
 	height: 100%;
 	overflow-y: auto;
 	background: $color-background;
@@ -41,6 +50,8 @@ export default defineComponent({
 	flex-direction: column;
 	row-gap: 0.25rem;
 	padding: 0.5rem;
-	@include scrollbar-vertical;
+	// @include scrollbar-vertical;
+	border-left: 1px solid $color-offline;
+	border-right: 1px solid $color-offline;
 }
 </style>

@@ -24,7 +24,9 @@
 //- Nested Menu
 .children(v-if="option.children && showChildren")
 	//- Vertical Bar
-	.children__bar(:class="`children__bar--${hue}`")
+	.children__bar(
+		:class="[`children__bar--${hue}`, { 'children__bar--hidden': !skeleton }]"
+	)
 
 	//- Children
 	.children__items
@@ -51,6 +53,10 @@ export default defineComponent({
 		theme: {
 			type: String as PropType<theme>,
 			default: "auto",
+		},
+		skeleton: {
+			type: Boolean as PropType<boolean>,
+			default: true,
 		},
 	},
 	data() {
@@ -118,8 +124,8 @@ export default defineComponent({
 .children {
 	display: grid;
 	grid-template-columns: min-content 1fr;
-	padding-left: 0.5rem;
-	column-gap: 0.25rem;
+	padding-left: 0.8rem;
+	column-gap: 0.5rem;
 
 	&__items {
 		display: flex;
@@ -130,8 +136,13 @@ export default defineComponent({
 	&__bar {
 		border-radius: $border-radius-standard;
 		width: 0.25rem;
-		// @include hue-background-modifiers;
+		@include hue-background-modifiers;
 		background: $color-divider;
+		opacity: 0.25;
+
+		&--hidden {
+			opacity: 0;
+		}
 	}
 }
 </style>

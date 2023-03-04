@@ -5,12 +5,12 @@
 	}
 
 	&::-webkit-scrollbar {
-		width: 6px;
+		width: 4px;
 		background-color: $color-transparent;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: $color-information;
+		background: $color-divider;
 		border-radius: 16px;
 	}
 }

@@ -1,4 +1,5 @@
 export * from "./types/menu.interface";
+export * from "./types/navbar.interface";
 
 // Common Types
 export type theme = "auto" | "light" | "dark" | "invert";

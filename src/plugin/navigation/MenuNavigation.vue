@@ -1,6 +1,6 @@
 <template lang="pug">
 .menu
-	MenuItem(v-for="option in options", :option="option")
+	MenuItem(v-for="option in options", :option="option", :skeleton="skeleton")
 </template>
 
 <script lang="ts">
@@ -15,6 +15,10 @@ export default defineComponent({
 		options: {
 			type: Array as PropType<menu_item[]>,
 			required: true,
+		},
+		skeleton: {
+			type: Boolean as PropType<boolean>,
+			default: true,
 		},
 	},
 	components: {

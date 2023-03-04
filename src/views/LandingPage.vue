@@ -4,9 +4,9 @@ DynamicBackground.background
 	.wrapper__navbar &nbsp;
 	.wrapper__content.content
 		img.content__logo(src="logo.png")
-		.content__header Ecosphere Design System
-		.content__subheader Simple • Modern • Delightgul
-		.content__description A modern lightweight design system, built on the principles of minimalism with inspirations from Scandinavian architecture, handcrafted for data intensive applications
+		.content__header {{ $t("pages.landing.title") }}
+		.content__subheader {{ $t("pages.landing.subtitle") }}
+		.content__description {{ $t("pages.landing.description") }}
 </template>
 
 <script lang="ts">
