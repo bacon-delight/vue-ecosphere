@@ -42,7 +42,7 @@ export default defineComponent({
 		},
 		iconPosition: {
 			type: String as PropType<button_icon_position>,
-			default: "right",
+			default: "after",
 		},
 	},
 	components: {

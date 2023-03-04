@@ -1,28 +1,37 @@
 <template lang="pug">
 DynamicBackground.background
-.wrapper
-	.wrapper__navbar &nbsp;
-	.wrapper__content.content
+.container
+	.container__navbar &nbsp;
+	.container__content.content
 		img.content__logo(src="logo.png")
 		.content__header {{ $t("pages.landing.title") }}
 		.content__subheader {{ $t("pages.landing.subtitle") }}
 		.content__description {{ $t("pages.landing.description") }}
+		.content__actions
+			ButtonComponent(
+				label="Get Started",
+				@click="$router.push('/introduction')",
+				icon="ri-arrow-right-line",
+				size="sm"
+			)
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import DynamicBackground from "@/components/DynamicBackground.vue";
+import ButtonComponent from "@/plugin/call-to-action/ButtonComponent.vue";
 
 export default defineComponent({
 	name: "LandingPage",
 	components: {
 		DynamicBackground,
+		ButtonComponent,
 	},
 });
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+.container {
 	height: 100vh;
 	overflow: hidden;
 	color: $color-contrast;
@@ -79,6 +88,12 @@ export default defineComponent({
 		margin-top: 1rem;
 		padding: 0 1.5rem;
 		max-width: 600px;
+	}
+
+	&__actions {
+		margin-top: 0.5rem;
+		display: flex;
+		align-items: center;
 	}
 }
 </style>
