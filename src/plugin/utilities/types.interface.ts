@@ -17,3 +17,10 @@ export interface unknown_object {
 	// eslint-disable-next-line
 	[key: string]: any;
 }
+
+export interface ecosphere {
+	theming: {
+		setTheme: (theme?: theme) => void;
+		setColors: (colors: unknown_object) => void;
+	};
+}
