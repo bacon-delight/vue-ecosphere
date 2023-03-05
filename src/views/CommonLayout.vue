@@ -65,7 +65,7 @@ export default defineComponent({
 		overflow: hidden;
 
 		@include respond-below(sm) {
-			grid-template-columns: 1fr;
+			// grid-template-columns: 1fr;
 		}
 	}
 
@@ -84,7 +84,8 @@ export default defineComponent({
 		}
 
 		@include respond-below(sm) {
-			display: none;
+			padding: 0;
+			// display: none;
 		}
 	}
 
