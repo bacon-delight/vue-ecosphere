@@ -1,18 +1,18 @@
 <template lang="pug">
 .input(:class="[{ 'input--disabled': disabled }]")
 	//- Input Label
-	.input__label {{ label }}
+	.input__label(:class="[`input__label--${state}`]") {{ label }}
 
 	//- Input Wrapper
 	.input__wrapper
 		//- Input Field
 		input.input__field(
-			:class="[`input__field--${status}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]",
+			:class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]",
 			:type="type",
 			:placeholder="placeholder",
 			:disabled="disabled",
-			@keyup="handleUpdate",
-			v-model="value"
+			v-model="value",
+			@input="handleUpdate"
 		)
 
 		//- Clear Icon
@@ -24,7 +24,13 @@
 		)
 
 	//- Assistive Text
-	.input__assistive-text {{ assistiveText }}
+	.input__texts
+		.input__alert-message(
+			v-if="alertMessage && state !== 'default'",
+			:class="[`input__alert-message--${state}`]"
+		) {{ alertMessage }}
+		.input__assistive-text(v-else) {{ assistiveText }}
+		.input__assistive-text.input__length(v-if="showLength") {{ inputLengthInformation }}
 </template>
 
 <script lang="ts">
@@ -32,13 +38,17 @@ import { defineComponent } from "vue";
 import type { PropType } from "vue";
 import type {
 	input_type,
-	input_status,
+	input_state,
 } from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
 	name: "InputField",
 	props: {
+		modelValue: {
+			type: [String, Number, null] as PropType<string | number | null>,
+			default: "",
+		},
 		label: {
 			type: String as PropType<string>,
 			default: "",
@@ -63,13 +73,25 @@ export default defineComponent({
 			type: String as PropType<string>,
 			default: "",
 		},
-		status: {
-			type: String as PropType<input_status>,
-			default: "none",
+		state: {
+			type: String as PropType<input_state>,
+			default: "default",
 		},
 		allowClear: {
 			type: Boolean as PropType<boolean>,
 			default: false,
+		},
+		maxLength: {
+			type: [Number, null] as PropType<number | null>,
+			default: null,
+		},
+		showLength: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
+		alertMessage: {
+			type: String as PropType<string>,
+			default: "",
 		},
 	},
 	components: {
@@ -77,17 +99,35 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			value: null as null | string | number,
+			value: "" as string | number,
 		};
+	},
+	mounted() {
+		if (this.modelValue) {
+			this.value = this.modelValue;
+		}
 	},
 	methods: {
 		handleUpdate(): void {
-			console.log(this.value);
-			console.log(typeof this.value);
+			if (
+				this.maxLength !== null &&
+				String(this.value).length > this.maxLength
+			) {
+				this.value = this.value.toString().slice(0, -1);
+			}
+			this.$emit("update:modelValue", this.value);
 		},
 		clearValue(): void {
-			this.value = null;
+			this.value = "";
 			this.handleUpdate();
+		},
+	},
+	computed: {
+		inputLengthInformation(): string | number {
+			if (this.maxLength !== null) {
+				return `${this.value.toString().length} / ${this.maxLength}`;
+			}
+			return this.value.toString().length;
 		},
 	},
 });
@@ -107,6 +147,18 @@ export default defineComponent({
 
 	&__label {
 		@include font-footnote;
+
+		&--error {
+			color: $color-error;
+		}
+
+		&--warning {
+			color: $color-warning;
+		}
+
+		&--success {
+			color: $color-success;
+		}
 	}
 
 	&__wrapper {
@@ -172,9 +224,36 @@ export default defineComponent({
 		}
 	}
 
+	&__texts {
+		display: flex;
+		flex-direction: row;
+		column-gap: 1rem;
+		align-items: center;
+	}
+
 	&__assistive-text {
 		@include font-footnote;
 		color: $color-disabled;
+	}
+
+	&__alert-message {
+		@include font-footnote;
+
+		&--error {
+			color: $color-error;
+		}
+
+		&--warning {
+			color: $color-warning;
+		}
+
+		&--success {
+			color: $color-success;
+		}
+	}
+
+	&__length {
+		margin-left: auto;
 	}
 }
 

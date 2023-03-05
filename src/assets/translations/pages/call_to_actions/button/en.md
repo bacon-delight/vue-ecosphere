@@ -35,7 +35,7 @@ type button_icon_position = "before" | "after";
 
 All events that works with a regular [`button`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) element are supported through [Attribute Inheritence](https://vuejs.org/guide/components/attrs.html#attribute-inheritance). Directly use them on the component.
 
-For example, to listen to the `click` event, you can use the following code:
+#### Example
 
 ```js
 <template>

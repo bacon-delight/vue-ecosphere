@@ -5,17 +5,7 @@
 	.wrapper__body
 		.section
 			.section__flex
-				InputField(
-					label="Label",
-					placeholder="Placeholder",
-					assistive-text="Assistive Text",
-					status="none",
-					type="number",
-					:outline="true",
-					:disabled="false",
-					:allow-clear="true"
-				)
-
+				InputField(label="Label", placeholder="Placeholder")
 		MarkdownParser(:content="$t('pages.data_entry.input.content')")
 </template>
 
