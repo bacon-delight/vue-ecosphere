@@ -75,7 +75,11 @@ export default defineComponent({
 
 	&__title {
 		cursor: pointer;
-		@include hue-color-modifiers;
+		transition: $transition-standard;
+
+		&:hover {
+			color: $color-information;
+		}
 	}
 }
 </style>

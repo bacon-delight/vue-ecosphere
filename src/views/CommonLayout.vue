@@ -1,6 +1,7 @@
 <template lang="pug">
 .layout
-	SidebarNavigation.layout__sidebar(:options="options", :skeleton="true")
+	.layout__sidebar
+		SidebarNavigation(:options="options", :skeleton="true")
 	.layout__body
 		.layout__navbar
 			NavigationBar(:options="[]", :branding="branding")
@@ -61,6 +62,7 @@ export default defineComponent({
 
 	&__sidebar {
 		min-width: 200px;
+		height: 100vh;
 
 		@include respond-below(sm) {
 			display: none;
@@ -103,8 +105,8 @@ export default defineComponent({
 	&__flex {
 		display: flex;
 		flex-wrap: wrap;
-		column-gap: 1rem;
-		row-gap: 1rem;
+		column-gap: 0.5rem;
+		row-gap: 0.5rem;
 		align-items: center;
 	}
 }

@@ -51,7 +51,5 @@ export default defineComponent({
 	row-gap: 0.25rem;
 	padding: 0.5rem;
 	// @include scrollbar-vertical;
-	border-left: 1px solid $color-offline;
-	border-right: 1px solid $color-offline;
 }
 </style>

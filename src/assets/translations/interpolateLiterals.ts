@@ -1,6 +1,6 @@
 import type { unknown_object } from "@/plugin/utilities/types.interface";
 
-const literals = { "{": `{'{'}`, "}": `{'}'}`, "|": `{'|'}` };
+const literals = { "{": `{'{'}`, "}": `{'}'}`, "|": `{'|'}`, "@": `{'@'}` };
 
 export default function interpolateLiterals(raw: string): string {
 	let interpolated = "";

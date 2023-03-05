@@ -21,4 +21,7 @@ export default {
 			button: button("en"),
 		},
 	},
+	common: {
+		example: "Example | Examples",
+	},
 };

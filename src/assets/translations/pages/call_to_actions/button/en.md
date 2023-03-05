@@ -28,3 +28,27 @@ Defines the positions where the icon can be placed inside the button
 ```ts
 type button_icon_position = "before" | "after";
 ```
+
+#### Events
+
+All events that works with a regular [`button`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) element are supported through [Attribute Inheritence](https://vuejs.org/guide/components/attrs.html#attribute-inheritance). Directly use them on the component.
+
+For example, to listen to the `click` event, you can use the following code:
+
+```js
+<template>
+  <v-eco-button label="Click me" @click="handleClick" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  methods: {
+    handleClick() {
+      console.log("Clicked!");
+    },
+  },
+});
+</script>
+```

@@ -6,6 +6,7 @@ Once the plugin is imported, you'll have access to a global property `$ecosphere
 $ecosphere.theming
 ```
 
-| Name       | Type                    | Default | Returns | Description                                             |
-| ---------- | ----------------------- | ------- | ------- | ------------------------------------------------------- |
-| `setTheme` | [`theme`](/types#theme) | `auto`  | `void`  | Set a theme which will be applied to all the components |
+| Property      | Description                                             | Type                         | Default |
+| ------------- | ------------------------------------------------------- | ---------------------------- | ------- |
+| `setTheme()`  | Set a theme which will be applied to all the components | [`theme`](/types#theme)      | `auto`  |
+| `setColors()` | Override the existing color scheme with a custom set    | [`color_map`](/types#colors) | `auto`  |

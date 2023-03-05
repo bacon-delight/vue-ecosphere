@@ -54,7 +54,7 @@ export default defineComponent({
 		color: $color-contrast;
 		background: $color-background;
 		border-radius: $border-radius-standard;
-		border: 1px solid $color-offline;
+		border: 1px solid $color-contrast-faded;
 		font-size: 0.85em;
 	}
 
@@ -80,9 +80,8 @@ export default defineComponent({
 	}
 
 	table {
-		width: 100%;
+		display: block;
 		margin: 1rem auto;
-		min-width: 500px;
 		overflow-x: auto;
 	}
 
@@ -101,8 +100,8 @@ export default defineComponent({
 
 	th,
 	td {
-		padding: 0.25rem 0.5rem;
-		min-width: 100px;
+		padding: 0.5rem 0.5rem;
+		min-width: 150px;
 
 		// &:last-child {
 		// 	min-width: 200px;
@@ -115,6 +114,14 @@ export default defineComponent({
 		&:last-child {
 			padding-right: 0;
 		}
+	}
+
+	ul {
+		padding-left: 1rem;
+	}
+
+	li {
+		margin: 0.3rem 0;
 	}
 }
 </style>

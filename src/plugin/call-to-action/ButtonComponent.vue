@@ -61,10 +61,13 @@ export default defineComponent({
 	@include font-regular;
 	cursor: pointer;
 	transition: $transition-standard;
-
-	// Hues
 	border: 1px solid $color-transparent;
 
+	&:focus {
+		outline: 2 px solid $color-hyperlink;
+	}
+
+	// Hues
 	&--primary {
 		background: $color-primary;
 		color: $color-primary-contrast;

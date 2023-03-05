@@ -80,12 +80,12 @@ export default defineComponent({
 
 	&__subheader {
 		@include header-6;
+		margin-top: -0.5rem;
 	}
 
 	&__description {
-		@include font-regular;
+		@include font-light;
 		text-align: center;
-		margin-top: 1rem;
 		padding: 0 1.5rem;
 		max-width: 600px;
 	}

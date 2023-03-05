@@ -4,11 +4,10 @@
 
 	.wrapper__body
 		.section
-			.section__title Examples
 			.section__flex
-				ButtonComponent(label="Button", hue="primary")
-				ButtonComponent(label="Button", hue="error")
-				ButtonComponent(label="Button", hue="success")
+				ButtonComponent(label="Primary", hue="primary")
+				ButtonComponent(label="Cancel", hue="error", icon="ri-close-circle-line")
+				ButtonComponent(label="Accept", hue="success", icon="ri-check-double-line")
 
 		MarkdownParser(:content="$t('pages.call_to_actions.button.content')")
 </template>
