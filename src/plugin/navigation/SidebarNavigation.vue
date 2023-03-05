@@ -9,13 +9,14 @@
 
 Teleport(to="body")
 	Transition(name="sidebar-overlay")
-		.overlay(v-if="overlay", @click.stop="overlay = false")
-			.overlay__menu
+		.overlay(v-if="overlay", @click="overlay = false")
+			.overlay__menu(@click.stop)
 				MenuItem(
 					v-for="option in options",
 					:option="option",
 					:hue="hue",
-					:skeleton="skeleton"
+					:skeleton="skeleton",
+					@action="overlay = false"
 				)
 
 Teleport(to="body")
@@ -105,6 +106,8 @@ export default defineComponent({
 		height: 100%;
 		overflow-y: auto;
 		padding: 0.5rem;
+		border-top-right-radius: $border-radius-standard;
+		border-bottom-right-radius: $border-radius-standard;
 
 		@include respond-below(xs) {
 			min-width: 75vw;
@@ -114,7 +117,7 @@ export default defineComponent({
 
 .trigger {
 	position: absolute;
-	top: 6rem;
+	top: 5.5rem;
 	left: 0;
 	background: $color-background;
 	padding: 0.5rem;

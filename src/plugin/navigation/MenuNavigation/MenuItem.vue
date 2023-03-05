@@ -30,7 +30,11 @@
 
 	//- Children
 	.children__items
-		MenuItem(v-for="child in option.children", :option="child")
+		MenuItem(
+			v-for="child in option.children",
+			:option="child",
+			@action="$emit('action')"
+		)
 </template>
 
 <script lang="ts">
@@ -74,6 +78,7 @@ export default defineComponent({
 			}
 			if (this.option.action) {
 				this.option.action();
+				this.$emit("action");
 			}
 		},
 	},
