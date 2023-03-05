@@ -49,12 +49,12 @@ export default defineComponent({
 		@include font-light;
 	}
 	code {
-		padding: 0 0.5rem;
+		padding: 0 0.5rem 0.15rem;
 		@include font-monospace;
 		color: $color-contrast;
 		background: $color-background;
 		border-radius: $border-radius-standard;
-		border: 1px solid $color-contrast-faded;
+		border: 1px solid rgba(#868686, 0.3);
 		font-size: 0.85em;
 		max-height: 60vh;
 	}
