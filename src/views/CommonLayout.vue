@@ -1,10 +1,18 @@
 <template lang="pug">
+//- .layout
+//- 	.layout__sidebar
+//- 		SidebarNavigation(:options="options", :skeleton="true")
+//- 	.layout__body
+//- 		.layout__navbar
+//- 			NavigationBar(:options="[]", :branding="branding")
+//- 		.layout__content
+//- 			router-view
 .layout
-	.layout__sidebar
-		SidebarNavigation(:options="options", :skeleton="true")
+	.layout__navbar
+		NavigationBar(:options="[]", :branding="branding")
 	.layout__body
-		.layout__navbar
-			NavigationBar(:options="[]", :branding="branding")
+		.layout__sidebar
+			SidebarNavigation(:options="options", :skeleton="true")
 		.layout__content
 			router-view
 </template>
@@ -13,6 +21,7 @@
 import { defineComponent } from "vue";
 import NavigationBar from "@/plugin/navigation/NavigationBar.vue";
 import SidebarNavigation from "@/plugin/navigation/SidebarNavigation.vue";
+import MenuNavigation from "@/plugin/navigation/MenuNavigation.vue";
 import navigation_options from "@/assets/utilities/navigation_options";
 import type { menu_item } from "@/plugin/utilities/types.interface";
 
@@ -21,6 +30,7 @@ export default defineComponent({
 	components: {
 		NavigationBar,
 		SidebarNavigation,
+		MenuNavigation,
 	},
 	data() {
 		return {
@@ -46,23 +56,32 @@ export default defineComponent({
 	height: 100vh;
 	width: 100vw;
 	display: grid;
-	grid-template-columns: min-content 1fr;
+	grid-template-rows: min-content 1fr;
 	overflow: hidden;
 
-	@include respond-below(sm) {
-		grid-template-columns: 1fr;
+	&__body {
+		display: grid;
+		grid-template-columns: min-content 1fr;
+		overflow: hidden;
+
+		@include respond-below(sm) {
+			grid-template-columns: 1fr;
+		}
 	}
 
-	&__body {
-		height: 100%;
-		display: grid;
-		grid-template-rows: min-content 1fr;
-		overflow: hidden;
+	&__navbar {
+		display: block;
+		border-bottom: 1px solid rgba(134, 134, 134, 0.1);
 	}
 
 	&__sidebar {
-		min-width: 200px;
-		height: 100vh;
+		padding: 1rem;
+		overflow-y: auto;
+
+		> * {
+			border-radius: $border-radius-standard;
+			box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		}
 
 		@include respond-below(sm) {
 			display: none;
@@ -71,9 +90,42 @@ export default defineComponent({
 
 	&__content {
 		overflow-y: auto;
-		@include scrollbar-vertical;
 	}
 }
+
+// .layout {
+// 	height: 100vh;
+// 	width: 100vw;
+// 	display: grid;
+// 	grid-template-columns: min-content 1fr;
+// 	overflow: hidden;
+
+// 	@include respond-below(sm) {
+// 		grid-template-columns: 1fr;
+// 	}
+
+// 	&__body {
+// 		height: 100%;
+// 		display: grid;
+// 		grid-template-rows: min-content 1fr;
+// 		overflow: hidden;
+// 	}
+
+// 	&__sidebar {
+// 		min-width: 200px;
+// 		height: 100vh;
+// 		border-right: 1px solid rgba(134, 134, 134, 0.3);
+
+// 		@include respond-below(sm) {
+// 			display: none;
+// 		}
+// 	}
+
+// 	&__content {
+// 		overflow-y: auto;
+// 		@include scrollbar-vertical;
+// 	}
+// }
 
 .wrapper {
 	display: block;
