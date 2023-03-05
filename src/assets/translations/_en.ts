@@ -5,9 +5,14 @@ import types from "./pages/root/types/_translations";
 
 // Navigation
 import menu from "./pages/navigation/menu/_translations";
+import sidebar from "./pages/navigation/sidebar/_translations";
+import navbar from "./pages/navigation/navbar/_translations";
 
 // Call to Actions
 import button from "./pages/call_to_actions/button/_translations";
+
+// Data Entry
+import input from "./pages/data_entry/input/_translations";
 
 export default {
 	title: "Ecosphere",
@@ -27,6 +32,11 @@ export default {
 		},
 		navigation: {
 			menu: menu("en"),
+			sidebar: sidebar("en"),
+			navbar: navbar("en"),
+		},
+		data_entry: {
+			input: input("en"),
 		},
 	},
 	common: {

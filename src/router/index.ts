@@ -44,6 +44,18 @@ const router = createRouter({
 					name: "Menu",
 					component: () => import("../views/navigation/MenuPage.vue"),
 				},
+				{
+					path: "/sidebar",
+					name: "Sidebar",
+					component: () =>
+						import("../views/navigation/SidebarPage.vue"),
+				},
+				{
+					path: "/navbar",
+					name: "Navbar",
+					component: () =>
+						import("../views/navigation/NavbarPage.vue"),
+				},
 
 				// Call to Actions
 				{
@@ -51,6 +63,14 @@ const router = createRouter({
 					name: "Button",
 					component: () =>
 						import("../views/call_to_actions/ButtonPage.vue"),
+				},
+
+				// Data Entry
+				{
+					path: "/input",
+					name: "Input",
+					component: () =>
+						import("../views/data_entry/InputPage.vue"),
 				},
 			],
 		},

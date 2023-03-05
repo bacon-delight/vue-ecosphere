@@ -37,7 +37,7 @@ export default defineComponent({
 		},
 		options: {
 			type: Array as PropType<menu_item[]>,
-			required: true,
+			default: () => [],
 		},
 		hue: {
 			type: String as PropType<hue>,
@@ -67,6 +67,7 @@ export default defineComponent({
 	align-items: center;
 	column-gap: 0.25rem;
 	user-select: none;
+	width: 100%;
 
 	&__logo {
 		max-height: 2rem;

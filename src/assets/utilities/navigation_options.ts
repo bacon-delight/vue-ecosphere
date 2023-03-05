@@ -77,9 +77,17 @@ function navigation_options(): menu_item[] {
 				},
 				{
 					label: "Sidebar",
+					active: router.currentRoute.value.path === "/sidebar",
+					action: () => {
+						router.push("/sidebar");
+					},
 				},
 				{
 					label: "Navbar",
+					active: router.currentRoute.value.path === "/navbar",
+					action: () => {
+						router.push("/navbar");
+					},
 				},
 				{
 					label: "Breadcrumb",
@@ -110,6 +118,10 @@ function navigation_options(): menu_item[] {
 			children: [
 				{
 					label: "Input",
+					active: router.currentRoute.value.path === "/input",
+					action: () => {
+						router.push("/input");
+					},
 				},
 				{
 					label: "Textarea",

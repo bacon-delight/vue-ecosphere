@@ -2,7 +2,7 @@
 
 A menu let users navigate through a complex set of available options.
 
-### API
+#### API
 
 | Property   | Description                                                    | Type                        | Default       |
 | ---------- | -------------------------------------------------------------- | --------------------------- | ------------- |

@@ -56,6 +56,7 @@ export default defineComponent({
 		border-radius: $border-radius-standard;
 		border: 1px solid $color-contrast-faded;
 		font-size: 0.85em;
+		max-height: 60vh;
 	}
 
 	a {

@@ -8,6 +8,7 @@
 				ButtonComponent(label="Primary", hue="primary")
 				ButtonComponent(label="Cancel", hue="error", icon="ri-close-circle-line")
 				ButtonComponent(label="Accept", hue="success", icon="ri-check-double-line")
+				ButtonComponent(label="Disabled", hue="success", :disabled="true")
 
 		MarkdownParser(:content="$t('pages.call_to_actions.button.content')")
 </template>

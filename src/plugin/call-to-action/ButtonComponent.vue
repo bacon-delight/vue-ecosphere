@@ -1,6 +1,7 @@
 <template lang="pug">
 button.button(
-	:class="[`button--${hue}${ghost ? '-ghost' : ''}`, `button--${size}`]"
+	:class="[`button--${hue}${ghost ? '-ghost' : ''}`, `button--${size}`, { 'button--disabled': disabled }]",
+	:disabled="disabled"
 )
 	SVGIcon(v-if="icon && iconPosition === 'before'", :name="icon")
 	span {{ label }}
@@ -44,6 +45,10 @@ export default defineComponent({
 			type: String as PropType<button_icon_position>,
 			default: "after",
 		},
+		disabled: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
 	},
 	components: {
 		SVGIcon,
@@ -64,7 +69,14 @@ export default defineComponent({
 	border: 1px solid $color-transparent;
 
 	&:focus {
-		outline: 2 px solid $color-hyperlink;
+		outline: 2px solid $color-hyperlink;
+	}
+
+	&--disabled {
+		opacity: 50%;
+		color: $color-dark !important;
+		background: $color-disabled !important;
+		cursor: not-allowed;
 	}
 
 	// Hues
