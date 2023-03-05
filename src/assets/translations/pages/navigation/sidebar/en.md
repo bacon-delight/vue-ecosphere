@@ -4,11 +4,12 @@ A sidebar lets users navigate through different pages in an application.
 
 #### API
 
-| Property   | Description                                                    | Type                             | Default       |
-| ---------- | -------------------------------------------------------------- | -------------------------------- | ------------- |
-| `options`  | Lists the available options to be rendered in the menu         | [`menu_item[]`](/menu#menu-item) | Required      |
-| `skeleton` | Show or hide the skeleton structure in case the menu is nested | `boolean`                        | `true`        |
-| `hue`      | Specify of the menu                                            | [`hue`](/types#hue)              | `information` |
+| Property     | Description                                                                           | Type                             | Default       |
+| ------------ | ------------------------------------------------------------------------------------- | -------------------------------- | ------------- |
+| `options`    | Lists the available options to be rendered in the menu                                | [`menu_item[]`](/menu#menu-item) | Required      |
+| `skeleton`   | Show or hide the skeleton structure in case the menu is nested                        | `boolean`                        | `true`        |
+| `hue`        | Specify of the menu                                                                   | [`hue`](/types#hue)              | `information` |
+| `responsive` | Makes the sidebar responsive, disappears after `xs` breakpoint and provides a trigger | `boolean`                        | `false`       |
 
 #### Example
 

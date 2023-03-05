@@ -45,6 +45,7 @@ import SVGIcon from "@/plugin/general/SVGIcon.vue";
 
 export default defineComponent({
 	name: "MenuItem",
+	emits: ["action"],
 	props: {
 		option: {
 			type: Object as PropType<menu_item>,

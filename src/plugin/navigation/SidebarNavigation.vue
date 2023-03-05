@@ -1,5 +1,5 @@
 <template lang="pug">
-.sidebar
+.sidebar(:class="[{ 'sidebar--responsive': responsive }]")
 	MenuItem(
 		v-for="option in options",
 		:option="option",
@@ -9,7 +9,7 @@
 
 Teleport(to="body")
 	Transition(name="sidebar-overlay")
-		.overlay(v-if="overlay", @click="overlay = false")
+		.overlay(v-if="overlay && responsive", @click="overlay = false")
 			.overlay__menu(@click.stop)
 				MenuItem(
 					v-for="option in options",
@@ -22,7 +22,7 @@ Teleport(to="body")
 Teleport(to="body")
 	Transition(name="trigger-overlay")
 		SVGIcon.trigger(
-			v-if="!overlay",
+			v-if="!overlay && responsive",
 			name="ri-menu-4-line",
 			@click="overlay = true"
 		)
@@ -54,6 +54,10 @@ export default defineComponent({
 			type: Boolean as PropType<boolean>,
 			default: true,
 		},
+		responsive: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
 	},
 	data() {
 		return {
@@ -79,8 +83,10 @@ export default defineComponent({
 	padding: 0.5rem;
 	// @include scrollbar-vertical;
 
-	@include respond-below(sm) {
-		display: none;
+	&--responsive {
+		@include respond-below(sm) {
+			display: none;
+		}
 	}
 }
 

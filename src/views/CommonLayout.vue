@@ -12,7 +12,11 @@
 		NavigationBar(:options="[]", :branding="branding")
 	.layout__body
 		.layout__sidebar
-			SidebarNavigation(:options="options", :skeleton="true")
+			SidebarNavigation(
+				:options="options",
+				:skeleton="true",
+				:responsive="true"
+			)
 		.layout__content
 			router-view
 </template>

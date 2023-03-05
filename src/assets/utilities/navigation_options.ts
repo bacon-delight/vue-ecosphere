@@ -35,34 +35,34 @@ function navigation_options(): menu_item[] {
 				router.push("/types");
 			},
 		},
-		{
-			label: "Design Language",
-			icon: "ri-pencil-line",
-			expanded: true,
-			children: [
-				{
-					label: "Design",
-					active: router.currentRoute.value.path === "/design",
-					action: () => {
-						router.push("/design");
-					},
-				},
-				{
-					label: "Typography",
-					active: router.currentRoute.value.path === "/typography",
-					action: () => {
-						router.push("/typography");
-					},
-				},
-				{
-					label: "Icons",
-					active: router.currentRoute.value.path === "/icons",
-					action: () => {
-						router.push("/icons");
-					},
-				},
-			],
-		},
+		// {
+		// 	label: "Design Language",
+		// 	icon: "ri-pencil-line",
+		// 	expanded: true,
+		// 	children: [
+		// 		{
+		// 			label: "Design",
+		// 			active: router.currentRoute.value.path === "/design",
+		// 			action: () => {
+		// 				router.push("/design");
+		// 			},
+		// 		},
+		// 		{
+		// 			label: "Typography",
+		// 			active: router.currentRoute.value.path === "/typography",
+		// 			action: () => {
+		// 				router.push("/typography");
+		// 			},
+		// 		},
+		// 		{
+		// 			label: "Icons",
+		// 			active: router.currentRoute.value.path === "/icons",
+		// 			action: () => {
+		// 				router.push("/icons");
+		// 			},
+		// 		},
+		// 	],
+		// },
 		{
 			label: "Navigation",
 			icon: "ri-navigation-line",
@@ -89,9 +89,9 @@ function navigation_options(): menu_item[] {
 						router.push("/navbar");
 					},
 				},
-				{
-					label: "Breadcrumb",
-				},
+				// {
+				// 	label: "Breadcrumb",
+				// },
 			],
 		},
 		{
@@ -106,9 +106,9 @@ function navigation_options(): menu_item[] {
 						router.push("/button");
 					},
 				},
-				{
-					label: "Link",
-				},
+				// {
+				// 	label: "Link",
+				// },
 			],
 		},
 		{
@@ -123,21 +123,21 @@ function navigation_options(): menu_item[] {
 						router.push("/input");
 					},
 				},
-				{
-					label: "Textarea",
-				},
-				{
-					label: "Dropdown",
-				},
-				{
-					label: "Radio",
-				},
-				{
-					label: "Checkbox",
-				},
-				{
-					label: "Switch",
-				},
+				// {
+				// 	label: "Textarea",
+				// },
+				// {
+				// 	label: "Dropdown",
+				// },
+				// {
+				// 	label: "Radio",
+				// },
+				// {
+				// 	label: "Checkbox",
+				// },
+				// {
+				// 	label: "Switch",
+				// },
 			],
 		},
 	];
