@@ -80,7 +80,7 @@ export default defineComponent({
 	width: $reading-width-standard;
 	max-width: 100%;
 	margin: 0 auto;
-	padding: 1rem;
+	padding: 0 1rem;
 
 	&__title {
 		@include header-2;

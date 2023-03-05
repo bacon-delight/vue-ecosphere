@@ -1,12 +1,18 @@
 <template lang="pug">
 .menu
-	MenuItem(v-for="option in options", :option="option", :skeleton="skeleton")
+	MenuItem(
+		v-for="option in options",
+		:option="option",
+		:skeleton="skeleton",
+		:hue="hue",
+		:theme="theme"
+	)
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
-import type { menu_item } from "@/plugin/utilities/types.interface";
+import type { menu_item, hue, theme } from "@/plugin/utilities/types.interface";
 import MenuItem from "./MenuNavigation/MenuItem.vue";
 
 export default defineComponent({
@@ -19,6 +25,14 @@ export default defineComponent({
 		skeleton: {
 			type: Boolean as PropType<boolean>,
 			default: true,
+		},
+		hue: {
+			type: String as PropType<hue>,
+			default: "information",
+		},
+		theme: {
+			type: String as PropType<theme>,
+			default: "auto",
 		},
 	},
 	components: {

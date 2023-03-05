@@ -4,10 +4,11 @@ A menu let users navigate through a complex set of available options.
 
 ### API
 
-| Property   | Description                                                    | Type                        | Default  |
-| ---------- | -------------------------------------------------------------- | --------------------------- | -------- |
-| `options`  | Lists the available options to be rendered in the menu         | [`menu_item[]`](#menu-item) | Required |
-| `skeleton` | Show or hide the skeleton structure in case the menu is nested | `boolean`                   | `true`   |
+| Property   | Description                                                    | Type                        | Default       |
+| ---------- | -------------------------------------------------------------- | --------------------------- | ------------- |
+| `options`  | Lists the available options to be rendered in the menu         | [`menu_item[]`](#menu-item) | Required      |
+| `skeleton` | Show or hide the skeleton structure in case the menu is nested | `boolean`                   | `true`        |
+| `hue`      | Specify of the menu                                            | [`hue`](/types#hue)         | `information` |
 
 #### Types
 
