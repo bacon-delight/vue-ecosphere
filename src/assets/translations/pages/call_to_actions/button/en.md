@@ -1,6 +1,8 @@
 #### Use Case
 
-Clicking a button triggers an action
+Clicking a button triggers an action. A button can be used to highlight a supported action in an application. Different types of button allow signifying the intensity and use case of a particular action.
+
+### API
 
 | Property       | Description                            | Type                                            | Default   |
 | -------------- | -------------------------------------- | ----------------------------------------------- | --------- |

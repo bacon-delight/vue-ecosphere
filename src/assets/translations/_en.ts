@@ -1,8 +1,13 @@
 import introduction from "./pages/root/introduction/_translations";
 import installation from "./pages/root/installation/_translations";
 import configuration from "./pages/root/configuration/_translations";
-import button from "./pages/call_to_actions/button/_translations";
 import types from "./pages/root/types/_translations";
+
+// Navigation
+import menu from "./pages/navigation/menu/_translations";
+
+// Call to Actions
+import button from "./pages/call_to_actions/button/_translations";
 
 export default {
 	title: "Ecosphere",
@@ -19,6 +24,9 @@ export default {
 		types: types("en"),
 		call_to_actions: {
 			button: button("en"),
+		},
+		navigation: {
+			menu: menu("en"),
 		},
 	},
 	common: {

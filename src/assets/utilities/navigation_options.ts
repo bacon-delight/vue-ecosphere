@@ -70,6 +70,10 @@ function navigation_options(): menu_item[] {
 			children: [
 				{
 					label: "Menu",
+					active: router.currentRoute.value.path === "/menu",
+					action: () => {
+						router.push("/menu");
+					},
 				},
 				{
 					label: "Sidebar",

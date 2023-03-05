@@ -37,6 +37,15 @@ const router = createRouter({
 					name: "Types",
 					component: () => import("../views/root/TypesPage.vue"),
 				},
+
+				// Navigation
+				{
+					path: "/menu",
+					name: "Menu",
+					component: () => import("../views/navigation/MenuPage.vue"),
+				},
+
+				// Call to Actions
 				{
 					path: "/button",
 					name: "Button",
