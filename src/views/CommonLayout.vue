@@ -85,7 +85,6 @@ export default defineComponent({
 
 		@include respond-below(sm) {
 			padding: 0;
-			// display: none;
 		}
 	}
 

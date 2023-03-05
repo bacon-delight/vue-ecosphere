@@ -68,7 +68,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .sidebar {
-	height: 100%;
+	max-height: 100%;
 	overflow-y: auto;
 	background: $color-background;
 	color: $color-contrast;
@@ -89,7 +89,7 @@ export default defineComponent({
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(#e8eae6, 0.8);
+	background: rgba(#bbbbbb, 0.8);
 	overflow: hidden;
 	cursor: pointer;
 	display: none;
