@@ -10,6 +10,12 @@ This input can be used to select a single field form a list of options. All the 
 | `label`    | Label to render along with the radio button | `string`  | Required |
 | `disabled` | Disables the radio field                    | `boolean` | `false`  |
 
+#### Events
+
+| Event     | Description                            | Returns   |
+| --------- | -------------------------------------- | --------- |
+| `@update` | Fired when the radio option is updated | `boolean` |
+
 #### Example
 
 ```html

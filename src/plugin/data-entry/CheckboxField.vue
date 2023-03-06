@@ -15,6 +15,7 @@ import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
 	name: "CheckboxField",
+	emits: ["update:modelValue", "update"],
 	components: {
 		SVGIcon,
 	},
@@ -31,6 +32,10 @@ export default defineComponent({
 			type: Boolean as PropType<boolean>,
 			default: false,
 		},
+		default: {
+			type: [Boolean, null] as PropType<boolean | null>,
+			default: null,
+		},
 	},
 	data() {
 		return {
@@ -38,12 +43,18 @@ export default defineComponent({
 		};
 	},
 	mounted() {
-		this.value = this.modelValue;
+		this.value = this.default !== null ? this.default : this.modelValue;
 	},
 	methods: {
 		handleClick(): void {
 			this.value = !this.value;
 			this.$emit("update:modelValue", this.value);
+			this.$emit("update", this.value);
+		},
+	},
+	watch: {
+		default(newDefault: boolean) {
+			this.value = newDefault;
 		},
 	},
 });
@@ -67,6 +78,11 @@ export default defineComponent({
 			color: $color-hyperlink;
 			outline: none;
 		}
+	}
+
+	&__label {
+		@include font-regular;
+		user-select: none;
 	}
 
 	&--disabled {

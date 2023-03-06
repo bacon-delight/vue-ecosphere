@@ -10,6 +10,12 @@ This input can be used to select multiple fields form a list of options. All the
 | `label`    | Label to render along with the checkbox | `string`  | Required |
 | `disabled` | Disables the checkbox field             | `boolean` | `false`  |
 
+#### Events
+
+| Event     | Description                        | Returns   |
+| --------- | ---------------------------------- | --------- |
+| `@update` | Fired when the checkbox is updated | `boolean` |
+
 #### Example
 
 ```html

@@ -21,6 +21,9 @@ export interface unknown_object {
 	[key: string]: any;
 }
 
+// Data Entry Types
+export type data_entry_state = "default" | "error" | "warning" | "success";
+
 // Plugin Type Definition
 export interface ecosphere {
 	theming: {

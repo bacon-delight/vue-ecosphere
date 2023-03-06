@@ -1,24 +1,24 @@
 <template lang="pug">
 .wrapper
-	.wrapper__title {{ $t("pages.data_entry.input.title") }}
+	.wrapper__title {{ $t("pages.data_entry.checkbox_group.title") }}
 
 	.wrapper__body
 		.section
 			.section__flex
-				InputField(label="Label", placeholder="Placeholder")
-		MarkdownParser(:content="$t('pages.data_entry.input.content')")
+				RadioGroup(label="Radio Option")
+		MarkdownParser(:content="$t('pages.data_entry.checkbox_group.content')")
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import MarkdownParser from "@/components/MarkdownParser.vue";
-import InputField from "@/plugin/data-entry/InputField.vue";
+import RadioGroup from "@/plugin/data-entry/RadioGroup.vue";
 
 export default defineComponent({
-	name: "InputPage",
+	name: "CheckboxGroupPage",
 	components: {
 		MarkdownParser,
-		InputField,
+		RadioGroup,
 	},
 });
 </script>

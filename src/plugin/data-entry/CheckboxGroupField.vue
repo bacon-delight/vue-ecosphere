@@ -5,12 +5,7 @@
 
 	//- Options
 	.radio-group__options(:class="[`radio-group__options--${alignment}`]")
-		RadioField(
-			v-for="(option, index) in options",
-			:label="option.label",
-			:default="index === value",
-			@update="handleClick(index)"
-		)
+		RadioField(v-for="option in options", :label="option.label")
 
 	//- Assistive Text
 	.radio-group__alert-message(
@@ -31,8 +26,7 @@ import type {
 import RadioField from "./RadioField.vue";
 
 export default defineComponent({
-	name: "RadioGroup",
-	emits: ["update:modelValue", "update"],
+	name: "CheckboxGroup",
 	components: {
 		RadioField,
 	},
@@ -61,41 +55,24 @@ export default defineComponent({
 			type: String as PropType<choice_option_alignment>,
 			default: "flex",
 		},
-		modelValue: {
-			type: [String, Number, Boolean, null] as PropType<
-				string | number | boolean | null
-			>,
-			default: null,
-		},
-		default: {
-			type: [String, Number, Boolean, null] as PropType<
-				string | number | boolean | null
-			>,
-			default: null,
-		},
+		// modelValue: {
+		// 	type: Boolean as PropType<boolean>,
+		// 	default: false,
+		// },
 	},
 	data() {
 		return {
-			value: null as number | null,
+			// value: false,
 		};
 	},
 	mounted() {
-		const initialValue =
-			this.default !== null ? this.default : this.modelValue;
-		if (initialValue !== null) {
-			this.options.forEach((option: choice_option, index: number) => {
-				if (option.value === initialValue) {
-					this.value = index;
-				}
-			});
-		}
+		// this.value = this.modelValue;
 	},
 	methods: {
-		handleClick(index: number): void {
-			this.value = index;
-			this.$emit("update:modelValue", this.options[this.value].value);
-			this.$emit("update", this.options[this.value].value);
-		},
+		// handleClick(): void {
+		// 	this.value = !this.value;
+		// 	this.$emit("update:modelValue", this.value);
+		// },
 	},
 });
 </script>
