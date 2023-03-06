@@ -1,12 +1,4 @@
 <template lang="pug">
-//- .layout
-//- 	.layout__sidebar
-//- 		SidebarNavigation(:options="options", :skeleton="true")
-//- 	.layout__body
-//- 		.layout__navbar
-//- 			NavigationBar(:options="[]", :branding="branding")
-//- 		.layout__content
-//- 			router-view
 .layout
 	.layout__navbar
 		NavigationBar(:options="[]", :branding="branding")
@@ -96,40 +88,6 @@ export default defineComponent({
 		overflow-y: auto;
 	}
 }
-
-// .layout {
-// 	height: 100vh;
-// 	width: 100vw;
-// 	display: grid;
-// 	grid-template-columns: min-content 1fr;
-// 	overflow: hidden;
-
-// 	@include respond-below(sm) {
-// 		grid-template-columns: 1fr;
-// 	}
-
-// 	&__body {
-// 		height: 100%;
-// 		display: grid;
-// 		grid-template-rows: min-content 1fr;
-// 		overflow: hidden;
-// 	}
-
-// 	&__sidebar {
-// 		min-width: 200px;
-// 		height: 100vh;
-// 		border-right: 1px solid rgba(134, 134, 134, 0.3);
-
-// 		@include respond-below(sm) {
-// 			display: none;
-// 		}
-// 	}
-
-// 	&__content {
-// 		overflow-y: auto;
-// 		@include scrollbar-vertical;
-// 	}
-// }
 
 .wrapper {
 	display: block;

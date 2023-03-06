@@ -15,6 +15,8 @@ import button from "./pages/call_to_actions/button/_translations";
 import input from "./pages/data_entry/input/_translations";
 import textarea from "./pages/data_entry/textarea/_translations";
 import radio from "./pages/data_entry/radio/_translations";
+import radio_group from "./pages/data_entry/radio_group/_translations";
+import checkbox from "./pages/data_entry/checkbox/_translations";
 
 export default {
 	title: "Ecosphere",
@@ -41,6 +43,8 @@ export default {
 			input: input("en"),
 			textarea: textarea("en"),
 			radio: radio("en"),
+			radio_group: radio_group("en"),
+			checkbox: checkbox("en"),
 		},
 	},
 	common: {

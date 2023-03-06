@@ -137,6 +137,20 @@ function navigation_options(): menu_item[] {
 						router.push("/radio");
 					},
 				},
+				{
+					label: "Radio Group",
+					active: router.currentRoute.value.path === "/radio-group",
+					action: () => {
+						router.push("/radio-group");
+					},
+				},
+				{
+					label: "Checkbox",
+					active: router.currentRoute.value.path === "/checkbox",
+					action: () => {
+						router.push("/checkbox");
+					},
+				},
 				// {
 				// 	label: "Dropdown",
 				// },
