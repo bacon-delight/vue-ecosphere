@@ -37,7 +37,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
-import type { input_state } from "@/plugin/utilities/types.interface";
+import type { data_entry_state } from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
@@ -72,7 +72,7 @@ export default defineComponent({
 			default: "",
 		},
 		state: {
-			type: String as PropType<input_state>,
+			type: String as PropType<data_entry_state>,
 			default: "default",
 		},
 		allowClear: {
