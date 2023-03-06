@@ -81,6 +81,7 @@ export default defineComponent({
 	flex-direction: column;
 	row-gap: 0.25rem;
 	padding: 0.5rem;
+	transition: $transition-standard;
 	// @include scrollbar-vertical;
 
 	&--responsive {
@@ -100,6 +101,7 @@ export default defineComponent({
 	overflow: hidden;
 	cursor: pointer;
 	display: none;
+	-webkit-tap-highlight-color: transparent;
 
 	@include respond-below(sm) {
 		display: block;

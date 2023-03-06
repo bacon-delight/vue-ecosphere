@@ -15,7 +15,7 @@ import MarkdownParser from "@/components/MarkdownParser.vue";
 import InputField from "@/plugin/data-entry/InputField.vue";
 
 export default defineComponent({
-	name: "NavbarPage",
+	name: "InputPage",
 	components: {
 		MarkdownParser,
 		InputField,

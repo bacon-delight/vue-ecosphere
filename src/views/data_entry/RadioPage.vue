@@ -1,24 +1,24 @@
 <template lang="pug">
 .wrapper
-	.wrapper__title {{ $t("pages.data_entry.textarea.title") }}
+	.wrapper__title {{ $t("pages.data_entry.radio.title") }}
 
 	.wrapper__body
 		.section
 			.section__flex
-			TextareaField(label="Label", placeholder="Placeholder")
-		MarkdownParser(:content="$t('pages.data_entry.textarea.content')")
+				RadioField(label="Radio Option", :disabled="false")
+		MarkdownParser(:content="$t('pages.data_entry.radio.content')")
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import MarkdownParser from "@/components/MarkdownParser.vue";
-import TextareaField from "@/plugin/data-entry/TextareaField.vue";
+import RadioField from "@/plugin/data-entry/RadioField.vue";
 
 export default defineComponent({
-	name: "TextareaPage",
+	name: "RadioPage",
 	components: {
 		MarkdownParser,
-		TextareaField,
+		RadioField,
 	},
 });
 </script>

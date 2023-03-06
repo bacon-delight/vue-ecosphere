@@ -78,6 +78,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/TextareaPage.vue"),
 				},
+				{
+					path: "/radio",
+					name: "RadioPage",
+					component: () =>
+						import("../views/data_entry/RadioPage.vue"),
+				},
 			],
 		},
 	],

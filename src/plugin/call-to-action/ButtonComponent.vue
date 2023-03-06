@@ -67,6 +67,8 @@ export default defineComponent({
 	cursor: pointer;
 	transition: $transition-standard;
 	border: 1px solid $color-transparent;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
 
 	&:focus {
 		outline: 2px solid $color-hyperlink;

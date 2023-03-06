@@ -130,12 +130,17 @@ function navigation_options(): menu_item[] {
 						router.push("/textarea");
 					},
 				},
+				{
+					label: "Radio",
+					active: router.currentRoute.value.path === "/radio",
+					action: () => {
+						router.push("/radio");
+					},
+				},
 				// {
 				// 	label: "Dropdown",
 				// },
-				// {
-				// 	label: "Radio",
-				// },
+
 				// {
 				// 	label: "Checkbox",
 				// },

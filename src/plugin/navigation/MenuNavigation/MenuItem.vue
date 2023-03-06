@@ -1,5 +1,10 @@
 <template lang="pug">
-.menu-item(v-if="!option.hidden", @click="handleClick")
+.menu-item(
+	v-if="!option.hidden",
+	@click="handleClick",
+	tabindex="0",
+	@keypress.enter="handleClick"
+)
 	//- Menu Item Icon
 	SVGIcon.menu-item__icon(v-if="option.icon", :name="option.icon")
 
@@ -101,6 +106,10 @@ export default defineComponent({
 	cursor: pointer;
 	transition: $transition-standard;
 
+	&:focus {
+		outline: 1px solid $color-hyperlink;
+	}
+
 	&__label {
 		white-space: nowrap;
 		user-select: none;
@@ -159,16 +168,18 @@ export default defineComponent({
 }
 
 .nested-children-enter-from {
+	// height: 0;
 	opacity: 0;
 	scale: 0;
-	transform: translateY(-100%);
-	// transform: translate(-100%, -100%);
+	// transform: translateY(-100%);
+	transform: translate(-100%, -100%);
 }
 
 .nested-children-leave-to {
+	// height: 0;
 	opacity: 0;
 	scale: 0;
-	transform: translateY(-100%);
-	// transform: translate(-100%, -100%);
+	// transform: translateY(-100%);
+	transform: translate(-100%, -100%);
 }
 </style>
