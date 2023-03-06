@@ -9,7 +9,7 @@
 				:skeleton="true",
 				:responsive="true"
 			)
-		.layout__content
+		#content.layout__content
 			router-view
 </template>
 
@@ -42,6 +42,24 @@ export default defineComponent({
 	computed: {
 		options(): menu_item[] {
 			return navigation_options();
+		},
+	},
+	mounted() {
+		if (this.$route.hash) {
+			setTimeout(() => {
+				document
+					.getElementById(this.$route.hash.replace("#", ""))
+					?.scrollIntoView({ behavior: "smooth" });
+			}, 1000);
+		}
+	},
+	watch: {
+		$route() {
+			if (!this.$route.hash) {
+				document
+					.getElementById("content")
+					?.scrollTo({ top: 0, behavior: "smooth" });
+			}
 		},
 	},
 });

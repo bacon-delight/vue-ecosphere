@@ -6,16 +6,16 @@ This input can be used to select a single field form a list of options. All the 
 
 | Property   | Description                                 | Type      | Default  |
 | ---------- | ------------------------------------------- | --------- | -------- |
-| `v-model`  | Binds the input value to a variable         | `boolean` | `false`  |
+| `v-model`  | Binds the input value to a variable         | `boolean` |          |
 | `label`    | Label to render along with the radio button | `string`  | Required |
 | `disabled` | Disables the radio field                    | `boolean` | `false`  |
 | `default`  | Default state of the radio button           | `boolean` |          |
 
 #### Events
 
-| Event     | Description                            | Returns   |
-| --------- | -------------------------------------- | --------- |
-| `@update` | Fired when the radio option is updated | `boolean` |
+| Event     | Description                                    | Returns   |
+| --------- | ---------------------------------------------- | --------- |
+| `@update` | Fired when one of the radio options is updated | `boolean` |
 
 #### Example
 

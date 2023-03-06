@@ -1,18 +1,28 @@
 <template lang="pug">
-.radio-group
+.checkbox-group
 	//- Label
-	.radio-group__label(:class="[`radio-group__label--${state}`]") {{ label }}
+	.checkbox-group__label(:class="[`checkbox-group__label--${state}`]") {{ label }}
 
 	//- Options
-	.radio-group__options(:class="[`radio-group__options--${alignment}`]")
-		RadioField(v-for="option in options", :label="option.label")
+	.checkbox-group__options(:class="[`checkbox-group__options--${alignment}`]")
+		.checkbox-group__field(v-for="(option, index) in options")
+			//- Checkbox
+			CheckboxField(
+				v-if="!option.hidden",
+				:label="option.label",
+				:disabled="option.disabled || disabled",
+				:default="values.includes(index)",
+				@update="handleClick(index)"
+			)
+
+	//- Alert Message
+	.checkbox-group__alert-message(
+		v-if="alertMessage && state !== 'default'",
+		:class="[`checkbox-group__alert-message--${state}`]"
+	) {{ alertMessage }}
 
 	//- Assistive Text
-	.radio-group__alert-message(
-		v-if="alertMessage && state !== 'default'",
-		:class="[`radio-group__alert-message--${state}`]"
-	) {{ alertMessage }}
-	.radio-group__assistive-text(v-else) {{ assistiveText }}
+	.checkbox-group__assistive-text(v-else) {{ assistiveText }}
 </template>
 
 <script lang="ts">
@@ -23,17 +33,18 @@ import type {
 	choice_option,
 	choice_option_alignment,
 } from "@/plugin/utilities/types.interface";
-import RadioField from "./RadioField.vue";
+import CheckboxField from "./CheckboxField.vue";
 
 export default defineComponent({
 	name: "CheckboxGroup",
+	emits: ["update:modelValue", "update"],
 	components: {
-		RadioField,
+		CheckboxField,
 	},
 	props: {
 		label: {
 			type: String as PropType<string>,
-			required: true,
+			default: "",
 		},
 		assistiveText: {
 			type: String as PropType<string>,
@@ -55,30 +66,64 @@ export default defineComponent({
 			type: String as PropType<choice_option_alignment>,
 			default: "flex",
 		},
-		// modelValue: {
-		// 	type: Boolean as PropType<boolean>,
-		// 	default: false,
-		// },
+		modelValue: {
+			type: Array as PropType<(string | number | boolean)[]>,
+			default: () => [],
+		},
+		default: {
+			type: Array as PropType<(string | number | boolean)[]>,
+			default: () => [],
+		},
+		disabled: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
 	},
 	data() {
 		return {
-			// value: false,
+			values: [] as number[],
 		};
 	},
 	mounted() {
-		// this.value = this.modelValue;
+		const initialValues = this.default.length
+			? this.default
+			: this.modelValue;
+		if (initialValues.length) {
+			this.options.forEach((option: choice_option, index: number) => {
+				if (initialValues.includes(option.value)) {
+					this.values.push(index);
+				}
+			});
+		}
 	},
 	methods: {
-		// handleClick(): void {
-		// 	this.value = !this.value;
-		// 	this.$emit("update:modelValue", this.value);
-		// },
+		handleClick(index: number): void {
+			if (this.values.includes(index)) {
+				this.values = this.values.filter(
+					(existing: number) => existing !== index
+				);
+			} else {
+				this.values.push(index);
+			}
+			this.$emit(
+				"update:modelValue",
+				this.values.map((index: number) => {
+					return this.options[index].value;
+				})
+			);
+			this.$emit(
+				"update",
+				this.values.map((index: number) => {
+					return this.options[index].value;
+				})
+			);
+		},
 	},
 });
 </script>
 
 <style lang="scss" scoped>
-.radio-group {
+.checkbox-group {
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.5rem;

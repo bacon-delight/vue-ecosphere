@@ -8,8 +8,7 @@
 				RadioGroup(
 					label="Select your favourite fruit",
 					assistive-text="Firethorns are inedible, but they're good source for birds!",
-					:options="options",
-					v-model="selection"
+					:options="options"
 				)
 		MarkdownParser(:content="$t('pages.data_entry.radio_group.content')")
 </template>
@@ -27,7 +26,6 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			selection: false,
 			options: [
 				{
 					label: "Apple",

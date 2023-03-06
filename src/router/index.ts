@@ -96,6 +96,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/CheckboxPage.vue"),
 				},
+				{
+					path: "/checkbox-group",
+					name: "CheckboxGroupPage",
+					component: () =>
+						import("../views/data_entry/CheckboxGroupPage.vue"),
+				},
 			],
 		},
 	],

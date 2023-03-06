@@ -151,6 +151,14 @@ function navigation_options(): menu_item[] {
 						router.push("/checkbox");
 					},
 				},
+				{
+					label: "Checkbox Group",
+					active:
+						router.currentRoute.value.path === "/checkbox-group",
+					action: () => {
+						router.push("/checkbox-group");
+					},
+				},
 				// {
 				// 	label: "Dropdown",
 				// },

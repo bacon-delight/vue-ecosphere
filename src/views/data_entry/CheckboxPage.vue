@@ -15,7 +15,7 @@ import MarkdownParser from "@/components/MarkdownParser.vue";
 import CheckboxField from "@/plugin/data-entry/CheckboxField.vue";
 
 export default defineComponent({
-	name: "RadioPage",
+	name: "CheckboxPage",
 	components: {
 		MarkdownParser,
 		CheckboxField,

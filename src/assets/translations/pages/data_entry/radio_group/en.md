@@ -26,7 +26,11 @@ This component renders a list of radio buttons that consolidates the user select
 
 ```html
 <template>
-	<v-eco-radio label="Radio Label" v-model="value" />
+	<v-eco-radio-group
+		label="Select your favourite fruit"
+		:options="options"
+		v-model="value"
+	/>
 </template>
 
 <script lang="ts">
@@ -35,7 +39,34 @@ This component renders a list of radio buttons that consolidates the user select
 	export default defineComponent({
 		data() {
 			return {
-				value: false,
+				value: null,
+				options: [
+					{
+						label: "Apple",
+						value: 1,
+					},
+					{
+						label: "Banana",
+						value: 2,
+					},
+					{
+						label: "Firethorn",
+						value: 3,
+						disabled: true,
+					},
+					{
+						label: "Grapefruit",
+						value: 4,
+					},
+					{
+						label: "Dragonfruit",
+						value: 5,
+					},
+					{
+						label: "Kiwi",
+						value: 6,
+					},
+				],
 			};
 		},
 	});
