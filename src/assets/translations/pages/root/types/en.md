@@ -12,7 +12,7 @@ Here's a list of common types that various components use across the design syst
 
 #### Global Types
 
-###### Theme
+##### Theme
 
 ```ts
 type theme = "auto" | "light" | "dark" | "invert";
@@ -28,7 +28,7 @@ const customTheme = "dark" as theme;
 $ecosphere.theming.setTheme(customTheme);
 ```
 
-###### Hue
+##### Hue
 
 ```ts
 type hue =
@@ -42,7 +42,7 @@ type hue =
 	| "information";
 ```
 
-###### Colors
+##### Colors
 
 ```ts
 interface color_map {
@@ -68,13 +68,13 @@ $ecosphere.theming.setColors(customColors);
 
 #### Data Entry Types
 
-###### Data Entry State
+##### Data Entry State
 
 ```ts
 type data_entry_state = "default" | "error" | "warning" | "success";
 ```
 
-###### Choice Option
+##### Choice Option
 
 ```ts
 interface choice_option {
@@ -82,11 +82,19 @@ interface choice_option {
 	value: string | number | boolean;
 	hidden?: boolean;
 	disabled?: boolean;
-	action?: () => {};
+	action?: () => void;
 }
 ```
 
-###### Choice Option Nested
+| Property   | Description                                           | Type                        | Default |
+| ---------- | ----------------------------------------------------- | --------------------------- | ------- |
+| `label`    | Label to render with the choice option                | `string`                    |         |
+| `value`    | Value of the choice option                            | `string` `number` `boolean` |         |
+| `hidden`   | Hides the choice option                               | `boolean`                   | `false` |
+| `disabled` | Disables the choice option                            | `boolean`                   | `false` |
+| `action`   | Triggers an action when the choice option is selected | `() => void`                |         |
+
+##### Choice Option Nested
 
 ```ts
 interface choice_option_nested extends choice_option {
@@ -94,7 +102,16 @@ interface choice_option_nested extends choice_option {
 }
 ```
 
-###### Choice Option Alignment
+| Property   | Description                                           | Type                                | Default |
+| ---------- | ----------------------------------------------------- | ----------------------------------- | ------- |
+| `label`    | Label to render with the choice option                | `string`                            |         |
+| `value`    | Value of the choice option                            | `string` `number` `boolean`         |         |
+| `hidden`   | Hides the choice option                               | `boolean`                           | `false` |
+| `disabled` | Disables the choice option                            | `boolean`                           | `false` |
+| `action`   | Triggers an action when the choice option is selected | `() => void`                        |         |
+| `children` | Renders a nested list of choice options               | [`choice_option[]`](#choice-option) |         |
+
+##### Choice Option Alignment
 
 ```ts
 type choice_option_alignment = "grid" | "flex" | "vertical";

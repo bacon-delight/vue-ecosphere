@@ -5,7 +5,7 @@ export interface choice_option {
 	value: string | number | boolean;
 	hidden?: boolean;
 	disabled?: boolean;
-	action?: () => {};
+	action?: () => void;
 }
 
 export interface choice_option_nested extends choice_option {

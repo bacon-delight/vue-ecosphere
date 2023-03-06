@@ -43,6 +43,9 @@ export default defineComponent({
 				{
 					label: "Grapefruit",
 					value: 4,
+					action: () => {
+						alert("You have selected Grapefruit!");
+					},
 				},
 				{
 					label: "Dragonfruit",

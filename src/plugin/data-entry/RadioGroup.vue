@@ -104,6 +104,9 @@ export default defineComponent({
 			this.value = index;
 			this.$emit("update:modelValue", this.options[this.value].value);
 			this.$emit("update", this.options[this.value].value);
+			if (this.options[this.value].action) {
+				(this.options[this.value].action as () => void)();
+			}
 		},
 	},
 });

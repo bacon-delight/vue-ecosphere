@@ -117,6 +117,9 @@ export default defineComponent({
 					return this.options[index].value;
 				})
 			);
+			if (this.options[index].action && this.values.includes(index)) {
+				(this.options[index].action as () => void)();
+			}
 		},
 	},
 });
