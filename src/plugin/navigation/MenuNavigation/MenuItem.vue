@@ -22,19 +22,20 @@
 		)
 
 //- Nested Menu
-.children(v-if="option.children && showChildren")
-	//- Vertical Bar
-	.children__bar(
-		:class="[`children__bar--${hue}`, { 'children__bar--hidden': !skeleton }]"
-	)
-
-	//- Children
-	.children__items
-		MenuItem(
-			v-for="child in option.children",
-			:option="child",
-			@action="$emit('action')"
+Transition(name="nested-children")
+	.children(v-if="option.children && showChildren")
+		//- Vertical Bar
+		.children__bar(
+			:class="[`children__bar--${hue}`, { 'children__bar--hidden': !skeleton }]"
 		)
+
+		//- Children
+		.children__items
+			MenuItem(
+				v-for="child in option.children",
+				:option="child",
+				@action="$emit('action')"
+			)
 </template>
 
 <script lang="ts">
@@ -150,5 +151,24 @@ export default defineComponent({
 			opacity: 0;
 		}
 	}
+}
+
+.nested-children-enter-active,
+.nested-children-leave-active {
+	transition: $transition-standard;
+}
+
+.nested-children-enter-from {
+	opacity: 0;
+	scale: 0;
+	transform: translateY(-100%);
+	// transform: translate(-100%, -100%);
+}
+
+.nested-children-leave-to {
+	opacity: 0;
+	scale: 0;
+	transform: translateY(-100%);
+	// transform: translate(-100%, -100%);
 }
 </style>

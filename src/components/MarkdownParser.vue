@@ -57,6 +57,7 @@ export default defineComponent({
 		border: 1px solid rgba(#868686, 0.3);
 		font-size: 0.85em;
 		max-height: 60vh;
+		tab-size: 1.5rem;
 	}
 
 	a {

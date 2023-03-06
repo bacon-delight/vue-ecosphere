@@ -72,6 +72,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/InputPage.vue"),
 				},
+				{
+					path: "/textarea",
+					name: "TextareaPage",
+					component: () =>
+						import("../views/data_entry/TextareaPage.vue"),
+				},
 			],
 		},
 	],

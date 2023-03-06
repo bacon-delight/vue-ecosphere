@@ -9,7 +9,7 @@ A input field records user input
 | `v-model`        | Binds the input value to a variable                                                                                          | `string` `number` `null`      | `null`    |
 | `label`          | Label to display of top of the input field                                                                                   | `string`                      |           |
 | `placeholder`    | Placeholder for the input, displayed if no value is present                                                                  | `string`                      |           |
-| `type`           | Specify the type of the input                                                                                                | [`input_type`](#input-type)   | `text`    |
+| `rows`           | Number of lines in the textarea                                                                                              | `number`                      | `3`       |
 | `disabled`       | Disables the input field                                                                                                     | `boolean`                     | `false`   |
 | `outline`        | Outlines the input field with a contrasting color                                                                            | `boolean`                     | `false`   |
 | `assistive-text` | Displays an assistive text below the input field                                                                             | `string`                      |           |
@@ -20,14 +20,6 @@ A input field records user input
 | `show-length`    | Display the length of the input in the field (shows `max-length` as well, if defined)                                        | `boolean`                     | `false`   |
 
 #### Types
-
-###### Input Type
-
-Specifies the supported input types for the field
-
-```ts
-type input_type = "text" | "number" | "email";
-```
 
 ###### Input State
 
@@ -41,7 +33,7 @@ type input_state = "default" | "error" | "warning" | "success";
 
 ```html
 <template>
-	<v-eco-input label="Name" v-model="name" />
+	<v-eco-textarea label="Name" v-model="name" />
 </template>
 
 <script lang="ts">

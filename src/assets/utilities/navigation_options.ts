@@ -123,9 +123,13 @@ function navigation_options(): menu_item[] {
 						router.push("/input");
 					},
 				},
-				// {
-				// 	label: "Textarea",
-				// },
+				{
+					label: "Textarea",
+					active: router.currentRoute.value.path === "/textarea",
+					action: () => {
+						router.push("/textarea");
+					},
+				},
 				// {
 				// 	label: "Dropdown",
 				// },

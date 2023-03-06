@@ -6,14 +6,14 @@
 	//- Input Wrapper
 	.input__wrapper
 		//- Input Field
-		input.input__field(
+		textarea.input__field(
 			:class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]",
-			:type="type",
 			:placeholder="placeholder",
 			:disabled="disabled",
 			v-model="value",
 			@input="handleUpdate",
-			:maxlength="maxLength"
+			:maxlength="maxLength",
+			:rows="rows"
 		)
 
 		//- Clear Icon
@@ -37,10 +37,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
-import type {
-	input_type,
-	input_state,
-} from "@/plugin/utilities/types.interface";
+import type { input_state } from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
@@ -58,9 +55,9 @@ export default defineComponent({
 			type: String as PropType<string>,
 			default: "",
 		},
-		type: {
-			type: String as PropType<input_type>,
-			default: "text",
+		rows: {
+			type: Number as PropType<number>,
+			default: 3,
 		},
 		disabled: {
 			type: Boolean as PropType<boolean>,
@@ -250,11 +247,5 @@ export default defineComponent({
 	&__length {
 		margin-left: auto;
 	}
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
 }
 </style>
