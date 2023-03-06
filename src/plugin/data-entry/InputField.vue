@@ -96,6 +96,10 @@ export default defineComponent({
 			type: String as PropType<string>,
 			default: "",
 		},
+		default: {
+			type: [String, Number, null] as PropType<string | number | null>,
+			default: "",
+		},
 	},
 	components: {
 		SVGIcon,
@@ -106,8 +110,11 @@ export default defineComponent({
 		};
 	},
 	mounted() {
-		if (this.modelValue) {
+		if (this.modelValue !== null) {
 			this.value = this.modelValue;
+		}
+		if (this.default !== null) {
+			this.value = this.default;
 		}
 	},
 	methods: {

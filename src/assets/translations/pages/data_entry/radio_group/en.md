@@ -18,9 +18,9 @@ This component renders a list of radio buttons that consolidates the user select
 
 #### Events
 
-| Event     | Description                            | Returns   |
-| --------- | -------------------------------------- | --------- |
-| `@update` | Fired when the radio option is updated | `boolean` |
+| Event     | Description                            | Returns                     |
+| --------- | -------------------------------------- | --------------------------- |
+| `@update` | Fired when the radio option is updated | `string` `number` `boolean` |
 
 #### Example
 

@@ -6,7 +6,7 @@ A input field records user input
 
 | Property         | Description                                                                                                                  | Type                                         | Default   |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | --------- |
-| `v-model`        | Binds the input value to a variable                                                                                          | `string` `number` `null`                     | `null`    |
+| `v-model`        | Binds the input value to a variable                                                                                          | `string` `number`                            |           |
 | `label`          | Label to display of top of the input field                                                                                   | `string`                                     |           |
 | `placeholder`    | Placeholder for the input, displayed if no value is present                                                                  | `string`                                     |           |
 | `type`           | Specify the type of the input                                                                                                | [`input_type`](#input-type)                  | `text`    |
@@ -18,6 +18,7 @@ A input field records user input
 | `allow-clear`    | Renders an icon to allow the user to clear the field                                                                         | `boolean`                                    | `false`   |
 | `max-length`     | Restricts the input field to a specified length                                                                              | `number`                                     |           |
 | `show-length`    | Display the length of the input in the field (shows `max-length` as well, if defined)                                        | `boolean`                                    | `false`   |
+| `default`        | Default value of the input field                                                                                             | `string` `number`                            |           |
 
 #### Types
 
