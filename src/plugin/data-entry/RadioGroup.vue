@@ -5,18 +5,23 @@
 
 	//- Options
 	.radio-group__options(:class="[`radio-group__options--${alignment}`]")
-		RadioField(
-			v-for="(option, index) in options",
-			:label="option.label",
-			:default="index === value",
-			@update="handleClick(index)"
-		)
+		.radio-group__field(v-for="(option, index) in options")
+			//- Radio Button
+			RadioField(
+				v-if="!option.hidden",
+				:label="option.label",
+				:disabled="option.disabled || disabled",
+				:default="index === value",
+				@update="handleClick(index)"
+			)
 
-	//- Assistive Text
+	//- Alert Message
 	.radio-group__alert-message(
 		v-if="alertMessage && state !== 'default'",
 		:class="[`radio-group__alert-message--${state}`]"
 	) {{ alertMessage }}
+
+	//- Assistive Text
 	.radio-group__assistive-text(v-else) {{ assistiveText }}
 </template>
 
@@ -39,7 +44,7 @@ export default defineComponent({
 	props: {
 		label: {
 			type: String as PropType<string>,
-			required: true,
+			default: "",
 		},
 		assistiveText: {
 			type: String as PropType<string>,
@@ -72,6 +77,10 @@ export default defineComponent({
 				string | number | boolean | null
 			>,
 			default: null,
+		},
+		disabled: {
+			type: Boolean as PropType<boolean>,
+			default: false,
 		},
 	},
 	data() {

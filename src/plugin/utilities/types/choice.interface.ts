@@ -1,5 +1,3 @@
-export type test = "test";
-
 export type choice_option_alignment = "grid" | "flex" | "vertical";
 
 export interface choice_option {

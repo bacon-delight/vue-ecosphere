@@ -9,6 +9,7 @@ This input can be used to select a single field form a list of options. All the 
 | `v-model`  | Binds the input value to a variable         | `boolean` | `false`  |
 | `label`    | Label to render along with the radio button | `string`  | Required |
 | `disabled` | Disables the radio field                    | `boolean` | `false`  |
+| `default`  | Default state of the radio button           | `boolean` |          |
 
 #### Events
 

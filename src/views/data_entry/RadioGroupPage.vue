@@ -6,12 +6,11 @@
 		.section
 			.section__flex
 				RadioGroup(
-					label="Radio Option",
-					assistive-text="Assistive Text",
+					label="Select your favourite fruit",
+					assistive-text="Firethorns are inedible, but they're good source for birds!",
 					:options="options",
 					v-model="selection"
 				)
-			p {{ selection }}
 		MarkdownParser(:content="$t('pages.data_entry.radio_group.content')")
 </template>
 
@@ -31,27 +30,28 @@ export default defineComponent({
 			selection: false,
 			options: [
 				{
-					label: "Option 1",
+					label: "Apple",
 					value: 1,
 				},
 				{
-					label: "Option 2",
+					label: "Banana",
 					value: 2,
 				},
 				{
-					label: "Option 3",
+					label: "Firethorn",
 					value: 3,
+					disabled: true,
 				},
 				{
-					label: "Option 4",
+					label: "Grapefruit",
 					value: 4,
 				},
 				{
-					label: "Option 5",
+					label: "Dragonfruit",
 					value: 5,
 				},
 				{
-					label: "Option 6",
+					label: "Kiwi",
 					value: 6,
 				},
 			],

@@ -1,12 +1,18 @@
 Here's a list of common types that various components use across the design system.
 
--   [Theme](#theme)
--   [Hue](#hue)
--   [Colors](#colors)
+-   Global Types
+    -   [Theme](#theme)
+    -   [Hue](#hue)
+    -   [Colors](#colors)
+-   Data Entry Types
+    -   [Data Entry State](#data-entry-state)
+    -   [Choice Option](#choice-option)
+    -   [Choice Option Nested](#choice-option-nested)
+    -   [Choice Option Alignment](#choice-option-alignment)
 
 #### Global Types
 
-##### Theme
+###### Theme
 
 ```ts
 type theme = "auto" | "light" | "dark" | "invert";
@@ -22,7 +28,7 @@ const customTheme = "dark" as theme;
 $ecosphere.theming.setTheme(customTheme);
 ```
 
-##### Hue
+###### Hue
 
 ```ts
 type hue =
@@ -36,7 +42,7 @@ type hue =
 	| "information";
 ```
 
-##### Colors
+###### Colors
 
 ```ts
 interface color_map {
@@ -58,4 +64,38 @@ const customColors = {
 } as color_map;
 
 $ecosphere.theming.setColors(customColors);
+```
+
+#### Data Entry Types
+
+###### Data Entry State
+
+```ts
+type data_entry_state = "default" | "error" | "warning" | "success";
+```
+
+###### Choice Option
+
+```ts
+interface choice_option {
+	label: string;
+	value: string | number | boolean;
+	hidden?: boolean;
+	disabled?: boolean;
+	action?: () => {};
+}
+```
+
+###### Choice Option Nested
+
+```ts
+interface choice_option_nested extends choice_option {
+	children?: choice_option[];
+}
+```
+
+###### Choice Option Alignment
+
+```ts
+type choice_option_alignment = "grid" | "flex" | "vertical";
 ```
