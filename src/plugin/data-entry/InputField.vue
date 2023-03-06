@@ -13,7 +13,8 @@
 			:disabled="disabled",
 			v-model="value",
 			@input="handleUpdate",
-			:maxlength="maxLength"
+			:maxlength="maxLength",
+			@keypress.enter="handleEnterPress"
 		)
 
 		//- Clear Icon
@@ -45,6 +46,7 @@ import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
 	name: "InputField",
+	emits: ["update:modelValue", "update", "enterPress", "clear"],
 	props: {
 		modelValue: {
 			type: [String, Number, null] as PropType<string | number | null>,
@@ -111,10 +113,17 @@ export default defineComponent({
 	methods: {
 		handleUpdate(): void {
 			this.$emit("update:modelValue", this.value);
+			this.$emit("update", this.value);
+			if (!this.value) {
+				this.$emit("clear");
+			}
 		},
 		clearValue(): void {
 			this.value = "";
 			this.handleUpdate();
+		},
+		handleEnterPress(): void {
+			this.$emit("enterPress", this.value);
 		},
 	},
 	computed: {

@@ -6,6 +6,7 @@
 		.section
 			.section__flex
 				InputField(label="Label", placeholder="Placeholder")
+				p {{ value }}
 		MarkdownParser(:content="$t('pages.data_entry.input.content')")
 </template>
 

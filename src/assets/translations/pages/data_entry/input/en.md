@@ -37,6 +37,14 @@ Highlights the input field if not in `default` state
 type input_state = "default" | "error" | "warning" | "success";
 ```
 
+#### Events
+
+| Event         | Description                                           | Returns                  |
+| ------------- | ----------------------------------------------------- | ------------------------ |
+| `@update`     | Fired when the text in the input field is updated     | `string` `number` `null` |
+| `@enterPress` | Fired when the user presses the keyboard enter button | `string` `number` `null` |
+| `@clear`      | Fired when the input field is cleared or emptied      | `void`                   |
+
 #### Example
 
 ```html
