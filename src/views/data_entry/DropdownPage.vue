@@ -14,7 +14,9 @@
 					:allow-clear="inputAttributeAlterations.includes('allowClear')",
 					:disabled="inputAttributeAlterations.includes('disabled')",
 					:outline="inputAttributeAlterations.includes('outline')",
-					:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null"
+					:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null",
+					:default="inputAttributeAlterations.includes('default') ? 2 : null",
+					:hue="inputHueAlteration"
 				)
 
 		.section
@@ -22,18 +24,25 @@
 			.section__description Customise the options below to see changes on the dropdown
 			.section__playground
 				CheckboxGroup(
-					label="Customise the attributes of the input field",
+					label="Customise the attributes of the dropdown",
 					:options="inputAttributeAlterationOptions",
 					v-model="inputAttributeAlterations",
 					alignment="flex",
 					:assistive-text="inputAttributeAlterationsAssistiveText"
 				)
 				RadioGroup(
-					label="Customise the state of the input field",
+					label="Customise the state of the dropdown",
 					:options="inputStateAlterationOptions",
 					v-model="inputStateAlteration",
 					alignment="grid",
 					:assistive-text="inputStateAlterationsAssistiveText"
+				)
+				RadioGroup(
+					label="Customise the hue of the dropdown",
+					:options="inputHueAlterationOptions",
+					v-model="inputHueAlteration",
+					alignment="flex",
+					assistive-text="The selected value will be highlighted"
 				)
 		MarkdownParser(:content="$t('pages.data_entry.dropdown.content')")
 </template>
@@ -99,10 +108,10 @@ export default defineComponent({
 					label: "Allow Clear",
 					value: "allowClear",
 				},
-				// {
-				// 	label: "Default",
-				// 	value: "default",
-				// },
+				{
+					label: "Default",
+					value: "default",
+				},
 				{
 					label: "Disabled",
 					value: "disabled",
@@ -118,29 +127,6 @@ export default defineComponent({
 				{
 					label: "Alert Message",
 					value: "alertMessage",
-				},
-			],
-			inputTypeAlteration: "text",
-			inputTypeAlterationOptions: [
-				{
-					label: "Text",
-					value: "text",
-				},
-				{
-					label: "Email",
-					value: "email",
-				},
-				{
-					label: "Number",
-					value: "number",
-				},
-				{
-					label: "Password",
-					value: "password",
-				},
-				{
-					label: "Search",
-					value: "search",
 				},
 			],
 			inputStateAlteration: "default",
@@ -160,6 +146,41 @@ export default defineComponent({
 				{
 					label: "Success",
 					value: "success",
+				},
+			],
+			inputHueAlteration: "information",
+			inputHueAlterationOptions: [
+				{
+					label: "Information",
+					value: "information",
+				},
+				{
+					label: "Error",
+					value: "error",
+				},
+				{
+					label: "Warning",
+					value: "warning",
+				},
+				{
+					label: "Success",
+					value: "success",
+				},
+				{
+					label: "Primary",
+					value: "primary",
+				},
+				{
+					label: "Primary Variant",
+					value: "primary-variant",
+				},
+				{
+					label: "Secondary",
+					value: "secondary",
+				},
+				{
+					label: "Secondary Variant",
+					value: "secondary-variant",
 				},
 			],
 		};

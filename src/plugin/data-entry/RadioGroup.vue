@@ -109,6 +109,19 @@ export default defineComponent({
 			}
 		},
 	},
+	watch: {
+		default(newDefault: string | number | boolean | null): void {
+			if (newDefault === null) {
+				this.value = null;
+			} else {
+				this.options.forEach((option: choice_option, index: number) => {
+					if (option.value === newDefault) {
+						this.value = index;
+					}
+				});
+			}
+		},
+	},
 });
 </script>
 

@@ -174,7 +174,7 @@ export default defineComponent({
 		},
 	},
 	watch: {
-		default(newDefault: string | number | null) {
+		default(newDefault: string | number | null): void {
 			this.value = newDefault;
 		},
 	},

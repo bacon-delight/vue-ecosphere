@@ -46,7 +46,9 @@
 					@keypress.enter="handleClick(index)"
 				)
 					//- Dropdown Option Label
-					.dropdown-option__label {{ option.label }}
+					.dropdown-option__label(
+						:class="[index === value ? `dropdown-option__label--active` : '']"
+					) {{ option.label }}
 
 					//- Active Icon
 					SVGIcon.dropdown-option__icon(
@@ -161,6 +163,17 @@ export default defineComponent({
 			this.showOptions = false;
 		},
 	},
+	mounted() {
+		const initialValue =
+			this.default !== null ? this.default : this.modelValue;
+		if (initialValue !== null) {
+			this.options.forEach((option: choice_option, index: number) => {
+				if (option.value === initialValue) {
+					this.value = index;
+				}
+			});
+		}
+	},
 	watch: {
 		showOptions(value: boolean): void {
 			if (value) {
@@ -170,10 +183,21 @@ export default defineComponent({
 							.getElementById("eco-dropdown")
 							?.contains(event.target)
 					) {
-						// Chicked Inside Dropdown
+						// Chicked Inside Dropdown - Do Nothing
 					} else {
 						this.showOptions = false;
 						document.removeEventListener("click", () => {});
+					}
+				});
+			}
+		},
+		default(newDefault: string | number | boolean | null): void {
+			if (newDefault === null) {
+				this.value = null;
+			} else {
+				this.options.forEach((option: choice_option, index: number) => {
+					if (option.value === newDefault) {
+						this.value = index;
 					}
 				});
 			}
@@ -341,11 +365,16 @@ export default defineComponent({
 
 	&__label {
 		@include font-regular;
+
+		&--active {
+			@include font-bold;
+		}
 	}
 
 	&__icon {
 		@include hue-color-modifiers;
 		font-size: 0.75rem;
+		margin-left: auto;
 
 		&--hidden {
 			opacity: 0;
