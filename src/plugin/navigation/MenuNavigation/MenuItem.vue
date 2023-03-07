@@ -21,8 +21,7 @@
 
 		//- Active Dot
 		SVGIcon.menu-item__icon.menu-item__status(
-			v-if="option.active",
-			:class="`menu-item__icon--${hue}`",
+			:class="[`menu-item__icon--${hue}`, { 'menu-item__icon--hidden': !option.active }]",
 			name="ri-checkbox-blank-circle-fill"
 		)
 
@@ -126,6 +125,10 @@ export default defineComponent({
 
 	&__icon {
 		@include hue-color-modifiers;
+
+		&--hidden {
+			opacity: 0;
+		}
 	}
 
 	&__status {

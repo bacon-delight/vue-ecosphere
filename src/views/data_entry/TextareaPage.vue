@@ -16,10 +16,8 @@
 				:max-length="inputAttributeAlterations.includes('maxLength') ? 15 : null",
 				:show-length="inputAttributeAlterations.includes('showLength')",
 				:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null",
-				:assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Assistive Text' : null",
-				v-model="value"
+				:assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Assistive Text' : null"
 			)
-		p {{ value }}
 
 		//- Playground
 		.section
@@ -61,7 +59,6 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			value: "Test",
 			inputAttributeAlterations: ["label", "placeholder"] as string[],
 			inputAttributeAlterationOptions: [
 				{
