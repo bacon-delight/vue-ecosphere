@@ -4,7 +4,7 @@
 	.dropdown__label(:class="[`dropdown__label--${state}`]") {{ label }}
 
 	//- Dropdown Wrapper
-	.dropdown__wrapper
+	#eco-dropdown.dropdown__wrapper
 		//- Dropdown Field
 		.dropdown__field(
 			:tabindex="disabled ? -1 : 0",
@@ -137,7 +137,7 @@ export default defineComponent({
 		return {
 			showOptions: false,
 			value: null as null | number,
-			// clickListener: null
+			clickListener: null,
 		};
 	},
 	methods: {
@@ -161,11 +161,24 @@ export default defineComponent({
 			this.showOptions = false;
 		},
 	},
-	// watch: {
-	// 	showOptions(value: boolean): void {
-	// 		console.log(value)
-	// 	}
-	// }
+	watch: {
+		showOptions(value: boolean): void {
+			if (value) {
+				window.addEventListener("click", (event: any) => {
+					if (
+						document
+							.getElementById("eco-dropdown")
+							?.contains(event.target)
+					) {
+						// Chicked Inside Dropdown
+					} else {
+						this.showOptions = false;
+						document.removeEventListener("click", () => {});
+					}
+				});
+			}
+		},
+	},
 });
 </script>
 
