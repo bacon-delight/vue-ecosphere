@@ -134,6 +134,10 @@ export default defineComponent({
 		@include header-6;
 	}
 
+	&__description {
+		@include font-light;
+	}
+
 	&__flex {
 		display: flex;
 		flex-wrap: wrap;

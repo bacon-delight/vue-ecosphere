@@ -6,9 +6,10 @@
 		.section
 			.section__flex
 				InputField(
-					label="Label",
-					placeholder="Placeholder",
+					:label="inputAttributeAlterations.includes('label') ? 'Label' : null",
+					:placeholder="inputAttributeAlterations.includes('placeholder') ? 'Placeholder' : null",
 					:type="inputTypeAlteration",
+					:default="inputAttributeAlterations.includes('default') ? 'Default Value' : null",
 					:state="inputStateAlteration",
 					:allow-clear="inputAttributeAlterations.includes('allowClear')",
 					:disabled="inputAttributeAlterations.includes('disabled')",
@@ -20,6 +21,7 @@
 				)
 		.section
 			.section__subtitle Playground
+			.section__description Customise the options below to see changes on the input field
 			.section__playground
 				RadioGroup(
 					label="Customise the type of the input field",
@@ -38,7 +40,8 @@
 					label="Customise the state of the input field",
 					:options="inputStateAlterationOptions",
 					v-model="inputStateAlteration",
-					alignment="grid"
+					alignment="grid",
+					:assistive-text="inputStateAlterationsAssistiveText"
 				)
 
 		MarkdownParser(:content="$t('pages.data_entry.input.content')")
@@ -61,11 +64,23 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			inputAttributeAlterations: [] as string[],
+			inputAttributeAlterations: ["label", "placeholder"] as string[],
 			inputAttributeAlterationOptions: [
+				{
+					label: "Label",
+					value: "label",
+				},
+				{
+					label: "Placeholder",
+					value: "placeholder",
+				},
 				{
 					label: "Allow Clear",
 					value: "allowClear",
+				},
+				{
+					label: "Default",
+					value: "default",
 				},
 				{
 					label: "Disabled",
@@ -145,6 +160,15 @@ export default defineComponent({
 				!this.inputAttributeAlterations.includes("showLength")
 			) {
 				return "Activate `Show Length` to see the length with the input field";
+			}
+			return null;
+		},
+		inputStateAlterationsAssistiveText(): string | null {
+			if (
+				this.inputStateAlteration !== "default" &&
+				!this.inputAttributeAlterations.includes("alertMessage")
+			) {
+				return "Select the 'Alert Message' attribute to see a message with the input field";
 			}
 			return null;
 		},

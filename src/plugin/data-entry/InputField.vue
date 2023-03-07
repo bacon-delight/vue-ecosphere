@@ -113,7 +113,7 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			value: "" as string | number,
+			value: "" as string | number | null,
 			showPassword: false,
 		};
 	},
@@ -144,9 +144,11 @@ export default defineComponent({
 	computed: {
 		inputLengthInformation(): string | number {
 			if (this.maxLength !== null) {
-				return `${this.value.toString().length} / ${this.maxLength}`;
+				return `${
+					this.value === null ? "0" : this.value.toString().length
+				} / ${this.maxLength}`;
 			}
-			return this.value.toString().length;
+			return this.value === null ? 0 : this.value.toString().length;
 		},
 		inputFieldType(): input_type {
 			if (this.type === "password") {
@@ -155,6 +157,11 @@ export default defineComponent({
 				}
 			}
 			return this.type;
+		},
+	},
+	watch: {
+		default(newDefault: string | number | null) {
+			this.value = newDefault;
 		},
 	},
 });
