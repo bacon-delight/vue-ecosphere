@@ -27,7 +27,7 @@ A input field records user input
 Specifies the supported input types for the field
 
 ```ts
-type input_type = "text" | "number" | "email" | "password";
+type input_type = "text" | "number" | "email" | "password" | "search";
 ```
 
 Note:
@@ -36,11 +36,12 @@ Note:
 
 #### Events
 
-| Event         | Description                                           | Returns                  |
-| ------------- | ----------------------------------------------------- | ------------------------ |
-| `@update`     | Fired when the text in the input field is updated     | `string` `number` `null` |
-| `@enterPress` | Fired when the user presses the keyboard enter button | `string` `number` `null` |
-| `@clear`      | Fired when the input field is cleared or emptied      | `void`                   |
+| Event         | Description                                              | Returns           |
+| ------------- | -------------------------------------------------------- | ----------------- |
+| `@update`     | Fired when the text in the input field is updated        | `string` `number` |
+| `@enterPress` | Fired when the user presses the keyboard enter button    | `string` `number` |
+| `@clear`      | Fired when the input field is cleared or emptied         | `void`            |
+| `@search`     | Fired when the search icon in the input field is pressed | `string` `number` |
 
 #### Example
 

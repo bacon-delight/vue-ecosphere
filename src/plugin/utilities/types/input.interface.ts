@@ -1,1 +1,1 @@
-export type input_type = "text" | "number" | "email" | "password";
+export type input_type = "text" | "number" | "email" | "password" | "search";

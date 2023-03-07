@@ -102,6 +102,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/CheckboxGroupPage.vue"),
 				},
+				{
+					path: "/dropdown",
+					name: "DropdownPage",
+					component: () =>
+						import("../views/data_entry/DropdownPage.vue"),
+				},
 			],
 		},
 	],

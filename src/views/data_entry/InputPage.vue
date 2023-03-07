@@ -125,6 +125,10 @@ export default defineComponent({
 					label: "Password",
 					value: "password",
 				},
+				{
+					label: "Search",
+					value: "search",
+				},
 			],
 			inputStateAlteration: "default",
 			inputStateAlterationOptions: [

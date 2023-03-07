@@ -17,22 +17,33 @@
 			@keypress.enter="handleEnterPress"
 		)
 
-		//- Clear Icon
-		SVGIcon.input__icon(
-			v-if="allowClear && type !== 'password'",
-			name="ri-close-circle-line",
-			:class="[{ 'input__icon--disabled': disabled }]",
-			@click="clearValue"
-		)
-		//- Show or Hide Password
-		SVGIcon.input__icon(
-			v-if="type === 'password'",
-			:name="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'",
-			:class="[{ 'input__icon--disabled': disabled }]",
-			@click="showPassword = !showPassword"
-		)
+		//- Icons
+		.input__icons
+			//- Clear Icon
+			SVGIcon.input__icon(
+				v-if="allowClear",
+				name="ri-close-circle-line",
+				:class="[{ 'input__icon--disabled': disabled }]",
+				@click="clearValue"
+			)
 
-	//- Assistive Text
+			//- Show or Hide Password Icon
+			SVGIcon.input__icon(
+				v-if="type === 'password'",
+				:name="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'",
+				:class="[{ 'input__icon--disabled': disabled }]",
+				@click="showPassword = !showPassword"
+			)
+
+			//- Search Icon
+			SVGIcon.input__icon(
+				v-if="type === 'search'",
+				name="ri-search-2-line",
+				:class="[{ 'input__icon--disabled': disabled }]",
+				@click="handleSearch"
+			)
+
+	//- Input Length, Assistive Text & Alert Message
 	.input__texts
 		.input__alert-message(
 			v-if="alertMessage && state !== 'default'",
@@ -53,7 +64,7 @@ import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
 	name: "InputField",
-	emits: ["update:modelValue", "update", "enterPress", "clear"],
+	emits: ["update:modelValue", "update", "enterPress", "clear", "search"],
 	props: {
 		modelValue: {
 			type: [String, Number, null] as PropType<string | number | null>,
@@ -140,6 +151,9 @@ export default defineComponent({
 		handleEnterPress(): void {
 			this.$emit("enterPress", this.value);
 		},
+		handleSearch(): void {
+			this.$emit("search", this.value);
+		},
 	},
 	computed: {
 		inputLengthInformation(): string | number {
@@ -169,14 +183,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .input {
-	display: block;
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.25rem;
 	width: 100%;
+	position: relative;
 
 	&--disabled {
 		opacity: 50%;
+		pointer-events: none;
 	}
 
 	&__label {
@@ -239,11 +254,19 @@ export default defineComponent({
 		}
 	}
 
-	&__icon {
+	&__icons {
 		position: absolute;
 		top: 50%;
 		right: 0.75rem;
 		transform: translateY(-50%);
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		column-gap: 0.325rem;
+		align-items: center;
+	}
+
+	&__icon {
 		font-size: 1.25rem;
 		color: $color-disabled;
 		cursor: pointer;

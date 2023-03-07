@@ -18,6 +18,7 @@ import radio from "./pages/data_entry/radio/_translations";
 import radio_group from "./pages/data_entry/radio_group/_translations";
 import checkbox from "./pages/data_entry/checkbox/_translations";
 import checkbox_group from "./pages/data_entry/checkbox_group/_translations";
+import dropdown from "./pages/data_entry/dropdown/_translations";
 
 export default {
 	title: "Ecosphere",
@@ -47,6 +48,7 @@ export default {
 			radio_group: radio_group("en"),
 			checkbox: checkbox("en"),
 			checkbox_group: checkbox_group("en"),
+			dropdown: dropdown("en"),
 		},
 	},
 	common: {

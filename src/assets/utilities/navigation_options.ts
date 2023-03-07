@@ -159,9 +159,13 @@ function navigation_options(): menu_item[] {
 						router.push("/checkbox-group");
 					},
 				},
-				// {
-				// 	label: "Dropdown",
-				// },
+				{
+					label: "Dropdown",
+					active: router.currentRoute.value.path === "/dropdown",
+					action: () => {
+						router.push("/dropdown");
+					},
+				},
 
 				// {
 				// 	label: "Checkbox",
