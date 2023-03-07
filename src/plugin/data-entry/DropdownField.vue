@@ -137,6 +137,7 @@ export default defineComponent({
 		return {
 			showOptions: false,
 			value: null as null | number,
+			// clickListener: null
 		};
 	},
 	methods: {
@@ -160,6 +161,11 @@ export default defineComponent({
 			this.showOptions = false;
 		},
 	},
+	// watch: {
+	// 	showOptions(value: boolean): void {
+	// 		console.log(value)
+	// 	}
+	// }
 });
 </script>
 
@@ -223,6 +229,7 @@ export default defineComponent({
 		flex-wrap: nowrap;
 		column-gap: 0.5rem;
 		align-items: center;
+		-webkit-tap-highlight-color: transparent;
 
 		&:focus {
 			outline: 1px solid $color-hyperlink;
@@ -309,6 +316,7 @@ export default defineComponent({
 	border-radius: $border-radius-standard;
 	cursor: pointer;
 	transition: $transition-standard;
+	-webkit-tap-highlight-color: transparent;
 
 	&:focus {
 		outline: 1px solid $color-hyperlink;

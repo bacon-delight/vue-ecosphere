@@ -19,6 +19,7 @@
 					:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null",
 					:assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Assistive Text' : null"
 				)
+
 		.section
 			.section__subtitle Playground
 			.section__description Customise the options below to see changes on the input field
