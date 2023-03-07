@@ -147,9 +147,10 @@ export default defineComponent({
 	}
 
 	&__playground {
+		margin-top: 0.5rem;
 		border: 1px dashed $color-divider;
 		border-radius: $border-radius-standard;
-		padding: 1rem;
+		padding: 1rem 1rem 0.5rem;
 		display: flex;
 		flex-direction: column;
 		row-gap: 1rem;

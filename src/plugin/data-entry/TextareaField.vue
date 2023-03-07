@@ -44,7 +44,7 @@ export default defineComponent({
 	name: "InputField",
 	props: {
 		modelValue: {
-			type: [String, Number, null] as PropType<string | number | null>,
+			type: [String, Number, null] as PropType<string | null>,
 			default: "",
 		},
 		label: {
@@ -91,18 +91,25 @@ export default defineComponent({
 			type: String as PropType<string>,
 			default: "",
 		},
+		default: {
+			type: [String, null] as PropType<string | null>,
+			default: "",
+		},
 	},
 	components: {
 		SVGIcon,
 	},
 	data() {
 		return {
-			value: "" as string | number,
+			value: "" as string | null,
 		};
 	},
 	mounted() {
-		if (this.modelValue) {
+		if (this.modelValue !== null) {
 			this.value = this.modelValue;
+		}
+		if (this.default !== null) {
+			this.value = this.default;
 		}
 	},
 	methods: {
@@ -117,9 +124,16 @@ export default defineComponent({
 	computed: {
 		inputLengthInformation(): string | number {
 			if (this.maxLength !== null) {
-				return `${this.value.toString().length} / ${this.maxLength}`;
+				return `${
+					this.value === null ? "0" : this.value.toString().length
+				} / ${this.maxLength}`;
 			}
-			return this.value.toString().length;
+			return this.value === null ? 0 : this.value.toString().length;
+		},
+	},
+	watch: {
+		default(newDefault: string | null) {
+			this.value = newDefault;
 		},
 	},
 });
@@ -199,8 +213,8 @@ export default defineComponent({
 
 	&__icon {
 		position: absolute;
-		top: 50%;
-		right: 0.75rem;
+		top: 1.125rem;
+		right: 0.5rem;
 		transform: translateY(-50%);
 		font-size: 1.25rem;
 		color: $color-disabled;
