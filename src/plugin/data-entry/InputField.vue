@@ -8,7 +8,7 @@
 		//- Input Field
 		input.input__field(
 			:class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]",
-			:type="type",
+			:type="inputFieldType",
 			:placeholder="placeholder",
 			:disabled="disabled",
 			v-model="value",
@@ -19,10 +19,17 @@
 
 		//- Clear Icon
 		SVGIcon.input__icon(
-			v-if="allowClear",
+			v-if="allowClear && type !== 'password'",
 			name="ri-close-circle-line",
 			:class="[{ 'input__icon--disabled': disabled }]",
 			@click="clearValue"
+		)
+		//- Show or Hide Password
+		SVGIcon.input__icon(
+			v-if="type === 'password'",
+			:name="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'",
+			:class="[{ 'input__icon--disabled': disabled }]",
+			@click="showPassword = !showPassword"
 		)
 
 	//- Assistive Text
@@ -107,6 +114,7 @@ export default defineComponent({
 	data() {
 		return {
 			value: "" as string | number,
+			showPassword: false,
 		};
 	},
 	mounted() {
@@ -139,6 +147,14 @@ export default defineComponent({
 				return `${this.value.toString().length} / ${this.maxLength}`;
 			}
 			return this.value.toString().length;
+		},
+		inputFieldType(): input_type {
+			if (this.type === "password") {
+				if (this.showPassword) {
+					return "text";
+				}
+			}
+			return this.type;
 		},
 	},
 });

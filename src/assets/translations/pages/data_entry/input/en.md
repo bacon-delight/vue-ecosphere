@@ -27,8 +27,12 @@ A input field records user input
 Specifies the supported input types for the field
 
 ```ts
-type input_type = "text" | "number" | "email";
+type input_type = "text" | "number" | "email" | "password";
 ```
+
+Note:
+
+-   `allow-clear` will not be available if `type` is `password`
 
 #### Events
 
