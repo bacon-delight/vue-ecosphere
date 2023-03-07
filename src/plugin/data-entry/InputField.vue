@@ -240,6 +240,7 @@ export default defineComponent({
 		font-size: 1.25rem;
 		color: $color-disabled;
 		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
 
 		&:hover {
 			color: $color-contrast;

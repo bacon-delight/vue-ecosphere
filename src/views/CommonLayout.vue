@@ -141,5 +141,14 @@ export default defineComponent({
 		row-gap: 0.5rem;
 		align-items: center;
 	}
+
+	&__playground {
+		border: 1px dashed $color-divider;
+		border-radius: $border-radius-standard;
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+	}
 }
 </style>
