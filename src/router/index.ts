@@ -57,6 +57,14 @@ const router = createRouter({
 						import("../views/navigation/NavbarPage.vue"),
 				},
 
+				// Design System
+				{
+					path: "/typography",
+					name: "Typography",
+					component: () =>
+						import("../views/design_system/TypographyPage.vue"),
+				},
+
 				// Call to Actions
 				{
 					path: "/button",
@@ -74,37 +82,37 @@ const router = createRouter({
 				},
 				{
 					path: "/textarea",
-					name: "TextareaPage",
+					name: "Textarea",
 					component: () =>
 						import("../views/data_entry/TextareaPage.vue"),
 				},
 				{
 					path: "/radio",
-					name: "RadioPage",
+					name: "Radio",
 					component: () =>
 						import("../views/data_entry/RadioPage.vue"),
 				},
 				{
 					path: "/radio-group",
-					name: "RadioGroupPage",
+					name: "RadioGroup",
 					component: () =>
 						import("../views/data_entry/RadioGroupPage.vue"),
 				},
 				{
 					path: "/checkbox",
-					name: "CheckboxPage",
+					name: "Checkbox",
 					component: () =>
 						import("../views/data_entry/CheckboxPage.vue"),
 				},
 				{
 					path: "/checkbox-group",
-					name: "CheckboxGroupPage",
+					name: "CheckboxGroup",
 					component: () =>
 						import("../views/data_entry/CheckboxGroupPage.vue"),
 				},
 				{
 					path: "/dropdown",
-					name: "DropdownPage",
+					name: "Dropdown",
 					component: () =>
 						import("../views/data_entry/DropdownPage.vue"),
 				},

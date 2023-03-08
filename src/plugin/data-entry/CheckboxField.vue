@@ -1,7 +1,7 @@
 <template lang="pug">
 .checkbox(@click="handleClick", :class="[{ 'checkbox--disabled': disabled }]")
 	SVGIcon.checkbox__icon(
-		:name="value ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'",
+		:name="value ? 'ri-checkbox-fill' : 'ri-checkbox-blank-line'",
 		:tabindex="disabled ? -1 : 0",
 		@keypress.enter="handleClick"
 	)

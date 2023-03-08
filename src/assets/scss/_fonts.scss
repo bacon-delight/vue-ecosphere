@@ -90,28 +90,28 @@ $font-monospace: "Roboto Mono", monospace;
 	font-family: $font-general;
 	font-size: 2.25rem;
 	font-weight: 300;
-	margin: 1rem 0 0.5rem;
+	margin: 2rem 0 0.5rem;
 }
 
 @mixin header-2 {
 	font-family: $font-general;
 	font-size: 2rem;
 	font-weight: 300;
-	margin: 1rem 0 0.5rem;
+	margin: 1.75rem 0 0.5rem;
 }
 
 @mixin header-3 {
 	font-family: $font-general;
 	font-size: 1.75rem;
 	font-weight: 300;
-	margin: 1rem 0 0.5rem;
+	margin: 1.5rem 0 0.5rem;
 }
 
 @mixin header-4 {
 	font-family: $font-general;
 	font-size: 1.5rem;
 	font-weight: 400;
-	margin: 1rem 0 0.5rem;
+	margin: 1.25rem 0 0.5rem;
 }
 
 @mixin header-5 {

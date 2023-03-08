@@ -3,6 +3,9 @@ import installation from "./pages/root/installation/_translations";
 import configuration from "./pages/root/configuration/_translations";
 import types from "./pages/root/types/_translations";
 
+// Design System
+import typography from "./pages/design_system/typography/_translations";
+
 // Navigation
 import menu from "./pages/navigation/menu/_translations";
 import sidebar from "./pages/navigation/sidebar/_translations";
@@ -49,6 +52,9 @@ export default {
 			checkbox: checkbox("en"),
 			checkbox_group: checkbox_group("en"),
 			dropdown: dropdown("en"),
+		},
+		design_system: {
+			typography: typography("en"),
 		},
 	},
 	common: {
