@@ -146,6 +146,17 @@ export default defineComponent({
 		align-items: center;
 	}
 
+	&__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		column-gap: 1rem;
+		row-gap: 1rem;
+
+		@include respond-below(sm) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
 	&__playground {
 		margin-top: 0.5rem;
 		border: 1px dashed $color-divider;

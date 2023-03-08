@@ -62,7 +62,7 @@ export default defineComponent({
 		},
 	},
 	watch: {
-		default(newDefault: boolean) {
+		default(newDefault: boolean): void {
 			this.value = newDefault;
 		},
 	},

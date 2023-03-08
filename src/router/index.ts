@@ -64,6 +64,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/design_system/TypographyPage.vue"),
 				},
+				{
+					path: "/colors",
+					name: "Colors",
+					component: () =>
+						import("../views/design_system/ColorsPage.vue"),
+				},
 
 				// Call to Actions
 				{

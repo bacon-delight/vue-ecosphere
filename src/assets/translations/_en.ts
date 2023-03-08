@@ -5,6 +5,7 @@ import types from "./pages/root/types/_translations";
 
 // Design System
 import typography from "./pages/design_system/typography/_translations";
+import colors from "./pages/design_system/colors/_translations";
 
 // Navigation
 import menu from "./pages/navigation/menu/_translations";
@@ -55,6 +56,7 @@ export default {
 		},
 		design_system: {
 			typography: typography("en"),
+			colors: colors("en"),
 		},
 	},
 	common: {

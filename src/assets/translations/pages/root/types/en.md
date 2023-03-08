@@ -9,6 +9,7 @@ Here's a list of common types that various components use across the design syst
     -   [Choice Option](#choice-option)
     -   [Choice Option Nested](#choice-option-nested)
     -   [Choice Option Alignment](#choice-option-alignment)
+    -   [Choice Option Expand](#choice-option-expand)
 
 #### Global Types
 

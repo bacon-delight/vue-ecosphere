@@ -54,6 +54,13 @@ function navigation_options(): menu_item[] {
 						router.push("/typography");
 					},
 				},
+				{
+					label: "Colors",
+					active: router.currentRoute.value.path === "/colors",
+					action: () => {
+						router.push("/colors");
+					},
+				},
 				// {
 				// 	label: "Icons",
 				// 	active: router.currentRoute.value.path === "/icons",

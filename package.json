@@ -11,13 +11,13 @@
 		"type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@prettier/plugin-pug": "^2.4.0",
 		"@rushstack/eslint-patch": "^1.1.4",
 		"@types/jsdom": "^20.0.1",
 		"@types/node": "^18.11.12",
 		"@vitejs/plugin-vue": "^4.0.0",
+		"@volar/vue-language-plugin-pug": "^1.2.0",
 		"@vue/eslint-config-prettier": "^7.0.0",
 		"@vue/eslint-config-typescript": "^11.0.0",
 		"@vue/test-utils": "^2.2.6",
