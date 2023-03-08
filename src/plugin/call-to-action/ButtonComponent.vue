@@ -77,7 +77,6 @@ export default defineComponent({
 	flex-wrap: nowrap;
 	align-items: center;
 	border-radius: $border-radius-standard;
-	@include font-regular;
 	cursor: pointer;
 	transition: $transition-standard;
 	border: 1px solid $color-transparent;
@@ -268,26 +267,31 @@ export default defineComponent({
 	&--xs {
 		padding: 0.25rem 1rem;
 		column-gap: 0.5rem;
+		@include font-footnote;
 	}
 
 	&--sm {
 		padding: 0.375rem 1.25rem;
 		column-gap: 0.625rem;
+		@include font-regular;
 	}
 
 	&--md {
 		padding: 0.5rem 1.5rem;
 		column-gap: 0.75rem;
+		@include font-regular;
 	}
 
 	&--lg {
 		padding: 0.625rem 1.75rem;
 		column-gap: 0.875rem;
+		@include header-6;
 	}
 
 	&--xl {
 		padding: 0.75rem 2rem;
 		column-gap: 1rem;
+		@include header-5;
 	}
 }
 </style>
