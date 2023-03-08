@@ -113,9 +113,13 @@ function navigation_options(): menu_item[] {
 						router.push("/button");
 					},
 				},
-				// {
-				// 	label: "Link",
-				// },
+				{
+					label: "Link",
+					active: router.currentRoute.value.path === "/link",
+					action: () => {
+						router.push("/link");
+					},
+				},
 			],
 		},
 		{

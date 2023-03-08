@@ -78,6 +78,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/call_to_actions/ButtonPage.vue"),
 				},
+				{
+					path: "/link",
+					name: "Link",
+					component: () =>
+						import("../views/call_to_actions/LinkPage.vue"),
+				},
 
 				// Data Entry
 				{

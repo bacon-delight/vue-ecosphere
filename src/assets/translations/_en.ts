@@ -14,6 +14,7 @@ import navbar from "./pages/navigation/navbar/_translations";
 
 // Call to Actions
 import button from "./pages/call_to_actions/button/_translations";
+import link from "./pages/call_to_actions/link/_translations";
 
 // Data Entry
 import input from "./pages/data_entry/input/_translations";
@@ -39,6 +40,7 @@ export default {
 		types: types("en"),
 		call_to_actions: {
 			button: button("en"),
+			link: link("en"),
 		},
 		navigation: {
 			menu: menu("en"),

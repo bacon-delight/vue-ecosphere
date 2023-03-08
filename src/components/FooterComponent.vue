@@ -7,16 +7,26 @@
 	.footer__edit Caught a mistake or want to improve the content on this page?
 	img.footer__logo(src="/logo.png", @click="navigateTo('/')")
 	.footer__brand Ecosphere Design System
-	.footer__description Released as Open Source under the MIT License
+	.footer__description
+		span Released as Open Source under the &nbsp;
+		LinkComponent(
+			label="MIT License",
+			href="https://opensource.org/license/mit/",
+			target="_blank"
+		)
 	.footer__description Copyright &copy; 2021 - {{ new Date().getFullYear() }} Team Ecosphere
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import LinkComponent from "@/plugin/call-to-action/LinkComponent.vue";
 // https://github.com/bacon-delight/vue-ecosphere/graphs/contributors
 // https://opensource.org/license/mit/
 export default defineComponent({
 	name: "CommonLayout",
+	components: {
+		LinkComponent,
+	},
 	methods: {
 		navigateTo(href: string): void {
 			if (href.includes("http")) {
