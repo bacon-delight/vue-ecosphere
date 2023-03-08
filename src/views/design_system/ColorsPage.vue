@@ -3,6 +3,19 @@
 	.wrapper__title {{ $t("pages.design_system.colors.title") }}
 	.wrapper__body
 		.section
+			.section__description Play around with the colors below to change the color palette across the design system. You can navigate to other pages as well to view the changes after setting them here. If you refresh, the changes will be reset.
+
+		.section
+			ButtonComponent(
+				label="Restore Defaults",
+				size="sm",
+				hue="error",
+				icon="ri-arrow-go-back-line",
+				icon-position="before",
+				@click="restoreDefaults"
+			)
+
+		.section
 			.section__subtitle Elementary Colors
 			.section__grid
 				ColorField(
@@ -221,47 +234,28 @@
 import { defineComponent } from "vue";
 import MarkdownParser from "@/components/MarkdownParser.vue";
 import ColorField from "@/plugin/data-entry/ColorField.vue";
+import ButtonComponent from "@/plugin/call-to-action/ButtonComponent.vue";
+import default_colors from "@/assets/utilities/colors";
 
 export default defineComponent({
 	name: "ColorsPage",
 	components: {
 		MarkdownParser,
 		ColorField,
+		ButtonComponent,
 	},
 	data() {
 		return {
 			value: "",
-			colors: {
-				dark: "#0d0f11",
-				"dark-faded": "#202b35",
-				light: "#ffffff",
-				"light-faded": "#eeeeee",
-				primary: "#0b3567",
-				"primary-contrast": "#fefefe",
-				"primary-variant": "#ade8f4",
-				"primary-variant-contrast": "#1a2129",
-				secondary: "#bbadff",
-				"secondary-contrast": "#160a22",
-				"secondary-variant": "#c4c7ff",
-				"secondary-variant-contrast": "#18192e",
-				hyperlink: "#56abff",
-				offline: "#e8eae6",
-				divider: "#d2d0d0",
-				disabled: "#a1a1a1",
-				error: "#ff7878",
-				success: "#71e2b2",
-				warning: "#ffcc1d",
-				information: "#8dc6ff",
-				"error-variant": "#fc9a9a",
-				"success-variant": "#96f8cf",
-				"warning-variant": "#fad459",
-				"information-variant": "#a6ccf1",
-			},
+			colors: { ...default_colors },
 		};
 	},
 	methods: {
 		handleChange(): void {
 			this.$ecosphere.theming.setColors(this.colors);
+		},
+		restoreDefaults(): void {
+			this.$ecosphere.theming.setColors(default_colors);
 		},
 	},
 });
