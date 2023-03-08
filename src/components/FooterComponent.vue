@@ -2,7 +2,7 @@
 .footer
 	img.footer__contributors(
 		src="https://contrib.rocks/image?repo=bacon-delight/vue-ecosphere",
-		@click="navigateTo('https://opensource.org/license/mit/')"
+		@click="navigateTo('https://github.com/bacon-delight/vue-ecosphere/graphs/contributors')"
 	)
 	.footer__edit Caught a mistake or want to improve the content on this page?
 	img.footer__logo(src="/logo.png", @click="navigateTo('/')")
@@ -14,14 +14,15 @@
 			href="https://opensource.org/license/mit/",
 			target="_blank"
 		)
-	.footer__description Copyright &copy; 2021 - {{ new Date().getFullYear() }} Team Ecosphere
+	.footer__description
+		span Copyright &copy; 2021 - {{ new Date().getFullYear() }} &nbsp;
+		LinkComponent(label="Team Ecosphere", href="/about")
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import LinkComponent from "@/plugin/call-to-action/LinkComponent.vue";
-// https://github.com/bacon-delight/vue-ecosphere/graphs/contributors
-// https://opensource.org/license/mit/
+
 export default defineComponent({
 	name: "CommonLayout",
 	components: {
