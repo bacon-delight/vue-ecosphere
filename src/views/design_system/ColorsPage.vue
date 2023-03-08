@@ -124,7 +124,7 @@
 				)
 
 		.section
-			.section__subtitle Helper Colors
+			.section__subtitle Helpers
 			.section__grid
 				ColorField(
 					label="Hyperlink",
@@ -160,7 +160,7 @@
 				)
 
 		.section
-			.section__subtitle Helper Colors
+			.section__subtitle Indicators
 			.section__grid
 				ColorField(
 					label="Error",

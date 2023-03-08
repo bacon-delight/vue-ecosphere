@@ -4,7 +4,7 @@ const colors: unknown_object = {
 	dark: "#0d0f11",
 	"dark-faded": "#202b35",
 	light: "#ffffff",
-	"light-faded": "#eeeeee",
+	"light-faded": "#edf2f7",
 	primary: "#0b3567",
 	"primary-contrast": "#fefefe",
 	"primary-variant": "#ade8f4",

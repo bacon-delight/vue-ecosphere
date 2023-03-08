@@ -11,6 +11,8 @@
 			)
 		#content.layout__content
 			router-view
+			.layout__footer
+				FooterComponent
 </template>
 
 <script lang="ts">
@@ -18,6 +20,7 @@ import { defineComponent } from "vue";
 import NavigationBar from "@/plugin/navigation/NavigationBar.vue";
 import SidebarNavigation from "@/plugin/navigation/SidebarNavigation.vue";
 import MenuNavigation from "@/plugin/navigation/MenuNavigation.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import navigation_options from "@/assets/utilities/navigation_options";
 import type { menu_item } from "@/plugin/utilities/types.interface";
 
@@ -27,6 +30,7 @@ export default defineComponent({
 		NavigationBar,
 		SidebarNavigation,
 		MenuNavigation,
+		FooterComponent,
 	},
 	data() {
 		return {
@@ -105,6 +109,15 @@ export default defineComponent({
 	&__content {
 		overflow-y: auto;
 	}
+
+	&__footer {
+		padding: 1rem;
+
+		@include respond-below(sm) {
+			padding: 0;
+			box-shadow: $box-shadow-heavy;
+		}
+	}
 }
 
 .wrapper {
@@ -113,6 +126,7 @@ export default defineComponent({
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 0 1rem 1rem;
+	min-height: 70vh;
 
 	&__title {
 		@include header-2;
