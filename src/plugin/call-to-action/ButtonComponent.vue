@@ -16,6 +16,11 @@ import type {
 	button_size,
 	button_icon_position,
 } from "@/plugin/utilities/types.interface";
+import {
+	hue_options,
+	button_size_options,
+	button_icon_position_options,
+} from "@/plugin/utilities/types.interface";
 import SVGIcon from "@/plugin/general/SVGIcon.vue";
 
 export default defineComponent({
@@ -28,10 +33,16 @@ export default defineComponent({
 		size: {
 			type: String as PropType<button_size>,
 			default: "md",
+			validator(value: button_size): boolean {
+				return button_size_options.includes(value);
+			},
 		},
 		hue: {
 			type: String as PropType<hue>,
 			default: "primary",
+			validator(value: hue): boolean {
+				return hue_options.includes(value);
+			},
 		},
 		ghost: {
 			type: Boolean as PropType<boolean>,
@@ -44,6 +55,9 @@ export default defineComponent({
 		iconPosition: {
 			type: String as PropType<button_icon_position>,
 			default: "after",
+			validator(value: button_icon_position): boolean {
+				return button_icon_position_options.includes(value);
+			},
 		},
 		disabled: {
 			type: Boolean as PropType<boolean>,

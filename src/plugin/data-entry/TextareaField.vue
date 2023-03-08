@@ -38,6 +38,7 @@
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
 import type { data_entry_state } from "@/plugin/utilities/types.interface";
+import { data_entry_state_options } from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
@@ -74,6 +75,9 @@ export default defineComponent({
 		state: {
 			type: String as PropType<data_entry_state>,
 			default: "default",
+			validator(value: data_entry_state): boolean {
+				return data_entry_state_options.includes(value);
+			},
 		},
 		allowClear: {
 			type: Boolean as PropType<boolean>,
@@ -132,7 +136,7 @@ export default defineComponent({
 		},
 	},
 	watch: {
-		default(newDefault: string | null) {
+		default(newDefault: string | null): void {
 			this.value = newDefault;
 		},
 	},

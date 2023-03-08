@@ -32,6 +32,7 @@ Teleport(to="body")
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
 import type { hue, theme, menu_item } from "@/plugin/utilities/types.interface";
+import { hue_options, theme_options } from "@/plugin/utilities/types.interface";
 import MenuItem from "./MenuNavigation/MenuItem.vue";
 import SVGIcon from "@/plugin/general/SVGIcon.vue";
 
@@ -45,10 +46,16 @@ export default defineComponent({
 		hue: {
 			type: String as PropType<hue>,
 			default: "information",
+			validator(value: hue): boolean {
+				return hue_options.includes(value);
+			},
 		},
 		theme: {
 			type: String as PropType<theme>,
 			default: "auto",
+			validator(value: theme): boolean {
+				return theme_options.includes(value);
+			},
 		},
 		skeleton: {
 			type: Boolean as PropType<boolean>,

@@ -104,6 +104,7 @@ export default defineComponent({
 	border-radius: $border-radius-standard;
 	cursor: pointer;
 	transition: $transition-standard;
+	-webkit-tap-highlight-color: transparent;
 
 	&:focus {
 		outline: 1px solid $color-hyperlink;

@@ -21,6 +21,7 @@ import type {
 	menu_item,
 	navbar_branding,
 } from "@/plugin/utilities/types.interface";
+import { hue_options, theme_options } from "@/plugin/utilities/types.interface";
 
 export default defineComponent({
 	name: "NavigationBar",
@@ -42,10 +43,16 @@ export default defineComponent({
 		hue: {
 			type: String as PropType<hue>,
 			default: "primary",
+			validator(value: hue): boolean {
+				return hue_options.includes(value);
+			},
 		},
 		theme: {
 			type: String as PropType<theme>,
 			default: "auto",
+			validator(value: theme): boolean {
+				return theme_options.includes(value);
+			},
 		},
 	},
 	methods: {

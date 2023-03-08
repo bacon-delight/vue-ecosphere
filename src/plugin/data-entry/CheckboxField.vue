@@ -68,6 +68,7 @@ export default defineComponent({
 	column-gap: 0.5rem;
 	align-items: center;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 
 	&__icon {
 		border-radius: 50%;

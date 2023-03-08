@@ -60,6 +60,10 @@ import type {
 	input_type,
 	data_entry_state,
 } from "@/plugin/utilities/types.interface";
+import {
+	data_entry_state_options,
+	input_type_options,
+} from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
 export default defineComponent({
@@ -81,6 +85,9 @@ export default defineComponent({
 		type: {
 			type: String as PropType<input_type>,
 			default: "text",
+			validator(value: input_type): boolean {
+				return input_type_options.includes(value);
+			},
 		},
 		disabled: {
 			type: Boolean as PropType<boolean>,
@@ -97,6 +104,9 @@ export default defineComponent({
 		state: {
 			type: String as PropType<data_entry_state>,
 			default: "default",
+			validator(value: data_entry_state): boolean {
+				return data_entry_state_options.includes(value);
+			},
 		},
 		allowClear: {
 			type: Boolean as PropType<boolean>,

@@ -16,7 +16,8 @@
 					:outline="inputAttributeAlterations.includes('outline')",
 					:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null",
 					:default="inputAttributeAlterations.includes('default') ? 2 : null",
-					:hue="inputHueAlteration"
+					:hue="inputHueAlteration",
+					expand="below"
 				)
 
 		.section
@@ -42,7 +43,7 @@
 					:options="inputHueAlterationOptions",
 					v-model="inputHueAlteration",
 					alignment="flex",
-					assistive-text="The selected value will be highlighted"
+					assistive-text="The selected option in the dropdown will be highlighted"
 				)
 		MarkdownParser(:content="$t('pages.data_entry.dropdown.content')")
 </template>

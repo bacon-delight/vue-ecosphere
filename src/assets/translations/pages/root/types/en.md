@@ -116,3 +116,9 @@ interface choice_option_nested extends choice_option {
 ```ts
 type choice_option_alignment = "grid" | "flex" | "vertical";
 ```
+
+##### Choice Option Expand
+
+```ts
+type choice_option_expand = "above" | "below";
+```

@@ -33,6 +33,10 @@ import type {
 	choice_option,
 	choice_option_alignment,
 } from "@/plugin/utilities/types.interface";
+import {
+	data_entry_state_options,
+	choice_option_alignment_options,
+} from "@/plugin/utilities/types.interface";
 import RadioField from "./RadioField.vue";
 
 export default defineComponent({
@@ -57,6 +61,9 @@ export default defineComponent({
 		state: {
 			type: String as PropType<data_entry_state>,
 			default: "default",
+			validator(value: data_entry_state): boolean {
+				return data_entry_state_options.includes(value);
+			},
 		},
 		options: {
 			type: Array as PropType<choice_option[]>,
@@ -65,6 +72,9 @@ export default defineComponent({
 		alignment: {
 			type: String as PropType<choice_option_alignment>,
 			default: "flex",
+			validator(value: choice_option_alignment): boolean {
+				return choice_option_alignment_options.includes(value);
+			},
 		},
 		modelValue: {
 			type: [String, Number, Boolean, null] as PropType<

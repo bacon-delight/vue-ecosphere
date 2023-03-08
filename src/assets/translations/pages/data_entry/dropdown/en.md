@@ -21,9 +21,10 @@ This component renders a dropdown that consolidates the user selection into a si
 
 #### Events
 
-| Event     | Description                            | Returns                     |
-| --------- | -------------------------------------- | --------------------------- |
-| `@update` | Fired when the radio option is updated | `string` `number` `boolean` |
+| Event     | Description                                   | Returns                     |
+| --------- | --------------------------------------------- | --------------------------- |
+| `@update` | Fired when the dropdown is updated            | `string` `number` `boolean` |
+| `@clear`  | Fired when the dropdown is cleared or emptied | `void`                      |
 
 #### Example
 

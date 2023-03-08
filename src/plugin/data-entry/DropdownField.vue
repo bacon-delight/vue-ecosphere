@@ -35,7 +35,7 @@
 		Transition(name="dropdown-options")
 			.dropdown__options(
 				v-if="showOptions",
-				:class="[{ 'dropdown__field--outline': outline }]"
+				:class="[`dropdown__options--${expand}`, { 'dropdown__field--outline': outline }]"
 			)
 				//- Dropdown Option
 				.dropdown-option(
@@ -72,6 +72,12 @@ import type {
 	choice_option,
 	data_entry_state,
 	hue,
+	choice_option_expand,
+} from "@/plugin/utilities/types.interface";
+import {
+	choice_option_expand_options,
+	hue_options,
+	data_entry_state_options,
 } from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
@@ -102,6 +108,9 @@ export default defineComponent({
 		state: {
 			type: String as PropType<data_entry_state>,
 			default: "default",
+			validator(value: data_entry_state): boolean {
+				return data_entry_state_options.includes(value);
+			},
 		},
 		options: {
 			type: Array as PropType<choice_option[]>,
@@ -130,6 +139,16 @@ export default defineComponent({
 		hue: {
 			type: String as PropType<hue>,
 			default: "information",
+			validator(value: hue): boolean {
+				return hue_options.includes(value);
+			},
+		},
+		expand: {
+			type: String as PropType<choice_option_expand>,
+			default: "below",
+			validator(value: choice_option_expand): boolean {
+				return choice_option_expand_options.includes(value);
+			},
 		},
 	},
 	components: {
@@ -217,9 +236,6 @@ export default defineComponent({
 	&__options {
 		position: absolute;
 		width: 100%;
-		top: 100%;
-		left: 0;
-		transform: translateY(0.325rem);
 		z-index: 10;
 		background: $color-background;
 		border-radius: $border-radius-standard;
@@ -229,6 +245,20 @@ export default defineComponent({
 		flex-direction: column;
 		row-gap: 0.25rem;
 		box-shadow: $box-shadow-heavy;
+		max-height: 50vh;
+		overflow-y: auto;
+
+		&--above {
+			top: 0;
+			left: 0;
+			transform: translateY(calc(-100% - 0.325rem));
+		}
+
+		&--below {
+			top: 100%;
+			left: 0;
+			transform: translateY(0.325rem);
+		}
 	}
 
 	&--disabled {

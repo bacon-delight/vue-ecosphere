@@ -13,6 +13,7 @@
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
 import type { menu_item, hue, theme } from "@/plugin/utilities/types.interface";
+import { hue_options, theme_options } from "@/plugin/utilities/types.interface";
 import MenuItem from "./MenuNavigation/MenuItem.vue";
 
 export default defineComponent({
@@ -29,10 +30,16 @@ export default defineComponent({
 		hue: {
 			type: String as PropType<hue>,
 			default: "information",
+			validator(value: hue): boolean {
+				return hue_options.includes(value);
+			},
 		},
 		theme: {
 			type: String as PropType<theme>,
 			default: "auto",
+			validator(value: theme): boolean {
+				return theme_options.includes(value);
+			},
 		},
 	},
 	components: {
