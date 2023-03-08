@@ -12,6 +12,7 @@
 				:label="option.label",
 				:disabled="option.disabled || disabled",
 				:default="index === value",
+				:hue="hue",
 				@update="handleClick(index)"
 			)
 
@@ -32,10 +33,12 @@ import type {
 	data_entry_state,
 	choice_option,
 	choice_option_alignment,
+	hue,
 } from "@/plugin/utilities/types.interface";
 import {
 	data_entry_state_options,
 	choice_option_alignment_options,
+	hue_options,
 } from "@/plugin/utilities/types.interface";
 import RadioField from "./RadioField.vue";
 
@@ -91,6 +94,13 @@ export default defineComponent({
 		disabled: {
 			type: Boolean as PropType<boolean>,
 			default: false,
+		},
+		hue: {
+			type: String as PropType<hue>,
+			default: "information",
+			validator(value: hue): boolean {
+				return hue_options.includes(value);
+			},
 		},
 	},
 	data() {

@@ -4,12 +4,13 @@ This input can be used to select a single field form a list of options. All the 
 
 #### API
 
-| Property   | Description                                 | Type      | Default  |
-| ---------- | ------------------------------------------- | --------- | -------- |
-| `v-model`  | Binds the input value to a variable         | `boolean` |          |
-| `label`    | Label to render along with the radio button | `string`  | Required |
-| `disabled` | Disables the radio field                    | `boolean` | `false`  |
-| `default`  | Default state of the radio button           | `boolean` |          |
+| Property   | Description                                 | Type                | Default       |
+| ---------- | ------------------------------------------- | ------------------- | ------------- |
+| `v-model`  | Binds the input value to a variable         | `boolean`           |               |
+| `label`    | Label to render along with the radio button | `string`            | Required      |
+| `disabled` | Disables the radio field                    | `boolean`           | `false`       |
+| `default`  | Default state of the radio button           | `boolean`           |               |
+| `hue`      | Applies a hue to the radio button           | [`hue`](/types#hue) | `information` |
 
 #### Events
 

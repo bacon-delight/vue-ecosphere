@@ -4,12 +4,13 @@ This input can be used to select multiple fields form a list of options. All the
 
 #### API
 
-| Property   | Description                             | Type      | Default  |
-| ---------- | --------------------------------------- | --------- | -------- |
-| `v-model`  | Binds the input value to a variable     | `boolean` |          |
-| `label`    | Label to render along with the checkbox | `string`  | Required |
-| `disabled` | Disables the checkbox field             | `boolean` | `false`  |
-| `default`  | Default state of the checkbox           | `boolean` |          |
+| Property   | Description                             | Type                | Default       |
+| ---------- | --------------------------------------- | ------------------- | ------------- |
+| `v-model`  | Binds the input value to a variable     | `boolean`           |               |
+| `label`    | Label to render along with the checkbox | `string`            | Required      |
+| `disabled` | Disables the checkbox field             | `boolean`           | `false`       |
+| `default`  | Default state of the checkbox           | `boolean`           |               |
+| `hue`      | Applies a hue to the checkbox           | [`hue`](/types#hue) | `information` |
 
 #### Events
 

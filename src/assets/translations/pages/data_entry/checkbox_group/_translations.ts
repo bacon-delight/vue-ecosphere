@@ -2,7 +2,7 @@ import content_en from "./en.md?raw";
 import interpolateLiterals from "@/assets/translations/interpolateLiterals";
 
 const en = {
-	title: "Checkbox",
+	title: "Checkbox Group",
 	content: interpolateLiterals(content_en),
 };
 

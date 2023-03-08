@@ -144,8 +144,8 @@ export default defineComponent({
 .children {
 	display: grid;
 	grid-template-columns: min-content 1fr;
-	padding-left: 0.8rem;
-	column-gap: 0.5rem;
+	padding-left: 0.875rem;
+	column-gap: 0.35rem;
 
 	&__items {
 		display: flex;
