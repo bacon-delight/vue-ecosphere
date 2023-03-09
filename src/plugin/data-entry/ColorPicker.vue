@@ -1,10 +1,11 @@
 <template lang="pug">
-.input(:class="[{ 'input--outline': outline }]")
+.input(:class="[{ 'input--outline': outline, 'input--disabled': disabled }]")
 	//- Input Field
 	input.input__field(
 		type="color",
 		v-model="value",
 		@change="handleChange",
+		:disabled="disabled",
 		tabindex="0"
 	)
 
@@ -19,16 +20,16 @@ import { defineComponent } from "vue";
 import type { PropType } from "vue";
 
 export default defineComponent({
-	name: "ColorField",
+	name: "ColorPicker",
 	emits: ["update:modelValue", "update"],
 	props: {
 		label: {
 			type: String as PropType<string>,
-			required: true,
+			default: "",
 		},
 		modelValue: {
 			type: [String, null] as PropType<string | null>,
-			default: null,
+			default: "#000000",
 		},
 		disabled: {
 			type: Boolean as PropType<boolean>,
@@ -67,7 +68,7 @@ export default defineComponent({
 	},
 	watch: {
 		default(newDefault: string | null): void {
-			this.value = newDefault;
+			this.value = newDefault === null ? "#000000" : newDefault;
 		},
 		modelValue(newValue: string | null): void {
 			this.value = newValue;
@@ -91,6 +92,11 @@ export default defineComponent({
 
 	&--outline {
 		border: 1px solid $color-contrast;
+	}
+
+	&--disabled {
+		opacity: 50%;
+		pointer-events: none;
 	}
 
 	&:focus-within {

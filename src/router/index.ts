@@ -128,6 +128,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/DropdownPage.vue"),
 				},
+				{
+					path: "/color-picker",
+					name: "ColorPicker",
+					component: () =>
+						import("../views/data_entry/ColorPickerPage.vue"),
+				},
 			],
 		},
 	],

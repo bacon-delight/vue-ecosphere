@@ -24,6 +24,7 @@ import radio_group from "./pages/data_entry/radio_group/_translations";
 import checkbox from "./pages/data_entry/checkbox/_translations";
 import checkbox_group from "./pages/data_entry/checkbox_group/_translations";
 import dropdown from "./pages/data_entry/dropdown/_translations";
+import color_picker from "./pages/data_entry/color_picker/_translations";
 
 export default {
 	title: "Ecosphere",
@@ -55,6 +56,7 @@ export default {
 			checkbox: checkbox("en"),
 			checkbox_group: checkbox_group("en"),
 			dropdown: dropdown("en"),
+			color_picker: color_picker("en"),
 		},
 		design_system: {
 			typography: typography("en"),

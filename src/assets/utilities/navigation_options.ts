@@ -177,6 +177,13 @@ function navigation_options(): menu_item[] {
 						router.push("/dropdown");
 					},
 				},
+				{
+					label: "Color Picker",
+					active: router.currentRoute.value.path === "/color-picker",
+					action: () => {
+						router.push("/color-picker");
+					},
+				},
 
 				// {
 				// 	label: "Checkbox",
