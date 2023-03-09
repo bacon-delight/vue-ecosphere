@@ -1,3 +1,12 @@
+export type input_type = "text" | "number" | "email" | "password" | "search";
+export const input_type_options: input_type[] = [
+	"text",
+	"number",
+	"email",
+	"password",
+	"search",
+];
+
 export type choice_option_alignment = "grid" | "flex" | "vertical";
 export const choice_option_alignment_options: choice_option_alignment[] = [
 	"grid",

@@ -7,8 +7,8 @@ export const button_size_options: button_size[] = [
 	"xl",
 ];
 
-export type button_icon_position = "before" | "after";
-export const button_icon_position_options: button_icon_position[] = [
+export type cta_icon_position = "before" | "after";
+export const cta_icon_position_options: cta_icon_position[] = [
 	"before",
 	"after",
 ];

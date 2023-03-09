@@ -56,6 +56,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/navigation/NavbarPage.vue"),
 				},
+				{
+					path: "/tabs",
+					name: "TabNavigation",
+					component: () =>
+						import("../views/navigation/TabNavigationPage.vue"),
+				},
 
 				// Design System
 				{

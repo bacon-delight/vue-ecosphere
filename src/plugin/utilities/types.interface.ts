@@ -1,8 +1,6 @@
-export * from "./types/menu.interface";
-export * from "./types/navbar.interface";
-export * from "./types/button.interface";
-export * from "./types/input.interface";
-export * from "./types/choice.interface";
+export * from "./types/navigation.interface";
+export * from "./types/call_to_actions.interface";
+export * from "./types/data_entry.interface";
 
 // Common Types
 export type theme = "auto" | "light" | "dark" | "invert";

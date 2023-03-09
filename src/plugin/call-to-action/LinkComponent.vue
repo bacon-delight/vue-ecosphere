@@ -18,8 +18,8 @@ import { defineComponent, type PropType } from "vue";
 import {
 	hue_options,
 	type hue,
-	button_icon_position_options,
-	type button_icon_position,
+	cta_icon_position_options,
+	type cta_icon_position,
 } from "@/plugin/utilities/types.interface";
 import SVGIcon from "../general/SVGIcon.vue";
 
@@ -45,10 +45,10 @@ export default defineComponent({
 			default: "",
 		},
 		iconPosition: {
-			type: String as PropType<button_icon_position>,
+			type: String as PropType<cta_icon_position>,
 			default: "after",
-			validator(value: button_icon_position): boolean {
-				return button_icon_position_options.includes(value);
+			validator(value: cta_icon_position): boolean {
+				return cta_icon_position_options.includes(value);
 			},
 		},
 	},

@@ -105,7 +105,7 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			value: null as number | null,
+			value: null as number | string | null,
 		};
 	},
 	mounted() {

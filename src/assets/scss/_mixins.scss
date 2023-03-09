@@ -125,3 +125,37 @@
 		color: $color-information;
 	}
 }
+
+@mixin hue-border-modifiers($property: border, $thickness: 1px) {
+	&--primary {
+		#{$property}: $thickness solid $color-primary;
+	}
+
+	&--primary-variant {
+		#{$property}: $thickness solid $color-primary-variant;
+	}
+
+	&--secondary {
+		#{$property}: $thickness solid $color-secondary;
+	}
+
+	&--secondary-variant {
+		#{$property}: $thickness solid $color-secondary-variant;
+	}
+
+	&--error {
+		#{$property}: $thickness solid $color-error;
+	}
+
+	&--success {
+		#{$property}: $thickness solid $color-success;
+	}
+
+	&--warning {
+		#{$property}: $thickness solid $color-warning;
+	}
+
+	&--information {
+		#{$property}: $thickness solid $color-information;
+	}
+}

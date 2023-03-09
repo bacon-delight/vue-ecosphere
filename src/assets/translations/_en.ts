@@ -11,6 +11,7 @@ import colors from "./pages/design_system/colors/_translations";
 import menu from "./pages/navigation/menu/_translations";
 import sidebar from "./pages/navigation/sidebar/_translations";
 import navbar from "./pages/navigation/navbar/_translations";
+import tabs from "./pages/navigation/tabs/_translations";
 
 // Call to Actions
 import button from "./pages/call_to_actions/button/_translations";
@@ -48,6 +49,7 @@ export default {
 			menu: menu("en"),
 			sidebar: sidebar("en"),
 			navbar: navbar("en"),
+			tabs: tabs("en"),
 		},
 		data_entry: {
 			input: input("en"),
