@@ -134,6 +134,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/ColorPickerPage.vue"),
 				},
+				{
+					path: "/switch",
+					name: "Switch",
+					component: () =>
+						import("../views/data_entry/SwitchPage.vue"),
+				},
 			],
 		},
 	],

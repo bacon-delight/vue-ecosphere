@@ -184,6 +184,13 @@ function navigation_options(): menu_item[] {
 						router.push("/color-picker");
 					},
 				},
+				{
+					label: "Switch",
+					active: router.currentRoute.value.path === "/switch",
+					action: () => {
+						router.push("/switch");
+					},
+				},
 
 				// {
 				// 	label: "Checkbox",
