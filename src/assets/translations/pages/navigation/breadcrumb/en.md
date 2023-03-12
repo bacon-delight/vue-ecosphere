@@ -10,6 +10,7 @@ Breadcrumbs are used to provide a visual hierarchy of the current page, and allo
 | `disabled`    | Disables the entire breadcrumb                   | `boolean`                              | `false`                 |
 | `outline`     | Adds an outline around the entire breadcrumb     | `boolean`                              | `false`                 |
 | `dividerIcon` | The icon for divider among the breadcrumb items  | [`Remix Icon`](https://remixicon.com/) | `ri-arrow-right-s-line` |
+| `wraps`       | Wraps the breadcrumb items on overflow           | `boolean`                              | `false`                 |
 
 #### Types
 

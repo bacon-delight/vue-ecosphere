@@ -1,5 +1,7 @@
 <template lang="pug">
-.breadcrumb(:class="{ 'breadcrumb--outline': outline }")
+.breadcrumb(
+	:class="{ 'breadcrumb--outline': outline, 'breadcrumb--expand': !wrap }"
+)
 	.breadcrumb__item(
 		v-for="option in renderOptions",
 		:class="[{ 'breadcrumb__item--active': option.active, 'breadcrumb__item--disabled': option.disabled || disabled }]",
@@ -33,6 +35,10 @@ export default defineComponent({
 			default: false,
 		},
 		outline: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
+		wrap: {
 			type: Boolean as PropType<boolean>,
 			default: false,
 		},
@@ -79,11 +85,19 @@ export default defineComponent({
 .breadcrumb {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	align-items: center;
-	column-gap: 0.5rem;
+	column-gap: 0.25rem;
+	row-gap: 0.25rem;
 	@include font-light;
 	width: fit-content;
+
+	&--expand {
+		flex-wrap: nowrap;
+		max-width: 100%;
+		padding-bottom: 0.5rem;
+		overflow-x: auto;
+	}
 
 	&--outline {
 		padding: 0.25rem 0.5rem;
