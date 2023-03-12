@@ -103,9 +103,13 @@ function navigation_options(): menu_item[] {
 						router.push("/tabs");
 					},
 				},
-				// {
-				// 	label: "Breadcrumb",
-				// },
+				{
+					label: "Breadcrumb",
+					active: router.currentRoute.value.path === "/breadcrumb",
+					action: () => {
+						router.push("/breadcrumb");
+					},
+				},
 			],
 		},
 		{

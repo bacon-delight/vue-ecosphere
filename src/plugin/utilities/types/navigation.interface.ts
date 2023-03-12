@@ -25,3 +25,16 @@ export interface menu_item {
 	children?: menu_item[];
 	expanded?: boolean;
 }
+
+export interface breadcrumb_item {
+	label?: string;
+	icon?: string;
+	hidden?: boolean;
+	disabled?: boolean;
+	active?: boolean;
+	action?: () => void;
+}
+
+export interface breadcrumb_item_compiled extends breadcrumb_item {
+	type: "item" | "divider";
+}

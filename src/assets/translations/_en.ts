@@ -12,6 +12,7 @@ import menu from "./pages/navigation/menu/_translations";
 import sidebar from "./pages/navigation/sidebar/_translations";
 import navbar from "./pages/navigation/navbar/_translations";
 import tabs from "./pages/navigation/tabs/_translations";
+import breadcrumb from "./pages/navigation/breadcrumb/_translations";
 
 // Call to Actions
 import button from "./pages/call_to_actions/button/_translations";
@@ -54,6 +55,7 @@ export default {
 			sidebar: sidebar("en"),
 			navbar: navbar("en"),
 			tabs: tabs("en"),
+			breadcrumb: breadcrumb("en"),
 		},
 		data_entry: {
 			input: input("en"),

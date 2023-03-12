@@ -62,6 +62,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/navigation/TabNavigationPage.vue"),
 				},
+				{
+					path: "/breadcrumb",
+					name: "BreadcrumbNavigation",
+					component: () =>
+						import("../views/navigation/BreadcrumbPage.vue"),
+				},
 
 				// Design System
 				{
