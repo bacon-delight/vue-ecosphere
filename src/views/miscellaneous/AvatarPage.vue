@@ -33,7 +33,7 @@
 					v-model="statusAlteration"
 				)
 				RadioGroup(
-					label="Customise the hue of the avatar",
+					label="Customise the hue of the avatar (when no image is used)",
 					:options="hueAlterationOptions",
 					v-model="hueAlteration",
 					assistive-text="It's not recommended to use 'Error', 'Success' and 'Warning' hues with this component, even though they are supported, because of similarities with the supported statuses"

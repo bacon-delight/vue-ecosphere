@@ -100,6 +100,7 @@ export default defineComponent({
 		padding: 0 0.25em;
 		border-radius: 50%;
 		transition: $transition-standard;
+		-webkit-tap-highlight-color: transparent;
 
 		&:hover {
 			background: $color-background;

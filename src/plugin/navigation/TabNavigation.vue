@@ -12,7 +12,7 @@
 			//- Before or Above Icon
 			SVGIcon.tabs__option-icon(
 				:class="[{ 'tabs__option-icon--above': iconPosition === 'above' }]",
-				v-if="iconPosition === 'before' || iconPosition === 'above'",
+				v-if="(iconPosition === 'before' || iconPosition === 'above') && option.icon",
 				:name="option.icon"
 			)
 
@@ -21,7 +21,7 @@
 
 			//- After Icon
 			SVGIcon.tabs__option-icon(
-				v-if="iconPosition === 'after'",
+				v-if="iconPosition === 'after' && option.icon",
 				:name="option.icon"
 			)
 </template>
@@ -167,26 +167,27 @@ export default defineComponent({
 		padding: 0.55rem 1rem 0.5rem;
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		column-gap: 0.5rem;
 		cursor: pointer;
 		border-bottom: 2px solid transparent;
 		@include hue-border-modifiers(border-bottom, 2px);
+		@include hue-color-modifiers;
 		user-select: none;
 		transition: $transition-standard;
-		border: 1px solid transparent;
+		-webkit-tap-highlight-color: transparent;
+		justify-content: center;
 
 		&:focus {
-			// background: $color-background-faded;
+			background: $color-background-faded;
 			outline: none;
-			color: $color-information;
+			// color: $color-information;
 			// border-radius: $border-radius-standard;
 			// border: 1px solid $color-information;
 		}
 
 		&:hover {
 			background: $color-background-faded;
-			color: $color-information;
+			// color: $color-information;
 		}
 
 		&--disabled {
@@ -197,7 +198,7 @@ export default defineComponent({
 		&--vertical {
 			flex-direction: column;
 			row-gap: 0.25rem;
-			justify-content: space-between;
+			justify-content: flex-end;
 		}
 	}
 

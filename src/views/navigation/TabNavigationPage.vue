@@ -1,12 +1,13 @@
 <template lang="pug">
 .wrapper
-	.wrapper__title {{ $t("pages.navigation.tabs.title") }} (WIP)
+	.wrapper__title {{ $t("pages.navigation.tabs.title") }}
 	.wrapper__body
 		.section
 			TabNavigation(
 				:options="options",
 				v-model="value",
 				:icon-position="positionAlteration",
+				:hue="hueAlteration",
 				:disabled="attributeAlterations.includes('disabled') ? true : false",
 				:default="attributeAlterations.includes('default') ? 'two' : null"
 			)
@@ -26,6 +27,11 @@
 					:options="positionAlterationOptions",
 					v-model="positionAlteration",
 					alignment="flex"
+				)
+				RadioGroup(
+					label="Customise the hue of the tab navigation",
+					:options="hueAlterationOptions",
+					v-model="hueAlteration"
 				)
 
 		MarkdownParser(:content="$t('pages.navigation.tabs.content')")
@@ -67,17 +73,13 @@ export default defineComponent({
 					disabled: true,
 				},
 				{
-					label: "User Profile",
-					value: "four",
-				},
-				{
 					label: "Settings",
 					icon: "ri-settings-line",
 					value: "five",
 				},
 				{
 					label: "Logout",
-					icon: "ri-logout-line",
+					icon: "ri-logout-circle-line",
 					value: "six",
 				},
 			],
@@ -105,6 +107,41 @@ export default defineComponent({
 				{
 					label: "After",
 					value: "after",
+				},
+			],
+			hueAlteration: "information" as string,
+			hueAlterationOptions: [
+				{
+					label: "Information",
+					value: "information",
+				},
+				{
+					label: "Error",
+					value: "error",
+				},
+				{
+					label: "Warning",
+					value: "warning",
+				},
+				{
+					label: "Success",
+					value: "success",
+				},
+				{
+					label: "Primary",
+					value: "primary",
+				},
+				{
+					label: "Primary Variant",
+					value: "primary-variant",
+				},
+				{
+					label: "Secondary",
+					value: "secondary",
+				},
+				{
+					label: "Secondary Variant",
+					value: "secondary-variant",
 				},
 			],
 		};
