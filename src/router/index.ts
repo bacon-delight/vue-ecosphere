@@ -146,6 +146,20 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/SwitchPage.vue"),
 				},
+
+				// Miscellaneous
+				{
+					path: "/avatar",
+					name: "Avatar",
+					component: () =>
+						import("../views/miscellaneous/AvatarPage.vue"),
+				},
+				{
+					path: "/tag",
+					name: "Tag",
+					component: () =>
+						import("../views/miscellaneous/TagPage.vue"),
+				},
 			],
 		},
 	],

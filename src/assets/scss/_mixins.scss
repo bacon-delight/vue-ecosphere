@@ -19,42 +19,42 @@
 @mixin hue-modifiers {
 	&--primary {
 		background: $color-primary;
-		color: $color-primary-variant;
+		color: $color-primary-contrast;
 	}
 
 	&--primary-variant {
 		background: $color-primary-variant;
-		color: $color-primary;
+		color: $color-primary-variant-contrast;
 	}
 
 	&--secondary {
-		background: $color-secondary;
+		background: $color-secondary-contrast;
 		color: $color-secondary-variant;
 	}
 
 	&--secondary-variant {
 		background: $color-secondary-variant;
-		color: $color-secondary;
+		color: $color-secondary-variant-contrast;
 	}
 
 	&--error {
 		background: $color-error;
-		color: $color-error-variant;
+		color: $color-dark;
 	}
 
 	&--success {
 		background: $color-success;
-		color: $color-success-variant;
+		color: $color-dark;
 	}
 
 	&--warning {
 		background: $color-warning;
-		color: $color-warning-variant;
+		color: $color-dark;
 	}
 
 	&--information {
 		background: $color-information;
-		color: $color-information-variant;
+		color: $color-dark;
 	}
 }
 

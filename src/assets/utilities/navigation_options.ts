@@ -207,6 +207,27 @@ function navigation_options(): menu_item[] {
 				// },
 			],
 		},
+		{
+			label: "Miscellaneous",
+			icon: "ri-mouse-line",
+			expanded: true,
+			children: [
+				{
+					label: "Avatar",
+					active: router.currentRoute.value.path === "/avatar",
+					action: () => {
+						router.push("/avatar");
+					},
+				},
+				{
+					label: "Tag",
+					active: router.currentRoute.value.path === "/tag",
+					action: () => {
+						router.push("/tag");
+					},
+				},
+			],
+		},
 	];
 }
 

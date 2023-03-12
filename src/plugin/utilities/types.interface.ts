@@ -1,6 +1,7 @@
 export * from "./types/navigation.interface";
 export * from "./types/call_to_actions.interface";
 export * from "./types/data_entry.interface";
+export * from "./types/miscellaneous.interface";
 
 // Common Types
 export type theme = "auto" | "light" | "dark" | "invert";

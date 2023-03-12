@@ -28,6 +28,10 @@ import dropdown from "./pages/data_entry/dropdown/_translations";
 import color_picker from "./pages/data_entry/color_picker/_translations";
 import switch_input from "./pages/data_entry/switch/_translations";
 
+// Miscellaneous
+import avatar from "./pages/miscellaneous/avatar/_translations";
+import tag from "./pages/miscellaneous/tag/_translations";
+
 export default {
 	title: "Ecosphere",
 	pages: {
@@ -65,6 +69,10 @@ export default {
 		design_system: {
 			typography: typography("en"),
 			colors: colors("en"),
+		},
+		miscellaneous: {
+			avatar: avatar("en"),
+			tag: tag("en"),
 		},
 	},
 	common: {
