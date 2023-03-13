@@ -4,7 +4,7 @@
 	.dropdown__label(:class="[`dropdown__label--${state}`]") {{ label }}
 
 	//- Dropdown Wrapper
-	#eco-dropdown.dropdown__wrapper
+	.dropdown__wrapper(:id="dropdownID")
 		//- Dropdown Field
 		.dropdown__field(
 			:tabindex="disabled ? -1 : 0",
@@ -159,6 +159,7 @@ export default defineComponent({
 			showOptions: false,
 			value: null as null | number,
 			clickListener: null,
+			dropdownID: `eco-dropdown-${Date.now()}`,
 		};
 	},
 	methods: {
@@ -199,7 +200,7 @@ export default defineComponent({
 				window.addEventListener("click", (event: any) => {
 					if (
 						document
-							.getElementById("eco-dropdown")
+							.getElementById(this.dropdownID)
 							?.contains(event.target)
 					) {
 						// Chicked Inside Dropdown - Do Nothing

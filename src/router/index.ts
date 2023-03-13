@@ -171,4 +171,12 @@ const router = createRouter({
 	],
 });
 
+// router.beforeEach((to, from) => {
+// 	console.log("Before");
+// });
+
+// router.afterEach((to, from) => {
+// 	console.log("After");
+// });
+
 export default router;
