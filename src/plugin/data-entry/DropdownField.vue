@@ -159,7 +159,9 @@ export default defineComponent({
 			showOptions: false,
 			value: null as null | number,
 			clickListener: null,
-			dropdownID: `eco-dropdown-${Date.now()}`,
+			dropdownID: `eco-dropdown-${Date.now()
+				.toString()
+				.slice(8)}-${Math.random().toFixed(5).slice(2)}`,
 		};
 	},
 	methods: {
@@ -193,6 +195,7 @@ export default defineComponent({
 				}
 			});
 		}
+		console.log(this.dropdownID);
 	},
 	watch: {
 		showOptions(value: boolean): void {
