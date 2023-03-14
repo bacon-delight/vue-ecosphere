@@ -46,6 +46,11 @@ export default {
 		installation: installation("en"),
 		configuration: configuration("en"),
 		types: types("en"),
+		about: {
+			team: {
+				title: "Team Ecosphere",
+			},
+		},
 		call_to_actions: {
 			button: button("en"),
 			link: link("en"),

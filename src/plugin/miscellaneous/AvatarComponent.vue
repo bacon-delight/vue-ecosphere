@@ -79,21 +79,35 @@ export default defineComponent({
 	border-radius: 50%;
 	user-select: none;
 	box-sizing: border-box;
+	width: fit-content;
+	margin: 0;
+	text-align: center;
 
 	// Size
 	&--sm {
-		padding: 0.5rem;
+		height: 2.5rem;
+		width: 2.5rem;
 		@include font-bold;
 	}
 	&--md {
-		padding: 1rem;
-		@include font-bold;
+		height: 3.5rem;
+		width: 3.5rem;
+		@include header-4;
+		margin: 0;
 	}
 	&--lg {
-		padding: 1.25rem 1rem;
+		height: 5rem;
+		width: 5rem;
 		@include header-2;
 		font-weight: 600;
 		margin: 0;
+	}
+
+	&__initials {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
 	}
 
 	// Status
@@ -114,6 +128,7 @@ export default defineComponent({
 		border-radius: 50%;
 		@include hue-modifiers;
 		@include font-bold;
+		display: block;
 
 		// Size
 		&--sm {

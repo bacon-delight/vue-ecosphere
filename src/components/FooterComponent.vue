@@ -16,7 +16,7 @@
 		)
 	.footer__description
 		span Copyright &copy; 2021 - {{ new Date().getFullYear() }} &nbsp;
-		LinkComponent(label="Team Ecosphere", href="/about")
+		LinkComponent(label="Team Ecosphere", href="/team")
 </template>
 
 <script lang="ts">

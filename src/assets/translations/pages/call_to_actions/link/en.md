@@ -4,12 +4,12 @@ Clicking a link navigates the user to another page within or outside the applica
 
 #### API
 
-| Property       | Description                  | Type                                        | Default   |
-| -------------- | ---------------------------- | ------------------------------------------- | --------- |
-| `label`        | Sets the label of the button | `string`                                    | Required  |
-| `hue`          | Hue of the link              | [`hue`](/types#hue)                         | `primary` |
-| `icon`         | Name of the icon             | [`Remix Icon`](https://remixicon.com/)      |           |
-| `iconPosition` | Position of the icon         | [`link_icon_position`](#link-icon-position) | `after`   |
+| Property       | Description                  | Type                                        | Default       |
+| -------------- | ---------------------------- | ------------------------------------------- | ------------- |
+| `label`        | Sets the label of the button | `string`                                    | Required      |
+| `hue`          | Hue of the link              | [`hue`](/types#hue)                         | `information` |
+| `icon`         | Name of the icon             | [`Remix Icon`](https://remixicon.com/)      |               |
+| `iconPosition` | Position of the icon         | [`link_icon_position`](#link-icon-position) | `after`       |
 
 #### Types
 

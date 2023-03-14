@@ -38,6 +38,13 @@ const router = createRouter({
 					component: () => import("../views/root/TypesPage.vue"),
 				},
 
+				// About
+				{
+					path: "/team",
+					name: "Team",
+					component: () => import("../views/about/TeamPage.vue"),
+				},
+
 				// Navigation
 				{
 					path: "/menu",

@@ -195,7 +195,6 @@ export default defineComponent({
 				}
 			});
 		}
-		console.log(this.dropdownID);
 	},
 	watch: {
 		showOptions(value: boolean): void {

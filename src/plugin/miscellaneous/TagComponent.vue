@@ -78,6 +78,7 @@ export default defineComponent({
 	align-items: center;
 	column-gap: 0.25rem;
 	@include hue-modifiers;
+	width: fit-content;
 
 	// Sizes
 	&--sm {

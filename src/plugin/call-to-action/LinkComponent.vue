@@ -1,16 +1,8 @@
 <template lang="pug">
-a.link
-	SVGIcon.link__icon(
-		v-if="iconPosition === 'before'",
-		:class="[`link__label--${hue}`]",
-		:name="icon"
-	)
-	.link__label(:class="[`link__label--${hue}`]") {{ iconPosition === "before" && icon ? "&nbsp;" : "" }} {{ label }} {{ iconPosition === "after" && icon ? "&nbsp;" : "" }}
-	SVGIcon.link__icon(
-		v-if="iconPosition === 'after'",
-		:class="[`link__label--${hue}`]",
-		:name="icon"
-	)
+a.link(:class="[`link--${hue}`]")
+	SVGIcon.link__icon(v-if="iconPosition === 'before'", :name="icon")
+	.link__label {{ iconPosition === "before" && icon ? "&nbsp;" : "" }} {{ label }} {{ iconPosition === "after" && icon ? "&nbsp;" : "" }}
+	SVGIcon.link__icon(v-if="iconPosition === 'after'", :name="icon")
 </template>
 
 <script lang="ts">
@@ -62,25 +54,26 @@ export default defineComponent({
 	cursor: pointer;
 	text-decoration: none;
 	@include font-regular;
+	@include hue-color-modifiers;
 	-webkit-tap-highlight-color: transparent;
+	max-width: fit-content;
 
 	&:hover {
-		// text-decoration: underline;
-		// text-decoration-color: $color-information;
-		@include font-bold;
-	}
-
-	&:focus {
-		outline: 1px solid $color-hyperlink;
-		padding: 0 0.125rem;
-		border-radius: $border-radius-standard;
+		color: $color-hyperlink;
 		// text-decoration: underline;
 		// text-decoration-color: $color-information;
 		// @include font-bold;
 	}
 
-	&__label {
-		@include hue-color-modifiers;
+	&:focus {
+		color: $color-hyperlink;
+		outline: none;
+		// outline: 1px solid $color-hyperlink;
+		// padding: 0 0.125rem;
+		// border-radius: $border-radius-standard;
+		// text-decoration: underline;
+		// text-decoration-color: $color-information;
+		// @include font-bold;
 	}
 }
 </style>

@@ -36,9 +36,44 @@ function navigation_options(): menu_item[] {
 			},
 		},
 		{
+			label: "About Ecosphere",
+			icon: "ri-building-2-line",
+			expanded: false,
+			children: [
+				{
+					label: "Team",
+					active: router.currentRoute.value.path === "/team",
+					action: () => {
+						router.push("/team");
+					},
+				},
+				// {
+				// 	label: "Enterprise",
+				// 	active: router.currentRoute.value.path === "/enterprise",
+				// 	action: () => {
+				// 		router.push("/enterprise");
+				// 	},
+				// },
+				// {
+				// 	label: "Support",
+				// 	active: router.currentRoute.value.path === "/support",
+				// 	action: () => {
+				// 		router.push("/support");
+				// 	},
+				// },
+				// {
+				// 	label: "Sponsor",
+				// 	active: router.currentRoute.value.path === "/sponsor",
+				// 	action: () => {
+				// 		router.push("/sponsor");
+				// 	},
+				// },
+			],
+		},
+		{
 			label: "Design System",
 			icon: "ri-pencil-line",
-			expanded: true,
+			expanded: false,
 			children: [
 				// {
 				// 	label: "Design",
