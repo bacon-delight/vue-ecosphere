@@ -60,20 +60,12 @@ export default defineComponent({
 
 	&:hover {
 		color: $color-hyperlink;
-		// text-decoration: underline;
-		// text-decoration-color: $color-information;
-		// @include font-bold;
 	}
 
 	&:focus {
 		color: $color-hyperlink;
 		outline: none;
-		// outline: 1px solid $color-hyperlink;
-		// padding: 0 0.125rem;
-		// border-radius: $border-radius-standard;
-		// text-decoration: underline;
-		// text-decoration-color: $color-information;
-		// @include font-bold;
+		outline: 1px solid $color-hyperlink;
 	}
 }
 </style>

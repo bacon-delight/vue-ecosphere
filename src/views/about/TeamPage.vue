@@ -23,11 +23,17 @@
 					TagComponent(label="Components", size="sm", hue="warning")
 					TagComponent(label="Plugin", size="sm")
 				.team__section
-					SVGIcon.team__section-icon(name="ri-suitcase-line")
-					.team__section-description Founder
+					SVGIcon.team__section-icon(name="ri-braces-line")
+					.team__section-description Founder - Ecosphere
 				.team__section
 					SVGIcon.team__section-icon(name="ri-suitcase-line")
-					.team__section-description Full Stack Engineer
+					.team__section-description
+						span Full Stack - &nbsp;
+						LinkComponent(
+							label="Karkinos Healthcare",
+							href="https://www.karkinos.in/",
+							target="_blank"
+						)
 				.team__section
 					SVGIcon.team__section-icon(name="ri-map-pin-2-line")
 					.team__section-description Bangalore, KA, India
@@ -83,7 +89,13 @@
 					TagComponent(label="Design", size="sm", hue="success")
 				.team__section
 					SVGIcon.team__section-icon(name="ri-suitcase-line")
-					.team__section-description Designer
+					.team__section-description
+						span Designer - &nbsp;
+						LinkComponent(
+							label="Karkinos Healthcare",
+							href="https://www.karkinos.in/",
+							target="_blank"
+						)
 				.team__section
 					SVGIcon.team__section-icon(name="ri-map-pin-2-line")
 					.team__section-description Bangalore, KA, India
