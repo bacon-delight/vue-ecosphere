@@ -83,7 +83,11 @@
 					)
 
 			.team__member
-				AvatarComponent.team__avatar(name="Nilsen Chaubey", size="lg")
+				AvatarComponent.team__avatar(
+					name="Nilsen Chaubey",
+					size="lg",
+					image="https://bacon-delight.sirv.com/Users/Nilsen.jpeg?ch=1400"
+				)
 				.team__name Nilsen Chaubey
 				.team__tags
 					TagComponent(label="Design", size="sm", hue="success")

@@ -159,6 +159,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/SwitchPage.vue"),
 				},
+				{
+					path: "/search-dropdown",
+					name: "SearchDropdown",
+					component: () =>
+						import("../views/data_entry/SearchDropdownPage.vue"),
+				},
 
 				// Miscellaneous
 				{

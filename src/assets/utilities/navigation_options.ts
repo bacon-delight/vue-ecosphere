@@ -224,6 +224,14 @@ function navigation_options(): menu_item[] {
 					},
 				},
 				{
+					label: "Search Dropdown",
+					active:
+						router.currentRoute.value.path === "/search-dropdown",
+					action: () => {
+						router.push("/search-dropdown");
+					},
+				},
+				{
 					label: "Color Picker",
 					active: router.currentRoute.value.path === "/color-picker",
 					action: () => {

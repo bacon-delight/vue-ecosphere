@@ -21,6 +21,9 @@ export interface choice_option {
 	disabled?: boolean;
 	action?: () => void;
 }
+export interface choice_option_filtered extends choice_option {
+	index: number;
+}
 
 export interface choice_option_nested extends choice_option {
 	children?: choice_option[];
