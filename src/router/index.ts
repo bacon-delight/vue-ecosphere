@@ -165,6 +165,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/data_entry/SearchDropdownPage.vue"),
 				},
+				{
+					path: "/choice-chips",
+					name: "ChoiceChips",
+					component: () =>
+						import("../views/data_entry/ChoiceChipsPage.vue"),
+				},
 
 				// Miscellaneous
 				{

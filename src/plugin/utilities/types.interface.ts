@@ -27,6 +27,34 @@ export const hue_options: hue[] = [
 	"information",
 ];
 
+export type hue_extended =
+	| "primary"
+	| "primary-variant"
+	| "secondary"
+	| "secondary-variant"
+	| "error"
+	| "success"
+	| "warning"
+	| "information"
+	| "auto"
+	| "invert"
+	| "light"
+	| "dark";
+export const hue_extended_options: hue_extended[] = [
+	"primary",
+	"primary-variant",
+	"secondary",
+	"secondary-variant",
+	"error",
+	"success",
+	"warning",
+	"information",
+	"auto",
+	"invert",
+	"light",
+	"dark",
+];
+
 export interface unknown_object {
 	// eslint-disable-next-line
 	[key: string]: any;

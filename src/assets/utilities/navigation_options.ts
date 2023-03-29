@@ -245,6 +245,13 @@ function navigation_options(): menu_item[] {
 						router.push("/switch");
 					},
 				},
+				{
+					label: "Choice Chips",
+					active: router.currentRoute.value.path === "/choice-chips",
+					action: () => {
+						router.push("/choice-chips");
+					},
+				},
 
 				// {
 				// 	label: "Checkbox",

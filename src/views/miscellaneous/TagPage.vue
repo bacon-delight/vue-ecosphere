@@ -7,8 +7,8 @@
 				TagComponent(
 					label="Label",
 					:size="sizeAlteration",
-					:icon="attributeAlterations.includes('icon') ? 'ri-home-line' : ''",
 					:allow-clear="attributeAlterations.includes('allowClear')",
+					:outline="attributeAlterations.includes('outline')",
 					:hue="hueAlteration"
 				)
 
@@ -60,12 +60,12 @@ export default defineComponent({
 					disabled: true,
 				},
 				{
-					label: "Icon",
-					value: "icon",
-				},
-				{
 					label: "Allow Clear",
 					value: "allowClear",
+				},
+				{
+					label: "Outline",
+					value: "outline",
 				},
 			],
 			sizeAlteration: "md" as string,

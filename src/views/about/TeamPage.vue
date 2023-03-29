@@ -143,7 +143,7 @@ export default defineComponent({
 	column-gap: 1rem;
 	row-gap: 1rem;
 
-	@include respond-below(sm) {
+	@include respond-below(md) {
 		grid-template-columns: 1fr;
 	}
 

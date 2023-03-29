@@ -29,6 +29,7 @@ import dropdown from "./pages/data_entry/dropdown/_translations";
 import color_picker from "./pages/data_entry/color_picker/_translations";
 import switch_input from "./pages/data_entry/switch/_translations";
 import search_dropdown from "./pages/data_entry/search_dropdown/_translations";
+import choice_chips from "./pages/data_entry/choice_chips/_translations";
 
 // Miscellaneous
 import avatar from "./pages/miscellaneous/avatar/_translations";
@@ -74,6 +75,7 @@ export default {
 			color_picker: color_picker("en"),
 			switch: switch_input("en"),
 			search_dropdown: search_dropdown("en"),
+			choice_chips: choice_chips("en"),
 		},
 		design_system: {
 			typography: typography("en"),

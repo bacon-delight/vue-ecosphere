@@ -4,13 +4,12 @@ Tags are used to display statuses, selected options, etc; in several use cases.
 
 #### API
 
-| Property     | Description                  | Type                                   | Default   |
-| ------------ | ---------------------------- | -------------------------------------- | --------- |
-| `label`      | Sets the label of the tag    | `string`                               | Required  |
-| `size`       | Sets the size of the tag     | [`tag_size`](#tag-size)                | `md`      |
-| `hue`        | Hue of the tag               | [`hue`](/types#hue)                    | `primary` |
-| `icon`       | Name of the icon             | [`Remix Icon`](https://remixicon.com/) |           |
-| `allowClear` | Allows the tag to be cleared | `boolean`                              | `false`   |
+| Property     | Description                  | Type                    | Default   |
+| ------------ | ---------------------------- | ----------------------- | --------- |
+| `label`      | Sets the label of the tag    | `string`                | Required  |
+| `size`       | Sets the size of the tag     | [`tag_size`](#tag-size) | `md`      |
+| `hue`        | Hue of the tag               | [`hue`](/types#hue)     | `primary` |
+| `allowClear` | Allows the tag to be cleared | `boolean`               | `false`   |
 
 #### Types
 

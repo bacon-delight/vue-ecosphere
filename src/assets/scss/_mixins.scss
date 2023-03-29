@@ -56,6 +56,26 @@
 		background: $color-information;
 		color: $color-dark;
 	}
+
+	&--auto {
+		background: $color-background;
+		color: $color-contrast;
+	}
+
+	&--invert {
+		background: $color-contrast;
+		color: $color-background;
+	}
+
+	&--light {
+		background: $color-light;
+		color: $color-dark;
+	}
+
+	&--dark {
+		background: $color-dark;
+		color: $color-light;
+	}
 }
 
 @mixin hue-background-modifiers {

@@ -1,8 +1,7 @@
 <template lang="pug">
-.tag(:class="[`tag--${hue}`, `tag--${size}`]")
-	//- Icon
-	SVGIcon.tag__icon(v-if="icon", :name="icon")
-
+.tag(
+	:class="[`tag--${hue}`, `tag--${size}`, outline ? `tag--outline` : '', disabled ? `tag--disabled` : '']"
+)
 	//- Label
 	.tag__label {{ label }}
 
@@ -21,9 +20,12 @@ import type { PropType } from "vue";
 import SVGIcon from "@/plugin/general/SVGIcon.vue";
 import {
 	tag_size_options,
-	hue_options,
+	hue_extended_options,
 } from "@/plugin/utilities/types.interface";
-import type { hue, tag_size } from "@/plugin/utilities/types.interface";
+import type {
+	hue_extended,
+	tag_size,
+} from "@/plugin/utilities/types.interface";
 
 export default defineComponent({
 	name: "TagComponent",
@@ -34,15 +36,11 @@ export default defineComponent({
 			required: true,
 		},
 		hue: {
-			type: String as PropType<hue>,
+			type: String as PropType<hue_extended>,
 			default: "information",
-			validator(value: hue): boolean {
-				return hue_options.includes(value);
+			validator(value: hue_extended): boolean {
+				return hue_extended_options.includes(value);
 			},
-		},
-		icon: {
-			type: String as PropType<string>,
-			default: "",
 		},
 		size: {
 			type: String as PropType<tag_size>,
@@ -52,6 +50,14 @@ export default defineComponent({
 			},
 		},
 		allowClear: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
+		outline: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
+		disabled: {
 			type: Boolean as PropType<boolean>,
 			default: false,
 		},
@@ -98,19 +104,31 @@ export default defineComponent({
 
 	&__icon-clear {
 		cursor: pointer;
-		padding: 0 0.25em;
 		border-radius: 50%;
 		transition: $transition-standard;
 		-webkit-tap-highlight-color: transparent;
 
 		&:hover {
-			background: $color-background;
+			color: $color-disabled;
 		}
 
 		&:focus {
-			outline: 1px solid $color-hyperlink;
-			background: $color-background;
+			outline: none;
+			color: $color-hyperlink;
+			// outline: 1px solid $color-hyperlink;
+			// background: $color-background;
 		}
+	}
+
+	&--outline {
+		border: 1px solid $color-contrast;
+	}
+
+	&--disabled {
+		background: $color-disabled;
+		color: $color-dark;
+		opacity: 0.3;
+		pointer-events: none;
 	}
 }
 </style>
