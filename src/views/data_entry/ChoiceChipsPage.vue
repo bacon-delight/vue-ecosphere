@@ -21,7 +21,7 @@
 				)
 
 		.section
-			.section__subtitle Playground {{ value }}
+			.section__subtitle Playground
 			.section__description Customise the options below to see changes on the choice chips
 			.section__playground
 				CheckboxGroup(

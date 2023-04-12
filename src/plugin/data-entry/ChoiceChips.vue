@@ -1,6 +1,6 @@
 <template lang="pug">
 .choice-chips
-	.choice-chips__label(:class="[`choice-chips__label--${state}`]") {{ label }} {{ values }}
+	.choice-chips__label(:class="[`choice-chips__label--${state}`]") {{ label }}
 	.choice-chips__options
 		TagComponent.option(
 			v-for="(option, index) in options",
