@@ -14,6 +14,7 @@
 				:hue="values.includes(index) ? hue : 'auto'",
 				:outline="outline",
 				:tabindex="option.disabled || disabled ? -1 : 0",
+				:size="size",
 				@click="handleClick(index)",
 				@keypress.enter="handleClick(index)"
 			)
@@ -216,8 +217,8 @@ export default defineComponent({
 	}
 
 	&__options {
-		column-gap: 1.75rem;
-		row-gap: 0.25rem;
+		column-gap: 0.375rem;
+		row-gap: 0.375rem;
 
 		&--flex {
 			display: flex;
@@ -235,6 +236,7 @@ export default defineComponent({
 			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 			align-items: center;
 			justify-content: center;
+			column-gap: 1.5rem;
 
 			@include respond-below(lg) {
 				grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
