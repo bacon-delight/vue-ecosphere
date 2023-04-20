@@ -17,6 +17,7 @@
 					:size="sizeAlteration",
 					:state="stateAlteration",
 					:alert-message="attributeAlterations.includes('alert-message') ? 'Alert Message' : ''",
+					:alignment="alignmentAlteration",
 					v-model="value"
 				)
 
@@ -46,6 +47,11 @@
 					v-model="stateAlteration",
 					alignment="grid"
 				)
+				RadioGroup(
+					label="Customise the alignment of the choice chips",
+					:options="alignmentAlterationOptions",
+					v-model="alignmentAlteration"
+				)
 		MarkdownParser(:content="$t('pages.data_entry.choice_chips.content')")
 </template>
 
@@ -64,14 +70,9 @@ export default defineComponent({
 		CheckboxGroup,
 		RadioGroup,
 	},
-	methods: {
-		handleUpdate(value: any) {
-			console.log(value);
-		},
-	},
 	data() {
 		return {
-			value: [1, 2],
+			value: [1],
 			options: [
 				{
 					label: "Apple",
@@ -146,6 +147,21 @@ export default defineComponent({
 				{
 					label: "Large",
 					value: "lg",
+				},
+			],
+			alignmentAlteration: "flex" as string,
+			alignmentAlterationOptions: [
+				{
+					label: "Flex",
+					value: "flex",
+				},
+				{
+					label: "Grid",
+					value: "grid",
+				},
+				{
+					label: "Vertical",
+					value: "vertical",
 				},
 			],
 			hueAlteration: "information" as string,

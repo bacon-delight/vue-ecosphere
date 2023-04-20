@@ -1,18 +1,22 @@
 <template lang="pug">
 .choice-chips
+	//- Label
 	.choice-chips__label(:class="[`choice-chips__label--${state}`]") {{ label }}
-	.choice-chips__options
-		TagComponent.option(
-			v-for="(option, index) in options",
-			:tabindex="option.disabled || disabled ? -1 : 0",
-			:label="option.label",
-			:size="size",
-			:hue="values.includes(index) ? hue : 'auto'",
-			:outline="outline",
-			:disabled="option.disabled || disabled",
-			@click="handleClick(index)",
-			@keypress.enter="handleClick(index)"
-		)
+
+	//- Options
+	.choice-chips__options(:class="[`choice-chips__options--${alignment}`]")
+		.choice-chips__field(v-for="(option, index) in options")
+			//- Tag
+			TagComponent.choice-chips__tag(
+				v-if="!option.hidden",
+				:label="option.label",
+				:disabled="option.disabled || disabled",
+				:hue="values.includes(index) ? hue : 'auto'",
+				:outline="outline",
+				:tabindex="option.disabled || disabled ? -1 : 0",
+				@click="handleClick(index)",
+				@keypress.enter="handleClick(index)"
+			)
 
 	//- Alert Message
 	.choice-chips__alert-message(
@@ -27,27 +31,45 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
-import SVGIcon from "@/plugin/general/SVGIcon.vue";
-import TagComponent from "../miscellaneous/TagComponent.vue";
-import {
-	tag_size_options,
-	hue_options,
-	data_entry_state_options,
-} from "@/plugin/utilities/types.interface";
 import type {
+	data_entry_state,
+	choice_option,
+	choice_option_alignment,
 	hue,
 	tag_size,
-	choice_option,
-	data_entry_state,
 } from "@/plugin/utilities/types.interface";
+import {
+	data_entry_state_options,
+	choice_option_alignment_options,
+	hue_options,
+	tag_size_options,
+} from "@/plugin/utilities/types.interface";
+import CheckboxField from "./CheckboxField.vue";
+import TagComponent from "../miscellaneous/TagComponent.vue";
 
 export default defineComponent({
-	name: "ChoiceChips",
+	name: "CheckboxGroup",
 	emits: ["update:modelValue", "update"],
+	components: {
+		CheckboxField,
+		TagComponent,
+	},
 	props: {
 		label: {
 			type: String as PropType<string>,
-			required: true,
+			default: "",
+		},
+		disabled: {
+			type: Boolean as PropType<boolean>,
+			default: false,
+		},
+		assistiveText: {
+			type: String as PropType<string>,
+			default: "",
+		},
+		alertMessage: {
+			type: String as PropType<string>,
+			default: "",
 		},
 		hue: {
 			type: String as PropType<hue>,
@@ -56,11 +78,11 @@ export default defineComponent({
 				return hue_options.includes(value);
 			},
 		},
-		size: {
-			type: String as PropType<tag_size>,
-			default: "md",
-			validator(value: tag_size): boolean {
-				return tag_size_options.includes(value);
+		state: {
+			type: String as PropType<data_entry_state>,
+			default: "default",
+			validator(value: data_entry_state): boolean {
+				return data_entry_state_options.includes(value);
 			},
 		},
 		options: {
@@ -71,28 +93,23 @@ export default defineComponent({
 			type: Boolean as PropType<boolean>,
 			default: false,
 		},
-		disabled: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
 		multiple: {
 			type: Boolean as PropType<boolean>,
 			default: true,
 		},
-		state: {
-			type: String as PropType<data_entry_state>,
-			default: "default",
-			validator(value: data_entry_state): boolean {
-				return data_entry_state_options.includes(value);
+		size: {
+			type: String as PropType<tag_size>,
+			default: "md",
+			validator(value: tag_size): boolean {
+				return tag_size_options.includes(value);
 			},
 		},
-		assistiveText: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		alertMessage: {
-			type: String as PropType<string>,
-			default: "",
+		alignment: {
+			type: String as PropType<choice_option_alignment>,
+			default: "flex",
+			validator(value: choice_option_alignment): boolean {
+				return choice_option_alignment_options.includes(value);
+			},
 		},
 		modelValue: {
 			type: Array as PropType<(string | number | boolean)[]>,
@@ -103,10 +120,6 @@ export default defineComponent({
 			default: () => [],
 		},
 	},
-	components: {
-		SVGIcon,
-		TagComponent,
-	},
 	data() {
 		return {
 			values: [] as number[],
@@ -116,13 +129,7 @@ export default defineComponent({
 		const initialValues = this.default.length
 			? this.default
 			: this.modelValue;
-		if (initialValues.length) {
-			this.options.forEach((option: choice_option, index: number) => {
-				if (initialValues.includes(option.value)) {
-					this.values.push(index);
-				}
-			});
-		}
+		this.populateValues(initialValues);
 	},
 	methods: {
 		handleClick(index: number): void {
@@ -131,11 +138,10 @@ export default defineComponent({
 					(existing: number) => existing !== index
 				);
 			} else {
-				if (this.multiple) {
-					this.values.push(index);
-				} else {
-					this.values = [index];
+				if (!this.multiple) {
+					this.values = [];
 				}
+				this.values.push(index);
 			}
 			this.$emit(
 				"update:modelValue",
@@ -153,25 +159,26 @@ export default defineComponent({
 				(this.options[index].action as () => void)();
 			}
 		},
-	},
-	watch: {
-		default(newDefaults: (string | number | boolean | null)[]): void {
-			if (newDefaults === null || !newDefaults.length) {
-				this.values = [];
-			} else {
-				this.options.forEach((option: choice_option, index: number) => {
-					if (newDefaults.includes(option.value)) {
-						this.values.push(index);
-					}
-				});
+		populateValues(defaults: (string | number | boolean)[]): void {
+			if (!defaults.length) {
+				return;
 			}
-		},
-		modelValue(newValues: (string | number | boolean | null)[]): void {
 			this.options.forEach((option: choice_option, index: number) => {
-				if (newValues.includes(option.value)) {
+				if (defaults.includes(option.value)) {
 					this.values.push(index);
 				}
 			});
+		},
+	},
+	watch: {
+		default(newDefaults: (string | number | boolean)[]): void {
+			this.populateValues(newDefaults);
+		},
+		modelValue(newValues: (string | number | boolean)[]): void {
+			this.populateValues(newValues);
+		},
+		multiple(): void {
+			this.values = [];
 		},
 	},
 });
@@ -179,6 +186,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .choice-chips {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.5rem;
+
 	&__label {
 		@include font-footnote;
 
@@ -195,18 +206,52 @@ export default defineComponent({
 		}
 	}
 
-	&__options {
-		margin: 0.5rem 0;
-		display: flex;
-		column-gap: 0.5rem;
-		row-gap: 0.5rem;
-		flex-wrap: wrap;
-		max-width: 100%;
+	&__tag {
+		cursor: pointer;
 	}
 
 	&__assistive-text {
 		@include font-footnote;
 		color: $color-disabled;
+	}
+
+	&__options {
+		column-gap: 1.75rem;
+		row-gap: 0.25rem;
+
+		&--flex {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		&--vertical {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&--grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+			align-items: center;
+			justify-content: center;
+
+			@include respond-below(lg) {
+				grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+			}
+
+			@include respond-below(md) {
+				grid-template-columns: 1fr 1fr 1fr 1fr;
+			}
+
+			@include respond-below(sm) {
+				grid-template-columns: 1fr 1fr 1fr;
+			}
+
+			@include respond-below(xs) {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
 	}
 
 	&__alert-message {
@@ -223,19 +268,6 @@ export default defineComponent({
 		&--success {
 			color: $color-success;
 		}
-	}
-}
-
-.option {
-	cursor: pointer;
-	transition: $transition-standard;
-
-	&:hover {
-		box-shadow: $box-shadow-standard;
-	}
-
-	&:focus {
-		outline: $outline-focus;
 	}
 }
 </style>

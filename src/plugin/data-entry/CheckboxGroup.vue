@@ -108,13 +108,7 @@ export default defineComponent({
 		const initialValues = this.default.length
 			? this.default
 			: this.modelValue;
-		if (initialValues.length) {
-			this.options.forEach((option: choice_option, index: number) => {
-				if (initialValues.includes(option.value)) {
-					this.values.push(index);
-				}
-			});
-		}
+		this.populateValues(initialValues);
 	},
 	methods: {
 		handleClick(index: number): void {
@@ -140,6 +134,24 @@ export default defineComponent({
 			if (this.options[index].action && this.values.includes(index)) {
 				(this.options[index].action as () => void)();
 			}
+		},
+		populateValues(defaults: (string | number | boolean)[]): void {
+			if (!defaults.length) {
+				return;
+			}
+			this.options.forEach((option: choice_option, index: number) => {
+				if (defaults.includes(option.value)) {
+					this.values.push(index);
+				}
+			});
+		},
+	},
+	watch: {
+		default(newDefaults: (string | number | boolean)[]): void {
+			this.populateValues(newDefaults);
+		},
+		modelValue(newValues: (string | number | boolean)[]): void {
+			this.populateValues(newValues);
 		},
 	},
 });
