@@ -209,6 +209,11 @@ export default defineComponent({
 
 	&__tag {
 		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+
+		&:focus {
+			outline: 1px solid $color-hyperlink;
+		}
 	}
 
 	&__assistive-text {
