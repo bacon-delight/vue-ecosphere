@@ -34,6 +34,7 @@ import choice_chips from "./pages/data_entry/choice_chips/_translations";
 // Miscellaneous
 import avatar from "./pages/miscellaneous/avatar/_translations";
 import tag from "./pages/miscellaneous/tag/_translations";
+import stepper from "./pages/miscellaneous/stepper/_translations";
 
 export default {
 	title: "Ecosphere",
@@ -84,6 +85,7 @@ export default {
 		miscellaneous: {
 			avatar: avatar("en"),
 			tag: tag("en"),
+			stepper: stepper("en"),
 		},
 	},
 	common: {

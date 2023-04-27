@@ -7,6 +7,20 @@ export * from "./types/miscellaneous.interface";
 export type theme = "auto" | "light" | "dark" | "invert";
 export const theme_options: theme[] = ["auto", "light", "dark", "invert"];
 
+export type hue_limited =
+	| "primary"
+	| "primary-variant"
+	| "secondary"
+	| "secondary-variant"
+	| "information";
+export const hue_limited_options: hue[] = [
+	"primary",
+	"primary-variant",
+	"secondary",
+	"secondary-variant",
+	"information",
+];
+
 export type hue =
 	| "primary"
 	| "primary-variant"

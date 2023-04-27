@@ -185,6 +185,12 @@ const router = createRouter({
 					component: () =>
 						import("../views/miscellaneous/TagPage.vue"),
 				},
+				{
+					path: "/stepper",
+					name: "Stepper",
+					component: () =>
+						import("../views/miscellaneous/StepperPage.vue"),
+				},
 			],
 		},
 	],

@@ -43,6 +43,17 @@ type hue =
 	| "information";
 ```
 
+##### Hue Limited
+
+```ts
+type hue_limited =
+	| "primary"
+	| "primary-variant"
+	| "secondary"
+	| "secondary-variant"
+	| "information";
+```
+
 ##### Colors
 
 ```ts

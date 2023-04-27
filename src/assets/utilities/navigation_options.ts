@@ -280,6 +280,13 @@ function navigation_options(): menu_item[] {
 						router.push("/tag");
 					},
 				},
+				{
+					label: "Stepper",
+					active: router.currentRoute.value.path === "/stepper",
+					action: () => {
+						router.push("/stepper");
+					},
+				},
 			],
 		},
 	];

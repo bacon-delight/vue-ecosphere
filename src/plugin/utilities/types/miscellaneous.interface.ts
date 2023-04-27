@@ -12,3 +12,29 @@ export const avatar_status_options: avatar_status[] = [
 	"away",
 	"busy",
 ];
+
+export interface stepper_step {
+	label: string;
+	description?: string;
+	icon?: string;
+}
+
+export type stepper_orientation = "horizontal" | "vertical";
+export const stepper_orientation_options: stepper_orientation[] = [
+	"horizontal",
+	"vertical",
+];
+
+export type stepper_state =
+	| "awaiting"
+	| "in-progress"
+	| "completed"
+	| "error"
+	| "warning";
+export const stepper_state_options: stepper_state[] = [
+	"awaiting",
+	"in-progress",
+	"completed",
+	"error",
+	"warning",
+];
