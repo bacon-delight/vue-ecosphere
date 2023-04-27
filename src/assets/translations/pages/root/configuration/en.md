@@ -10,3 +10,4 @@ $ecosphere.theming
 | ------------- | ------------------------------------------------------- | ---------------------------- | ------- |
 | `setTheme()`  | Set a theme which will be applied to all the components | [`theme`](/types#theme)      | `auto`  |
 | `setColors()` | Override the existing color scheme with a custom set    | [`color_map`](/types#colors) | `auto`  |
+| `getTheme()`  | Returns the current theme                               | `light`, `dark`              |         |

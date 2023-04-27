@@ -28,10 +28,10 @@
 				.team__section
 					SVGIcon.team__section-icon(name="ri-suitcase-line")
 					.team__section-description
-						span Full Stack - &nbsp;
+						span Tech Specialist - &nbsp;
 						LinkComponent(
-							label="Karkinos Healthcare",
-							href="https://www.karkinos.in/",
+							label="Vince AS",
+							href="https://vince.no/",
 							target="_blank"
 						)
 				.team__section
