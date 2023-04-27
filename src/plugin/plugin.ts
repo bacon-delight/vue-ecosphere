@@ -1,5 +1,5 @@
 // Helpers
-import { setTheme, setColors } from "./utilities/helpers/theme";
+import { setTheme, setColors, getTheme } from "./utilities/helpers/theme";
 
 // Initialize
 function initialize(): void {
@@ -14,6 +14,7 @@ export default {
 			theming: {
 				setTheme,
 				setColors,
+				getTheme,
 			},
 		};
 	},

@@ -88,5 +88,6 @@ export interface ecosphere {
 	theming: {
 		setTheme: (theme?: theme) => void;
 		setColors: (colors: unknown_object) => void;
+		getTheme: () => theme;
 	};
 }

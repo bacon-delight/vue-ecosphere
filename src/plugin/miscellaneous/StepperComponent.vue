@@ -204,6 +204,7 @@ export default defineComponent({
 
 		&--default {
 			border: 1px solid $color-divider;
+			color: $color-dark-faded;
 		}
 	}
 

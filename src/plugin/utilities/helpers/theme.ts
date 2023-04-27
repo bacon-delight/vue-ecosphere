@@ -18,3 +18,9 @@ export function setColors(colors: unknown_object) {
 		root.style.setProperty(`--color-${color}`, colors[color]);
 	}
 }
+
+export function getTheme(): theme {
+	return document.body.classList.contains("ecosphere-dark")
+		? "dark"
+		: "light";
+}

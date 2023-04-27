@@ -6,14 +6,22 @@
 			.section__description Play around with the colors below to change the color palette across the design system. You can navigate to other pages as well to view the changes after setting them here. If you refresh, the changes will be reset.
 
 		.section
-			ButtonComponent(
-				label="Restore Defaults",
-				size="sm",
-				hue="error",
-				icon="ri-arrow-go-back-line",
-				icon-position="before",
-				@click="restoreDefaults"
-			)
+			.section__flex
+				ButtonComponent(
+					label="Restore Defaults",
+					size="sm",
+					hue="error",
+					icon="ri-arrow-go-back-line",
+					icon-position="before",
+					@click="restoreDefaults"
+				)
+				ButtonComponent(
+					label="Toggle Theme",
+					size="sm",
+					icon="ri-arrow-left-right-line",
+					icon-position="before",
+					@click="toggleTheme"
+				)
 
 		.section
 			.section__subtitle Elementary Colors
@@ -256,6 +264,13 @@ export default defineComponent({
 		},
 		restoreDefaults(): void {
 			this.$ecosphere.theming.setColors(default_colors);
+		},
+		toggleTheme(): void {
+			if (this.$ecosphere.theming.getTheme() === "dark") {
+				this.$ecosphere.theming.setTheme("light");
+			} else {
+				this.$ecosphere.theming.setTheme("dark");
+			}
 		},
 	},
 });

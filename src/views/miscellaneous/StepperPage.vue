@@ -54,7 +54,7 @@ import CheckboxGroup from "@/plugin/data-entry/CheckboxGroup.vue";
 import RadioGroup from "@/plugin/data-entry/RadioGroup.vue";
 
 export default defineComponent({
-	name: "TagPage",
+	name: "StepperPage",
 	components: {
 		MarkdownParser,
 		StepperComponent,
