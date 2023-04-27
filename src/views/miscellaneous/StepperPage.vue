@@ -3,7 +3,7 @@
 	.wrapper__title {{ $t("pages.miscellaneous.stepper.title") }}
 	.wrapper__body
 		.section
-			.section__flex
+			.section__flex.stepper-wrapper
 				StepperComponent(
 					:current="currentStepAlteration",
 					:responsive="attributeAlterations.includes('responsive')",
@@ -75,8 +75,7 @@ export default defineComponent({
 				},
 				{
 					label: "Step 3",
-					description:
-						"You're done, components can now be used in your project",
+					description: "You're all set!",
 				},
 				{
 					label: "Step 4",
@@ -172,4 +171,9 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.stepper-wrapper {
+	min-width: 600px;
+	overflow-x: auto;
+}
+</style>

@@ -164,14 +164,14 @@ export default defineComponent({
 		grid-auto-columns: 1fr;
 		row-gap: 1.5rem;
 
-		&::before {
-			content: "";
-			background: $color-divider;
-			position: absolute;
-			height: calc(100% - 1rem);
-			width: 1px;
-			transform: translateX(1rem) translateY(10px);
-		}
+		// &::before {
+		// 	content: "";
+		// 	background: $color-divider;
+		// 	position: absolute;
+		// 	height: calc(100% - 1rem);
+		// 	width: 1px;
+		// 	transform: translateX(1rem) translateY(10px);
+		// }
 	}
 }
 
@@ -244,6 +244,21 @@ export default defineComponent({
 }
 
 .step-completed + .step-completed--horizontal:after {
+	background: $color-success;
+}
+
+.step + .step--vertical:after {
+	content: "";
+	position: absolute;
+	transform: translateY(-2rem);
+	left: 1rem;
+	background: $color-divider;
+	height: 100%;
+	width: 1px;
+	z-index: -1;
+}
+
+.step-completed + .step-completed--vertical:after {
 	background: $color-success;
 }
 </style>
