@@ -7,7 +7,7 @@
 			.section__flex
 				SearchDropdown(
 					:label="inputAttributeAlterations.includes('label') ? 'Select your favourite fruit' : null",
-					:placeholder="inputAttributeAlterations.includes('placeholder') ? 'Select an option' : null",
+					:placeholder="inputAttributeAlterations.includes('placeholder') ? 'Search & Select Option' : null",
 					:assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Firethorns are inedible, but they are good source for birds!' : null",
 					:options="options",
 					:state="inputStateAlteration",

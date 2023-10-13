@@ -6,13 +6,16 @@
 	//- Dropdown Wrapper
 	.dropdown__wrapper(:id="dropdownID")
 		input.dropdown__field(
-			:class="[`dropdown__field--${state}`, { 'dropdown__field--outline': outline }]",
+			:ref="`input_${dropdownID}`",
+			:id="`input_${dropdownID}`",
+			:class="[`dropdown__field--${state}`, { 'dropdown__field--outline': outline }, { 'dropdown__field--selected': value !== null && !showOptions }]",
 			@click="showOptions = true",
 			@focus="showOptions = true",
-			:placeholder="placeholder",
+			:placeholder="value !== null && !showOptions ? options[value].label : placeholder",
 			v-model="search",
 			type="text"
 		)
+
 		//- Icons
 		.dropdown__icons
 			//- Clear Icon
@@ -364,6 +367,13 @@ export default defineComponent({
 
 		&--success {
 			outline: 1px solid $color-success;
+		}
+
+		&--selected {
+			&::placeholder {
+				color: $color-contrast;
+				@include font-regular;
+			}
 		}
 	}
 
