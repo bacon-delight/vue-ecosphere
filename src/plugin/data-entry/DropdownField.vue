@@ -158,7 +158,6 @@ export default defineComponent({
 		return {
 			showOptions: false,
 			value: null as null | number,
-			clickListener: null,
 			dropdownID: `eco-dropdown-${Date.now()
 				.toString()
 				.slice(8)}-${Math.random().toFixed(5).slice(2)}`,
@@ -184,6 +183,18 @@ export default defineComponent({
 			this.$emit("clear");
 			this.showOptions = false;
 		},
+		clickHandler(event: any | null): void {
+			if (
+				document
+					.getElementById(this.dropdownID)
+					?.contains(event?.target)
+			) {
+				// Chicked Inside Dropdown - Do Nothing
+			} else {
+				this.showOptions = false;
+				window.removeEventListener("click", this.clickHandler);
+			}
+		},
 	},
 	mounted() {
 		const initialValue =
@@ -199,18 +210,9 @@ export default defineComponent({
 	watch: {
 		showOptions(value: boolean): void {
 			if (value) {
-				window.addEventListener("click", (event: any) => {
-					if (
-						document
-							.getElementById(this.dropdownID)
-							?.contains(event.target)
-					) {
-						// Chicked Inside Dropdown - Do Nothing
-					} else {
-						this.showOptions = false;
-						document.removeEventListener("click", () => {});
-					}
-				});
+				window.addEventListener("click", this.clickHandler);
+			} else {
+				window.removeEventListener("click", this.clickHandler);
 			}
 		},
 		default(newDefault: string | number | boolean | null): void {
