@@ -33,7 +33,10 @@ export default defineConfig(({ mode }) => {
 				? {
 						lib: {
 							name: "vue-ecosphere",
-							entry: path.resolve(__dirname, "plugin.ts"),
+							entry: path.resolve(
+								__dirname,
+								"./src/plugin/plugin.ts"
+							),
 							fileName(format) {
 								return `vue-ecosphere.${format}.js`;
 							},

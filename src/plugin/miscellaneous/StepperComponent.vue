@@ -163,15 +163,6 @@ export default defineComponent({
 		grid-auto-flow: row;
 		grid-auto-columns: 1fr;
 		row-gap: 1.5rem;
-
-		// &::before {
-		// 	content: "";
-		// 	background: $color-divider;
-		// 	position: absolute;
-		// 	height: calc(100% - 1rem);
-		// 	width: 1px;
-		// 	transform: translateX(1rem) translateY(10px);
-		// }
 	}
 }
 
