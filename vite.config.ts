@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
 		build:
 			process.env.VITE_PACKAGE_MODE === "true"
 				? {
+						cssCodeSplit: false,
 						lib: {
 							name: "vue-ecosphere",
 							entry: path.resolve(
@@ -53,11 +54,3 @@ export default defineConfig(({ mode }) => {
 				: {},
 	};
 });
-// export default defineConfig({
-// 	plugins: [vue()],
-// 	resolve: {
-// 		alias: {
-// 			"@": fileURLToPath(new URL("./src", import.meta.url)),
-// 		},
-// 	},
-// });

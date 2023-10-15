@@ -2,9 +2,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
 
-$font-general: "Work Sans", -apple-system, sans-serif;
-$font-serif: "Libre Baskerville", serif;
-$font-monospace: "Roboto Mono", monospace;
+:root {
+	--font-general: "Work Sans", -apple-system, sans-serif;
+	--font-serif: "Libre Baskerville", serif;
+	--font-monospace: "Roboto Mono", monospace;
+}
+
+$font-general: var(--font-general);
+$font-serif: var(--font-serif);
+$font-monospace: var(--font-monospace);
 
 @mixin font-light {
 	font-family: $font-general;

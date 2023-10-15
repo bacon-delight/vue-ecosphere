@@ -19,6 +19,13 @@ export function setColors(colors: unknown_object) {
 	}
 }
 
+export function setFonts(fonts: unknown_object) {
+	const root: any = document.querySelector(":root");
+	for (const font in fonts) {
+		root.style.setProperty(`--font-${font}`, fonts[font]);
+	}
+}
+
 export function getTheme(): theme {
 	return document.body.classList.contains("ecosphere-dark")
 		? "dark"
