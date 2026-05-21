@@ -1,22 +1,7 @@
 {
 	"files": [],
 	"references": [
-		{
-			"path": "./tsconfig.config.json"
-		},
-		{
-			"path": "./tsconfig.app.json"
-		},
-		{
-			"path": "./tsconfig.vitest.json"
-		}
-	],
-	"vueCompilerOptions": {
-		"plugins": [
-			"@volar/vue-language-plugin-pug",
-			"@vue/language-plugin-pug"
-		]
-	},
-	"include": [],
-	"exclude": []
+		{ "path": "./packages/ecosphere" },
+		{ "path": "./apps/docs" }
+	]
 }

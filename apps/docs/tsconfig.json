@@ -1,0 +1,27 @@
+{
+	"extends": "@vue/tsconfig/tsconfig.dom.json",
+	"compilerOptions": {
+		"composite": false,
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@ecosphere/*": ["../../packages/ecosphere/src/*"]
+		},
+		"types": ["node", "vite/client"],
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"useDefineForClassFields": true,
+		"jsx": "preserve",
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src/**/*", "src/**/*.vue", "env.d.ts"],
+	"exclude": ["node_modules", "dist"]
+}

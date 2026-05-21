@@ -1,0 +1,253 @@
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">
+			{{ $t("pages.data_entry.choice_chips.title") }}
+		</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<ChoiceChips
+						v-model="value"
+						:label="
+							attributeAlterations.includes('label')
+								? 'Choice Chips'
+								: ''
+						"
+						:assistive-text="
+							attributeAlterations.includes('assistive-text')
+								? 'Assistive Text'
+								: ''
+						"
+						:disabled="attributeAlterations.includes('disabled')"
+						:outline="attributeAlterations.includes('outline')"
+						:options="options"
+						:default="
+							attributeAlterations.includes('default')
+								? [1, 2]
+								: []
+						"
+						:multiple="attributeAlterations.includes('multiple')"
+						:hue="hueAlteration"
+						:size="sizeAlteration"
+						:state="stateAlteration"
+						:alert-message="
+							attributeAlterations.includes('alert-message')
+								? 'Alert Message'
+								: ''
+						"
+						:alignment="alignmentAlteration"
+					></ChoiceChips>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">
+					Customise the options below to see changes on the choice
+					chips
+				</div>
+				<div class="section__playground">
+					<CheckboxGroup
+						v-model="attributeAlterations"
+						label="Customise the attributes of the choice chips"
+						:options="attributeAlterationOptions"
+						alignment="flex"
+					></CheckboxGroup>
+					<RadioGroup
+						v-model="sizeAlteration"
+						label="Customise the size of the choice chips"
+						:options="sizeAlterationOptions"
+					></RadioGroup>
+					<RadioGroup
+						v-model="hueAlteration"
+						label="Customise the hue of the choice chips"
+						:options="hueAlterationOptions"
+					></RadioGroup>
+					<RadioGroup
+						v-model="stateAlteration"
+						label="Customise the state of the choice chips"
+						:options="stateAlterationOptions"
+						alignment="grid"
+					></RadioGroup>
+					<RadioGroup
+						v-model="alignmentAlteration"
+						label="Customise the alignment of the choice chips"
+						:options="alignmentAlterationOptions"
+					></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser
+				:content="$t('pages.data_entry.choice_chips.content')"
+			></MarkdownParser>
+		</div>
+	</div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import MarkdownParser from "@/components/MarkdownParser.vue";
+import ChoiceChips from "@ecosphere/data-entry/ChoiceChips.vue";
+import CheckboxGroup from "@ecosphere/data-entry/CheckboxGroup.vue";
+import RadioGroup from "@ecosphere/data-entry/RadioGroup.vue";
+
+export default defineComponent({
+	name: "RadioPage",
+	components: {
+		MarkdownParser,
+		ChoiceChips,
+		CheckboxGroup,
+		RadioGroup,
+	},
+	data() {
+		return {
+			value: [1],
+			options: [
+				{
+					label: "Apple",
+					value: 1,
+				},
+				{
+					label: "Banana",
+					value: 2,
+				},
+				{
+					label: "Firethorn",
+					value: 3,
+					disabled: true,
+				},
+				{
+					label: "Grapefruit",
+					value: 4,
+					action: () => {
+						alert("You have selected Grapefruit!");
+					},
+				},
+				{
+					label: "Dragonfruit",
+					value: 5,
+				},
+				{
+					label: "Kiwi",
+					value: 6,
+				},
+			],
+			attributeAlterations: ["label", "multiple"] as string[],
+			attributeAlterationOptions: [
+				{
+					label: "Allow Multiple Selections",
+					value: "multiple",
+				},
+				{
+					label: "Label",
+					value: "label",
+				},
+				{
+					label: "Default",
+					value: "default",
+				},
+				{
+					label: "Disabled",
+					value: "disabled",
+				},
+				{
+					label: "Outline",
+					value: "outline",
+				},
+				{
+					label: "Assistive Text",
+					value: "assistive-text",
+				},
+				{
+					label: "Alert Message",
+					value: "alert-message",
+				},
+			],
+			sizeAlteration: "md" as string,
+			sizeAlterationOptions: [
+				{
+					label: "Small",
+					value: "sm",
+				},
+				{
+					label: "Medium",
+					value: "md",
+				},
+				{
+					label: "Large",
+					value: "lg",
+				},
+			],
+			alignmentAlteration: "flex" as string,
+			alignmentAlterationOptions: [
+				{
+					label: "Flex",
+					value: "flex",
+				},
+				{
+					label: "Grid",
+					value: "grid",
+				},
+				{
+					label: "Vertical",
+					value: "vertical",
+				},
+			],
+			hueAlteration: "information" as string,
+			hueAlterationOptions: [
+				{
+					label: "Information",
+					value: "information",
+				},
+				{
+					label: "Error",
+					value: "error",
+				},
+				{
+					label: "Warning",
+					value: "warning",
+				},
+				{
+					label: "Success",
+					value: "success",
+				},
+				{
+					label: "Primary",
+					value: "primary",
+				},
+				{
+					label: "Primary Variant",
+					value: "primary-variant",
+				},
+				{
+					label: "Secondary",
+					value: "secondary",
+				},
+				{
+					label: "Secondary Variant",
+					value: "secondary-variant",
+				},
+			],
+			stateAlteration: "default",
+			stateAlterationOptions: [
+				{
+					label: "Default",
+					value: "default",
+				},
+				{
+					label: "Error",
+					value: "error",
+				},
+				{
+					label: "Warning",
+					value: "warning",
+				},
+				{
+					label: "Success",
+					value: "success",
+				},
+			],
+		};
+	},
+});
+</script>
+
+<style lang="scss" scoped></style>

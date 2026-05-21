@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+graphify-out
+fix-agent
+test-agent
+pnpm-lock.yaml
+*.md
