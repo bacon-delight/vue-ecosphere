@@ -32,7 +32,7 @@ features:
     linkText: A11y guide
   - icon: 🧩
     title: Composable & explicit
-    details: Plain Vue 3 SFCs, <script setup>, v-model:value pattern. No global state, no surprises.
+    details: Plain Vue 3 SFCs with script setup, v-model:value pattern. No global state, no surprises.
     link: /components/
     linkText: Components
   - icon: 🌗
