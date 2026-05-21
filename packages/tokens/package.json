@@ -1,0 +1,42 @@
+{
+	"name": "@ecosphere/tokens",
+	"version": "0.1.0",
+	"description": "Design tokens for vue-ecosphere (Style Dictionary v4 output)",
+	"license": "MIT",
+	"author": "bacon-delight",
+	"type": "module",
+	"sideEffects": [
+		"**/*.css",
+		"**/*.scss"
+	],
+	"files": [
+		"dist",
+		"src"
+	],
+	"main": "./dist/tokens.cjs",
+	"module": "./dist/tokens.js",
+	"types": "./dist/tokens.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/tokens.d.ts",
+			"import": "./dist/tokens.js",
+			"require": "./dist/tokens.cjs"
+		},
+		"./css": "./dist/tokens.css",
+		"./css/dark": "./dist/tokens.dark.css",
+		"./scss": "./dist/tokens.scss",
+		"./tailwind": "./dist/tailwind.preset.cjs",
+		"./package.json": "./package.json"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"build": "node scripts/build.mjs",
+		"clean": "rimraf dist"
+	},
+	"devDependencies": {
+		"rimraf": "^6.0.1",
+		"style-dictionary": "^4.3.0"
+	}
+}

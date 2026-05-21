@@ -1,0 +1,59 @@
+{
+	"color": {
+		"background": { "value": "{primitive.color.light}" },
+		"background-faded": { "value": "{primitive.color.light-faded}" },
+		"contrast": { "value": "{primitive.color.dark}" },
+		"contrast-faded": { "value": "{primitive.color.dark-faded}" },
+
+		"primary": { "value": "{primitive.color.blue.700}" },
+		"primary-contrast": { "value": "#fefefe" },
+		"primary-variant": { "value": "{primitive.color.cyan.300}" },
+		"primary-variant-contrast": { "value": "{primitive.color.cyan.700}" },
+
+		"secondary": { "value": "{primitive.color.purple.500}" },
+		"secondary-contrast": { "value": "{primitive.color.purple.900}" },
+		"secondary-variant": { "value": "{primitive.color.purple.300}" },
+		"secondary-variant-contrast": { "value": "{primitive.color.purple.700}" },
+
+		"transparent": { "value": "transparent" },
+		"hyperlink": { "value": "{primitive.color.blue.500}" },
+		"divider": { "value": "{primitive.color.grey.300}" },
+		"disabled": { "value": "{primitive.color.grey.500}" },
+		"offline": { "value": "{primitive.color.grey.100}" },
+
+		"error": { "value": "{primitive.color.red.500}" },
+		"error-variant": { "value": "{primitive.color.red.300}" },
+		"success": { "value": "{primitive.color.green.500}" },
+		"success-variant": { "value": "{primitive.color.green.300}" },
+		"warning": { "value": "{primitive.color.yellow.500}" },
+		"warning-variant": { "value": "{primitive.color.yellow.300}" },
+		"information": { "value": "{primitive.color.blue.300}" },
+		"information-variant": { "value": "#a6ccf1" }
+	},
+
+	"font": {
+		"family": {
+			"base": { "value": "{primitive.font.family.inter}" },
+			"serif": { "value": "{primitive.font.family.serif}" },
+			"mono": { "value": "{primitive.font.family.mono}" }
+		}
+	},
+
+	"radius": {
+		"base": { "value": "{primitive.radius.md}" }
+	},
+
+	"shadow": {
+		"sm": { "value": "0 1px 2px rgba(0, 0, 0, 0.05)" },
+		"md": { "value": "rgba(149, 157, 165, 0.2) 0px 2px 8px" },
+		"lg": { "value": "rgba(149, 157, 165, 0.2) 0px 8px 24px" }
+	},
+
+	"transition": {
+		"base": { "value": "all {primitive.duration.normal} {primitive.easing.standard}" }
+	},
+
+	"outline": {
+		"focus": { "value": "1px solid {color.hyperlink}" }
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"color": {
+		"background": { "value": "{primitive.color.dark}" },
+		"background-faded": { "value": "{primitive.color.dark-faded}" },
+		"contrast": { "value": "{primitive.color.light}" },
+		"contrast-faded": { "value": "{primitive.color.light-faded}" },
+
+		"divider": { "value": "#3a4350" },
+		"disabled": { "value": "#6b7280" },
+		"offline": { "value": "#2c3440" }
+	}
+}

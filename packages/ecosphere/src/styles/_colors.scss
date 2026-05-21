@@ -1,99 +1,91 @@
-// ---------- Base ----------
+// ---------- Compatibility aliases for legacy --color-* names ----------
+// All values are sourced from the @ecosphere/tokens pipeline (--ep-color-*).
+// Consumers can override behavior by setting --ep-color-* on :root.
 :root {
 	// Elementary
-	--color-light: #ffffff;
-	--color-light-faded: #edf2f7;
-	--color-dark: #0d0f11;
-	--color-dark-faded: #202b35;
+	--color-light: var(--ep-primitive-color-light);
+	--color-light-faded: var(--ep-primitive-color-light-faded);
+	--color-dark: var(--ep-primitive-color-dark);
+	--color-dark-faded: var(--ep-primitive-color-dark-faded);
+
+	// Semantic surfaces
+	--color-background: var(--ep-color-background);
+	--color-background-faded: var(--ep-color-background-faded);
+	--color-contrast: var(--ep-color-contrast);
+	--color-contrast-faded: var(--ep-color-contrast-faded);
 
 	// Brand
-	--color-primary: #0b3567;
-	--color-primary-contrast: #fefefe;
-	--color-primary-variant: #ade8f4;
-	--color-primary-variant-contrast: #1a2129;
-	--color-secondary: #bbadff;
-	--color-secondary-contrast: #160a22;
-	--color-secondary-variant: #c4c7ff;
-	--color-secondary-variant-contrast: #18192e;
+	--color-primary: var(--ep-color-primary);
+	--color-primary-contrast: var(--ep-color-primary-contrast);
+	--color-primary-variant: var(--ep-color-primary-variant);
+	--color-primary-variant-contrast: var(--ep-color-primary-variant-contrast);
+	--color-secondary: var(--ep-color-secondary);
+	--color-secondary-contrast: var(--ep-color-secondary-contrast);
+	--color-secondary-variant: var(--ep-color-secondary-variant);
+	--color-secondary-variant-contrast: var(--ep-color-secondary-variant-contrast);
 
 	// Helpers
-	--color-transparent: transparent;
-	--color-hyperlink: #56abff;
-	--color-divider: #d2d0d0;
-	--color-disabled: #a1a1a1;
-	--color-offline: #e8eae6;
+	--color-transparent: var(--ep-color-transparent);
+	--color-hyperlink: var(--ep-color-hyperlink);
+	--color-divider: var(--ep-color-divider);
+	--color-disabled: var(--ep-color-disabled);
+	--color-offline: var(--ep-color-offline);
 
 	// Indicators
-	--color-error: #ff7878;
-	--color-error-variant: #fc9a9a;
-	--color-success: #71e2b2;
-	--color-success-variant: #96f8cf;
-	--color-warning: #ffcc1d;
-	--color-warning-variant: #fad459;
-	--color-information: #8dc6ff;
-	--color-information-variant: #a6ccf1;
+	--color-error: var(--ep-color-error);
+	--color-error-variant: var(--ep-color-error-variant);
+	--color-success: var(--ep-color-success);
+	--color-success-variant: var(--ep-color-success-variant);
+	--color-warning: var(--ep-color-warning);
+	--color-warning-variant: var(--ep-color-warning-variant);
+	--color-information: var(--ep-color-information);
+	--color-information-variant: var(--ep-color-information-variant);
 }
 
-// ---------- Semantic Colors - CSS Variables ----------
-:root {
-	// Elementary
-	--color-background: var(--color-light);
-	--color-background-faded: var(--color-light-faded);
-	--color-contrast: var(--color-dark);
-	--color-contrast-faded: var(--color-dark-faded);
-}
-// @media (prefers-color-scheme: dark) {
-// 	:root {
-// 		// Elementary
-// 		--color-background: var(--color-dark);
-// 		--color-background-faded: var(--color-dark-faded);
-// 		--color-contrast: var(--color-light);
-// 		--color-contrast-faded: var(--color-light-faded);
-// 	}
-// }
-
+// Legacy body.ecosphere-dark hook — kept for back-compat with apps that toggle
+// the class directly. New code should set [data-theme="dark"] on <html> via
+// EpConfigProvider (preferred).
 body.ecosphere-dark {
-	// Elementary
-	--color-background: var(--color-dark);
-	--color-background-faded: var(--color-dark-faded);
-	--color-contrast: var(--color-light);
-	--color-contrast-faded: var(--color-light-faded);
+	--color-background: var(--ep-primitive-color-dark);
+	--color-background-faded: var(--ep-primitive-color-dark-faded);
+	--color-contrast: var(--ep-primitive-color-light);
+	--color-contrast-faded: var(--ep-primitive-color-light-faded);
 }
 
-// ---------- SCSS Variables ----------
+// ---------- SCSS variable aliases (consume CSS custom properties) ----------
 // Elementary
-$color-light: var(--color-light);
-$color-light-faded: var(--color-light-faded);
-$color-dark: var(--color-dark);
-$color-dark-faded: var(--color-dark-faded);
-$color-background: var(--color-background);
-$color-background-faded: var(--color-background-faded);
-$color-contrast: var(--color-contrast);
-$color-contrast-faded: var(--color-contrast-faded);
+$color-light: var(--ep-primitive-color-light);
+$color-light-faded: var(--ep-primitive-color-light-faded);
+$color-dark: var(--ep-primitive-color-dark);
+$color-dark-faded: var(--ep-primitive-color-dark-faded);
+$color-background: var(--ep-color-background);
+$color-background-faded: var(--ep-color-background-faded);
+$color-contrast: var(--ep-color-contrast);
+$color-contrast-faded: var(--ep-color-contrast-faded);
 
 // Brand
-$color-primary: var(--color-primary);
-$color-primary-contrast: var(--color-primary-contrast);
-$color-primary-variant: var(--color-primary-variant);
-$color-primary-variant-contrast: var(--color-primary-variant-contrast);
-$color-secondary: var(--color-secondary);
-$color-secondary-contrast: var(--color-secondary-contrast);
-$color-secondary-variant: var(--color-secondary-variant);
-$color-secondary-variant-contrast: var(--color-secondary-variant-contrast);
+$color-primary: var(--ep-color-primary);
+$color-primary-contrast: var(--ep-color-primary-contrast);
+$color-primary-variant: var(--ep-color-primary-variant);
+$color-primary-variant-contrast: var(--ep-color-primary-variant-contrast);
+$color-secondary: var(--ep-color-secondary);
+$color-secondary-contrast: var(--ep-color-secondary-contrast);
+$color-secondary-variant: var(--ep-color-secondary-variant);
+$color-secondary-variant-contrast: var(--ep-color-secondary-variant-contrast);
 
 // Helpers
-$color-transparent: var(--color-transparent);
-$color-hyperlink: var(--color-hyperlink);
-$color-divider: var(--color-divider);
-$color-disabled: var(--color-disabled);
-$color-offline: var(--color-offline);
+$color-transparent: var(--ep-color-transparent);
+$color-hyperlink: var(--ep-color-hyperlink);
+$color-divider: var(--ep-color-divider);
+$color-disabled: var(--ep-color-disabled);
+$color-offline: var(--ep-color-offline);
 
 // Indicators
-$color-error: var(--color-error);
-$color-error-variant: var(--color-error-variant);
-$color-success: var(--color-success);
-$color-success-variant: var(--color-success-variant);
-$color-warning: var(--color-warning);
-$color-warning-variant: var(--color-warning-variant);
-$color-information: var(--color-information);
-$color-information-variant: var(--color-information-variant);
+$color-error: var(--ep-color-error);
+$color-error-variant: var(--ep-color-error-variant);
+$color-success: var(--ep-color-success);
+$color-success-variant: var(--ep-color-success-variant);
+$color-warning: var(--ep-color-warning);
+$color-warning-variant: var(--ep-color-warning-variant);
+$color-information: var(--ep-color-information);
+$color-information-variant: var(--ep-color-information-variant);
