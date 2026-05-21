@@ -27,3 +27,9 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Agent artifacts
+test-agent/node_modules/
+fix-agent/node_modules/
+test-agent-results.json
+fix-agent-results.json
