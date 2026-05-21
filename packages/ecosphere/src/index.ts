@@ -1,3 +1,8 @@
+// Token pipeline — design tokens as CSS custom properties (--ep-*).
+// These two CSS imports are inlined into the lib's bundled stylesheet by Vite.
+import "@ecosphere/tokens/css";
+import "@ecosphere/tokens/css/dark";
+
 // Components
 import ButtonComponent from "./call-to-action/ButtonComponent.vue";
 import LinkComponent from "./call-to-action/LinkComponent.vue";
@@ -15,6 +20,7 @@ import SwitchComponent from "./data-entry/SwitchComponent.vue";
 import TextareaField from "./data-entry/TextareaField.vue";
 
 import SVGIcon from "./general/SVGIcon.vue";
+import EpConfigProviderComponent from "./general/EpConfigProvider.vue";
 
 import AvatarComponent from "./miscellaneous/AvatarComponent.vue";
 import StepperComponent from "./miscellaneous/StepperComponent.vue";
@@ -47,6 +53,7 @@ export const EpSearchDropdown = SearchDropdown;
 export const EpSwitch = SwitchComponent;
 export const EpTextarea = TextareaField;
 export const EpIcon = SVGIcon;
+export const EpConfigProvider = EpConfigProviderComponent;
 export const EpAvatar = AvatarComponent;
 export const EpStepper = StepperComponent;
 export const EpTag = TagComponent;
@@ -84,6 +91,12 @@ export {
 
 // Public types
 export * from "./utilities/types.interface";
+export {
+	EpConfigKey,
+	type EpConfig,
+	type EpSize,
+	type EpLocale,
+} from "./general/config";
 
 // GlobalComponents type augmentation for template auto-completion
 declare module "vue" {
@@ -102,6 +115,7 @@ declare module "vue" {
 		EpSwitch: typeof SwitchComponent;
 		EpTextarea: typeof TextareaField;
 		EpIcon: typeof SVGIcon;
+		EpConfigProvider: typeof EpConfigProviderComponent;
 		EpAvatar: typeof AvatarComponent;
 		EpStepper: typeof StepperComponent;
 		EpTag: typeof TagComponent;

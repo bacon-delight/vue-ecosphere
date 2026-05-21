@@ -1,6 +1,8 @@
-$border-radius-standard: 0.5rem;
-$transition-standard: all 0.3s ease-in-out;
+// ---------- Misc variable aliases ----------
+// Sources: @ecosphere/tokens. Override --ep-* on :root to customize.
+$border-radius-standard: var(--ep-radius-base);
+$transition-standard: var(--ep-transition-base);
 $reading-width-standard: 850px;
-$box-shadow-standard: $color-disabled 0px 2px 8px;
-$box-shadow-heavy: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-$outline-focus: 1px solid $color-hyperlink;
+$box-shadow-standard: var(--ep-shadow-md);
+$box-shadow-heavy: var(--ep-shadow-lg);
+$outline-focus: var(--ep-outline-focus);

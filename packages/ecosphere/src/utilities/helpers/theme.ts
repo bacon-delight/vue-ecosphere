@@ -1,32 +1,95 @@
 import type { theme, unknown_object } from "../../utilities/types.interface";
 
-export function setTheme(theme: theme = "auto") {
-	document.body.classList.remove("ecosphere-dark");
-	if (
-		(theme === "auto" &&
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme:dark)").matches) ||
-		theme === "dark"
-	) {
-		document.body.classList.add("ecosphere-dark");
-	}
+let darkMediaQuery: MediaQueryList | null = null;
+let darkMediaListener: ((event: MediaQueryListEvent) => void) | null = null;
+
+function applyTheme(resolved: "light" | "dark"): void {
+	if (typeof document === "undefined") return;
+	const root = document.documentElement;
+	root.setAttribute("data-theme", resolved);
+
+	// Legacy hook — keep body class in sync for any consumer still styling
+	// against `body.ecosphere-dark`. Removed in a future major.
+	document.body.classList.toggle("ecosphere-dark", resolved === "dark");
 }
 
-export function setColors(colors: unknown_object) {
-	const root: any = document.querySelector(":root");
+function teardownAutoListener(): void {
+	if (darkMediaQuery && darkMediaListener) {
+		darkMediaQuery.removeEventListener("change", darkMediaListener);
+	}
+	darkMediaQuery = null;
+	darkMediaListener = null;
+}
+
+export function setTheme(theme: theme = "auto"): void {
+	if (typeof document === "undefined") return;
+	teardownAutoListener();
+
+	if (theme === "auto") {
+		document.documentElement.setAttribute("data-theme", "auto");
+		if (typeof window !== "undefined" && window.matchMedia) {
+			darkMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+			applyTheme(darkMediaQuery.matches ? "dark" : "light");
+			// Re-apply data-theme="auto" so the CSS @media block governs values;
+			// the body class above is the only DOM signal for legacy callers.
+			document.documentElement.setAttribute("data-theme", "auto");
+			darkMediaListener = (event: MediaQueryListEvent) => {
+				document.body.classList.toggle("ecosphere-dark", event.matches);
+			};
+			darkMediaQuery.addEventListener("change", darkMediaListener);
+		} else {
+			applyTheme("light");
+		}
+		return;
+	}
+
+	applyTheme(theme === "invert" ? "dark" : theme);
+}
+
+/**
+ * @deprecated Override `--ep-color-*` CSS custom properties on `:root` (or any
+ * scoped ancestor) instead. Will be removed in a future major release.
+ */
+export function setColors(colors: unknown_object): void {
+	if (typeof console !== "undefined") {
+		console.warn(
+			'[vue-ecosphere] setColors() is deprecated. Override --ep-color-* CSS variables on :root (or use <EpConfigProvider :colors="...">) instead.'
+		);
+	}
+	if (typeof document === "undefined") return;
+	const root = document.documentElement;
 	for (const color in colors) {
-		root.style.setProperty(`--color-${color}`, colors[color]);
+		root.style.setProperty(`--color-${color}`, String(colors[color]));
+		root.style.setProperty(`--ep-color-${color}`, String(colors[color]));
 	}
 }
 
-export function setFonts(fonts: unknown_object) {
-	const root: any = document.querySelector(":root");
+/**
+ * @deprecated Override `--ep-font-family-*` CSS custom properties on `:root`
+ * instead. Will be removed in a future major release.
+ */
+export function setFonts(fonts: unknown_object): void {
+	if (typeof console !== "undefined") {
+		console.warn(
+			"[vue-ecosphere] setFonts() is deprecated. Override --ep-font-family-* CSS variables on :root instead."
+		);
+	}
+	if (typeof document === "undefined") return;
+	const root = document.documentElement;
 	for (const font in fonts) {
-		root.style.setProperty(`--font-${font}`, fonts[font]);
+		root.style.setProperty(`--font-${font}`, String(fonts[font]));
+		const epKey = font === "general" ? "base" : font;
+		root.style.setProperty(
+			`--ep-font-family-${epKey}`,
+			String(fonts[font])
+		);
 	}
 }
 
 export function getTheme(): theme {
+	if (typeof document === "undefined") return "light";
+	const attr = document.documentElement.getAttribute("data-theme");
+	if (attr === "dark" || attr === "light" || attr === "auto") return attr;
 	return document.body.classList.contains("ecosphere-dark")
 		? "dark"
 		: "light";

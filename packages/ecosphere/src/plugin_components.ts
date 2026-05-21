@@ -19,6 +19,7 @@ import TextareaField from "./data-entry/TextareaField.vue";
 
 // General
 import SVGIcon from "./general/SVGIcon.vue";
+import EpConfigProvider from "./general/EpConfigProvider.vue";
 
 // Miscellaneous
 import AvatarComponent from "./miscellaneous/AvatarComponent.vue";
@@ -57,6 +58,7 @@ export default function registerPluginComponents(app: App) {
 
 	// General
 	app.component("EpIcon", SVGIcon);
+	app.component("EpConfigProvider", EpConfigProvider);
 
 	// Miscellaneous
 	app.component("EpAvatar", AvatarComponent);
