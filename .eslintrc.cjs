@@ -12,4 +12,10 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: "latest",
 	},
+	overrides: [
+		{
+			files: ["test-agent/**/*.js", "fix-agent/**/*.js"],
+			env: { node: true },
+		},
+	],
 };
