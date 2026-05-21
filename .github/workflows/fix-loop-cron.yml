@@ -1,0 +1,46 @@
+name: Fix Loop (Scheduled)
+
+on:
+    schedule:
+        - cron: "0 * * * *"
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pull-requests: write
+    issues: write
+
+jobs:
+    fix:
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18"
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci && npm ci --prefix ./fix-agent 2>/dev/null || npm ci
+
+            - name: Configure git
+              run: |
+                  git config --global user.email "claude@ecosphere.dev"
+                  git config --global user.name "Claude Fix Agent"
+
+            - name: Run fix agent
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+              run: |
+                  node fix-agent/index.js \
+                    --owner "${{ github.repository_owner }}" \
+                    --repo "vue-ecosphere" \
+                    --dry-run false || true

@@ -1,0 +1,12 @@
+{
+	"name": "ecosphere-fix-agent",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"@anthropic-ai/sdk": "^0.16.0",
+		"@octokit/rest": "^20.0.0"
+	}
+}
