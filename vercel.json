@@ -2,4 +2,5 @@
         "buildCommand": "pnpm --filter @vue-ecosphere/docs build",
         "outputDirectory": "apps/docs/dist",
         "installCommand": "pnpm install",
+        "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
