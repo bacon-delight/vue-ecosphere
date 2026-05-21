@@ -1,136 +1,175 @@
 <template>
-	<div
-		class="tag"
+	<span
+		class="ep-tag"
 		:class="[
-			`tag--${hue}`,
-			`tag--${size}`,
-			outline ? `tag--outline` : '',
-			disabled ? `tag--disabled` : '',
+			`ep-tag--${hue}`,
+			`ep-tag--${size}`,
+			{
+				'ep-tag--bordered': bordered,
+				'ep-tag--disabled': disabled,
+			},
 		]"
+		:aria-disabled="disabled ? 'true' : undefined"
 	>
-		<div class="tag__label">{{ label }}</div>
-		<SVGIcon
-			v-if="allowClear"
-			class="tag__icon tag__icon-clear"
-			name="ri-close-line"
-			tabindex="0"
-			@click="handleClear"
-		></SVGIcon>
-	</div>
+		<span v-if="hasIcon" class="ep-tag__icon" aria-hidden="true">
+			<slot name="icon">
+				<SVGIcon v-if="icon" :name="icon" />
+			</slot>
+		</span>
+		<span class="ep-tag__label">
+			<slot>{{ label }}</slot>
+		</span>
+		<button
+			v-if="closable"
+			type="button"
+			class="ep-tag__close"
+			:aria-label="closeLabel"
+			:disabled="disabled"
+			@click="onClose"
+			@keydown.enter.prevent="onClose"
+			@keydown.space.prevent="onClose"
+		>
+			<SVGIcon name="ri-close-line" />
+		</button>
+	</span>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
+<script setup lang="ts">
+import { computed, useSlots } from "vue";
 import SVGIcon from "../general/SVGIcon.vue";
-import {
-	tag_size_options,
-	hue_extended_options,
-} from "../utilities/types.interface";
-import type { hue_extended, tag_size } from "../utilities/types.interface";
+import { useEpSize } from "../composables/useEpSize";
+import type { EpSize } from "../general/config";
+import type { EpHue } from "../utilities/types/shared";
 
-export default defineComponent({
-	name: "TagComponent",
-	components: {
-		SVGIcon,
-	},
-	props: {
-		label: {
-			type: String as PropType<string>,
-			required: true,
-		},
-		hue: {
-			type: String as PropType<hue_extended>,
-			default: "information",
-			validator(value: hue_extended): boolean {
-				return hue_extended_options.includes(value);
-			},
-		},
-		size: {
-			type: String as PropType<tag_size>,
-			default: "md",
-			validator(value: tag_size): boolean {
-				return tag_size_options.includes(value);
-			},
-		},
-		allowClear: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		outline: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		disabled: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-	},
-	emits: ["clear"],
-	methods: {
-		handleClear(): void {
-			this.$emit("clear");
-		},
-	},
+export interface TagProps {
+	label?: string;
+	/** Semantic hue or `"default"` for neutral. */
+	hue?: EpHue | "default";
+	size?: EpSize;
+	closable?: boolean;
+	bordered?: boolean;
+	disabled?: boolean;
+	icon?: string;
+	/** Accessible label for the close button. */
+	closeLabel?: string;
+}
+
+const props = withDefaults(defineProps<TagProps>(), {
+	label: undefined,
+	hue: "information",
+	size: undefined,
+	closable: false,
+	bordered: false,
+	disabled: false,
+	icon: undefined,
+	closeLabel: "Remove",
 });
+
+const emit = defineEmits<{
+	(e: "close", event: MouseEvent | KeyboardEvent): void;
+}>();
+
+const slots = useSlots();
+const size = useEpSize(() => props.size);
+const hasIcon = computed(() => Boolean(props.icon || slots.icon));
+
+function onClose(event: MouseEvent | KeyboardEvent) {
+	if (props.disabled) return;
+	emit("close", event);
+}
 </script>
 
-<style lang="scss" scoped>
-.tag {
-	background: $color-background;
-	border-radius: calc($border-radius-standard * 3);
-	user-select: none;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
+<style scoped>
+.ep-tag {
+	display: inline-flex;
 	align-items: center;
 	column-gap: 0.25rem;
-	@include hue-modifiers;
+	background: var(--ep-color-background-faded, var(--ep-color-background));
+	border: 1px solid var(--ep-color-transparent);
+	border-radius: calc(var(--ep-radius-base) * 3);
+	user-select: none;
+	font-family: var(--ep-font-family-base);
 	width: fit-content;
+	white-space: nowrap;
 
-	// Sizes
-	&--sm {
-		padding: 0.25rem 0.5rem;
-		@include font-footnote;
-	}
-
-	&--md {
-		padding: 0.125rem 0.75rem;
-		@include font-regular;
-	}
-
-	&--lg {
-		padding: 0.25rem 0.75rem;
-		@include font-bold;
-	}
-
-	&__icon-clear {
-		cursor: pointer;
-		border-radius: 50%;
-		transition: $transition-standard;
-		-webkit-tap-highlight-color: transparent;
-
-		&:hover {
-			color: $color-disabled;
-		}
-
-		&:focus {
-			outline: none;
-			color: $color-hyperlink;
-			// outline: 1px solid $color-hyperlink;
-			// background: $color-background;
-		}
-	}
-
-	&--outline {
-		border: 1px solid $color-contrast;
+	&--bordered {
+		border-color: currentColor;
 	}
 
 	&--disabled {
-		background: $color-disabled;
-		color: $color-dark;
-		opacity: 0.3;
+		opacity: 0.4;
 		pointer-events: none;
+	}
+
+	&--xs {
+		padding: 0.125rem 0.375rem;
+		font-size: 0.6875rem;
+	}
+	&--sm {
+		padding: 0.125rem 0.5rem;
+		font-size: 0.75rem;
+	}
+	&--md {
+		padding: 0.25rem 0.625rem;
+		font-size: 0.875rem;
+	}
+	&--lg {
+		padding: 0.25rem 0.75rem;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+	&--xl {
+		padding: 0.375rem 1rem;
+		font-size: 1.125rem;
+		font-weight: 600;
+	}
+
+	&--default {
+		color: var(--ep-color-contrast);
+	}
+	&--primary {
+		color: var(--ep-color-primary);
+	}
+	&--primary-variant {
+		color: var(--ep-color-primary-variant);
+	}
+	&--secondary {
+		color: var(--ep-color-secondary);
+	}
+	&--secondary-variant {
+		color: var(--ep-color-secondary-variant);
+	}
+	&--error {
+		color: var(--ep-color-error);
+	}
+	&--success {
+		color: var(--ep-color-success);
+	}
+	&--warning {
+		color: var(--ep-color-warning);
+	}
+	&--information {
+		color: var(--ep-color-information);
+	}
+
+	&__close {
+		all: unset;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		border-radius: 50%;
+		padding: 0.0625rem;
+		transition: var(--ep-transition-base);
+
+		&:hover {
+			color: var(--ep-color-disabled);
+		}
+
+		&:focus-visible {
+			outline: var(--ep-outline-focus);
+			outline-offset: 1px;
+		}
 	}
 }
 </style>

@@ -16,10 +16,10 @@
 					class="choice-chips__tag"
 					:label="option.label"
 					:disabled="option.disabled || disabled"
-					:hue="values.includes(index) ? hue : 'auto'"
-					:outline="outline"
+					:hue="values.includes(index) ? (hue as 'information') : 'default'"
+					:bordered="outline"
 					:tabindex="option.disabled || disabled ? -1 : 0"
-					:size="size"
+					:size="size as 'sm' | 'md' | 'lg'"
 					@click="handleClick(index)"
 					@keypress.enter="handleClick(index)"
 				></TagComponent>
