@@ -1,237 +1,219 @@
 <template>
-	<div class="radio-group">
+	<div
+		class="ep-radio-group"
+		:class="optionType === 'button' && 'ep-radio-group--button'"
+		role="radiogroup"
+		:aria-labelledby="label ? labelId : undefined"
+		:aria-label="!label ? ariaLabel : undefined"
+	>
 		<div
-			class="radio-group__label"
-			:class="[`radio-group__label--${state}`]"
+			v-if="label"
+			:id="labelId"
+			class="ep-radio-group__label"
+			:class="state !== 'default' && `ep-radio-group__label--${state}`"
 		>
 			{{ label }}
 		</div>
 		<div
-			class="radio-group__options"
-			:class="[`radio-group__options--${alignment}`]"
+			class="ep-radio-group__options"
+			:class="[
+				`ep-radio-group__options--${alignment}`,
+				optionType === 'button' && 'ep-radio-group__options--button',
+			]"
 		>
-			<div v-for="(option, index) in options" class="radio-group__field">
-				<RadioField
-					v-if="!option.hidden"
-					:label="option.label"
-					:disabled="option.disabled || disabled"
-					:default="index === value"
-					:hue="hue"
-					@update="handleClick(index)"
-				></RadioField>
-			</div>
+			<RadioField
+				v-for="opt in normalizedOptions"
+				:key="String(opt.value)"
+				:label="opt.label"
+				:disabled="opt.disabled || disabled"
+				:hue="hue"
+				:size="size"
+				:value="value"
+				:native-value="opt.value"
+				:name="groupName"
+				:option-type="optionType"
+				:button-style="buttonStyle"
+				@update:value="handleUpdate"
+				@change="handleChange"
+			/>
+			<slot />
 		</div>
 		<div
 			v-if="alertMessage && state !== 'default'"
-			class="radio-group__alert-message"
-			:class="[`radio-group__alert-message--${state}`]"
+			class="ep-radio-group__alert-message"
+			:class="`ep-radio-group__alert-message--${state}`"
 		>
 			{{ alertMessage }}
 		</div>
-		<div v-else class="radio-group__assistive-text">
+		<div
+			v-else-if="assistiveText"
+			class="ep-radio-group__assistive-text"
+		>
 			{{ assistiveText }}
 		</div>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
-import type {
-	data_entry_state,
-	choice_option,
-	choice_option_alignment,
-	hue,
-} from "../utilities/types.interface";
-import {
-	data_entry_state_options,
-	choice_option_alignment_options,
-	hue_options,
-} from "../utilities/types.interface";
+<script setup lang="ts">
+import { computed } from "vue";
 import RadioField from "./RadioField.vue";
+import { useEpId } from "../composables/useEpId";
+import { useEpSize } from "../composables/useEpSize";
+import type { EpSize } from "../general/config";
+import type { EpHue } from "../utilities/types/shared";
+import type { RadioValue, RadioOptionType, RadioButtonStyle } from "./RadioField.vue";
 
-export default defineComponent({
-	name: "RadioGroup",
-	components: {
-		RadioField,
-	},
-	props: {
-		label: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		assistiveText: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		alertMessage: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		state: {
-			type: String as PropType<data_entry_state>,
-			default: "default",
-			validator(value: data_entry_state): boolean {
-				return data_entry_state_options.includes(value);
-			},
-		},
-		options: {
-			type: Array as PropType<choice_option[]>,
-			required: true,
-		},
-		alignment: {
-			type: String as PropType<choice_option_alignment>,
-			default: "flex",
-			validator(value: choice_option_alignment): boolean {
-				return choice_option_alignment_options.includes(value);
-			},
-		},
-		modelValue: {
-			type: [String, Number, Boolean, null] as PropType<
-				string | number | boolean | null
-			>,
-			default: null,
-		},
-		default: {
-			type: [String, Number, Boolean, null] as PropType<
-				string | number | boolean | null
-			>,
-			default: null,
-		},
-		disabled: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		hue: {
-			type: String as PropType<hue>,
-			default: "information",
-			validator(value: hue): boolean {
-				return hue_options.includes(value);
-			},
-		},
-	},
-	emits: ["update:modelValue", "update"],
-	data() {
-		return {
-			value: null as number | string | null,
-		};
-	},
-	watch: {
-		default(newDefault: string | number | boolean | null): void {
-			if (newDefault === null) {
-				this.value = null;
-			} else {
-				this.options.forEach((option: choice_option, index: number) => {
-					if (option.value === newDefault) {
-						this.value = index;
-					}
-				});
-			}
-		},
-	},
-	mounted() {
-		const initialValue =
-			this.default !== null ? this.default : this.modelValue;
-		if (initialValue !== null) {
-			this.options.forEach((option: choice_option, index: number) => {
-				if (option.value === initialValue) {
-					this.value = index;
-				}
-			});
-		}
-	},
-	methods: {
-		handleClick(index: number): void {
-			this.value = index;
-			this.$emit("update:modelValue", this.options[this.value].value);
-			this.$emit("update", this.options[this.value].value);
-			if (this.options[this.value].action) {
-				(this.options[this.value].action as () => void)();
-			}
-		},
-	},
+export interface RadioOption {
+	label: string;
+	value: string | number | boolean;
+	disabled?: boolean;
+	hidden?: boolean;
+}
+export type RadioOptionLike = RadioOption | string | number | boolean;
+
+export type RadioGroupAlignment = "flex" | "vertical" | "grid";
+export type DataEntryState = "default" | "error" | "warning" | "success";
+
+export interface RadioGroupProps {
+	value?: RadioValue;
+	options?: RadioOptionLike[];
+	label?: string;
+	assistiveText?: string;
+	alertMessage?: string;
+	state?: DataEntryState;
+	alignment?: RadioGroupAlignment;
+	disabled?: boolean;
+	hue?: EpHue;
+	size?: EpSize;
+	ariaLabel?: string;
+	name?: string;
+	optionType?: RadioOptionType;
+	buttonStyle?: RadioButtonStyle;
+}
+
+const props = withDefaults(defineProps<RadioGroupProps>(), {
+	value: null,
+	options: () => [],
+	label: "",
+	assistiveText: "",
+	alertMessage: "",
+	state: "default",
+	alignment: "flex",
+	disabled: false,
+	hue: "information",
+	size: undefined,
+	ariaLabel: undefined,
+	name: undefined,
+	optionType: "default",
+	buttonStyle: "outline",
 });
+
+const emit = defineEmits<{
+	(e: "update:value", value: RadioValue): void;
+	(e: "change", value: RadioValue, event: Event): void;
+}>();
+
+const size = useEpSize(() => props.size);
+const labelId = useEpId("ep-radio-group-label");
+const autoName = useEpId("ep-radio-group");
+const groupName = computed(() => props.name ?? autoName);
+
+const normalizedOptions = computed<RadioOption[]>(() =>
+	props.options
+		.map((opt): RadioOption =>
+			typeof opt === "object" && opt !== null && "label" in opt
+				? (opt as RadioOption)
+				: { label: String(opt), value: opt as string | number | boolean },
+		)
+		.filter((opt) => !opt.hidden),
+);
+
+function handleUpdate(v: RadioValue) {
+	emit("update:value", v);
+}
+function handleChange(v: RadioValue, ev: Event) {
+	emit("change", v, ev);
+}
 </script>
 
-<style lang="scss" scoped>
-.radio-group {
+<style scoped>
+.ep-radio-group {
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.5rem;
+	font-family: var(--ep-font-family-base);
 
 	&__label {
-		@include font-footnote;
+		font-size: 0.875rem;
+		color: var(--ep-color-text, currentColor);
 
 		&--error {
-			color: $color-error;
+			color: var(--ep-color-error);
 		}
-
 		&--warning {
-			color: $color-warning;
+			color: var(--ep-color-warning);
 		}
-
 		&--success {
-			color: $color-success;
+			color: var(--ep-color-success);
 		}
-	}
-
-	&__assistive-text {
-		@include font-footnote;
-		color: $color-disabled;
 	}
 
 	&__options {
-		column-gap: 1.75rem;
-		row-gap: 0.25rem;
+		column-gap: 1.5rem;
+		row-gap: 0.4rem;
 
 		&--flex {
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
 		}
-
 		&--vertical {
 			display: flex;
 			flex-direction: column;
 		}
-
 		&--grid {
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-			align-items: center;
-			justify-content: center;
+			grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		}
 
-			@include respond-below(lg) {
-				grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		&--button {
+			column-gap: 0;
+			row-gap: 0;
+			display: inline-flex;
+			flex-wrap: nowrap;
+
+			& > :deep(.ep-radio--button) {
+				border-radius: 0;
+				margin-left: -1px;
 			}
-
-			@include respond-below(md) {
-				grid-template-columns: 1fr 1fr 1fr 1fr;
+			& > :deep(.ep-radio--button:first-of-type) {
+				border-top-left-radius: var(--ep-radius-md, 6px);
+				border-bottom-left-radius: var(--ep-radius-md, 6px);
+				margin-left: 0;
 			}
-
-			@include respond-below(sm) {
-				grid-template-columns: 1fr 1fr 1fr;
-			}
-
-			@include respond-below(xs) {
-				grid-template-columns: 1fr 1fr;
+			& > :deep(.ep-radio--button:last-of-type) {
+				border-top-right-radius: var(--ep-radius-md, 6px);
+				border-bottom-right-radius: var(--ep-radius-md, 6px);
 			}
 		}
 	}
 
+	&__assistive-text {
+		font-size: 0.75rem;
+		color: var(--ep-color-disabled, currentColor);
+	}
+
 	&__alert-message {
-		@include font-footnote;
+		font-size: 0.75rem;
 
 		&--error {
-			color: $color-error;
+			color: var(--ep-color-error);
 		}
-
 		&--warning {
-			color: $color-warning;
+			color: var(--ep-color-warning);
 		}
-
 		&--success {
-			color: $color-success;
+			color: var(--ep-color-success);
 		}
 	}
 }
