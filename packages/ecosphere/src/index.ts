@@ -11,12 +11,11 @@ import CheckboxField from "./data-entry/CheckboxField.vue";
 import CheckboxGroup from "./data-entry/CheckboxGroup.vue";
 import ChoiceChips from "./data-entry/ChoiceChips.vue";
 import ColorPicker from "./data-entry/ColorPicker.vue";
-import DropdownField from "./data-entry/DropdownField.vue";
 import InputField from "./data-entry/InputField.vue";
 import InputNumberField from "./data-entry/InputNumberField.vue";
 import RadioField from "./data-entry/RadioField.vue";
 import RadioGroup from "./data-entry/RadioGroup.vue";
-import SearchDropdown from "./data-entry/SearchDropdown.vue";
+import SelectField from "./data-entry/SelectField.vue";
 import SwitchComponent from "./data-entry/SwitchComponent.vue";
 import TextareaField from "./data-entry/TextareaField.vue";
 
@@ -47,12 +46,11 @@ export const EpCheckbox = CheckboxField;
 export const EpCheckboxGroup = CheckboxGroup;
 export const EpChoiceChips = ChoiceChips;
 export const EpColorPicker = ColorPicker;
-export const EpDropdown = DropdownField;
 export const EpInput = InputField;
 export const EpInputNumber = InputNumberField;
 export const EpRadio = RadioField;
 export const EpRadioGroup = RadioGroup;
-export const EpSearchDropdown = SearchDropdown;
+export const EpSelect = SelectField;
 export const EpSwitch = SwitchComponent;
 export const EpTextarea = TextareaField;
 export const EpIcon = SVGIcon;
@@ -75,12 +73,11 @@ export {
 	CheckboxGroup,
 	ChoiceChips,
 	ColorPicker,
-	DropdownField,
 	InputField,
 	InputNumberField,
 	RadioField,
 	RadioGroup,
-	SearchDropdown,
+	SelectField,
 	SwitchComponent,
 	TextareaField,
 	SVGIcon,
@@ -113,12 +110,11 @@ declare module "vue" {
 		EpCheckboxGroup: typeof CheckboxGroup;
 		EpChoiceChips: typeof ChoiceChips;
 		EpColorPicker: typeof ColorPicker;
-		EpDropdown: typeof DropdownField;
 		EpInput: typeof InputField;
 		EpInputNumber: typeof InputNumberField;
 		EpRadio: typeof RadioField;
 		EpRadioGroup: typeof RadioGroup;
-		EpSearchDropdown: typeof SearchDropdown;
+		EpSelect: typeof SelectField;
 		EpSwitch: typeof SwitchComponent;
 		EpTextarea: typeof TextareaField;
 		EpIcon: typeof SVGIcon;

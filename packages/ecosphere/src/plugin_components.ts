@@ -9,12 +9,11 @@ import CheckboxField from "./data-entry/CheckboxField.vue";
 import CheckboxGroup from "./data-entry/CheckboxGroup.vue";
 import ChoiceChips from "./data-entry/ChoiceChips.vue";
 import ColorPicker from "./data-entry/ColorPicker.vue";
-import DropdownField from "./data-entry/DropdownField.vue";
 import InputField from "./data-entry/InputField.vue";
 import InputNumberField from "./data-entry/InputNumberField.vue";
 import RadioField from "./data-entry/RadioField.vue";
 import RadioGroup from "./data-entry/RadioGroup.vue";
-import SearchDropdown from "./data-entry/SearchDropdown.vue";
+import SelectField from "./data-entry/SelectField.vue";
 import SwitchComponent from "./data-entry/SwitchComponent.vue";
 import TextareaField from "./data-entry/TextareaField.vue";
 
@@ -50,12 +49,11 @@ export default function registerPluginComponents(app: App) {
 	app.component("EpCheckboxGroup", CheckboxGroup);
 	app.component("EpChoiceChips", ChoiceChips);
 	app.component("EpColorPicker", ColorPicker);
-	app.component("EpDropdown", DropdownField);
 	app.component("EpInput", InputField);
 	app.component("EpInputNumber", InputNumberField);
 	app.component("EpRadio", RadioField);
 	app.component("EpRadioGroup", RadioGroup);
-	app.component("EpSearchDropdown", SearchDropdown);
+	app.component("EpSelect", SelectField);
 	app.component("EpSwitch", SwitchComponent);
 	app.component("EpTextarea", TextareaField);
 

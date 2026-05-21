@@ -142,10 +142,10 @@ const router = createRouter({
 						import("../views/data_entry/CheckboxGroupPage.vue"),
 				},
 				{
-					path: "/dropdown",
-					name: "Dropdown",
+					path: "/select",
+					name: "Select",
 					component: () =>
-						import("../views/data_entry/DropdownPage.vue"),
+						import("../views/data_entry/SelectPage.vue"),
 				},
 				{
 					path: "/color-picker",
@@ -158,12 +158,6 @@ const router = createRouter({
 					name: "Switch",
 					component: () =>
 						import("../views/data_entry/SwitchPage.vue"),
-				},
-				{
-					path: "/search-dropdown",
-					name: "SearchDropdown",
-					component: () =>
-						import("../views/data_entry/SearchDropdownPage.vue"),
 				},
 				{
 					path: "/choice-chips",
