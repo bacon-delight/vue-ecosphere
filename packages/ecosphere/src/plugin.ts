@@ -1,8 +1,9 @@
 import type { App, Plugin } from "vue";
 import {
 	setTheme,
+	applyColors,
+	applyFonts,
 	setColors,
-	setFonts,
 	getTheme,
 } from "./utilities/helpers/theme";
 import registerPluginComponents from "./plugin_components";
@@ -11,8 +12,8 @@ import fonts from "./defaults/fonts";
 
 function initialize(): void {
 	setTheme("light");
-	setColors(colors);
-	setFonts(fonts);
+	applyColors(colors);
+	applyFonts(fonts);
 }
 
 const plugin: Plugin = {
