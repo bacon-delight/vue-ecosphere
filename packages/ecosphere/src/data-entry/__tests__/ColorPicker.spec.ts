@@ -5,11 +5,15 @@ import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("EpColorPicker", () => {
 	it("renders trigger with current swatch and aria-haspopup", () => {
-		const w = mount(ColorPicker, { props: { label: "Brand", value: "#ff0000" } });
+		const w = mount(ColorPicker, {
+			props: { label: "Brand", value: "#ff0000" },
+		});
 		const trig = w.find(".ep-color-picker__trigger");
 		expect(trig.attributes("aria-haspopup")).toBe("dialog");
 		expect(trig.attributes("aria-expanded")).toBe("false");
-		expect(w.find(".ep-color-picker__swatch").attributes("style")).toContain("background-color");
+		expect(
+			w.find(".ep-color-picker__swatch").attributes("style")
+		).toContain("background-color");
 	});
 
 	it("opens popover on trigger click", async () => {
@@ -19,7 +23,9 @@ describe("EpColorPicker", () => {
 		});
 		await w.find(".ep-color-picker__trigger").trigger("click");
 		expect(w.find('[role="dialog"]').exists()).toBe(true);
-		expect(w.find(".ep-color-picker__trigger").attributes("aria-expanded")).toBe("true");
+		expect(
+			w.find(".ep-color-picker__trigger").attributes("aria-expanded")
+		).toBe("true");
 		w.unmount();
 	});
 

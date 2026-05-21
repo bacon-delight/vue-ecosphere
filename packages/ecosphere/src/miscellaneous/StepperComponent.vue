@@ -1,286 +1,399 @@
 <template>
-	<div
-		:id="stepperID"
-		class="stepper"
-		:class="`stepper--${responsiveOrientation}`"
+	<ol
+		:id="stepperId"
+		class="ep-stepper"
+		:class="[
+			`ep-stepper--${effectiveOrientation}`,
+			`ep-stepper--${size}`,
+			{
+				'ep-stepper--clickable': clickable,
+				'ep-stepper--progress-dots': progressDots,
+			},
+		]"
+		:aria-label="ariaLabel"
 	>
-		<div
+		<li
 			v-for="(step, index) in steps"
-			class="step"
+			:key="index"
+			class="ep-stepper__step"
 			:class="[
-				`step--${responsiveOrientation}`,
-				index <= current
-					? `step-completed step-completed--${responsiveOrientation}`
-					: '',
+				`ep-stepper__step--${effectiveOrientation}`,
+				`ep-stepper__step--${stepHue(index)}`,
+				{
+					'ep-stepper__step--complete': index < value,
+					'ep-stepper__step--current': index === value,
+					'ep-stepper__step--pending': index > value,
+				},
 			]"
+			:aria-current="index === value ? 'step' : undefined"
 		>
-			<div class="step__icon" :class="[`step__icon--${stepHue(index)}`]">
+			<component
+				:is="clickable ? 'button' : 'div'"
+				class="ep-stepper__indicator"
+				:type="clickable ? 'button' : undefined"
+				:tabindex="clickable ? 0 : undefined"
+				:aria-label="
+					clickable
+						? `Go to step ${index + 1}: ${step.label}`
+						: undefined
+				"
+				:disabled="clickable && !canClick(index) ? true : undefined"
+				@click="onStepClick(index)"
+				@keydown.enter.prevent="onStepClick(index)"
+				@keydown.space.prevent="onStepClick(index)"
+			>
 				<SVGIcon
 					v-if="
-						index < current ||
-						(index === current && state === 'completed')
+						index < value ||
+						(index === value && state === 'completed')
 					"
 					name="ri-check-line"
-				></SVGIcon>
+				/>
 				<SVGIcon
-					v-else-if="index === current && state === 'error'"
+					v-else-if="index === value && state === 'error'"
 					name="ri-close-line"
-				></SVGIcon>
+				/>
 				<SVGIcon
-					v-else-if="index === current && state === 'warning'"
+					v-else-if="index === value && state === 'warning'"
 					name="ri-error-warning-line"
-				></SVGIcon>
-				<SVGIcon v-else-if="step.icon" :name="step.icon"></SVGIcon
-				><span v-else>{{ index + 1 }}</span>
-			</div>
+				/>
+				<SVGIcon v-else-if="step.icon" :name="step.icon" />
+				<span v-else>{{ index + 1 }}</span>
+			</component>
 			<div
-				class="step__details"
-				:class="`step__details--${responsiveOrientation}`"
+				class="ep-stepper__details"
+				:class="`ep-stepper__details--${effectiveOrientation}`"
 			>
-				<div
-					class="step__label"
-					:class="[
-						current === index ? `step__label--${state}` : '',
-						`step__label--${stepHue(index)}`,
-					]"
-				>
-					{{ step.label }}
-				</div>
-				<div
-					class="step__description"
-					:class="`step__description--${responsiveOrientation}`"
-				>
+				<div class="ep-stepper__label">{{ step.label }}</div>
+				<div v-if="step.description" class="ep-stepper__description">
 					{{ step.description }}
 				</div>
 			</div>
-		</div>
-	</div>
+			<div
+				v-if="index < steps.length - 1"
+				class="ep-stepper__connector"
+				:class="[
+					`ep-stepper__connector--${effectiveOrientation}`,
+					{
+						'ep-stepper__connector--complete': index < value,
+					},
+				]"
+				aria-hidden="true"
+			/>
+		</li>
+	</ol>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
-import type {
-	hue_limited,
-	stepper_step,
-	stepper_orientation,
-	stepper_state,
-	hue,
-} from "../utilities/types.interface";
-import {
-	hue_limited_options,
-	stepper_orientation_options,
-	stepper_state_options,
-} from "../utilities/types.interface";
+<script setup lang="ts">
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import SVGIcon from "../general/SVGIcon.vue";
+import { useEpSize } from "../composables/useEpSize";
+import { useEpId } from "../composables/useEpId";
+import type { EpSize } from "../general/config";
+import type { EpHue } from "../utilities/types/shared";
 
-export default defineComponent({
-	name: "StepperComponent",
-	components: {
-		SVGIcon,
-	},
-	props: {
-		current: {
-			type: Number as PropType<number>,
-			default: 0,
-		},
-		hue: {
-			type: String as PropType<hue_limited>,
-			default: "information",
-			validator(value: hue_limited): boolean {
-				return hue_limited_options.includes(value);
-			},
-		},
-		steps: {
-			type: Array as PropType<stepper_step[]>,
-			required: true,
-		},
-		orientation: {
-			type: String as PropType<stepper_orientation>,
-			default: "horizontal",
-			validator(value: stepper_orientation): boolean {
-				return stepper_orientation_options.includes(value);
-			},
-		},
-		state: {
-			type: String as PropType<stepper_state>,
-			default: "in-progress",
-			validator(value: stepper_state): boolean {
-				return stepper_state_options.includes(value);
-			},
-		},
-		responsive: {
-			type: Boolean as PropType<boolean>,
-			default: true,
-		},
-	},
-	data() {
-		return {
-			stepperID: `eco-stepper-${Date.now()
-				.toString()
-				.slice(8)}-${Math.random().toFixed(5).slice(2)}`,
-			allowHorizontal: false,
-		};
-	},
-	computed: {
-		responsiveOrientation(): stepper_orientation {
-			if (this.orientation === "horizontal" && this.responsive) {
-				if (!this.allowHorizontal) {
-					return "vertical";
-				}
-			}
-			return this.orientation;
-		},
-	},
-	beforeMount() {
-		window.addEventListener("resize", this.assessHorizontalCapability);
-	},
-	mounted() {
-		this.assessHorizontalCapability();
-	},
-	beforeUnmount() {
-		window.removeEventListener("resize", this.assessHorizontalCapability);
-	},
-	methods: {
-		stepHue(index: number): hue | "default" {
-			if (index < this.current) {
+export type StepperOrientation = "horizontal" | "vertical";
+export type StepperState =
+	| "awaiting"
+	| "in-progress"
+	| "completed"
+	| "error"
+	| "warning";
+
+export interface StepperStep {
+	label: string;
+	description?: string;
+	icon?: string;
+}
+
+export interface StepperProps {
+	value?: number;
+	steps: StepperStep[];
+	hue?: EpHue;
+	orientation?: StepperOrientation;
+	state?: StepperState;
+	responsive?: boolean;
+	clickable?: boolean;
+	progressDots?: boolean;
+	size?: EpSize;
+	ariaLabel?: string;
+}
+
+const props = withDefaults(defineProps<StepperProps>(), {
+	value: 0,
+	hue: "information",
+	orientation: "horizontal",
+	state: "in-progress",
+	responsive: true,
+	clickable: false,
+	progressDots: false,
+	size: undefined,
+	ariaLabel: "Progress",
+});
+
+const emit = defineEmits<{
+	(e: "update:value", value: number): void;
+	(e: "change", value: number, step: StepperStep): void;
+}>();
+
+const stepperId = useEpId("ep-stepper");
+const size = useEpSize(() => props.size);
+const allowHorizontal = ref(true);
+
+const effectiveOrientation = computed<StepperOrientation>(() => {
+	if (
+		props.orientation === "horizontal" &&
+		props.responsive &&
+		!allowHorizontal.value
+	) {
+		return "vertical";
+	}
+	return props.orientation;
+});
+
+function stepHue(index: number): EpHue | "default" {
+	if (index < props.value) return "success";
+	if (index === props.value) {
+		switch (props.state) {
+			case "awaiting":
+				return "default";
+			case "in-progress":
+				return props.hue;
+			case "completed":
 				return "success";
-			} else if (index <= this.current) {
-				switch (this.state) {
-					case "awaiting":
-						return "default";
-					case "in-progress":
-						return this.hue;
-					case "completed":
-						return "success";
-					case "warning":
-						return "warning";
-					case "error":
-						return "error";
-					default:
-						break;
-				}
-				return "information";
-			}
-			return "default";
-		},
-		assessHorizontalCapability(): void {
-			const containerWidth: number =
-				document.getElementById(this.stepperID)?.getBoundingClientRect()
-					.width || 0;
-			const minimumRequiredHorizontalWidth = 150 * this.steps.length + 50;
-			if (containerWidth < minimumRequiredHorizontalWidth) {
-				this.allowHorizontal = false;
-			} else {
-				this.allowHorizontal = true;
-			}
-		},
-	},
+			case "warning":
+				return "warning";
+			case "error":
+				return "error";
+		}
+	}
+	return "default";
+}
+
+function canClick(index: number): boolean {
+	return props.clickable && index <= props.value + 1;
+}
+
+function onStepClick(index: number) {
+	if (!props.clickable || !canClick(index)) return;
+	emit("update:value", index);
+	emit("change", index, props.steps[index]);
+}
+
+function assessHorizontalCapability() {
+	if (typeof document === "undefined") return;
+	const el = document.getElementById(stepperId);
+	if (!el) return;
+	const width = el.getBoundingClientRect().width || 0;
+	const minWidth = 150 * props.steps.length + 50;
+	allowHorizontal.value = width >= minWidth;
+}
+
+onMounted(() => {
+	assessHorizontalCapability();
+	if (typeof window !== "undefined") {
+		window.addEventListener("resize", assessHorizontalCapability);
+	}
+});
+
+onBeforeUnmount(() => {
+	if (typeof window !== "undefined") {
+		window.removeEventListener("resize", assessHorizontalCapability);
+	}
 });
 </script>
 
-<style lang="scss" scoped>
-.stepper {
+<style scoped>
+.ep-stepper {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 	display: grid;
 	width: 100%;
-
-	&--horizontal {
-		grid-auto-columns: minmax(0, 1fr);
-		grid-auto-flow: column;
-		column-gap: 1rem;
-	}
-
-	&--vertical {
-		grid-auto-flow: row;
-		grid-auto-columns: 1fr;
-		row-gap: 1.5rem;
-	}
+	font-family: var(--ep-font-family-base);
+	color: var(--ep-color-contrast);
 }
 
-.step {
+.ep-stepper--horizontal {
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(0, 1fr);
+	column-gap: 0;
+}
+
+.ep-stepper--vertical {
+	grid-auto-flow: row;
+	row-gap: 1.25rem;
+}
+
+.ep-stepper--xs {
+	font-size: 0.75rem;
+}
+.ep-stepper--sm {
+	font-size: 0.875rem;
+}
+.ep-stepper--md {
+	font-size: 1rem;
+}
+.ep-stepper--lg {
+	font-size: 1.125rem;
+}
+.ep-stepper--xl {
+	font-size: 1.25rem;
+}
+
+.ep-stepper__step {
+	position: relative;
+	min-width: 0;
+}
+
+.ep-stepper__step--horizontal {
+	display: flex;
+	flex-direction: column;
 	align-items: center;
-	min-width: 150px;
-
-	&--horizontal {
-		display: flex;
-		flex-direction: column;
-	}
-
-	&--vertical {
-		display: grid;
-		grid-template-columns: min-content 1fr;
-		column-gap: 0.5rem;
-	}
-
-	&__icon {
-		background: $color-offline;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 2rem;
-		width: 2rem;
-		@include font-bold;
-		@include hue-modifiers;
-		border: 1px solid $color-transparent;
-
-		&--default {
-			border: 1px solid $color-divider;
-			color: $color-dark-faded;
-		}
-	}
-
-	&__details {
-		display: flex;
-		flex-direction: column;
-
-		&--horizontal {
-			align-items: center;
-		}
-	}
-
-	&__label {
-		@include font-bold;
-		@include hue-color-modifiers;
-		color: $color-disabled;
-	}
-
-	&__description {
-		@include font-footnote;
-
-		&--horizontal {
-			text-align: center;
-		}
-	}
+	row-gap: 0.5rem;
 }
 
-.step + .step--horizontal:after {
-	content: "";
+.ep-stepper__step--vertical {
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	column-gap: 0.75rem;
+}
+
+.ep-stepper__indicator {
+	appearance: none;
+	border: 1px solid var(--ep-color-transparent);
+	background: var(--ep-color-background-faded);
+	color: var(--ep-color-contrast);
+	height: 2rem;
+	width: 2rem;
+	min-width: 2rem;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	cursor: default;
+	transition: var(--ep-transition-base);
+	font-family: inherit;
+}
+
+.ep-stepper--progress-dots .ep-stepper__indicator {
+	height: 0.75rem;
+	width: 0.75rem;
+	min-width: 0.75rem;
+	font-size: 0;
+}
+
+.ep-stepper--progress-dots .ep-stepper__indicator > * {
+	display: none;
+}
+
+.ep-stepper--clickable .ep-stepper__indicator {
+	cursor: pointer;
+}
+
+.ep-stepper--clickable .ep-stepper__indicator:focus-visible {
+	outline: var(--ep-outline-focus);
+	outline-offset: 2px;
+}
+
+.ep-stepper--clickable .ep-stepper__indicator:disabled {
+	cursor: not-allowed;
+}
+
+.ep-stepper__step--primary .ep-stepper__indicator {
+	background: var(--ep-color-primary);
+	color: var(--ep-color-primary-contrast);
+}
+.ep-stepper__step--primary-variant .ep-stepper__indicator {
+	background: var(--ep-color-primary-variant);
+	color: var(--ep-color-primary-variant-contrast);
+}
+.ep-stepper__step--secondary .ep-stepper__indicator {
+	background: var(--ep-color-secondary);
+	color: var(--ep-color-secondary-contrast);
+}
+.ep-stepper__step--secondary-variant .ep-stepper__indicator {
+	background: var(--ep-color-secondary-variant);
+	color: var(--ep-color-secondary-variant-contrast);
+}
+.ep-stepper__step--error .ep-stepper__indicator {
+	background: var(--ep-color-error);
+	color: var(--ep-color-contrast);
+}
+.ep-stepper__step--success .ep-stepper__indicator {
+	background: var(--ep-color-success);
+	color: var(--ep-color-contrast);
+}
+.ep-stepper__step--warning .ep-stepper__indicator {
+	background: var(--ep-color-warning);
+	color: var(--ep-color-contrast);
+}
+.ep-stepper__step--information .ep-stepper__indicator {
+	background: var(--ep-color-information);
+	color: var(--ep-color-contrast);
+}
+.ep-stepper__step--default .ep-stepper__indicator {
+	background: var(--ep-color-background-faded);
+	color: var(--ep-color-contrast);
+	border: 1px solid var(--ep-color-divider);
+	opacity: 0.7;
+}
+
+.ep-stepper__details {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ep-stepper__details--horizontal {
+	align-items: center;
+	text-align: center;
+}
+
+.ep-stepper__label {
+	font-weight: 600;
+}
+
+.ep-stepper__step--pending .ep-stepper__label {
+	opacity: 0.6;
+}
+
+.ep-stepper__description {
+	font-size: 0.875em;
+	opacity: 0.7;
+}
+
+.ep-stepper__connector {
+	background: var(--ep-color-divider);
+	z-index: 0;
+}
+
+.ep-stepper__connector--horizontal {
 	position: absolute;
-	transform: translateX(-50%);
 	top: 1rem;
-	background: $color-divider;
-	height: 1px;
+	left: 50%;
 	width: 100%;
-	z-index: -1;
+	height: 1px;
 }
 
-.step-completed + .step-completed--horizontal:after {
-	background: $color-success;
+.ep-stepper--progress-dots .ep-stepper__connector--horizontal {
+	top: 0.375rem;
 }
 
-.step + .step--vertical:after {
-	content: "";
+.ep-stepper__connector--vertical {
 	position: absolute;
-	transform: translateY(-2rem);
 	left: 1rem;
-	background: $color-divider;
-	height: 100%;
+	top: 2rem;
+	height: calc(100% + 1.25rem - 2rem);
 	width: 1px;
-	z-index: -1;
 }
 
-.step-completed + .step-completed--vertical:after {
-	background: $color-success;
+.ep-stepper--progress-dots .ep-stepper__connector--vertical {
+	left: 0.375rem;
+}
+
+.ep-stepper__connector--complete {
+	background: var(--ep-color-success);
 }
 </style>

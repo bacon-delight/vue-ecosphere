@@ -20,7 +20,9 @@
 			:name="name"
 			:value="nativeValueAttr"
 			:aria-label="ariaLabel || label"
-			:aria-checked="indeterminate ? 'mixed' : isChecked ? 'true' : 'false'"
+			:aria-checked="
+				indeterminate ? 'mixed' : isChecked ? 'true' : 'false'
+			"
 			:aria-describedby="describedBy"
 			@change="onChange"
 			@focus="emit('focus', $event)"
@@ -114,19 +116,25 @@ const isArrayMode = computed(() => Array.isArray(props.value));
 
 const isChecked = computed<boolean>(() => {
 	if (Array.isArray(props.value)) {
-		return props.nativeValue !== undefined && props.value.includes(props.nativeValue);
+		return (
+			props.nativeValue !== undefined &&
+			props.value.includes(props.nativeValue)
+		);
 	}
 	return !!props.value;
 });
 
 const nativeValueAttr = computed(() =>
-	props.nativeValue === undefined ? undefined : String(props.nativeValue),
+	props.nativeValue === undefined ? undefined : String(props.nativeValue)
 );
 
 function onChange(e: Event) {
 	if (props.disabled) return;
 	const next: CheckboxValue = isArrayMode.value
-		? toggleInArray(props.value as (string | number | boolean)[], props.nativeValue)
+		? toggleInArray(
+				props.value as (string | number | boolean)[],
+				props.nativeValue
+			)
 		: !isChecked.value;
 	emit("update:value", next);
 	emit("change", next, e);
@@ -253,8 +261,14 @@ watchPostEffect(() => {
 	}
 	&--checked.ep-checkbox--secondary-variant &__box,
 	&--indeterminate.ep-checkbox--secondary-variant &__box {
-		background: var(--ep-color-secondary-variant, var(--ep-color-secondary));
-		border-color: var(--ep-color-secondary-variant, var(--ep-color-secondary));
+		background: var(
+			--ep-color-secondary-variant,
+			var(--ep-color-secondary)
+		);
+		border-color: var(
+			--ep-color-secondary-variant,
+			var(--ep-color-secondary)
+		);
 		color: var(--ep-color-contrast, #fff);
 	}
 	&--checked.ep-checkbox--information &__box,

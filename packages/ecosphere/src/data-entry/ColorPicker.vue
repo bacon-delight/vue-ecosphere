@@ -15,7 +15,8 @@
 			:id="labelId"
 			class="ep-color-picker__label"
 			:class="state !== 'default' && `ep-color-picker__label--${state}`"
-		>{{ label }}</label>
+			>{{ label }}</label
+		>
 		<div ref="rootRef" class="ep-color-picker__wrapper">
 			<button
 				:id="triggerId"
@@ -33,7 +34,9 @@
 				<slot name="trigger" :value="displayValue" :open="isOpen">
 					<span
 						class="ep-color-picker__swatch"
-						:style="{ backgroundColor: displayValue || 'transparent' }"
+						:style="{
+							backgroundColor: displayValue || 'transparent',
+						}"
 						aria-hidden
 					>
 						<span
@@ -41,7 +44,9 @@
 							class="ep-color-picker__swatch-empty"
 						></span>
 					</span>
-					<span class="ep-color-picker__text">{{ formattedDisplay }}</span>
+					<span class="ep-color-picker__text">{{
+						formattedDisplay
+					}}</span>
 				</slot>
 			</button>
 
@@ -92,7 +97,12 @@
 								class="ep-color-picker__hue"
 								:value="hue"
 								aria-label="Hue"
-								@input="onHueInput(($event.target as HTMLInputElement).valueAsNumber)"
+								@input="
+									onHueInput(
+										($event.target as HTMLInputElement)
+											.valueAsNumber
+									)
+								"
 							/>
 							<input
 								v-if="alpha"
@@ -103,25 +113,37 @@
 								class="ep-color-picker__alpha"
 								:value="Math.round(alphaValue * 100)"
 								:style="{
-									'--ep-color-picker-alpha-bg':
-										`linear-gradient(to right, transparent, ${previewSolid})`,
+									'--ep-color-picker-alpha-bg': `linear-gradient(to right, transparent, ${previewSolid})`,
 								}"
 								aria-label="Alpha"
-								@input="onAlphaInput(($event.target as HTMLInputElement).valueAsNumber / 100)"
+								@input="
+									onAlphaInput(
+										($event.target as HTMLInputElement)
+											.valueAsNumber / 100
+									)
+								"
 							/>
 						</div>
 					</div>
 
-					<div v-if="formatOptions.length > 1" class="ep-color-picker__formats">
+					<div
+						v-if="formatOptions.length > 1"
+						class="ep-color-picker__formats"
+					>
 						<button
 							v-for="f in formatOptions"
 							:key="f"
 							type="button"
 							class="ep-color-picker__format-btn"
-							:class="{ 'ep-color-picker__format-btn--active': format === f }"
+							:class="{
+								'ep-color-picker__format-btn--active':
+									format === f,
+							}"
 							:aria-pressed="format === f ? 'true' : 'false'"
 							@click="format = f"
-						>{{ f.toUpperCase() }}</button>
+						>
+							{{ f.toUpperCase() }}
+						</button>
 					</div>
 
 					<div class="ep-color-picker__input-row">
@@ -135,7 +157,10 @@
 						/>
 					</div>
 
-					<div v-if="presets && presets.length" class="ep-color-picker__presets">
+					<div
+						v-if="presets && presets.length"
+						class="ep-color-picker__presets"
+					>
 						<button
 							v-for="p in presets"
 							:key="p"
@@ -153,12 +178,16 @@
 							type="button"
 							class="ep-color-picker__action ep-color-picker__action--ghost"
 							@click="clear"
-						>{{ clearLabel }}</button>
+						>
+							{{ clearLabel }}
+						</button>
 						<button
 							type="button"
 							class="ep-color-picker__action"
 							@click="close"
-						>{{ doneLabel }}</button>
+						>
+							{{ doneLabel }}
+						</button>
 					</div>
 				</div>
 			</Transition>
@@ -169,12 +198,16 @@
 			class="ep-color-picker__alert"
 			:class="`ep-color-picker__alert--${state}`"
 			role="alert"
-		>{{ alertMessage }}</div>
+		>
+			{{ alertMessage }}
+		</div>
 		<div
 			v-else-if="assistiveText"
 			:id="describedById"
 			class="ep-color-picker__assistive"
-		>{{ assistiveText }}</div>
+		>
+			{{ assistiveText }}
+		</div>
 	</div>
 </template>
 
@@ -249,9 +282,18 @@ const textInput = ref("");
 
 const displayValue = computed(() => props.value || "");
 
-const previewSolid = computed(() => hsvToHex(hue.value, saturation.value, value.value));
+const previewSolid = computed(() =>
+	hsvToHex(hue.value, saturation.value, value.value)
+);
 const currentColorString = computed(() =>
-	formatColor(hue.value, saturation.value, value.value, alphaValue.value, format.value, props.alpha),
+	formatColor(
+		hue.value,
+		saturation.value,
+		value.value,
+		alphaValue.value,
+		format.value,
+		props.alpha
+	)
 );
 
 const formattedDisplay = computed(() => {
@@ -260,13 +302,17 @@ const formattedDisplay = computed(() => {
 });
 
 // HSV ↔ HEX / RGB
-function clamp01(x: number) { return Math.min(1, Math.max(0, x)); }
+function clamp01(x: number) {
+	return Math.min(1, Math.max(0, x));
+}
 
 function hsvToRgb(h: number, s: number, v: number) {
 	const c = v * s;
 	const hp = (h % 360) / 60;
 	const x = c * (1 - Math.abs((hp % 2) - 1));
-	let r = 0, g = 0, b = 0;
+	let r = 0,
+		g = 0,
+		b = 0;
 	if (hp >= 0 && hp < 1) [r, g, b] = [c, x, 0];
 	else if (hp < 2) [r, g, b] = [x, c, 0];
 	else if (hp < 3) [r, g, b] = [0, c, x];
@@ -282,8 +328,11 @@ function hsvToRgb(h: number, s: number, v: number) {
 }
 
 function rgbToHsv(r: number, g: number, b: number) {
-	r /= 255; g /= 255; b /= 255;
-	const max = Math.max(r, g, b), min = Math.min(r, g, b);
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	const max = Math.max(r, g, b),
+		min = Math.min(r, g, b);
 	const d = max - min;
 	let h = 0;
 	if (d === 0) h = 0;
@@ -302,7 +351,9 @@ function hsvToHex(h: number, s: number, v: number) {
 	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-function parseColor(input: string): { h: number; s: number; v: number; a: number } | null {
+function parseColor(
+	input: string
+): { h: number; s: number; v: number; a: number } | null {
 	if (!input) return null;
 	const s = input.trim();
 	// hex
@@ -310,7 +361,10 @@ function parseColor(input: string): { h: number; s: number; v: number; a: number
 	if (m) {
 		let hex = m[1];
 		if (hex.length === 3 || hex.length === 4) {
-			hex = hex.split("").map((c) => c + c).join("");
+			hex = hex
+				.split("")
+				.map((c) => c + c)
+				.join("");
 		}
 		const r = parseInt(hex.slice(0, 2), 16);
 		const g = parseInt(hex.slice(2, 4), 16);
@@ -320,14 +374,20 @@ function parseColor(input: string): { h: number; s: number; v: number; a: number
 		return { ...hsv, a };
 	}
 	// rgb / rgba
-	m = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(s);
+	m =
+		/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(
+			s
+		);
 	if (m) {
 		const hsv = rgbToHsv(+m[1], +m[2], +m[3]);
 		const a = m[4] === undefined ? 1 : Math.min(1, Math.max(0, +m[4]));
 		return { ...hsv, a };
 	}
 	// hsl / hsla
-	m = /^hsla?\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(s);
+	m =
+		/^hsla?\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*(?:,\s*([\d.]+)\s*)?\)$/i.exec(
+			s
+		);
 	if (m) {
 		const h = +m[1];
 		const sl = +m[2] / 100;
@@ -341,27 +401,41 @@ function parseColor(input: string): { h: number; s: number; v: number; a: number
 	return null;
 }
 
-function formatColor(h: number, s: number, v: number, a: number, fmt: ColorFormat, includeAlpha: boolean) {
+function formatColor(
+	h: number,
+	s: number,
+	v: number,
+	a: number,
+	fmt: ColorFormat,
+	includeAlpha: boolean
+) {
 	if (fmt === "hex") {
 		const hex = hsvToHex(h, s, v);
 		if (includeAlpha) {
-			const ah = Math.round(a * 255).toString(16).padStart(2, "0");
+			const ah = Math.round(a * 255)
+				.toString(16)
+				.padStart(2, "0");
 			return `${hex}${ah}`;
 		}
 		return hex;
 	}
 	const { r, g, b } = hsvToRgb(h, s, v);
 	if (fmt === "rgb") {
-		return includeAlpha ? `rgba(${r}, ${g}, ${b}, ${+a.toFixed(2)})` : `rgb(${r}, ${g}, ${b})`;
+		return includeAlpha
+			? `rgba(${r}, ${g}, ${b}, ${+a.toFixed(2)})`
+			: `rgb(${r}, ${g}, ${b})`;
 	}
 	// hsl
-	const max = v, min = v * (1 - s);
+	const max = v,
+		min = v * (1 - s);
 	const l = (max + min) / 2;
 	const sl = l === 0 || l === 1 ? 0 : (max - l) / Math.min(l, 1 - l);
 	const H = Math.round(h);
 	const S = Math.round(sl * 100);
 	const L = Math.round(l * 100);
-	return includeAlpha ? `hsla(${H}, ${S}%, ${L}%, ${+a.toFixed(2)})` : `hsl(${H}, ${S}%, ${L}%)`;
+	return includeAlpha
+		? `hsla(${H}, ${S}%, ${L}%, ${+a.toFixed(2)})`
+		: `hsl(${H}, ${S}%, ${L}%)`;
 }
 
 // Sync external value → internal HSV
@@ -500,8 +574,12 @@ onBeforeUnmount(() => {
 	window.removeEventListener("pointerup", onPaletteUp);
 });
 
-function focus() { triggerRef.value?.focus(); }
-function blur() { triggerRef.value?.blur(); }
+function focus() {
+	triggerRef.value?.focus();
+}
+function blur() {
+	triggerRef.value?.blur();
+}
 defineExpose({ focus, blur, open, close });
 </script>
 
@@ -517,9 +595,15 @@ defineExpose({ focus, blur, open, close });
 		font-size: 0.875rem;
 		font-weight: 500;
 
-		&--error { color: var(--ep-color-error); }
-		&--warning { color: var(--ep-color-warning); }
-		&--success { color: var(--ep-color-success); }
+		&--error {
+			color: var(--ep-color-error);
+		}
+		&--warning {
+			color: var(--ep-color-warning);
+		}
+		&--success {
+			color: var(--ep-color-success);
+		}
 	}
 
 	&__wrapper {
@@ -548,11 +632,26 @@ defineExpose({ focus, blur, open, close });
 		}
 	}
 
-	&--xs &__trigger { font-size: 0.75rem; padding: 0.125rem 0.375rem; }
-	&--sm &__trigger { font-size: 0.8125rem; padding: 0.1875rem 0.4375rem; }
-	&--md &__trigger { font-size: 0.9375rem; padding: 0.25rem 0.5rem; }
-	&--lg &__trigger { font-size: 1rem; padding: 0.375rem 0.625rem; }
-	&--xl &__trigger { font-size: 1.125rem; padding: 0.5rem 0.75rem; }
+	&--xs &__trigger {
+		font-size: 0.75rem;
+		padding: 0.125rem 0.375rem;
+	}
+	&--sm &__trigger {
+		font-size: 0.8125rem;
+		padding: 0.1875rem 0.4375rem;
+	}
+	&--md &__trigger {
+		font-size: 0.9375rem;
+		padding: 0.25rem 0.5rem;
+	}
+	&--lg &__trigger {
+		font-size: 1rem;
+		padding: 0.375rem 0.625rem;
+	}
+	&--xl &__trigger {
+		font-size: 1.125rem;
+		padding: 0.5rem 0.75rem;
+	}
 
 	&__swatch {
 		display: inline-block;
@@ -562,12 +661,17 @@ defineExpose({ focus, blur, open, close });
 		border: 1px solid var(--ep-color-border, rgba(0, 0, 0, 0.15));
 		position: relative;
 		overflow: hidden;
-		background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+		background-image:
+			linear-gradient(45deg, #ccc 25%, transparent 25%),
 			linear-gradient(-45deg, #ccc 25%, transparent 25%),
 			linear-gradient(45deg, transparent 75%, #ccc 75%),
 			linear-gradient(-45deg, transparent 75%, #ccc 75%);
 		background-size: 8px 8px;
-		background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+		background-position:
+			0 0,
+			0 4px,
+			4px -4px,
+			-4px 0;
 	}
 
 	&__swatch-empty {
@@ -644,7 +748,7 @@ defineExpose({ focus, blur, open, close });
 		flex-shrink: 0;
 		border-radius: 50%;
 		overflow: hidden;
-		border: 1px solid var(--ep-color-border, rgba(0,0,0,0.1));
+		border: 1px solid var(--ep-color-border, rgba(0, 0, 0, 0.1));
 	}
 	&__preview {
 		width: 100%;
@@ -678,7 +782,10 @@ defineExpose({ focus, blur, open, close });
 	}
 
 	&__alpha {
-		background: var(--ep-color-picker-alpha-bg, linear-gradient(to right, transparent, #000));
+		background: var(
+			--ep-color-picker-alpha-bg,
+			linear-gradient(to right, transparent, #000)
+		);
 	}
 
 	&__hue::-webkit-slider-thumb,
@@ -782,15 +889,23 @@ defineExpose({ focus, blur, open, close });
 
 	&__alert {
 		font-size: 0.75rem;
-		&--error { color: var(--ep-color-error); }
-		&--warning { color: var(--ep-color-warning); }
-		&--success { color: var(--ep-color-success); }
+		&--error {
+			color: var(--ep-color-error);
+		}
+		&--warning {
+			color: var(--ep-color-warning);
+		}
+		&--success {
+			color: var(--ep-color-success);
+		}
 	}
 }
 
 .ep-color-picker-pop-enter-active,
 .ep-color-picker-pop-leave-active {
-	transition: opacity 0.12s ease, transform 0.12s ease;
+	transition:
+		opacity 0.12s ease,
+		transform 0.12s ease;
 }
 .ep-color-picker-pop-enter-from,
 .ep-color-picker-pop-leave-to {

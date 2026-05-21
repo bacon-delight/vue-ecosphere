@@ -64,7 +64,9 @@
 						</span>
 					</template>
 					<template v-else-if="selectedSingle">
-						<span class="ep-select__single">{{ selectedSingle.label }}</span>
+						<span class="ep-select__single">{{
+							selectedSingle.label
+						}}</span>
 					</template>
 
 					<input
@@ -84,7 +86,8 @@
 					<span
 						v-else-if="!hasSelection"
 						class="ep-select__placeholder"
-					>{{ placeholder }}</span>
+						>{{ placeholder }}</span
+					>
 				</div>
 				<div class="ep-select__icons">
 					<button
@@ -107,7 +110,11 @@
 					<SVGIcon
 						v-else
 						class="ep-select__icon"
-						:name="isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"
+						:name="
+							isOpen
+								? 'ri-arrow-up-s-line'
+								: 'ri-arrow-down-s-line'
+						"
 						aria-hidden
 					/>
 				</div>
@@ -119,19 +126,24 @@
 					ref="listboxRef"
 					class="ep-select__listbox"
 					role="listbox"
-					:aria-multiselectable="isMultiple || tags ? 'true' : undefined"
+					:aria-multiselectable="
+						isMultiple || tags ? 'true' : undefined
+					"
 					:style="{ maxHeight: `${listboxMaxHeight}px` }"
 					@mousedown.prevent
 					@scroll="onListScroll"
 				>
+					<div v-if="loading" class="ep-select__loading">
+						{{ loadingText }}
+					</div>
 					<div
-						v-if="loading"
-						class="ep-select__loading"
-					>{{ loadingText }}</div>
-					<div
-						v-else-if="filteredOptions.length === 0 && !canCreateTag"
+						v-else-if="
+							filteredOptions.length === 0 && !canCreateTag
+						"
 						class="ep-select__empty"
-					>{{ notFoundText }}</div>
+					>
+						{{ notFoundText }}
+					</div>
 					<div
 						v-else
 						class="ep-select__virtual"
@@ -139,12 +151,14 @@
 					>
 						<div
 							class="ep-select__virtual-window"
-							:style="{ transform: `translateY(${virtualOffsetY}px)` }"
+							:style="{
+								transform: `translateY(${virtualOffsetY}px)`,
+							}"
 						>
 							<div
 								v-for="(opt, vi) in visibleOptions"
-								:key="`${opt.value}-${virtualStart + vi}`"
 								:id="`${listboxId}-opt-${virtualStart + vi}`"
+								:key="`${opt.value}-${virtualStart + vi}`"
 								class="ep-select__option"
 								:class="[
 									{
@@ -152,17 +166,22 @@
 											virtualStart + vi === activeIndex,
 										'ep-select__option--selected':
 											isSelected(opt.value),
-										'ep-select__option--disabled': opt.disabled,
+										'ep-select__option--disabled':
+											opt.disabled,
 									},
 								]"
 								role="option"
-								:aria-selected="isSelected(opt.value) ? 'true' : 'false'"
+								:aria-selected="
+									isSelected(opt.value) ? 'true' : 'false'
+								"
 								:aria-disabled="opt.disabled || undefined"
 								:style="{ height: `${optionHeight}px` }"
 								@click="selectOption(opt)"
 								@mouseenter="activeIndex = virtualStart + vi"
 							>
-								<span class="ep-select__option-label">{{ opt.label }}</span>
+								<span class="ep-select__option-label">{{
+									opt.label
+								}}</span>
 								<SVGIcon
 									v-if="isSelected(opt.value)"
 									class="ep-select__option-check"
@@ -191,7 +210,9 @@
 				class="ep-select__alert"
 				:class="`ep-select__alert--${state}`"
 				role="alert"
-			>{{ alertMessage }}</div>
+			>
+				{{ alertMessage }}
+			</div>
 			<div v-else-if="assistiveText" class="ep-select__assistive">
 				{{ assistiveText }}
 			</div>
@@ -200,7 +221,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import {
+	computed,
+	nextTick,
+	onBeforeUnmount,
+	onMounted,
+	ref,
+	watch,
+} from "vue";
 import SVGIcon from "../general/SVGIcon.vue";
 import { useEpId } from "../composables/useEpId";
 import { useEpSize } from "../composables/useEpSize";
@@ -311,14 +339,17 @@ function normalizeOption(o: SelectOptionLike): SelectOption {
 }
 
 const allOptions = computed<SelectOption[]>(() => {
-	const base = (props.options || []).map(normalizeOption).filter((o) => !o.hidden);
+	const base = (props.options || [])
+		.map(normalizeOption)
+		.filter((o) => !o.hidden);
 	return [...base, ...dynamicOptions.value];
 });
 
 const filteredOptions = computed<SelectOption[]>(() => {
 	const q = searchText.value.trim().toLowerCase();
 	if (!q || (!props.showSearch && !props.tags)) return allOptions.value;
-	if (props.filter) return allOptions.value.filter((o) => props.filter!(o, q));
+	if (props.filter)
+		return allOptions.value.filter((o) => props.filter!(o, q));
 	return allOptions.value.filter((o) => o.label.toLowerCase().includes(q));
 });
 
@@ -326,12 +357,16 @@ const canCreateTag = computed(() => {
 	if (!props.tags) return false;
 	const q = searchText.value.trim();
 	if (!q) return false;
-	return !allOptions.value.some((o) => String(o.value).toLowerCase() === q.toLowerCase());
+	return !allOptions.value.some(
+		(o) => String(o.value).toLowerCase() === q.toLowerCase()
+	);
 });
 
 const valuesArray = computed<SelectPrimitive[]>(() => {
 	if (props.value == null) return [];
-	return Array.isArray(props.value) ? props.value : [props.value as SelectPrimitive];
+	return Array.isArray(props.value)
+		? props.value
+		: [props.value as SelectPrimitive];
 });
 
 function isSelected(v: SelectPrimitive): boolean {
@@ -348,32 +383,45 @@ const selectedSingle = computed<SelectOption | null>(() => {
 const selectedDisplay = computed<SelectOption[]>(() => {
 	if (!isMultiple.value) return [];
 	return valuesArray.value.map(
-		(v) => allOptions.value.find((o) => o.value === v) ?? { label: String(v), value: v },
+		(v) =>
+			allOptions.value.find((o) => o.value === v) ?? {
+				label: String(v),
+				value: v,
+			}
 	);
 });
 
-const hasSelection = computed(
-	() => (isMultiple.value ? valuesArray.value.length > 0 : selectedSingle.value !== null),
+const hasSelection = computed(() =>
+	isMultiple.value
+		? valuesArray.value.length > 0
+		: selectedSingle.value !== null
 );
 
 const hasFooter = computed(
-	() => (!!props.assistiveText || (!!props.alertMessage && props.state !== "default")),
+	() =>
+		!!props.assistiveText ||
+		(!!props.alertMessage && props.state !== "default")
 );
 
 // Virtual scroll
 const scrollTop = ref(0);
-const visibleCount = computed(() => Math.ceil(props.listMaxHeight / props.optionHeight) + 4);
+const visibleCount = computed(
+	() => Math.ceil(props.listMaxHeight / props.optionHeight) + 4
+);
 const virtualStart = computed(() =>
-	Math.max(0, Math.floor(scrollTop.value / props.optionHeight) - 2),
+	Math.max(0, Math.floor(scrollTop.value / props.optionHeight) - 2)
 );
 const virtualEnd = computed(() =>
-	Math.min(filteredOptions.value.length, virtualStart.value + visibleCount.value),
+	Math.min(
+		filteredOptions.value.length,
+		virtualStart.value + visibleCount.value
+	)
 );
 const visibleOptions = computed(() =>
-	filteredOptions.value.slice(virtualStart.value, virtualEnd.value),
+	filteredOptions.value.slice(virtualStart.value, virtualEnd.value)
 );
 const virtualTotalHeight = computed(
-	() => filteredOptions.value.length * props.optionHeight,
+	() => filteredOptions.value.length * props.optionHeight
 );
 const virtualOffsetY = computed(() => virtualStart.value * props.optionHeight);
 
@@ -537,7 +585,11 @@ function onSearchKeydown(e: KeyboardEvent) {
 			triggerRef.value?.focus();
 			break;
 		case "Backspace":
-			if (!searchText.value && isMultiple.value && valuesArray.value.length) {
+			if (
+				!searchText.value &&
+				isMultiple.value &&
+				valuesArray.value.length
+			) {
 				removeValue(valuesArray.value[valuesArray.value.length - 1]);
 			}
 			break;
@@ -613,8 +665,11 @@ onBeforeUnmount(() => document.removeEventListener("mousedown", onDocClick));
 watch(
 	() => props.options,
 	() => {
-		activeIndex.value = Math.min(activeIndex.value, filteredOptions.value.length - 1);
-	},
+		activeIndex.value = Math.min(
+			activeIndex.value,
+			filteredOptions.value.length - 1
+		);
+	}
 );
 
 function focus() {
@@ -640,9 +695,15 @@ defineExpose({ focus, blur, open, close });
 		font-weight: 500;
 		color: var(--ep-color-text, currentColor);
 
-		&--error { color: var(--ep-color-error); }
-		&--warning { color: var(--ep-color-warning); }
-		&--success { color: var(--ep-color-success); }
+		&--error {
+			color: var(--ep-color-error);
+		}
+		&--warning {
+			color: var(--ep-color-warning);
+		}
+		&--success {
+			color: var(--ep-color-success);
+		}
 	}
 
 	&__wrapper {
@@ -684,11 +745,26 @@ defineExpose({ focus, blur, open, close });
 		opacity: 0.6;
 	}
 
-	&--xs &__trigger { font-size: 0.75rem; padding: 0.125rem 0.375rem; }
-	&--sm &__trigger { font-size: 0.8125rem; padding: 0.1875rem 0.5rem; }
-	&--md &__trigger { font-size: 0.9375rem; padding: 0.25rem 0.625rem; }
-	&--lg &__trigger { font-size: 1rem; padding: 0.375rem 0.75rem; }
-	&--xl &__trigger { font-size: 1.125rem; padding: 0.5rem 0.875rem; }
+	&--xs &__trigger {
+		font-size: 0.75rem;
+		padding: 0.125rem 0.375rem;
+	}
+	&--sm &__trigger {
+		font-size: 0.8125rem;
+		padding: 0.1875rem 0.5rem;
+	}
+	&--md &__trigger {
+		font-size: 0.9375rem;
+		padding: 0.25rem 0.625rem;
+	}
+	&--lg &__trigger {
+		font-size: 1rem;
+		padding: 0.375rem 0.75rem;
+	}
+	&--xl &__trigger {
+		font-size: 1.125rem;
+		padding: 0.5rem 0.875rem;
+	}
 
 	&__selection {
 		flex: 1;
@@ -715,7 +791,10 @@ defineExpose({ focus, blur, open, close });
 		align-items: center;
 		column-gap: 0.25rem;
 		padding: 0 0.375rem;
-		background: var(--ep-color-primary-tint, var(--ep-color-surface-alt, #eef));
+		background: var(
+			--ep-color-primary-tint,
+			var(--ep-color-surface-alt, #eef)
+		);
 		color: var(--ep-color-text);
 		border-radius: var(--ep-radius-sm, 4px);
 		font-size: 0.8125em;
@@ -729,7 +808,9 @@ defineExpose({ focus, blur, open, close });
 		font-size: 0.875em;
 		color: var(--ep-color-disabled, currentColor);
 
-		&:hover { color: var(--ep-color-text); }
+		&:hover {
+			color: var(--ep-color-text);
+		}
 	}
 
 	&__search {
@@ -761,7 +842,9 @@ defineExpose({ focus, blur, open, close });
 		padding: 0.125rem;
 		border-radius: 4px;
 
-		&:hover { color: var(--ep-color-text); }
+		&:hover {
+			color: var(--ep-color-text);
+		}
 	}
 
 	&__icon {
@@ -857,15 +940,23 @@ defineExpose({ focus, blur, open, close });
 	}
 
 	&__alert {
-		&--error { color: var(--ep-color-error); }
-		&--warning { color: var(--ep-color-warning); }
-		&--success { color: var(--ep-color-success); }
+		&--error {
+			color: var(--ep-color-error);
+		}
+		&--warning {
+			color: var(--ep-color-warning);
+		}
+		&--success {
+			color: var(--ep-color-success);
+		}
 	}
 }
 
 .ep-select-pop-enter-active,
 .ep-select-pop-leave-active {
-	transition: opacity 0.12s ease, transform 0.12s ease;
+	transition:
+		opacity 0.12s ease,
+		transform 0.12s ease;
 }
 .ep-select-pop-enter-from,
 .ep-select-pop-leave-to {
@@ -874,6 +965,8 @@ defineExpose({ focus, blur, open, close });
 }
 
 @keyframes ep-select-spin {
-	to { transform: rotate(360deg); }
+	to {
+		transform: rotate(360deg);
+	}
 }
 </style>

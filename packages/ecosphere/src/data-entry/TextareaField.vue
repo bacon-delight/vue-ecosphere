@@ -60,7 +60,10 @@
 				{{ assistiveText }}
 			</div>
 			<div v-if="showCount" class="ep-input__count">
-				{{ currentLength }}<template v-if="maxLength != null"> / {{ maxLength }}</template>
+				{{ currentLength
+				}}<template v-if="maxLength != null">
+					/ {{ maxLength }}</template
+				>
 			</div>
 		</div>
 	</div>
@@ -133,10 +136,13 @@ const internalValue = computed<TextareaValue>({
 	set: (v) => emit("update:value", v),
 });
 
-const hasValue = computed(() => internalValue.value !== null && internalValue.value !== "");
+const hasValue = computed(
+	() => internalValue.value !== null && internalValue.value !== ""
+);
 const currentLength = computed(() => (internalValue.value ?? "").length);
 const effectiveRows = computed(() => {
-	if (typeof props.autoSize === "object" && props.autoSize.minRows) return props.autoSize.minRows;
+	if (typeof props.autoSize === "object" && props.autoSize.minRows)
+		return props.autoSize.minRows;
 	return props.rows;
 });
 
@@ -144,7 +150,7 @@ const hasFooter = computed(
 	() =>
 		(props.alertMessage && props.state !== "default") ||
 		!!props.assistiveText ||
-		props.showCount,
+		props.showCount
 );
 
 function resize() {
@@ -173,9 +179,18 @@ function clearValue() {
 	textareaRef.value?.focus();
 }
 
-watch(() => internalValue.value, () => { if (props.autoSize) nextTick(resize); }, { immediate: true });
+watch(
+	() => internalValue.value,
+	() => {
+		if (props.autoSize) nextTick(resize);
+	},
+	{ immediate: true }
+);
 
-defineExpose({ focus: () => textareaRef.value?.focus(), blur: () => textareaRef.value?.blur() });
+defineExpose({
+	focus: () => textareaRef.value?.focus(),
+	blur: () => textareaRef.value?.blur(),
+});
 </script>
 
 <style scoped>

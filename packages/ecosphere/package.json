@@ -18,8 +18,7 @@
 	},
 	"type": "module",
 	"sideEffects": [
-		"**/*.css",
-		"**/*.scss"
+		"**/*.css"
 	],
 	"files": [
 		"dist"
@@ -34,7 +33,6 @@
 			"require": "./dist/vue-ecosphere.umd.cjs"
 		},
 		"./styles": "./dist/vue-ecosphere.css",
-		"./styles/framework.scss": "./src/styles/framework.scss",
 		"./package.json": "./package.json"
 	},
 	"engines": {
@@ -63,7 +61,6 @@
 		"@vue/tsconfig": "^0.5.1",
 		"axe-core": "^4.11.4",
 		"jsdom": "^25.0.1",
-		"sass": "^1.80.6",
 		"size-limit": "^11.1.6",
 		"vite": "^6.0.0",
 		"vite-plugin-dts": "^4.3.0",

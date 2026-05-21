@@ -7,7 +7,11 @@ import LinkComponent from "./LinkComponent.vue";
 			<LinkComponent label="Go to docs" href="#" />
 		</Variant>
 		<Variant title="With icon">
-			<LinkComponent label="External" href="#" icon="ri-external-link-line" />
+			<LinkComponent
+				label="External"
+				href="#"
+				icon="ri-external-link-line"
+			/>
 		</Variant>
 		<Variant title="Disabled">
 			<LinkComponent label="Disabled" href="#" disabled />

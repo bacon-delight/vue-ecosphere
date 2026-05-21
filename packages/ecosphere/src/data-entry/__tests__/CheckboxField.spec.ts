@@ -5,7 +5,9 @@ import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("EpCheckbox", () => {
 	it("renders an accessible native checkbox", () => {
-		const w = mount(CheckboxField, { props: { label: "Agree", value: false } });
+		const w = mount(CheckboxField, {
+			props: { label: "Agree", value: false },
+		});
 		const input = w.find("input[type=checkbox]");
 		expect(input.exists()).toBe(true);
 		expect(input.attributes("aria-checked")).toBe("false");
@@ -30,7 +32,9 @@ describe("EpCheckbox", () => {
 		});
 		expect(w.classes()).toContain("ep-checkbox--indeterminate");
 		expect(w.find("input").attributes("aria-checked")).toBe("mixed");
-		expect((w.find("input").element as HTMLInputElement).indeterminate).toBe(true);
+		expect(
+			(w.find("input").element as HTMLInputElement).indeterminate
+		).toBe(true);
 	});
 
 	it("does not toggle when disabled", async () => {

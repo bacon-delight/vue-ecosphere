@@ -11,7 +11,9 @@ const opts = [
 
 describe("EpChoiceChips", () => {
 	it("renders chips as buttons with aria-pressed", () => {
-		const w = mount(ChoiceChips, { props: { label: "Size", options: opts, value: "md" } });
+		const w = mount(ChoiceChips, {
+			props: { label: "Size", options: opts, value: "md" },
+		});
 		const chips = w.findAll(".ep-choice-chips__chip");
 		expect(chips.length).toBe(3);
 		expect(chips[0].attributes("aria-pressed")).toBe("false");
@@ -19,13 +21,17 @@ describe("EpChoiceChips", () => {
 	});
 
 	it("selects single value on click", async () => {
-		const w = mount(ChoiceChips, { props: { label: "x", options: opts, value: null } });
+		const w = mount(ChoiceChips, {
+			props: { label: "x", options: opts, value: null },
+		});
 		await w.findAll(".ep-choice-chips__chip")[0].trigger("click");
 		expect(w.emitted("update:value")?.[0]).toEqual(["sm"]);
 	});
 
 	it("toggles off single value when clicked again", async () => {
-		const w = mount(ChoiceChips, { props: { label: "x", options: opts, value: "sm" } });
+		const w = mount(ChoiceChips, {
+			props: { label: "x", options: opts, value: "sm" },
+		});
 		await w.findAll(".ep-choice-chips__chip")[0].trigger("click");
 		expect(w.emitted("update:value")?.[0]).toEqual([null]);
 	});
@@ -39,13 +45,17 @@ describe("EpChoiceChips", () => {
 	});
 
 	it("does not toggle disabled chips", async () => {
-		const w = mount(ChoiceChips, { props: { label: "x", options: opts, value: null } });
+		const w = mount(ChoiceChips, {
+			props: { label: "x", options: opts, value: null },
+		});
 		await w.findAll(".ep-choice-chips__chip")[2].trigger("click");
 		expect(w.emitted("update:value")).toBeFalsy();
 	});
 
 	it("normalizes string options", () => {
-		const w = mount(ChoiceChips, { props: { label: "x", options: ["a", "b"], value: null } });
+		const w = mount(ChoiceChips, {
+			props: { label: "x", options: ["a", "b"], value: null },
+		});
 		expect(w.findAll(".ep-choice-chips__chip").length).toBe(2);
 	});
 

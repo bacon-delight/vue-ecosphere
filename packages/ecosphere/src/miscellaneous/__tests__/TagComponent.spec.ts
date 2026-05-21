@@ -66,7 +66,7 @@ describe("EpTag", () => {
 			props: { label: "x", closable: true, closeLabel: "Dismiss tag" },
 		});
 		expect(w.find(".ep-tag__close").attributes("aria-label")).toBe(
-			"Dismiss tag",
+			"Dismiss tag"
 		);
 	});
 

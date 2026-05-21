@@ -12,7 +12,11 @@ const value = ref(false);
 			<SwitchComponent :value="true" label="Saving" loading />
 		</Variant>
 		<Variant title="With slots">
-			<SwitchComponent v-model:value="value" checked-text="ON" unchecked-text="OFF" />
+			<SwitchComponent
+				v-model:value="value"
+				checked-text="ON"
+				unchecked-text="OFF"
+			/>
 		</Variant>
 	</Story>
 </template>

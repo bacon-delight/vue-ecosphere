@@ -1,4 +1,9 @@
-import { computed, type ComputedRef, type MaybeRefOrGetter, toValue } from "vue";
+import {
+	computed,
+	type ComputedRef,
+	type MaybeRefOrGetter,
+	toValue,
+} from "vue";
 import type { EpSize } from "../general/config";
 import { useEpConfig } from "./useEpConfig";
 
@@ -7,7 +12,7 @@ import { useEpConfig } from "./useEpConfig";
  * context, then `"md"`.
  */
 export function useEpSize(
-	propSize?: MaybeRefOrGetter<EpSize | undefined>,
+	propSize?: MaybeRefOrGetter<EpSize | undefined>
 ): ComputedRef<EpSize> {
 	const config = useEpConfig();
 	return computed<EpSize>(() => {

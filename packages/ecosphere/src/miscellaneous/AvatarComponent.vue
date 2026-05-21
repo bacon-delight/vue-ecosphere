@@ -28,12 +28,7 @@ import { useEpSize } from "../composables/useEpSize";
 import type { EpSize } from "../general/config";
 import type { EpHue, EpShape } from "../utilities/types/shared";
 
-export type EpAvatarStatus =
-	| "default"
-	| "offline"
-	| "online"
-	| "away"
-	| "busy";
+export type EpAvatarStatus = "default" | "offline" | "online" | "away" | "busy";
 
 export interface AvatarProps {
 	/** Display name; first/last initials are derived when no image. */
@@ -65,7 +60,7 @@ watch(
 	() => props.image,
 	() => {
 		imageFailed.value = false;
-	},
+	}
 );
 
 function onImageError() {

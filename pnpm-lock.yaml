@@ -118,9 +118,6 @@ importers:
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1
-      sass:
-        specifier: ^1.80.6
-        version: 1.99.0
       size-limit:
         specifier: ^11.1.6
         version: 11.2.0

@@ -45,10 +45,7 @@
 		>
 			{{ alertMessage }}
 		</div>
-		<div
-			v-else-if="assistiveText"
-			class="ep-radio-group__assistive-text"
-		>
+		<div v-else-if="assistiveText" class="ep-radio-group__assistive-text">
 			{{ assistiveText }}
 		</div>
 	</div>
@@ -61,7 +58,11 @@ import { useEpId } from "../composables/useEpId";
 import { useEpSize } from "../composables/useEpSize";
 import type { EpSize } from "../general/config";
 import type { EpHue } from "../utilities/types/shared";
-import type { RadioValue, RadioOptionType, RadioButtonStyle } from "./RadioField.vue";
+import type {
+	RadioValue,
+	RadioOptionType,
+	RadioButtonStyle,
+} from "./RadioField.vue";
 
 export interface RadioOption {
 	label: string;
@@ -120,12 +121,16 @@ const groupName = computed(() => props.name ?? autoName);
 
 const normalizedOptions = computed<RadioOption[]>(() =>
 	props.options
-		.map((opt): RadioOption =>
-			typeof opt === "object" && opt !== null && "label" in opt
-				? (opt as RadioOption)
-				: { label: String(opt), value: opt as string | number | boolean },
+		.map(
+			(opt): RadioOption =>
+				typeof opt === "object" && opt !== null && "label" in opt
+					? (opt as RadioOption)
+					: {
+							label: String(opt),
+							value: opt as string | number | boolean,
+						}
 		)
-		.filter((opt) => !opt.hidden),
+		.filter((opt) => !opt.hidden)
 );
 
 function handleUpdate(v: RadioValue) {

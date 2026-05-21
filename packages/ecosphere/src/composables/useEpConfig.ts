@@ -13,7 +13,7 @@ export function useEpConfig(): EpConfig {
 		theme: ref<theme>("auto") as Ref<theme>,
 		size: ref<EpSize>("md"),
 		locale: ref(
-			typeof navigator !== "undefined" ? navigator.language : "en",
+			typeof navigator !== "undefined" ? navigator.language : "en"
 		),
 	};
 }

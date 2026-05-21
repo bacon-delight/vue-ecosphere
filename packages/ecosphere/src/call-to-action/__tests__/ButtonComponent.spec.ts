@@ -43,7 +43,9 @@ describe("EpButton", () => {
 	});
 
 	it("block applies full-width modifier", () => {
-		const w = mount(ButtonComponent, { props: { label: "x", block: true } });
+		const w = mount(ButtonComponent, {
+			props: { label: "x", block: true },
+		});
 		expect(w.classes()).toContain("ep-button--block");
 	});
 
@@ -85,7 +87,11 @@ describe("EpButton", () => {
 
 	it("href with target=_blank adds rel noopener", () => {
 		const w = mount(ButtonComponent, {
-			props: { label: "Out", href: "https://x.example", target: "_blank" },
+			props: {
+				label: "Out",
+				href: "https://x.example",
+				target: "_blank",
+			},
 		});
 		expect(w.attributes("target")).toBe("_blank");
 		expect(w.attributes("rel")).toBe("noopener noreferrer");

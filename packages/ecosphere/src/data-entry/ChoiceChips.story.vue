@@ -17,13 +17,31 @@ const sizes = [
 			<ChoiceChips v-model:value="single" label="Size" :options="sizes" />
 		</Variant>
 		<Variant title="Multiple">
-			<ChoiceChips v-model:value="multi" label="Sizes" :options="sizes" multiple hue="success" />
+			<ChoiceChips
+				v-model:value="multi"
+				label="Sizes"
+				:options="sizes"
+				multiple
+				hue="success"
+			/>
 		</Variant>
 		<Variant title="Bordered">
-			<ChoiceChips v-model:value="single" label="Size" :options="sizes" bordered hue="information" />
+			<ChoiceChips
+				v-model:value="single"
+				label="Size"
+				:options="sizes"
+				bordered
+				hue="information"
+			/>
 		</Variant>
 		<Variant title="Grid">
-			<ChoiceChips v-model:value="multi" label="Tags" :options="sizes" multiple alignment="grid" />
+			<ChoiceChips
+				v-model:value="multi"
+				label="Tags"
+				:options="sizes"
+				multiple
+				alignment="grid"
+			/>
 		</Variant>
 	</Story>
 </template>

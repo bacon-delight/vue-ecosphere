@@ -32,7 +32,12 @@ describe("EpRadio", () => {
 
 	it("does not emit when disabled", async () => {
 		const w = mount(RadioField, {
-			props: { label: "A", nativeValue: "a", value: null, disabled: true },
+			props: {
+				label: "A",
+				nativeValue: "a",
+				value: null,
+				disabled: true,
+			},
 		});
 		await w.find("input").trigger("change");
 		expect(w.emitted("update:value")).toBeUndefined();
@@ -40,7 +45,12 @@ describe("EpRadio", () => {
 
 	it("renders button option type", () => {
 		const w = mount(RadioField, {
-			props: { label: "Day", nativeValue: "d", value: "d", optionType: "button" },
+			props: {
+				label: "Day",
+				nativeValue: "d",
+				value: "d",
+				optionType: "button",
+			},
 		});
 		expect(w.classes()).toContain("ep-radio--button");
 		expect(w.find(".ep-radio__circle").exists()).toBe(false);
@@ -55,7 +65,12 @@ describe("EpRadio", () => {
 
 	it("has no axe violations", async () => {
 		const w = mount(RadioField, {
-			props: { label: "Option A", nativeValue: "a", value: "a", name: "g1" },
+			props: {
+				label: "Option A",
+				nativeValue: "a",
+				value: "a",
+				name: "g1",
+			},
 			attachTo: document.body,
 		});
 		await expectNoA11yViolations(w.element as HTMLElement);

@@ -24,7 +24,9 @@ describe("EpIcon", () => {
 	});
 
 	it("applies spin class", () => {
-		const w = mount(SVGIcon, { props: { name: "ri-loader-line", spin: true } });
+		const w = mount(SVGIcon, {
+			props: { name: "ri-loader-line", spin: true },
+		});
 		expect(w.classes()).toContain("ep-icon--spin");
 	});
 
@@ -38,7 +40,7 @@ describe("EpIcon", () => {
 	it("does not apply rotate-0", () => {
 		const w = mount(SVGIcon, { props: { name: "ri-x", rotate: 0 } });
 		expect(w.classes().some((c) => c.startsWith("ep-icon--rotate-"))).toBe(
-			false,
+			false
 		);
 	});
 });

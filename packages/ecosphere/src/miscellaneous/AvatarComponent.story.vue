@@ -4,7 +4,9 @@ import AvatarGroup from "./AvatarGroup.vue";
 </script>
 <template>
 	<Story title="Miscellaneous/Avatar">
-		<Variant title="Initials"><AvatarComponent name="Ada Lovelace" /></Variant>
+		<Variant title="Initials"
+			><AvatarComponent name="Ada Lovelace"
+		/></Variant>
 		<Variant title="Image">
 			<AvatarComponent name="Ada" image="https://i.pravatar.cc/100" />
 		</Variant>

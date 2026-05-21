@@ -45,7 +45,11 @@
 					@focus="emit('focus', $event)"
 					@blur="onBlur($event)"
 				/>
-				<div v-if="controls" class="ep-input-number__controls" aria-hidden="true">
+				<div
+					v-if="controls"
+					class="ep-input-number__controls"
+					aria-hidden="true"
+				>
 					<button
 						type="button"
 						class="ep-input-number__btn"
@@ -154,17 +158,29 @@ const displayValue = computed(() => {
 	return String(props.value);
 });
 
-const canIncrement = computed(() => props.max === null || (props.value ?? 0) + stepValue.value <= (props.max as number));
-const canDecrement = computed(() => props.min === null || (props.value ?? 0) - stepValue.value >= (props.min as number));
+const canIncrement = computed(
+	() =>
+		props.max === null ||
+		(props.value ?? 0) + stepValue.value <= (props.max as number)
+);
+const canDecrement = computed(
+	() =>
+		props.min === null ||
+		(props.value ?? 0) - stepValue.value >= (props.min as number)
+);
 
 const hasFooter = computed(
-	() => (props.alertMessage && props.state !== "default") || !!props.assistiveText,
+	() =>
+		(props.alertMessage && props.state !== "default") ||
+		!!props.assistiveText
 );
 
 function clamp(n: number): number {
 	let r = n;
-	if (props.min !== null && r < (props.min as number)) r = props.min as number;
-	if (props.max !== null && r > (props.max as number)) r = props.max as number;
+	if (props.min !== null && r < (props.min as number))
+		r = props.min as number;
+	if (props.max !== null && r > (props.max as number))
+		r = props.max as number;
 	if (props.precision !== null) r = Number(r.toFixed(props.precision));
 	return r;
 }
@@ -203,7 +219,10 @@ function step(delta: number) {
 	emit("update:value", next);
 }
 
-defineExpose({ focus: () => inputRef.value?.focus(), blur: () => inputRef.value?.blur() });
+defineExpose({
+	focus: () => inputRef.value?.focus(),
+	blur: () => inputRef.value?.blur(),
+});
 </script>
 
 <style scoped>

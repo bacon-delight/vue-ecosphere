@@ -66,7 +66,7 @@ describe("EpAvatar", () => {
 describe("EpAvatarGroup", () => {
 	it("renders default slot inside a group", () => {
 		const w = mount(AvatarGroup, {
-			slots: { default: "<span class=\"x\"></span>" },
+			slots: { default: '<span class="x"></span>' },
 		});
 		expect(w.attributes("role")).toBe("group");
 		expect(w.find(".x").exists()).toBe(true);
