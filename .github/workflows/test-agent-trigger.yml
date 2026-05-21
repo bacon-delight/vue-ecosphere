@@ -18,14 +18,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.3
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: "npm"
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci && npm ci --prefix ./test-agent 2>/dev/null || npm ci
+        run: pnpm install --frozen-lockfile && npm ci --prefix ./test-agent 2>/dev/null || true
 
       - name: Wait for Vercel preview
         run: sleep 10
