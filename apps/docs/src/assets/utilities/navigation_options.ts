@@ -217,18 +217,10 @@ function navigation_options(): menu_item[] {
 					},
 				},
 				{
-					label: "Dropdown",
-					active: router.currentRoute.value.path === "/dropdown",
+					label: "Select",
+					active: router.currentRoute.value.path === "/select",
 					action: () => {
-						router.push("/dropdown");
-					},
-				},
-				{
-					label: "Search Dropdown",
-					active:
-						router.currentRoute.value.path === "/search-dropdown",
-					action: () => {
-						router.push("/search-dropdown");
+						router.push("/select");
 					},
 				},
 				{

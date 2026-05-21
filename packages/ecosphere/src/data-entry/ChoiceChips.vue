@@ -1,233 +1,175 @@
 <template>
-	<div class="choice-chips">
+	<div
+		class="ep-choice-chips"
+		:class="[`ep-choice-chips--${size}`]"
+		role="group"
+		:aria-labelledby="label ? labelId : undefined"
+		:aria-label="!label ? ariaLabel : undefined"
+	>
 		<div
-			class="choice-chips__label"
-			:class="[`choice-chips__label--${state}`]"
-		>
-			{{ label }}
-		</div>
+			v-if="label"
+			:id="labelId"
+			class="ep-choice-chips__label"
+			:class="state !== 'default' && `ep-choice-chips__label--${state}`"
+		>{{ label }}</div>
 		<div
-			class="choice-chips__options"
-			:class="[`choice-chips__options--${alignment}`]"
+			class="ep-choice-chips__options"
+			:class="`ep-choice-chips__options--${alignment}`"
 		>
-			<div v-for="(option, index) in options" class="choice-chips__field">
-				<TagComponent
-					v-if="!option.hidden"
-					class="choice-chips__tag"
-					:label="option.label"
-					:disabled="option.disabled || disabled"
-					:hue="values.includes(index) ? (hue as 'information') : 'default'"
-					:bordered="outline"
-					:tabindex="option.disabled || disabled ? -1 : 0"
-					:size="size as 'sm' | 'md' | 'lg'"
-					@click="handleClick(index)"
-					@keypress.enter="handleClick(index)"
-				></TagComponent>
-			</div>
+			<button
+				v-for="opt in normalizedOptions"
+				:key="String(opt.value)"
+				type="button"
+				class="ep-choice-chips__chip"
+				:class="[
+					`ep-choice-chips__chip--${size}`,
+					{
+						'ep-choice-chips__chip--active': isSelected(opt.value),
+						'ep-choice-chips__chip--disabled': opt.disabled || disabled,
+						[`ep-choice-chips__chip--${hue}`]: isSelected(opt.value),
+						'ep-choice-chips__chip--bordered': bordered,
+					},
+				]"
+				:disabled="opt.disabled || disabled"
+				:aria-pressed="isSelected(opt.value) ? 'true' : 'false'"
+				@click="toggle(opt)"
+			>
+				<slot name="chip" :option="opt" :selected="isSelected(opt.value)">
+					{{ opt.label }}
+				</slot>
+			</button>
 		</div>
 		<div
 			v-if="alertMessage && state !== 'default'"
-			class="choice-chips__alert-message"
-			:class="[`choice-chips__alert-message--${state}`]"
-		>
-			{{ alertMessage }}
-		</div>
-		<div v-else class="choice-chips__assistive-text">
-			{{ assistiveText }}
-		</div>
+			:id="describedById"
+			class="ep-choice-chips__alert"
+			:class="`ep-choice-chips__alert--${state}`"
+			role="alert"
+		>{{ alertMessage }}</div>
+		<div
+			v-else-if="assistiveText"
+			:id="describedById"
+			class="ep-choice-chips__assistive"
+		>{{ assistiveText }}</div>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
-import type {
-	data_entry_state,
-	choice_option,
-	choice_option_alignment,
-	hue,
-	tag_size,
-} from "../utilities/types.interface";
-import {
-	data_entry_state_options,
-	choice_option_alignment_options,
-	hue_options,
-	tag_size_options,
-} from "../utilities/types.interface";
-import CheckboxField from "./CheckboxField.vue";
-import TagComponent from "../miscellaneous/TagComponent.vue";
+<script setup lang="ts">
+import { computed } from "vue";
+import { useEpId } from "../composables/useEpId";
+import { useEpSize } from "../composables/useEpSize";
+import type { EpSize } from "../general/config";
+import type { EpHue } from "../utilities/types/shared";
 
-export default defineComponent({
-	name: "CheckboxGroup",
-	components: {
-		CheckboxField,
-		TagComponent,
-	},
-	props: {
-		label: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		disabled: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		assistiveText: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		alertMessage: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		hue: {
-			type: String as PropType<hue>,
-			default: "information",
-			validator(value: hue): boolean {
-				return hue_options.includes(value);
-			},
-		},
-		state: {
-			type: String as PropType<data_entry_state>,
-			default: "default",
-			validator(value: data_entry_state): boolean {
-				return data_entry_state_options.includes(value);
-			},
-		},
-		options: {
-			type: Array as PropType<choice_option[]>,
-			required: true,
-		},
-		outline: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		multiple: {
-			type: Boolean as PropType<boolean>,
-			default: true,
-		},
-		size: {
-			type: String as PropType<tag_size>,
-			default: "md",
-			validator(value: tag_size): boolean {
-				return tag_size_options.includes(value);
-			},
-		},
-		alignment: {
-			type: String as PropType<choice_option_alignment>,
-			default: "flex",
-			validator(value: choice_option_alignment): boolean {
-				return choice_option_alignment_options.includes(value);
-			},
-		},
-		modelValue: {
-			type: Array as PropType<(string | number | boolean)[]>,
-			default: () => [],
-		},
-		default: {
-			type: Array as PropType<(string | number | boolean)[]>,
-			default: () => [],
-		},
-	},
-	emits: ["update:modelValue", "update"],
-	data() {
-		return {
-			values: [] as number[],
-		};
-	},
-	watch: {
-		default(newDefaults: (string | number | boolean)[]): void {
-			this.populateValues(newDefaults);
-		},
-		modelValue(newValues: (string | number | boolean)[]): void {
-			this.populateValues(newValues);
-		},
-		multiple(): void {
-			this.values = [];
-		},
-	},
-	mounted() {
-		const initialValues = this.default.length
-			? this.default
-			: this.modelValue;
-		this.populateValues(initialValues);
-	},
-	methods: {
-		handleClick(index: number): void {
-			if (this.values.includes(index)) {
-				this.values = this.values.filter(
-					(existing: number) => existing !== index
-				);
-			} else {
-				if (!this.multiple) {
-					this.values = [];
-				}
-				this.values.push(index);
-			}
-			this.$emit(
-				"update:modelValue",
-				this.values.map((index: number) => {
-					return this.options[index].value;
-				})
-			);
-			this.$emit(
-				"update",
-				this.values.map((index: number) => {
-					return this.options[index].value;
-				})
-			);
-			if (this.options[index].action && this.values.includes(index)) {
-				(this.options[index].action as () => void)();
-			}
-		},
-		populateValues(defaults: (string | number | boolean)[]): void {
-			if (!defaults.length) {
-				return;
-			}
-			this.options.forEach((option: choice_option, index: number) => {
-				if (defaults.includes(option.value)) {
-					this.values.push(index);
-				}
-			});
-		},
-	},
+export type ChoicePrimitive = string | number | boolean;
+export type ChoiceChipsValue =
+	| ChoicePrimitive
+	| ChoicePrimitive[]
+	| null;
+
+export interface ChoiceOption {
+	label: string;
+	value: ChoicePrimitive;
+	disabled?: boolean;
+	hidden?: boolean;
+}
+
+export type ChoiceOptionLike = ChoiceOption | string | number | boolean;
+export type ChoiceAlignment = "flex" | "vertical" | "grid";
+export type DataEntryState = "default" | "error" | "warning" | "success";
+
+export interface ChoiceChipsProps {
+	value?: ChoiceChipsValue;
+	options?: ChoiceOptionLike[];
+	multiple?: boolean;
+	label?: string;
+	alignment?: ChoiceAlignment;
+	hue?: EpHue;
+	state?: DataEntryState;
+	size?: EpSize;
+	disabled?: boolean;
+	bordered?: boolean;
+	assistiveText?: string;
+	alertMessage?: string;
+	ariaLabel?: string;
+}
+
+const props = withDefaults(defineProps<ChoiceChipsProps>(), {
+	value: null,
+	options: () => [],
+	multiple: false,
+	label: "",
+	alignment: "flex",
+	hue: "primary",
+	state: "default",
+	size: undefined,
+	disabled: false,
+	bordered: false,
+	assistiveText: "",
+	alertMessage: "",
+	ariaLabel: "",
 });
+
+const emit = defineEmits<{
+	(e: "update:value", value: ChoiceChipsValue): void;
+	(e: "change", value: ChoiceChipsValue): void;
+}>();
+
+const size = useEpSize(() => props.size);
+const labelId = useEpId("ep-choice-chips-label");
+const describedById = useEpId("ep-choice-chips-desc");
+
+function normalize(o: ChoiceOptionLike): ChoiceOption {
+	if (typeof o === "object" && o !== null) return o;
+	return { label: String(o), value: o };
+}
+
+const normalizedOptions = computed<ChoiceOption[]>(() =>
+	(props.options || []).map(normalize).filter((o) => !o.hidden),
+);
+
+const valuesArray = computed<ChoicePrimitive[]>(() => {
+	if (props.value == null) return [];
+	return Array.isArray(props.value) ? props.value : [props.value as ChoicePrimitive];
+});
+
+function isSelected(v: ChoicePrimitive): boolean {
+	return valuesArray.value.some((x) => x === v);
+}
+
+function commit(next: ChoiceChipsValue) {
+	emit("update:value", next);
+	emit("change", next);
+}
+
+function toggle(opt: ChoiceOption) {
+	if (opt.disabled || props.disabled) return;
+	if (props.multiple) {
+		const set = new Set(valuesArray.value);
+		if (set.has(opt.value)) set.delete(opt.value);
+		else set.add(opt.value);
+		commit(Array.from(set));
+	} else {
+		commit(isSelected(opt.value) ? null : opt.value);
+	}
+}
 </script>
 
-<style lang="scss" scoped>
-.choice-chips {
+<style>
+.ep-choice-chips {
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.5rem;
+	font-family: var(--ep-font-family-base, inherit);
+	color: var(--ep-color-text, currentColor);
 
 	&__label {
-		@include font-footnote;
+		font-size: 0.875rem;
+		font-weight: 500;
 
-		&--error {
-			color: $color-error;
-		}
-
-		&--warning {
-			color: $color-warning;
-		}
-
-		&--success {
-			color: $color-success;
-		}
-	}
-
-	&__tag {
-		cursor: pointer;
-		-webkit-tap-highlight-color: transparent;
-
-		&:focus {
-			outline: 1px solid $color-hyperlink;
-		}
-	}
-
-	&__assistive-text {
-		@include font-footnote;
-		color: $color-disabled;
+		&--error { color: var(--ep-color-error); }
+		&--warning { color: var(--ep-color-warning); }
+		&--success { color: var(--ep-color-success); }
 	}
 
 	&__options {
@@ -239,51 +181,82 @@ export default defineComponent({
 			flex-direction: row;
 			flex-wrap: wrap;
 		}
-
 		&--vertical {
 			display: flex;
 			flex-direction: column;
+			align-items: flex-start;
 		}
-
 		&--grid {
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-			align-items: center;
-			justify-content: center;
-			column-gap: 1.5rem;
-
-			@include respond-below(lg) {
-				grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-			}
-
-			@include respond-below(md) {
-				grid-template-columns: 1fr 1fr 1fr 1fr;
-			}
-
-			@include respond-below(sm) {
-				grid-template-columns: 1fr 1fr 1fr;
-			}
-
-			@include respond-below(xs) {
-				grid-template-columns: 1fr 1fr;
-			}
+			grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 		}
 	}
 
-	&__alert-message {
-		@include font-footnote;
+	&__chip {
+		all: unset;
+		box-sizing: border-box;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		font: inherit;
+		line-height: 1;
+		border-radius: var(--ep-radius-pill, 999px);
+		background: var(--ep-color-surface-alt, rgba(0, 0, 0, 0.04));
+		color: var(--ep-color-text, currentColor);
+		transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 
-		&--error {
-			color: $color-error;
+		&--bordered {
+			border: 1px solid var(--ep-color-border, currentColor);
+			background: transparent;
 		}
 
-		&--warning {
-			color: $color-warning;
+		&--xs { padding: 0.125rem 0.5rem; font-size: 0.6875rem; }
+		&--sm { padding: 0.1875rem 0.625rem; font-size: 0.75rem; }
+		&--md { padding: 0.25rem 0.75rem; font-size: 0.8125rem; }
+		&--lg { padding: 0.375rem 0.875rem; font-size: 0.9375rem; }
+		&--xl { padding: 0.5rem 1rem; font-size: 1rem; }
+
+		&:hover:not(.ep-choice-chips__chip--disabled) {
+			background: var(--ep-color-surface-hover, rgba(0, 0, 0, 0.06));
 		}
 
-		&--success {
-			color: $color-success;
+		&:focus-visible {
+			outline: var(--ep-outline-focus, 2px solid var(--ep-color-primary));
+			outline-offset: 2px;
 		}
+
+		&--disabled {
+			cursor: not-allowed;
+			opacity: 0.5;
+		}
+
+		&--active {
+			color: var(--ep-color-on-primary, #fff);
+			background: var(--ep-color-primary);
+			border-color: var(--ep-color-primary);
+		}
+
+		&--active.ep-choice-chips__chip--primary { background: var(--ep-color-primary); border-color: var(--ep-color-primary); color: var(--ep-color-on-primary, #fff); }
+		&--active.ep-choice-chips__chip--primary-variant { background: var(--ep-color-primary-variant); border-color: var(--ep-color-primary-variant); color: var(--ep-color-on-primary, #fff); }
+		&--active.ep-choice-chips__chip--secondary { background: var(--ep-color-secondary); border-color: var(--ep-color-secondary); color: var(--ep-color-on-secondary, #fff); }
+		&--active.ep-choice-chips__chip--secondary-variant { background: var(--ep-color-secondary-variant); border-color: var(--ep-color-secondary-variant); color: var(--ep-color-on-secondary, #fff); }
+		&--active.ep-choice-chips__chip--information { background: var(--ep-color-information); border-color: var(--ep-color-information); color: #fff; }
+		&--active.ep-choice-chips__chip--success { background: var(--ep-color-success); border-color: var(--ep-color-success); color: #fff; }
+		&--active.ep-choice-chips__chip--warning { background: var(--ep-color-warning); border-color: var(--ep-color-warning); color: #fff; }
+		&--active.ep-choice-chips__chip--error { background: var(--ep-color-error); border-color: var(--ep-color-error); color: #fff; }
+	}
+
+	&__assistive {
+		font-size: 0.75rem;
+		color: var(--ep-color-disabled, currentColor);
+	}
+
+	&__alert {
+		font-size: 0.75rem;
+		&--error { color: var(--ep-color-error); }
+		&--warning { color: var(--ep-color-warning); }
+		&--success { color: var(--ep-color-success); }
 	}
 }
 </style>
