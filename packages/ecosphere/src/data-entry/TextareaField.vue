@@ -1,277 +1,199 @@
 <template>
-	<div class="input" :class="[{ 'input--disabled': disabled }]">
-		<div class="input__label" :class="[`input__label--${state}`]">
+	<div
+		class="ep-textarea ep-input"
+		:class="[
+			`ep-input--${size}`,
+			state !== 'default' && `ep-input--${state}`,
+			{
+				'ep-input--disabled': disabled,
+				'ep-input--bordered': bordered,
+			},
+		]"
+	>
+		<label
+			v-if="label"
+			:for="inputId"
+			class="ep-input__label"
+			:class="state !== 'default' && `ep-input__label--${state}`"
+		>
 			{{ label }}
-		</div>
-		<div class="input__wrapper">
+		</label>
+		<div class="ep-input__wrapper ep-textarea__wrapper">
 			<textarea
-				v-model="value"
-				class="input__field"
-				:class="[
-					`input__field--${state}`,
-					{ 'input__field--outline': outline },
-					{ 'input__field--disabled': disabled },
-				]"
+				:id="inputId"
+				ref="textareaRef"
+				v-model="internalValue"
+				class="ep-input__field ep-textarea__field"
 				:placeholder="placeholder"
 				:disabled="disabled"
+				:readonly="readonly"
+				:rows="effectiveRows"
 				:maxlength="maxLength ?? undefined"
-				:rows="rows"
-				@input="handleUpdate"
-			></textarea>
-			<SVGIcon
-				v-if="allowClear"
-				class="input__icon"
-				name="ri-close-circle-line"
-				:class="[{ 'input__icon--disabled': disabled }]"
+				:aria-invalid="state === 'error' ? 'true' : undefined"
+				:aria-describedby="describedById"
+				:style="autoSize ? { resize: 'none' } : undefined"
+				@input="onInput"
+				@change="onChange"
+				@focus="emit('focus', $event)"
+				@blur="emit('blur', $event)"
+			/>
+			<button
+				v-if="allowClear && hasValue && !disabled && !readonly"
+				type="button"
+				class="ep-input__icon-btn ep-textarea__clear"
+				:aria-label="clearLabel"
 				@click="clearValue"
-			></SVGIcon>
+			>
+				<SVGIcon name="ri-close-circle-line" aria-hidden />
+			</button>
 		</div>
-		<div class="input__texts">
+		<div v-if="hasFooter" :id="describedById" class="ep-input__footer">
 			<div
 				v-if="alertMessage && state !== 'default'"
-				class="input__alert-message"
-				:class="[`input__alert-message--${state}`]"
+				class="ep-input__alert"
+				:class="`ep-input__alert--${state}`"
+				role="alert"
 			>
 				{{ alertMessage }}
 			</div>
-			<div v-else class="input__assistive-text">{{ assistiveText }}</div>
-			<div v-if="showLength" class="input__assistive-text input__length">
-				{{ inputLengthInformation }}
+			<div v-else-if="assistiveText" class="ep-input__assistive">
+				{{ assistiveText }}
+			</div>
+			<div v-if="showCount" class="ep-input__count">
+				{{ currentLength }}<template v-if="maxLength != null"> / {{ maxLength }}</template>
 			</div>
 		</div>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
-import type { data_entry_state } from "../utilities/types.interface";
-import { data_entry_state_options } from "../utilities/types.interface";
+<script setup lang="ts">
+import { computed, nextTick, ref, watch } from "vue";
 import SVGIcon from "../general/SVGIcon.vue";
+import { useEpId } from "../composables/useEpId";
+import { useEpSize } from "../composables/useEpSize";
+import type { EpSize } from "../general/config";
 
-export default defineComponent({
-	name: "InputField",
-	components: {
-		SVGIcon,
-	},
-	props: {
-		modelValue: {
-			type: [String, Number, null] as PropType<string | null>,
-			default: "",
-		},
-		label: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		placeholder: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		rows: {
-			type: Number as PropType<number>,
-			default: 3,
-		},
-		disabled: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		outline: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		assistiveText: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		state: {
-			type: String as PropType<data_entry_state>,
-			default: "default",
-			validator(value: data_entry_state): boolean {
-				return data_entry_state_options.includes(value);
-			},
-		},
-		allowClear: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		maxLength: {
-			type: [Number, null] as PropType<number | null>,
-			default: null,
-		},
-		showLength: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		alertMessage: {
-			type: String as PropType<string>,
-			default: "",
-		},
-		default: {
-			type: [String, null] as PropType<string | null>,
-			default: "",
-		},
-	},
-	data() {
-		return {
-			value: "" as string | null,
-		};
-	},
-	computed: {
-		inputLengthInformation(): string | number {
-			if (this.maxLength !== null) {
-				return `${
-					this.value === null ? "0" : this.value.toString().length
-				} / ${this.maxLength}`;
-			}
-			return this.value === null ? 0 : this.value.toString().length;
-		},
-	},
-	watch: {
-		default(newDefault: string | null): void {
-			this.value = newDefault;
-		},
-	},
-	mounted() {
-		if (this.modelValue !== null) {
-			this.value = this.modelValue;
-		}
-		if (this.default !== null) {
-			this.value = this.default;
-		}
-	},
-	methods: {
-		handleUpdate(): void {
-			this.$emit("update:modelValue", this.value);
-		},
-		clearValue(): void {
-			this.value = "";
-			this.handleUpdate();
-		},
-	},
+export type DataEntryState = "default" | "error" | "warning" | "success";
+export type TextareaValue = string | null;
+export type AutoSize = boolean | { minRows?: number; maxRows?: number };
+
+export interface TextareaProps {
+	value?: TextareaValue;
+	label?: string;
+	placeholder?: string;
+	rows?: number;
+	disabled?: boolean;
+	readonly?: boolean;
+	bordered?: boolean;
+	allowClear?: boolean;
+	maxLength?: number | null;
+	showCount?: boolean;
+	autoSize?: AutoSize;
+	assistiveText?: string;
+	alertMessage?: string;
+	state?: DataEntryState;
+	size?: EpSize;
+	clearLabel?: string;
+}
+
+const props = withDefaults(defineProps<TextareaProps>(), {
+	value: "",
+	label: "",
+	placeholder: "",
+	rows: 3,
+	disabled: false,
+	readonly: false,
+	bordered: true,
+	allowClear: false,
+	maxLength: null,
+	showCount: false,
+	autoSize: false,
+	assistiveText: "",
+	alertMessage: "",
+	state: "default",
+	size: undefined,
+	clearLabel: "Clear",
 });
+
+const emit = defineEmits<{
+	(e: "update:value", value: TextareaValue): void;
+	(e: "change", value: TextareaValue, event: Event): void;
+	(e: "clear"): void;
+	(e: "focus", event: FocusEvent): void;
+	(e: "blur", event: FocusEvent): void;
+}>();
+
+const size = useEpSize(() => props.size);
+const inputId = useEpId("ep-textarea");
+const describedById = useEpId("ep-textarea-desc");
+const textareaRef = ref<HTMLTextAreaElement | null>(null);
+
+const internalValue = computed<TextareaValue>({
+	get: () => props.value ?? "",
+	set: (v) => emit("update:value", v),
+});
+
+const hasValue = computed(() => internalValue.value !== null && internalValue.value !== "");
+const currentLength = computed(() => (internalValue.value ?? "").length);
+const effectiveRows = computed(() => {
+	if (typeof props.autoSize === "object" && props.autoSize.minRows) return props.autoSize.minRows;
+	return props.rows;
+});
+
+const hasFooter = computed(
+	() =>
+		(props.alertMessage && props.state !== "default") ||
+		!!props.assistiveText ||
+		props.showCount,
+);
+
+function resize() {
+	if (!props.autoSize || !textareaRef.value) return;
+	const ta = textareaRef.value;
+	ta.style.height = "auto";
+	let newHeight = ta.scrollHeight;
+	if (typeof props.autoSize === "object" && props.autoSize.maxRows) {
+		const lineHeight = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+		const maxHeight = lineHeight * props.autoSize.maxRows;
+		if (newHeight > maxHeight) newHeight = maxHeight;
+	}
+	ta.style.height = `${newHeight}px`;
+}
+
+function onInput(e: Event) {
+	emit("change", (e.target as HTMLTextAreaElement).value, e);
+	if (props.autoSize) nextTick(resize);
+}
+function onChange(e: Event) {
+	emit("change", (e.target as HTMLTextAreaElement).value, e);
+}
+function clearValue() {
+	emit("update:value", "");
+	emit("clear");
+	textareaRef.value?.focus();
+}
+
+watch(() => internalValue.value, () => { if (props.autoSize) nextTick(resize); }, { immediate: true });
+
+defineExpose({ focus: () => textareaRef.value?.focus(), blur: () => textareaRef.value?.blur() });
 </script>
 
-<style lang="scss" scoped>
-.input {
-	display: block;
-	display: flex;
-	flex-direction: column;
-	row-gap: 0.25rem;
-	width: 100%;
-
-	&--disabled {
-		opacity: 50%;
-	}
-
-	&__label {
-		@include font-footnote;
-
-		&--error {
-			color: $color-error;
-		}
-
-		&--warning {
-			color: $color-warning;
-		}
-
-		&--success {
-			color: $color-success;
-		}
-	}
-
-	&__wrapper {
-		position: relative;
-		width: 100%;
-	}
-
-	&__field {
-		background: $color-background;
-		border: 1px solid $color-transparent;
-		border-radius: $border-radius-standard;
-		padding: 0.5rem 0.75rem;
-		@include font-regular;
-		color: $color-contrast;
-		width: 100%;
-
-		&::placeholder {
-			color: $color-disabled;
-			@include font-regular;
-		}
-
-		&:focus {
-			outline: 1px solid $color-hyperlink;
-		}
-
-		&--outline {
-			outline: 1px solid $color-contrast-faded;
-		}
-
-		&--error {
-			outline: 1px solid $color-error;
-		}
-
-		&--warning {
-			outline: 1px solid $color-warning;
-		}
-
-		&--success {
-			outline: 1px solid $color-success;
-		}
-
-		&--disabled {
-			cursor: not-allowed;
-		}
-	}
-
-	&__icon {
-		position: absolute;
-		top: 1.125rem;
-		right: 0.5rem;
-		transform: translateY(-50%);
-		font-size: 1.25rem;
-		color: $color-disabled;
-		cursor: pointer;
-
-		&:hover {
-			color: $color-contrast;
-		}
-
-		&--disabled {
-			cursor: not-allowed;
-			pointer-events: none;
-		}
-	}
-
-	&__texts {
-		display: flex;
-		flex-direction: row;
-		column-gap: 1rem;
-		align-items: center;
-	}
-
-	&__assistive-text {
-		@include font-footnote;
-		color: $color-disabled;
-	}
-
-	&__alert-message {
-		@include font-footnote;
-
-		&--error {
-			color: $color-error;
-		}
-
-		&--warning {
-			color: $color-warning;
-		}
-
-		&--success {
-			color: $color-success;
-		}
-	}
-
-	&__length {
-		margin-left: auto;
-	}
+<style scoped>
+.ep-textarea__wrapper {
+	align-items: stretch;
+	padding: 0;
+}
+.ep-textarea__field {
+	resize: vertical;
+	min-height: 4rem;
+	line-height: 1.5;
+}
+.ep-textarea__clear {
+	position: absolute;
+	top: 0.375rem;
+	right: 0.375rem;
+}
+.ep-textarea {
+	position: relative;
 }
 </style>
