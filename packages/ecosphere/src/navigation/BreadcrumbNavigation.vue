@@ -1,151 +1,248 @@
 <template>
-	<div
-		class="breadcrumb"
-		:class="{ 'breadcrumb--outline': outline, 'breadcrumb--expand': !wrap }"
+	<nav
+		class="ep-breadcrumb"
+		:class="[
+			`ep-breadcrumb--${size}`,
+			{
+				'ep-breadcrumb--bordered': bordered,
+				'ep-breadcrumb--scroll': !wrap,
+				'ep-breadcrumb--disabled': disabled,
+			},
+		]"
+		:aria-label="ariaLabel"
 	>
-		<div
-			v-for="option in renderOptions"
-			class="breadcrumb__item"
-			:class="[
-				{
-					'breadcrumb__item--active': option.active,
-					'breadcrumb__item--disabled': option.disabled || disabled,
-				},
-			]"
-			:tabindex="option.disabled ? -1 : 0"
-			@click="handleClick(option)"
-		>
-			<SVGIcon
-				v-if="option.icon"
-				class="breadcrumb__item-icon"
-				:name="option.icon"
-			></SVGIcon>
-			<div class="breadcrumb__item-label">{{ option.label }}</div>
-		</div>
-	</div>
+		<ol class="ep-breadcrumb__list">
+			<template v-for="(item, index) in visibleItems" :key="index">
+				<li
+					v-if="index > 0"
+					class="ep-breadcrumb__separator"
+					aria-hidden="true"
+				>
+					<slot name="separator" :index="index">
+						<SVGIcon :name="dividerIcon" />
+					</slot>
+				</li>
+				<li
+					class="ep-breadcrumb__item"
+					:class="{
+						'ep-breadcrumb__item--active': item.active,
+						'ep-breadcrumb__item--disabled':
+							item.disabled || disabled,
+					}"
+				>
+					<slot name="item" :item="item" :index="index">
+						<component
+							:is="
+								item.active || item.disabled || disabled
+									? 'span'
+									: 'a'
+							"
+							class="ep-breadcrumb__link"
+							:href="
+								item.active || item.disabled || disabled
+									? undefined
+									: (item.href ?? '#')
+							"
+							:aria-current="item.active ? 'page' : undefined"
+							:aria-disabled="
+								item.disabled || disabled ? 'true' : undefined
+							"
+							:tabindex="
+								item.active || item.disabled || disabled
+									? undefined
+									: 0
+							"
+							@click="onItemClick($event, item)"
+							@keydown.enter.prevent="onItemActivate(item)"
+							@keydown.space.prevent="onItemActivate(item)"
+						>
+							<SVGIcon
+								v-if="item.icon"
+								class="ep-breadcrumb__icon"
+								:name="item.icon"
+								aria-hidden="true"
+							/>
+							<span class="ep-breadcrumb__label">{{
+								item.label
+							}}</span>
+						</component>
+					</slot>
+				</li>
+			</template>
+		</ol>
+	</nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import SVGIcon from "../general/SVGIcon.vue";
-import type {
-	breadcrumb_item,
-	breadcrumb_item_compiled,
-} from "../utilities/types.interface";
+import { useEpSize } from "../composables/useEpSize";
+import type { EpSize } from "../general/config";
 
-export default defineComponent({
-	name: "BreadcrumbNavigation",
-	components: {
-		SVGIcon,
-	},
-	props: {
-		options: {
-			type: Array as PropType<breadcrumb_item[]>,
-			required: true,
-		},
-		disabled: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		outline: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		wrap: {
-			type: Boolean as PropType<boolean>,
-			default: false,
-		},
-		dividerIcon: {
-			type: String as PropType<string>,
-			default: "ri-arrow-right-s-line",
-		},
-	},
-	computed: {
-		renderOptions(): breadcrumb_item_compiled[] {
-			const filtered_options = this.options
-				.filter((option: breadcrumb_item) => !option.hidden)
-				.map((option: breadcrumb_item): breadcrumb_item_compiled => {
-					return {
-						...option,
-						type: "item",
-					};
-				});
-			const options: breadcrumb_item_compiled[] = [];
-			for (let index = 0; index < filtered_options.length; index++) {
-				if (index !== 0) {
-					options.push({
-						type: "divider",
-						icon: this.dividerIcon,
-						disabled: true,
-					});
-				}
-				options.push(filtered_options[index]);
-			}
-			return options;
-		},
-	},
-	methods: {
-		handleClick(option: breadcrumb_item): void {
-			if (option.action) {
-				option.action();
-			}
-		},
-	},
+export interface BreadcrumbItem {
+	label?: string;
+	icon?: string;
+	href?: string;
+	hidden?: boolean;
+	disabled?: boolean;
+	active?: boolean;
+	action?: () => void;
+}
+
+export interface BreadcrumbProps {
+	items: BreadcrumbItem[];
+	disabled?: boolean;
+	bordered?: boolean;
+	wrap?: boolean;
+	dividerIcon?: string;
+	size?: EpSize;
+	ariaLabel?: string;
+}
+
+const props = withDefaults(defineProps<BreadcrumbProps>(), {
+	disabled: false,
+	bordered: false,
+	wrap: true,
+	dividerIcon: "ri-arrow-right-s-line",
+	size: undefined,
+	ariaLabel: "Breadcrumb",
 });
+
+const emit = defineEmits<{
+	(e: "select", item: BreadcrumbItem, index: number): void;
+}>();
+
+const size = useEpSize(() => props.size);
+const visibleItems = computed(() => props.items.filter((i) => !i.hidden));
+
+function onItemActivate(item: BreadcrumbItem) {
+	if (item.active || item.disabled || props.disabled) return;
+	item.action?.();
+	const idx = visibleItems.value.indexOf(item);
+	emit("select", item, idx);
+}
+
+function onItemClick(e: MouseEvent, item: BreadcrumbItem) {
+	if (!item.href || item.href === "#") {
+		e.preventDefault();
+	}
+	onItemActivate(item);
+}
 </script>
 
-<style lang="scss" scoped>
-.breadcrumb {
+<style scoped>
+.ep-breadcrumb {
+	display: block;
+	width: fit-content;
+	max-width: 100%;
+	color: var(--ep-color-contrast);
+	font-family: var(--ep-font-family-base);
+}
+
+.ep-breadcrumb--bordered {
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--ep-radius-base);
+	border: 1px solid var(--ep-color-divider);
+}
+
+.ep-breadcrumb--scroll {
+	overflow-x: auto;
+	padding-bottom: 0.25rem;
+}
+
+.ep-breadcrumb--disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.ep-breadcrumb--xs {
+	font-size: 0.75rem;
+}
+.ep-breadcrumb--sm {
+	font-size: 0.875rem;
+}
+.ep-breadcrumb--md {
+	font-size: 1rem;
+}
+.ep-breadcrumb--lg {
+	font-size: 1.125rem;
+}
+.ep-breadcrumb--xl {
+	font-size: 1.25rem;
+}
+
+.ep-breadcrumb__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
 	align-items: center;
+	flex-wrap: wrap;
 	column-gap: 0.25rem;
 	row-gap: 0.25rem;
-	@include font-light;
-	width: fit-content;
+}
 
-	&--expand {
-		flex-wrap: nowrap;
-		max-width: 100%;
-		padding-bottom: 0.5rem;
-		overflow-x: auto;
-	}
+.ep-breadcrumb--scroll .ep-breadcrumb__list {
+	flex-wrap: nowrap;
+}
 
-	&--outline {
-		padding: 0.25rem 0.5rem;
-		border-radius: $border-radius-standard;
-		border: 1px solid $color-divider;
-	}
+.ep-breadcrumb__separator {
+	display: inline-flex;
+	align-items: center;
+	opacity: 0.5;
+	font-size: 1em;
+}
 
-	&__item {
-		cursor: pointer;
-		transition: $transition-standard;
-		padding: 0 0.25rem;
-		border-radius: $border-radius-standard;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		column-gap: 0.25rem;
-		align-items: center;
+.ep-breadcrumb__item {
+	display: inline-flex;
+	align-items: center;
+	min-width: 0;
+}
 
-		&:hover {
-			color: $color-hyperlink;
-		}
+.ep-breadcrumb__item--disabled {
+	opacity: 0.5;
+}
 
-		&:focus {
-			outline: $outline-focus;
-		}
+.ep-breadcrumb__link {
+	display: inline-flex;
+	align-items: center;
+	column-gap: 0.25rem;
+	padding: 0 0.25rem;
+	border-radius: var(--ep-radius-base);
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
+	transition: var(--ep-transition-base);
+	white-space: nowrap;
+}
 
-		&--active {
-			@include font-bold;
-		}
+.ep-breadcrumb__link:hover:not([aria-disabled="true"]):not([aria-current]) {
+	color: var(--ep-color-information);
+}
 
-		&--disabled {
-			opacity: 0.5;
-			color: $color-disabled;
-			pointer-events: none;
-		}
-	}
+.ep-breadcrumb__link:focus-visible {
+	outline: var(--ep-outline-focus);
+	outline-offset: 2px;
+}
+
+.ep-breadcrumb__link[aria-current="page"] {
+	cursor: default;
+	font-weight: 600;
+}
+
+.ep-breadcrumb__link[aria-disabled="true"] {
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.ep-breadcrumb__icon {
+	font-size: 1em;
+}
+
+.ep-breadcrumb__label {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 </style>

@@ -35,7 +35,9 @@ describe("EpSwitch", () => {
 			props: { label: "x", value: true },
 		});
 		expect(w.classes()).toContain("ep-switch--checked");
-		expect(w.find('[role="switch"]').attributes("aria-checked")).toBe("true");
+		expect(w.find('[role="switch"]').attributes("aria-checked")).toBe(
+			"true"
+		);
 	});
 
 	it("does not toggle when disabled", async () => {

@@ -47,7 +47,10 @@ withDefaults(defineProps<AvatarGroupProps>(), {
 		height: 2rem;
 		padding-inline: 0.5rem;
 		border-radius: 999px;
-		background: var(--ep-color-background-faded, var(--ep-color-background));
+		background: var(
+			--ep-color-background-faded,
+			var(--ep-color-background)
+		);
 		color: var(--ep-color-contrast);
 		font-family: var(--ep-font-family-base);
 		font-size: 0.75rem;

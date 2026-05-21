@@ -16,7 +16,11 @@
 		:type="tag === 'button' ? htmlType : undefined"
 		:href="tag === 'a' ? href : undefined"
 		:target="tag === 'a' ? target : undefined"
-		:rel="tag === 'a' && target === '_blank' ? 'noopener noreferrer' : undefined"
+		:rel="
+			tag === 'a' && target === '_blank'
+				? 'noopener noreferrer'
+				: undefined
+		"
 		:disabled="tag === 'button' ? isDisabled : undefined"
 		:aria-disabled="isDisabled ? 'true' : undefined"
 		:aria-busy="loading ? 'true' : undefined"
@@ -122,7 +126,7 @@ const size = useEpSize(() => props.size);
 const tag = computed<"button" | "a">(() => (props.href ? "a" : "button"));
 const isDisabled = computed(() => props.disabled || props.loading);
 const effectiveHue = computed<EpHue>(() =>
-	props.danger ? "error" : props.hue,
+	props.danger ? "error" : props.hue
 );
 const hasIcon = computed(() => Boolean(props.icon || slots.icon));
 const hasLabel = computed(() => Boolean(props.label || slots.default));

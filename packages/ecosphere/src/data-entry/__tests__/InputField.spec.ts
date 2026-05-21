@@ -20,14 +20,21 @@ describe("EpInput", () => {
 	});
 
 	it("renders prefix and suffix", () => {
-		const w = mount(InputField, { props: { label: "x", value: "", prefix: "$", suffix: "USD" } });
+		const w = mount(InputField, {
+			props: { label: "x", value: "", prefix: "$", suffix: "USD" },
+		});
 		expect(w.find(".ep-input__affix--prefix").text()).toBe("$");
 		expect(w.find(".ep-input__affix--suffix").text()).toBe("USD");
 	});
 
 	it("renders addonBefore and addonAfter", () => {
 		const w = mount(InputField, {
-			props: { label: "x", value: "", addonBefore: "https://", addonAfter: ".com" },
+			props: {
+				label: "x",
+				value: "",
+				addonBefore: "https://",
+				addonAfter: ".com",
+			},
 		});
 		expect(w.find(".ep-input__addon--before").text()).toBe("https://");
 		expect(w.find(".ep-input__addon--after").text()).toBe(".com");
@@ -69,7 +76,12 @@ describe("EpInput", () => {
 
 	it("sets aria-invalid in error state", () => {
 		const w = mount(InputField, {
-			props: { label: "x", value: "", state: "error", alertMessage: "bad" },
+			props: {
+				label: "x",
+				value: "",
+				state: "error",
+				alertMessage: "bad",
+			},
 		});
 		expect(w.find("input").attributes("aria-invalid")).toBe("true");
 		expect(w.find(".ep-input__alert--error").text()).toBe("bad");
@@ -77,7 +89,11 @@ describe("EpInput", () => {
 
 	it("has no axe violations", async () => {
 		const w = mount(InputField, {
-			props: { label: "Name", value: "hi", assistiveText: "Enter your full name" },
+			props: {
+				label: "Name",
+				value: "hi",
+				assistiveText: "Enter your full name",
+			},
 			attachTo: document.body,
 		});
 		await expectNoA11yViolations(w.element as HTMLElement);

@@ -6,8 +6,16 @@ const value = ref<string | number | boolean | null>("a");
 <template>
 	<Story title="Data entry/Radio">
 		<Variant title="Default">
-			<RadioField v-model:value="value" native-value="a" label="Option A" />
-			<RadioField v-model:value="value" native-value="b" label="Option B" />
+			<RadioField
+				v-model:value="value"
+				native-value="a"
+				label="Option A"
+			/>
+			<RadioField
+				v-model:value="value"
+				native-value="b"
+				label="Option B"
+			/>
 		</Variant>
 		<Variant title="Disabled">
 			<RadioField :value="'a'" native-value="b" disabled label="Locked" />

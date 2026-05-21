@@ -1,7 +1,5 @@
 // Vitest config for vue-ecosphere library tests.
-// Note: production build still uses vite.config.ts (which keeps the SCSS
-// preprocessor pipeline for transitional components). Tests don't compile
-// styles, so this config keeps the surface minimal.
+// Plain-CSS only — no SCSS preprocessing.
 
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vitest/config";
@@ -12,19 +10,6 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"@": fileURLToPath(new URL("./src", import.meta.url)),
-		},
-	},
-	css: {
-		preprocessorOptions: {
-			scss: {
-				additionalData: `@import "@/styles/framework.scss";`,
-				api: "modern-compiler",
-				silenceDeprecations: [
-					"legacy-js-api",
-					"import",
-					"global-builtin",
-				],
-			},
 		},
 	},
 	test: {

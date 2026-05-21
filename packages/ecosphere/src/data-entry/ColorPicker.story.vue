@@ -16,7 +16,14 @@ const c = ref<string | null>("#3366ff");
 			<ColorPicker
 				v-model:value="c"
 				label="Theme"
-				:presets="['#ff5e57', '#ffa600', '#52c41a', '#1890ff', '#722ed1', '#000000']"
+				:presets="[
+					'#ff5e57',
+					'#ffa600',
+					'#52c41a',
+					'#1890ff',
+					'#722ed1',
+					'#000000',
+				]"
 			/>
 		</Variant>
 		<Variant title="Clearable">

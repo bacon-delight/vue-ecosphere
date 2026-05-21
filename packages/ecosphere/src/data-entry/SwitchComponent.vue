@@ -24,7 +24,11 @@
 			@keydown.space.prevent="toggle"
 		>
 			<span class="ep-switch__thumb">
-				<span v-if="loading" class="ep-switch__spinner" aria-hidden="true">
+				<span
+					v-if="loading"
+					class="ep-switch__spinner"
+					aria-hidden="true"
+				>
 					<svg
 						viewBox="0 0 24 24"
 						width="0.75em"

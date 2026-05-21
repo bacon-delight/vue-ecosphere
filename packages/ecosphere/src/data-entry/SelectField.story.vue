@@ -12,22 +12,53 @@ const big = Array.from({ length: 500 }, (_, i) => `Option ${i + 1}`);
 <template>
 	<Story title="Data entry/Select">
 		<Variant title="Single">
-			<SelectField v-model:value="single" label="Fruit" :options="options" />
+			<SelectField
+				v-model:value="single"
+				label="Fruit"
+				:options="options"
+			/>
 		</Variant>
 		<Variant title="Multiple">
-			<SelectField v-model:value="multi" label="Fruits" :options="options" multiple allow-clear />
+			<SelectField
+				v-model:value="multi"
+				label="Fruits"
+				:options="options"
+				multiple
+				allow-clear
+			/>
 		</Variant>
 		<Variant title="Searchable">
-			<SelectField v-model:value="single" label="Fruit" :options="options" show-search />
+			<SelectField
+				v-model:value="single"
+				label="Fruit"
+				:options="options"
+				show-search
+			/>
 		</Variant>
 		<Variant title="Tags">
-			<SelectField v-model:value="tagged" label="Tags" :options="options" tags allow-clear />
+			<SelectField
+				v-model:value="tagged"
+				label="Tags"
+				:options="options"
+				tags
+				allow-clear
+			/>
 		</Variant>
 		<Variant title="Virtual scroll (500 opts)">
-			<SelectField v-model:value="single" label="Pick one" :options="big" show-search />
+			<SelectField
+				v-model:value="single"
+				label="Pick one"
+				:options="big"
+				show-search
+			/>
 		</Variant>
 		<Variant title="Loading">
-			<SelectField v-model:value="single" label="Async" :options="[]" loading />
+			<SelectField
+				v-model:value="single"
+				label="Async"
+				:options="[]"
+				loading
+			/>
 		</Variant>
 	</Story>
 </template>

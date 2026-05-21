@@ -9,13 +9,28 @@ const n = ref<number | null>(5);
 			<InputNumberField v-model:value="n" label="Quantity" />
 		</Variant>
 		<Variant title="Min/Max + step">
-			<InputNumberField v-model:value="n" label="Volume" :min="0" :max="10" :step="2" />
+			<InputNumberField
+				v-model:value="n"
+				label="Volume"
+				:min="0"
+				:max="10"
+				:step="2"
+			/>
 		</Variant>
 		<Variant title="Precision (2dp)">
-			<InputNumberField v-model:value="n" label="Price" :step="0.1" :precision="2" />
+			<InputNumberField
+				v-model:value="n"
+				label="Price"
+				:step="0.1"
+				:precision="2"
+			/>
 		</Variant>
 		<Variant title="No controls">
-			<InputNumberField v-model:value="n" label="Pages" :controls="false" />
+			<InputNumberField
+				v-model:value="n"
+				label="Pages"
+				:controls="false"
+			/>
 		</Variant>
 	</Story>
 </template>

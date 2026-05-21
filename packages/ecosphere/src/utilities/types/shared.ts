@@ -3,7 +3,12 @@
 // so consumers can import `EpSize` / `EpStatus` / `EpHue` without pulling the
 // full legacy type surface.
 
-export type EpStatus = "default" | "error" | "warning" | "success" | "information";
+export type EpStatus =
+	| "default"
+	| "error"
+	| "warning"
+	| "success"
+	| "information";
 export const epStatusOptions: EpStatus[] = [
 	"default",
 	"error",

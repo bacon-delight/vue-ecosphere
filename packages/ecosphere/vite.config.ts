@@ -19,19 +19,6 @@ export default defineConfig({
 			"@": fileURLToPath(new URL("./src", import.meta.url)),
 		},
 	},
-	css: {
-		preprocessorOptions: {
-			scss: {
-				additionalData: `@import "@/styles/framework.scss";`,
-				api: "modern-compiler",
-				silenceDeprecations: [
-					"legacy-js-api",
-					"import",
-					"global-builtin",
-				],
-			},
-		},
-	},
 	build: {
 		cssCodeSplit: false,
 		sourcemap: true,

@@ -67,11 +67,7 @@ export interface CheckboxOption {
 	hidden?: boolean;
 }
 
-export type CheckboxOptionLike =
-	| CheckboxOption
-	| string
-	| number
-	| boolean;
+export type CheckboxOptionLike = CheckboxOption | string | number | boolean;
 
 export type CheckboxGroupAlignment = "flex" | "vertical" | "grid";
 export type DataEntryState = "default" | "error" | "warning" | "success";
@@ -117,12 +113,16 @@ const assistId = useEpId("ep-checkbox-group-assist");
 
 const normalizedOptions = computed<CheckboxOption[]>(() =>
 	props.options
-		.map((opt): CheckboxOption =>
-			typeof opt === "object" && opt !== null && "label" in opt
-				? (opt as CheckboxOption)
-				: { label: String(opt), value: opt as string | number | boolean },
+		.map(
+			(opt): CheckboxOption =>
+				typeof opt === "object" && opt !== null && "label" in opt
+					? (opt as CheckboxOption)
+					: {
+							label: String(opt),
+							value: opt as string | number | boolean,
+						}
 		)
-		.filter((opt) => !opt.hidden),
+		.filter((opt) => !opt.hidden)
 );
 
 function handleUpdate(next: boolean | CheckboxGroupValue) {

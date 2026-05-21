@@ -1,62 +1,86 @@
 <template>
-	<div class="menu">
+	<ul
+		class="ep-menu"
+		:class="[`ep-menu--${size}`, `ep-menu--${mode}`]"
+		role="menu"
+		:aria-label="ariaLabel"
+	>
 		<MenuItem
-			v-for="option in options"
+			v-for="(option, idx) in options"
+			:key="idx"
 			:option="option"
-			:skeleton="skeleton"
 			:hue="hue"
-			:theme="theme"
-		></MenuItem>
-	</div>
+			:skeleton="skeleton"
+			:collapsed="collapsed"
+		/>
+	</ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
-import type { menu_item, hue, theme } from "../utilities/types.interface";
-import { hue_options, theme_options } from "../utilities/types.interface";
-import MenuItem from "./MenuNavigation/MenuItem.vue";
+<script setup lang="ts">
+import MenuItem, { type MenuItemData } from "./MenuNavigation/MenuItem.vue";
+import { useEpSize } from "../composables/useEpSize";
+import type { EpSize } from "../general/config";
+import type { EpHue } from "../utilities/types/shared";
 
-export default defineComponent({
-	name: "MenuNavigation",
-	components: {
-		MenuItem,
-	},
-	props: {
-		options: {
-			type: Array as PropType<menu_item[]>,
-			required: true,
-		},
-		skeleton: {
-			type: Boolean as PropType<boolean>,
-			default: true,
-		},
-		hue: {
-			type: String as PropType<hue>,
-			default: "information",
-			validator(value: hue): boolean {
-				return hue_options.includes(value);
-			},
-		},
-		theme: {
-			type: String as PropType<theme>,
-			default: "auto",
-			validator(value: theme): boolean {
-				return theme_options.includes(value);
-			},
-		},
-	},
+export type MenuMode = "inline" | "vertical" | "horizontal";
+
+export interface MenuProps {
+	options: MenuItemData[];
+	mode?: MenuMode;
+	hue?: EpHue;
+	size?: EpSize;
+	skeleton?: boolean;
+	collapsed?: boolean;
+	ariaLabel?: string;
+}
+
+const props = withDefaults(defineProps<MenuProps>(), {
+	mode: "inline",
+	hue: "information",
+	size: undefined,
+	skeleton: true,
+	collapsed: false,
+	ariaLabel: "Menu",
 });
+
+const size = useEpSize(() => props.size);
+export type { MenuItemData };
 </script>
 
-<style lang="scss" scoped>
-.menu {
-	background: $color-background;
-	color: $color-contrast;
+<style scoped>
+.ep-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0.25rem;
+	background: var(--ep-color-background);
+	color: var(--ep-color-contrast);
+	font-family: var(--ep-font-family-base);
+	border-radius: var(--ep-radius-base);
 	display: flex;
 	flex-direction: column;
-	row-gap: 0.25rem;
-	padding: 0.25rem;
-	border-radius: $border-radius-standard;
+	row-gap: 0.15rem;
+}
+
+.ep-menu--horizontal {
+	flex-direction: row;
+	column-gap: 0.25rem;
+	row-gap: 0;
+	flex-wrap: wrap;
+}
+
+.ep-menu--xs {
+	font-size: 0.75rem;
+}
+.ep-menu--sm {
+	font-size: 0.875rem;
+}
+.ep-menu--md {
+	font-size: 1rem;
+}
+.ep-menu--lg {
+	font-size: 1.125rem;
+}
+.ep-menu--xl {
+	font-size: 1.25rem;
 }
 </style>

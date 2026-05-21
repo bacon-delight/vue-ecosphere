@@ -67,7 +67,11 @@ const sizes: EpSize[] = ["xs", "sm", "md", "lg", "xl"];
 		</Variant>
 
 		<Variant title="As link">
-			<ButtonComponent label="Open docs" href="https://example.com" target="_blank" />
+			<ButtonComponent
+				label="Open docs"
+				href="https://example.com"
+				target="_blank"
+			/>
 		</Variant>
 	</Story>
 </template>

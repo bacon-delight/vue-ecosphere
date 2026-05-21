@@ -25,7 +25,11 @@
 			@focus="emit('focus', $event)"
 			@blur="emit('blur', $event)"
 		/>
-		<span v-if="optionType === 'default'" class="ep-radio__circle" aria-hidden="true">
+		<span
+			v-if="optionType === 'default'"
+			class="ep-radio__circle"
+			aria-hidden="true"
+		>
 			<span class="ep-radio__dot" />
 		</span>
 		<span class="ep-radio__label">
@@ -195,7 +199,10 @@ function onChange(e: Event) {
 		color: var(--ep-color-secondary);
 	}
 	&--checked.ep-radio--secondary-variant &__circle {
-		border-color: var(--ep-color-secondary-variant, var(--ep-color-secondary));
+		border-color: var(
+			--ep-color-secondary-variant,
+			var(--ep-color-secondary)
+		);
 		color: var(--ep-color-secondary-variant, var(--ep-color-secondary));
 	}
 	&--checked.ep-radio--information &__circle {

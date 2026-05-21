@@ -11,7 +11,9 @@
 			:id="labelId"
 			class="ep-choice-chips__label"
 			:class="state !== 'default' && `ep-choice-chips__label--${state}`"
-		>{{ label }}</div>
+		>
+			{{ label }}
+		</div>
 		<div
 			class="ep-choice-chips__options"
 			:class="`ep-choice-chips__options--${alignment}`"
@@ -25,8 +27,11 @@
 					`ep-choice-chips__chip--${size}`,
 					{
 						'ep-choice-chips__chip--active': isSelected(opt.value),
-						'ep-choice-chips__chip--disabled': opt.disabled || disabled,
-						[`ep-choice-chips__chip--${hue}`]: isSelected(opt.value),
+						'ep-choice-chips__chip--disabled':
+							opt.disabled || disabled,
+						[`ep-choice-chips__chip--${hue}`]: isSelected(
+							opt.value
+						),
 						'ep-choice-chips__chip--bordered': bordered,
 					},
 				]"
@@ -34,7 +39,11 @@
 				:aria-pressed="isSelected(opt.value) ? 'true' : 'false'"
 				@click="toggle(opt)"
 			>
-				<slot name="chip" :option="opt" :selected="isSelected(opt.value)">
+				<slot
+					name="chip"
+					:option="opt"
+					:selected="isSelected(opt.value)"
+				>
 					{{ opt.label }}
 				</slot>
 			</button>
@@ -45,12 +54,16 @@
 			class="ep-choice-chips__alert"
 			:class="`ep-choice-chips__alert--${state}`"
 			role="alert"
-		>{{ alertMessage }}</div>
+		>
+			{{ alertMessage }}
+		</div>
 		<div
 			v-else-if="assistiveText"
 			:id="describedById"
 			class="ep-choice-chips__assistive"
-		>{{ assistiveText }}</div>
+		>
+			{{ assistiveText }}
+		</div>
 	</div>
 </template>
 
@@ -62,10 +75,7 @@ import type { EpSize } from "../general/config";
 import type { EpHue } from "../utilities/types/shared";
 
 export type ChoicePrimitive = string | number | boolean;
-export type ChoiceChipsValue =
-	| ChoicePrimitive
-	| ChoicePrimitive[]
-	| null;
+export type ChoiceChipsValue = ChoicePrimitive | ChoicePrimitive[] | null;
 
 export interface ChoiceOption {
 	label: string;
@@ -125,12 +135,14 @@ function normalize(o: ChoiceOptionLike): ChoiceOption {
 }
 
 const normalizedOptions = computed<ChoiceOption[]>(() =>
-	(props.options || []).map(normalize).filter((o) => !o.hidden),
+	(props.options || []).map(normalize).filter((o) => !o.hidden)
 );
 
 const valuesArray = computed<ChoicePrimitive[]>(() => {
 	if (props.value == null) return [];
-	return Array.isArray(props.value) ? props.value : [props.value as ChoicePrimitive];
+	return Array.isArray(props.value)
+		? props.value
+		: [props.value as ChoicePrimitive];
 });
 
 function isSelected(v: ChoicePrimitive): boolean {
@@ -167,9 +179,15 @@ function toggle(opt: ChoiceOption) {
 		font-size: 0.875rem;
 		font-weight: 500;
 
-		&--error { color: var(--ep-color-error); }
-		&--warning { color: var(--ep-color-warning); }
-		&--success { color: var(--ep-color-success); }
+		&--error {
+			color: var(--ep-color-error);
+		}
+		&--warning {
+			color: var(--ep-color-warning);
+		}
+		&--success {
+			color: var(--ep-color-success);
+		}
 	}
 
 	&__options {
@@ -204,18 +222,36 @@ function toggle(opt: ChoiceOption) {
 		border-radius: var(--ep-radius-pill, 999px);
 		background: var(--ep-color-surface-alt, rgba(0, 0, 0, 0.04));
 		color: var(--ep-color-text, currentColor);
-		transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+		transition:
+			background 0.15s ease,
+			color 0.15s ease,
+			border-color 0.15s ease;
 
 		&--bordered {
 			border: 1px solid var(--ep-color-border, currentColor);
 			background: transparent;
 		}
 
-		&--xs { padding: 0.125rem 0.5rem; font-size: 0.6875rem; }
-		&--sm { padding: 0.1875rem 0.625rem; font-size: 0.75rem; }
-		&--md { padding: 0.25rem 0.75rem; font-size: 0.8125rem; }
-		&--lg { padding: 0.375rem 0.875rem; font-size: 0.9375rem; }
-		&--xl { padding: 0.5rem 1rem; font-size: 1rem; }
+		&--xs {
+			padding: 0.125rem 0.5rem;
+			font-size: 0.6875rem;
+		}
+		&--sm {
+			padding: 0.1875rem 0.625rem;
+			font-size: 0.75rem;
+		}
+		&--md {
+			padding: 0.25rem 0.75rem;
+			font-size: 0.8125rem;
+		}
+		&--lg {
+			padding: 0.375rem 0.875rem;
+			font-size: 0.9375rem;
+		}
+		&--xl {
+			padding: 0.5rem 1rem;
+			font-size: 1rem;
+		}
 
 		&:hover:not(.ep-choice-chips__chip--disabled) {
 			background: var(--ep-color-surface-hover, rgba(0, 0, 0, 0.06));
@@ -237,14 +273,46 @@ function toggle(opt: ChoiceOption) {
 			border-color: var(--ep-color-primary);
 		}
 
-		&--active.ep-choice-chips__chip--primary { background: var(--ep-color-primary); border-color: var(--ep-color-primary); color: var(--ep-color-on-primary, #fff); }
-		&--active.ep-choice-chips__chip--primary-variant { background: var(--ep-color-primary-variant); border-color: var(--ep-color-primary-variant); color: var(--ep-color-on-primary, #fff); }
-		&--active.ep-choice-chips__chip--secondary { background: var(--ep-color-secondary); border-color: var(--ep-color-secondary); color: var(--ep-color-on-secondary, #fff); }
-		&--active.ep-choice-chips__chip--secondary-variant { background: var(--ep-color-secondary-variant); border-color: var(--ep-color-secondary-variant); color: var(--ep-color-on-secondary, #fff); }
-		&--active.ep-choice-chips__chip--information { background: var(--ep-color-information); border-color: var(--ep-color-information); color: #fff; }
-		&--active.ep-choice-chips__chip--success { background: var(--ep-color-success); border-color: var(--ep-color-success); color: #fff; }
-		&--active.ep-choice-chips__chip--warning { background: var(--ep-color-warning); border-color: var(--ep-color-warning); color: #fff; }
-		&--active.ep-choice-chips__chip--error { background: var(--ep-color-error); border-color: var(--ep-color-error); color: #fff; }
+		&--active.ep-choice-chips__chip--primary {
+			background: var(--ep-color-primary);
+			border-color: var(--ep-color-primary);
+			color: var(--ep-color-on-primary, #fff);
+		}
+		&--active.ep-choice-chips__chip--primary-variant {
+			background: var(--ep-color-primary-variant);
+			border-color: var(--ep-color-primary-variant);
+			color: var(--ep-color-on-primary, #fff);
+		}
+		&--active.ep-choice-chips__chip--secondary {
+			background: var(--ep-color-secondary);
+			border-color: var(--ep-color-secondary);
+			color: var(--ep-color-on-secondary, #fff);
+		}
+		&--active.ep-choice-chips__chip--secondary-variant {
+			background: var(--ep-color-secondary-variant);
+			border-color: var(--ep-color-secondary-variant);
+			color: var(--ep-color-on-secondary, #fff);
+		}
+		&--active.ep-choice-chips__chip--information {
+			background: var(--ep-color-information);
+			border-color: var(--ep-color-information);
+			color: #fff;
+		}
+		&--active.ep-choice-chips__chip--success {
+			background: var(--ep-color-success);
+			border-color: var(--ep-color-success);
+			color: #fff;
+		}
+		&--active.ep-choice-chips__chip--warning {
+			background: var(--ep-color-warning);
+			border-color: var(--ep-color-warning);
+			color: #fff;
+		}
+		&--active.ep-choice-chips__chip--error {
+			background: var(--ep-color-error);
+			border-color: var(--ep-color-error);
+			color: #fff;
+		}
 	}
 
 	&__assistive {
@@ -254,9 +322,15 @@ function toggle(opt: ChoiceOption) {
 
 	&__alert {
 		font-size: 0.75rem;
-		&--error { color: var(--ep-color-error); }
-		&--warning { color: var(--ep-color-warning); }
-		&--success { color: var(--ep-color-success); }
+		&--error {
+			color: var(--ep-color-error);
+		}
+		&--warning {
+			color: var(--ep-color-warning);
+		}
+		&--success {
+			color: var(--ep-color-success);
+		}
 	}
 }
 </style>

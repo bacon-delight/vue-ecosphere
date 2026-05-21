@@ -21,11 +21,17 @@
 			{{ label }}
 		</label>
 		<div class="ep-input__row">
-			<div v-if="hasAddonBefore" class="ep-input__addon ep-input__addon--before">
+			<div
+				v-if="hasAddonBefore"
+				class="ep-input__addon ep-input__addon--before"
+			>
 				<slot name="addonBefore">{{ addonBefore }}</slot>
 			</div>
 			<div class="ep-input__wrapper">
-				<span v-if="hasPrefix" class="ep-input__affix ep-input__affix--prefix">
+				<span
+					v-if="hasPrefix"
+					class="ep-input__affix ep-input__affix--prefix"
+				>
 					<slot name="prefix">{{ prefix }}</slot>
 				</span>
 				<input
@@ -47,7 +53,10 @@
 					@focus="emit('focus', $event)"
 					@blur="emit('blur', $event)"
 				/>
-				<span v-if="hasSuffix" class="ep-input__affix ep-input__affix--suffix">
+				<span
+					v-if="hasSuffix"
+					class="ep-input__affix ep-input__affix--suffix"
+				>
 					<button
 						v-if="allowClear && hasValue && !disabled && !readonly"
 						type="button"
@@ -61,11 +70,18 @@
 						v-if="type === 'password'"
 						type="button"
 						class="ep-input__icon-btn"
-						:aria-label="showPassword ? 'Hide password' : 'Show password'"
+						:aria-label="
+							showPassword ? 'Hide password' : 'Show password'
+						"
 						:aria-pressed="showPassword ? 'true' : 'false'"
 						@click="showPassword = !showPassword"
 					>
-						<SVGIcon :name="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'" aria-hidden />
+						<SVGIcon
+							:name="
+								showPassword ? 'ri-eye-off-line' : 'ri-eye-line'
+							"
+							aria-hidden
+						/>
 					</button>
 					<button
 						v-if="type === 'search'"
@@ -79,7 +95,10 @@
 					<slot name="suffix">{{ suffix }}</slot>
 				</span>
 			</div>
-			<div v-if="hasAddonAfter" class="ep-input__addon ep-input__addon--after">
+			<div
+				v-if="hasAddonAfter"
+				class="ep-input__addon ep-input__addon--after"
+			>
 				<slot name="addonAfter">{{ addonAfter }}</slot>
 			</div>
 		</div>
@@ -96,7 +115,10 @@
 				{{ assistiveText }}
 			</div>
 			<div v-if="showCount" class="ep-input__count">
-				{{ currentLength }}<template v-if="maxLength != null"> / {{ maxLength }}</template>
+				{{ currentLength
+				}}<template v-if="maxLength != null">
+					/ {{ maxLength }}</template
+				>
 			</div>
 		</div>
 	</div>
@@ -109,7 +131,13 @@ import { useEpId } from "../composables/useEpId";
 import { useEpSize } from "../composables/useEpSize";
 import type { EpSize } from "../general/config";
 
-export type InputType = "text" | "email" | "password" | "search" | "tel" | "url";
+export type InputType =
+	| "text"
+	| "email"
+	| "password"
+	| "search"
+	| "tel"
+	| "url";
 export type DataEntryState = "default" | "error" | "warning" | "success";
 export type InputValue = string | number | null;
 
@@ -184,15 +212,18 @@ const internalValue = computed<InputValue>({
 });
 
 const fieldType = computed<InputType>(() =>
-	props.type === "password" && showPassword.value ? "text" : props.type,
+	props.type === "password" && showPassword.value ? "text" : props.type
 );
 
 const hasValue = computed(
-	() => internalValue.value !== null && internalValue.value !== "" && internalValue.value !== undefined,
+	() =>
+		internalValue.value !== null &&
+		internalValue.value !== "" &&
+		internalValue.value !== undefined
 );
 
 const currentLength = computed(() =>
-	internalValue.value == null ? 0 : String(internalValue.value).length,
+	internalValue.value == null ? 0 : String(internalValue.value).length
 );
 
 const hasPrefix = computed(() => !!props.prefix || !!slots.prefix);
@@ -202,15 +233,17 @@ const hasSuffix = computed(
 		!!slots.suffix ||
 		props.allowClear ||
 		props.type === "password" ||
-		props.type === "search",
+		props.type === "search"
 );
-const hasAddonBefore = computed(() => !!props.addonBefore || !!slots.addonBefore);
+const hasAddonBefore = computed(
+	() => !!props.addonBefore || !!slots.addonBefore
+);
 const hasAddonAfter = computed(() => !!props.addonAfter || !!slots.addonAfter);
 const hasFooter = computed(
 	() =>
 		(props.alertMessage && props.state !== "default") ||
 		!!props.assistiveText ||
-		props.showCount,
+		props.showCount
 );
 
 function onInput(e: Event) {
@@ -231,7 +264,10 @@ function clearValue() {
 	inputRef.value?.focus();
 }
 
-defineExpose({ focus: () => inputRef.value?.focus(), blur: () => inputRef.value?.blur() });
+defineExpose({
+	focus: () => inputRef.value?.focus(),
+	blur: () => inputRef.value?.blur(),
+});
 </script>
 
 <style scoped>

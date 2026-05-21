@@ -11,7 +11,9 @@ const opts = [
 
 describe("EpSelect", () => {
 	it("renders combobox with aria attributes", () => {
-		const w = mount(SelectField, { props: { label: "Fruit", options: opts, value: null } });
+		const w = mount(SelectField, {
+			props: { label: "Fruit", options: opts, value: null },
+		});
 		const trig = w.find('[role="combobox"]');
 		expect(trig.exists()).toBe(true);
 		expect(trig.attributes("aria-expanded")).toBe("false");
@@ -93,7 +95,12 @@ describe("EpSelect", () => {
 
 	it("clears all on clear button", async () => {
 		const w = mount(SelectField, {
-			props: { label: "x", options: opts, value: "apple", allowClear: true },
+			props: {
+				label: "x",
+				options: opts,
+				value: "apple",
+				allowClear: true,
+			},
 		});
 		await w.find(".ep-select__icon-btn").trigger("click");
 		expect(w.emitted("update:value")?.[0]).toEqual([null]);
@@ -116,9 +123,17 @@ describe("EpSelect", () => {
 
 	it("sets aria-invalid in error state", () => {
 		const w = mount(SelectField, {
-			props: { label: "x", options: opts, value: null, state: "error", alertMessage: "bad" },
+			props: {
+				label: "x",
+				options: opts,
+				value: null,
+				state: "error",
+				alertMessage: "bad",
+			},
 		});
-		expect(w.find('[role="combobox"]').attributes("aria-invalid")).toBe("true");
+		expect(w.find('[role="combobox"]').attributes("aria-invalid")).toBe(
+			"true"
+		);
 	});
 
 	it("has no axe violations", async () => {

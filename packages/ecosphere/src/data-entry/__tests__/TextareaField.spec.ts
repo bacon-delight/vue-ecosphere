@@ -5,7 +5,9 @@ import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("EpTextarea", () => {
 	it("renders textarea with label association", () => {
-		const w = mount(TextareaField, { props: { label: "Notes", value: "" } });
+		const w = mount(TextareaField, {
+			props: { label: "Notes", value: "" },
+		});
 		const ta = w.find("textarea");
 		const label = w.find("label");
 		expect(ta.exists()).toBe(true);
@@ -21,7 +23,9 @@ describe("EpTextarea", () => {
 	});
 
 	it("respects rows prop", () => {
-		const w = mount(TextareaField, { props: { label: "x", value: "", rows: 6 } });
+		const w = mount(TextareaField, {
+			props: { label: "x", value: "", rows: 6 },
+		});
 		expect(w.find("textarea").attributes("rows")).toBe("6");
 	});
 
@@ -34,7 +38,12 @@ describe("EpTextarea", () => {
 
 	it("shows char count", () => {
 		const w = mount(TextareaField, {
-			props: { label: "x", value: "hello", showCount: true, maxLength: 20 },
+			props: {
+				label: "x",
+				value: "hello",
+				showCount: true,
+				maxLength: 20,
+			},
 		});
 		expect(w.find(".ep-input__count").text()).toBe("5 / 20");
 	});
@@ -50,7 +59,12 @@ describe("EpTextarea", () => {
 
 	it("sets aria-invalid in error state", () => {
 		const w = mount(TextareaField, {
-			props: { label: "x", value: "", state: "error", alertMessage: "bad" },
+			props: {
+				label: "x",
+				value: "",
+				state: "error",
+				alertMessage: "bad",
+			},
 		});
 		expect(w.find("textarea").attributes("aria-invalid")).toBe("true");
 		expect(w.find(".ep-input__alert--error").text()).toBe("bad");
@@ -58,7 +72,11 @@ describe("EpTextarea", () => {
 
 	it("has no axe violations", async () => {
 		const w = mount(TextareaField, {
-			props: { label: "Notes", value: "Hello", assistiveText: "Describe" },
+			props: {
+				label: "Notes",
+				value: "Hello",
+				assistiveText: "Describe",
+			},
 			attachTo: document.body,
 		});
 		await expectNoA11yViolations(w.element as HTMLElement);
