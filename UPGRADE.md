@@ -52,6 +52,7 @@
   - [ ] `tailwind.preset.js` (theme extension)
 - [ ] Naming convention enforced via lint: `--ep-primitive-*`, `--ep-*`, `--ep-{component}-*`
 - [ ] Refactor every existing component's SCSS to read **only** `--ep-*` tokens (no raw hex/px)
+
 - [ ] Add `<EpConfigProvider>` (provide/inject `theme`, `size`, `locale`)
 - [ ] Bundle Inter via `@fontsource-variable/inter`; document opt-out via `--ep-font-family-base`
 - [ ] Deprecate `setColors()` / `setFonts()` with console warnings; keep `setTheme()` as `data-theme` toggle
@@ -69,12 +70,13 @@
 - [ ] Add missing props (see component-specific list below)
 - [ ] Add `aria-*` attributes, `focus-visible` ring, keyboard support
 - [ ] Standardize on `v-model:value` (Vue 3 convention)
-- [ ] Unify size enum to `small | middle | large` (warn on legacy)
+- [ ] Unify size enum to `xs | sm | md | lg | xl` across all components
 - [ ] Honor `<EpConfigProvider>` size/locale
 - [ ] Add `.story.vue` for Histoire
 - [ ] Write Vitest unit tests
 - [ ] Add `axe-core` a11y assertion
 - [ ] Update SCSS to consume tokens only
+- [ ] Migrate component styles from SCSS to plain CSS (CSS nesting via Vite 6 PostCSS replaces SCSS nesting; `--ep-*` custom properties replace SCSS variables; no SCSS features remain in component source); remove `sass` from library `devDependencies` — `tokens.scss` output in `packages/tokens/dist/` is still generated for consumers who want it
 
 ### Components (in order)
 - [ ] **Button** (`v-eco-button`) — add `loading`, `block`, `ghost`, `danger`, `htmlType`, `href`, `icon` slot
@@ -217,7 +219,7 @@
 1. Do you want to keep `pug` templates or migrate to plain Vue `<template>`? Pug is now uncommon and adds toolchain weight.
 2. Keep `vue-i18n` for the docs only, or move docs to a static markdown approach (VitePress handles i18n natively)?
 3. Tailwind support as a first-class consumer story, or CSS-vars only?
-4. Acceptable to drop `xs` and `xl` sizes from Button (consolidating to AntD's `small | middle | large`)?
+4. Size scale is `xs | sm | md | lg | xl` — keep all five tiers across all components.
 5. Component naming: keep the `v-eco-` kebab-case prefix, or switch to PascalCase `Ep*` for tree-shakable imports?
 6. Are there private/internal consumers that need a deprecation runway longer than 6 months on `v0.x`?
 

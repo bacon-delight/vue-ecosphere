@@ -45,8 +45,8 @@
 		"build": "vite build && vue-tsc -p tsconfig.build.json",
 		"dev": "vite build --watch",
 		"type-check": "vue-tsc --noEmit -p tsconfig.json",
-		"test": "vitest run --environment jsdom --passWithNoTests",
-		"test:watch": "vitest --environment jsdom --passWithNoTests",
+		"test": "vitest run --passWithNoTests",
+		"test:watch": "vitest --passWithNoTests",
 		"size": "size-limit"
 	},
 	"peerDependencies": {
@@ -61,6 +61,7 @@
 		"@vitejs/plugin-vue": "^5.1.4",
 		"@vue/test-utils": "^2.4.6",
 		"@vue/tsconfig": "^0.5.1",
+		"axe-core": "^4.11.4",
 		"jsdom": "^25.0.1",
 		"sass": "^1.80.6",
 		"size-limit": "^11.1.6",
