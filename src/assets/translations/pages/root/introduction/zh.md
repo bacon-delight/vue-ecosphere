@@ -1,3 +1,0 @@
-# Introduction
-
-Ecosphere design system

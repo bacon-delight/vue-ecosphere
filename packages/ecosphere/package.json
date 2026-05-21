@@ -1,0 +1,75 @@
+{
+	"name": "vue-ecosphere",
+	"version": "0.1.4",
+	"description": "A modern and minimal Vue 3 design system",
+	"keywords": [
+		"vue",
+		"vue3",
+		"design-system",
+		"component-library",
+		"ui-kit"
+	],
+	"license": "MIT",
+	"author": "bacon-delight",
+	"homepage": "https://ecosphere.dev/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bacon-delight/vue-ecosphere.git"
+	},
+	"type": "module",
+	"sideEffects": [
+		"**/*.css",
+		"**/*.scss"
+	],
+	"files": [
+		"dist"
+	],
+	"main": "./dist/vue-ecosphere.umd.cjs",
+	"module": "./dist/vue-ecosphere.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/vue-ecosphere.js",
+			"require": "./dist/vue-ecosphere.umd.cjs"
+		},
+		"./styles": "./dist/vue-ecosphere.css",
+		"./styles/framework.scss": "./src/styles/framework.scss",
+		"./package.json": "./package.json"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"build": "vite build && vue-tsc -p tsconfig.build.json",
+		"dev": "vite build --watch",
+		"type-check": "vue-tsc --noEmit -p tsconfig.json",
+		"test": "vitest run --environment jsdom --passWithNoTests",
+		"test:watch": "vitest --environment jsdom --passWithNoTests",
+		"size": "size-limit"
+	},
+	"peerDependencies": {
+		"vue": "^3.4"
+	},
+	"devDependencies": {
+		"@size-limit/preset-small-lib": "^11.1.6",
+		"@vitejs/plugin-vue": "^5.1.4",
+		"@vue/test-utils": "^2.4.6",
+		"@vue/tsconfig": "^0.5.1",
+		"jsdom": "^25.0.1",
+		"sass": "^1.80.6",
+		"size-limit": "^11.1.6",
+		"vite": "^6.0.0",
+		"vite-plugin-dts": "^4.3.0",
+		"vitest": "^2.1.4",
+		"vue": "^3.5.12"
+	},
+	"size-limit": [
+		{
+			"name": "ESM bundle (gz)",
+			"path": "dist/vue-ecosphere.js",
+			"limit": "60 KB",
+			"gzip": true
+		}
+	]
+}
