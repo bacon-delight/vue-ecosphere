@@ -23,6 +23,7 @@ import EpConfigProvider from "./general/EpConfigProvider.vue";
 
 // Miscellaneous
 import AvatarComponent from "./miscellaneous/AvatarComponent.vue";
+import AvatarGroup from "./miscellaneous/AvatarGroup.vue";
 import StepperComponent from "./miscellaneous/StepperComponent.vue";
 import TagComponent from "./miscellaneous/TagComponent.vue";
 
@@ -62,6 +63,7 @@ export default function registerPluginComponents(app: App) {
 
 	// Miscellaneous
 	app.component("EpAvatar", AvatarComponent);
+	app.component("EpAvatarGroup", AvatarGroup);
 	app.component("EpStepper", StepperComponent);
 	app.component("EpTag", TagComponent);
 

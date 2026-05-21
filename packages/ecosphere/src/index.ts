@@ -23,6 +23,7 @@ import SVGIcon from "./general/SVGIcon.vue";
 import EpConfigProviderComponent from "./general/EpConfigProvider.vue";
 
 import AvatarComponent from "./miscellaneous/AvatarComponent.vue";
+import AvatarGroup from "./miscellaneous/AvatarGroup.vue";
 import StepperComponent from "./miscellaneous/StepperComponent.vue";
 import TagComponent from "./miscellaneous/TagComponent.vue";
 
@@ -55,6 +56,7 @@ export const EpTextarea = TextareaField;
 export const EpIcon = SVGIcon;
 export const EpConfigProvider = EpConfigProviderComponent;
 export const EpAvatar = AvatarComponent;
+export const EpAvatarGroup = AvatarGroup;
 export const EpStepper = StepperComponent;
 export const EpTag = TagComponent;
 export const EpBreadcrumb = BreadcrumbNavigation;
@@ -80,6 +82,7 @@ export {
 	TextareaField,
 	SVGIcon,
 	AvatarComponent,
+	AvatarGroup,
 	StepperComponent,
 	TagComponent,
 	BreadcrumbNavigation,
@@ -117,6 +120,7 @@ declare module "vue" {
 		EpIcon: typeof SVGIcon;
 		EpConfigProvider: typeof EpConfigProviderComponent;
 		EpAvatar: typeof AvatarComponent;
+		EpAvatarGroup: typeof AvatarGroup;
 		EpStepper: typeof StepperComponent;
 		EpTag: typeof TagComponent;
 		EpBreadcrumb: typeof BreadcrumbNavigation;
