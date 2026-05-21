@@ -1,12 +1,8 @@
-<template lang="pug">
-.radio(@click="handleClick", :class="[{ 'radio--disabled': disabled }]")
-	SVGIcon.radio__icon(
-		:class="[value ? `radio__icon--${hue}` : '']",
-		:name="value ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'",
-		:tabindex="disabled ? -1 : 0",
-		@keypress.enter="handleClick"
-	)
-	.radio__label {{ label }}
+<template>
+	<div class="radio" @click="handleClick" :class="[{ 'radio--disabled': disabled }]">
+		<SVGIcon class="radio__icon" :class="[value ? `radio__icon--${hue}` : '']" :name="value ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'" :tabindex="disabled ? -1 : 0" @keypress.enter="handleClick"></SVGIcon>
+		<div class="radio__label">{{ label }}</div>
+	</div>
 </template>
 
 <script lang="ts">

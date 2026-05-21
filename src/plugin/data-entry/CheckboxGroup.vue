@@ -1,29 +1,14 @@
-<template lang="pug">
-.checkbox-group
-	//- Label
-	.checkbox-group__label(:class="[`checkbox-group__label--${state}`]") {{ label }}
-
-	//- Options
-	.checkbox-group__options(:class="[`checkbox-group__options--${alignment}`]")
-		.checkbox-group__field(v-for="(option, index) in options")
-			//- Checkbox
-			CheckboxField(
-				v-if="!option.hidden",
-				:label="option.label",
-				:disabled="option.disabled || disabled",
-				:default="values.includes(index)",
-				:hue="hue",
-				@update="handleClick(index)"
-			)
-
-	//- Alert Message
-	.checkbox-group__alert-message(
-		v-if="alertMessage && state !== 'default'",
-		:class="[`checkbox-group__alert-message--${state}`]"
-	) {{ alertMessage }}
-
-	//- Assistive Text
-	.checkbox-group__assistive-text(v-else) {{ assistiveText }}
+<template>
+	<div class="checkbox-group">
+		<div class="checkbox-group__label" :class="[`checkbox-group__label--${state}`]">{{ label }}</div>
+		<div class="checkbox-group__options" :class="[`checkbox-group__options--${alignment}`]">
+			<div class="checkbox-group__field" v-for="(option, index) in options">
+				<CheckboxField v-if="!option.hidden" :label="option.label" :disabled="option.disabled || disabled" :default="values.includes(index)" :hue="hue" @update="handleClick(index)"></CheckboxField>
+			</div>
+		</div>
+		<div class="checkbox-group__alert-message" v-if="alertMessage && state !== 'default'" :class="[`checkbox-group__alert-message--${state}`]">{{ alertMessage }}</div>
+		<div class="checkbox-group__assistive-text" v-else>{{ assistiveText }}</div>
+	</div>
 </template>
 
 <script lang="ts">

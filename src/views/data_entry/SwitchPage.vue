@@ -1,12 +1,15 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.switch.title") }}
-	.wrapper__body
-		.section
-			.section__flex
-				SwitchComponent(label="Switch Label", :disabled="false", hue="error")
-
-		MarkdownParser(:content="$t('pages.data_entry.switch.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.switch.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<SwitchComponent label="Switch Label" :disabled="false" hue="error"></SwitchComponent>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.switch.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

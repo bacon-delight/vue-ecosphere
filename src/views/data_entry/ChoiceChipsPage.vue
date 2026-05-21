@@ -1,58 +1,26 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.choice_chips.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				ChoiceChips(
-					:label="attributeAlterations.includes('label') ? 'Choice Chips' : ''",
-					:assistive-text="attributeAlterations.includes('assistive-text') ? 'Assistive Text' : ''",
-					:disabled="attributeAlterations.includes('disabled')",
-					:outline="attributeAlterations.includes('outline')",
-					:options="options",
-					:default="attributeAlterations.includes('default') ? [1, 2] : []",
-					:multiple="attributeAlterations.includes('multiple')",
-					:hue="hueAlteration",
-					:size="sizeAlteration",
-					:state="stateAlteration",
-					:alert-message="attributeAlterations.includes('alert-message') ? 'Alert Message' : ''",
-					:alignment="alignmentAlteration",
-					v-model="value"
-				)
-
-		.section
-			.section__subtitle Playground
-			.section__description Customise the options below to see changes on the choice chips
-			.section__playground
-				CheckboxGroup(
-					label="Customise the attributes of the choice chips",
-					:options="attributeAlterationOptions",
-					v-model="attributeAlterations",
-					alignment="flex"
-				)
-				RadioGroup(
-					label="Customise the size of the choice chips",
-					:options="sizeAlterationOptions",
-					v-model="sizeAlteration"
-				)
-				RadioGroup(
-					label="Customise the hue of the choice chips",
-					:options="hueAlterationOptions",
-					v-model="hueAlteration"
-				)
-				RadioGroup(
-					label="Customise the state of the choice chips",
-					:options="stateAlterationOptions",
-					v-model="stateAlteration",
-					alignment="grid"
-				)
-				RadioGroup(
-					label="Customise the alignment of the choice chips",
-					:options="alignmentAlterationOptions",
-					v-model="alignmentAlteration"
-				)
-		MarkdownParser(:content="$t('pages.data_entry.choice_chips.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.choice_chips.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<ChoiceChips :label="attributeAlterations.includes('label') ? 'Choice Chips' : ''" :assistive-text="attributeAlterations.includes('assistive-text') ? 'Assistive Text' : ''" :disabled="attributeAlterations.includes('disabled')" :outline="attributeAlterations.includes('outline')" :options="options" :default="attributeAlterations.includes('default') ? [1, 2] : []" :multiple="attributeAlterations.includes('multiple')" :hue="hueAlteration" :size="sizeAlteration" :state="stateAlteration" :alert-message="attributeAlterations.includes('alert-message') ? 'Alert Message' : ''" :alignment="alignmentAlteration" v-model="value"></ChoiceChips>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">Customise the options below to see changes on the choice chips</div>
+				<div class="section__playground">
+					<CheckboxGroup label="Customise the attributes of the choice chips" :options="attributeAlterationOptions" v-model="attributeAlterations" alignment="flex"></CheckboxGroup>
+					<RadioGroup label="Customise the size of the choice chips" :options="sizeAlterationOptions" v-model="sizeAlteration"></RadioGroup>
+					<RadioGroup label="Customise the hue of the choice chips" :options="hueAlterationOptions" v-model="hueAlteration"></RadioGroup>
+					<RadioGroup label="Customise the state of the choice chips" :options="stateAlterationOptions" v-model="stateAlteration" alignment="grid"></RadioGroup>
+					<RadioGroup label="Customise the alignment of the choice chips" :options="alignmentAlterationOptions" v-model="alignmentAlteration"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.choice_chips.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

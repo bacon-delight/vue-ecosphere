@@ -1,71 +1,27 @@
-<template lang="pug">
-.dropdown(:class="[{ 'dropdown--disabled': disabled }]")
-	//- Dropdown Label
-	.dropdown__label(:class="[`dropdown__label--${state}`]") {{ label }}
-
-	//- Dropdown Wrapper
-	.dropdown__wrapper(:id="dropdownID")
-		input.dropdown__field(
-			:ref="`input_${dropdownID}`",
-			:id="`input_${dropdownID}`",
-			:class="[`dropdown__field--${state}`, { 'dropdown__field--outline': outline }, { 'dropdown__field--selected': value !== null && !showOptions }]",
-			@click="showOptions = true",
-			@focus="showOptions = true",
-			:placeholder="value !== null && !showOptions ? options[value].label : placeholder",
-			v-model="search",
-			type="text"
-		)
-
-		//- Icons
-		.dropdown__icons
-			//- Clear Icon
-			SVGIcon.dropdown__icon(
-				v-if="allowClear",
-				name="ri-close-circle-line",
-				:class="[{ 'dropdown__icon--disabled': disabled }]",
-				@click.stop="clearValue"
-			)
-
-			//- Dropdown Arrow Icon
-			SVGIcon.dropdown__icon(
-				:name="showOptions ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'",
-				@click.stop="toggleDropdown"
-			)
-
-		//- Dropdown Options
-		Transition(name="dropdown-options")
-			.dropdown__options(
-				v-if="showOptions",
-				:class="[`dropdown__options--${expand}`, { 'dropdown__field--outline': outline }]"
-			)
-				//- Dropdown Option
-				.dropdown-option(
-					v-for="option in filteredOptions",
-					:class="[{ 'dropdown-option--disabled': option.disabled }]",
-					:tabindex="option.disabled ? -1 : 0",
-					@click="handleClick(option.index)",
-					@keypress.enter="handleClick(option.index)"
-				)
-					//- Dropdown Option Label
-					.dropdown-option__label(
-						:class="[option.index === value ? `dropdown-option__label--active` : '']"
-					) {{ option.label }}
-
-					//- Active Icon
-					SVGIcon.dropdown-option__icon(
-						name="ri-checkbox-blank-circle-fill",
-						:class="[`dropdown-option__icon--${hue}`, { 'dropdown-option__icon--hidden': !(option.index === value) }]"
-					)
-				//- No Available Options
-				.dropdown__empty(v-if="!filteredOptions.length") No Results
-
-	//- Assistive Text & Alert Message
-	.dropdown__texts
-		.dropdown__alert-message(
-			v-if="alertMessage && state !== 'default'",
-			:class="[`dropdown__alert-message--${state}`]"
-		) {{ alertMessage }}
-		.dropdown__assistive-text(v-else) {{ assistiveText }}
+<template>
+	<div class="dropdown" :class="[{ 'dropdown--disabled': disabled }]">
+		<div class="dropdown__label" :class="[`dropdown__label--${state}`]">{{ label }}</div>
+		<div class="dropdown__wrapper" :id="dropdownID">
+			<input class="dropdown__field" :ref="`input_${dropdownID}`" :id="`input_${dropdownID}`" :class="[`dropdown__field--${state}`, { 'dropdown__field--outline': outline }, { 'dropdown__field--selected': value !== null && !showOptions }]" @click="showOptions = true" @focus="showOptions = true" :placeholder="value !== null && !showOptions ? options[value].label : placeholder" v-model="search" type="text">
+			<div class="dropdown__icons">
+				<SVGIcon class="dropdown__icon" v-if="allowClear" name="ri-close-circle-line" :class="[{ 'dropdown__icon--disabled': disabled }]" @click.stop="clearValue"></SVGIcon>
+				<SVGIcon class="dropdown__icon" :name="showOptions ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'" @click.stop="toggleDropdown"></SVGIcon>
+			</div>
+			<Transition name="dropdown-options">
+				<div class="dropdown__options" v-if="showOptions" :class="[`dropdown__options--${expand}`, { 'dropdown__field--outline': outline }]">
+					<div class="dropdown-option" v-for="option in filteredOptions" :class="[{ 'dropdown-option--disabled': option.disabled }]" :tabindex="option.disabled ? -1 : 0" @click="handleClick(option.index)" @keypress.enter="handleClick(option.index)">
+						<div class="dropdown-option__label" :class="[option.index === value ? `dropdown-option__label--active` : '']">{{ option.label }}</div>
+						<SVGIcon class="dropdown-option__icon" name="ri-checkbox-blank-circle-fill" :class="[`dropdown-option__icon--${hue}`, { 'dropdown-option__icon--hidden': !(option.index === value) }]"></SVGIcon>
+					</div>
+					<div class="dropdown__empty" v-if="!filteredOptions.length">No Results</div>
+				</div>
+			</Transition>
+		</div>
+		<div class="dropdown__texts">
+			<div class="dropdown__alert-message" v-if="alertMessage && state !== 'default'" :class="[`dropdown__alert-message--${state}`]">{{ alertMessage }}</div>
+			<div class="dropdown__assistive-text" v-else>{{ assistiveText }}</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

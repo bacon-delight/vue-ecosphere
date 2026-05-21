@@ -1,31 +1,21 @@
-<template lang="pug">
-.sidebar(:class="[{ 'sidebar--responsive': responsive }]")
-	MenuItem(
-		v-for="option in options",
-		:option="option",
-		:hue="hue",
-		:skeleton="skeleton"
-	)
-
-Teleport(to="body")
-	Transition(name="sidebar-overlay")
-		.overlay(v-if="overlay && responsive", @click="overlay = false")
-			.overlay__menu(@click.stop)
-				MenuItem(
-					v-for="option in options",
-					:option="option",
-					:hue="hue",
-					:skeleton="skeleton",
-					@action="overlay = false"
-				)
-
-Teleport(to="body")
-	Transition(name="trigger-overlay")
-		SVGIcon.trigger(
-			v-if="!overlay && responsive",
-			name="ri-menu-4-line",
-			@click="overlay = true"
-		)
+<template>
+	<div class="sidebar" :class="[{ 'sidebar--responsive': responsive }]">
+		<MenuItem v-for="option in options" :option="option" :hue="hue" :skeleton="skeleton"></MenuItem>
+	</div>
+	<Teleport to="body">
+		<Transition name="sidebar-overlay">
+			<div class="overlay" v-if="overlay && responsive" @click="overlay = false">
+				<div class="overlay__menu" @click.stop>
+					<MenuItem v-for="option in options" :option="option" :hue="hue" :skeleton="skeleton" @action="overlay = false"></MenuItem>
+				</div>
+			</div>
+		</Transition>
+	</Teleport>
+	<Teleport to="body">
+		<Transition name="trigger-overlay">
+			<SVGIcon class="trigger" v-if="!overlay && responsive" name="ri-menu-4-line" @click="overlay = true"></SVGIcon>
+		</Transition>
+	</Teleport>
 </template>
 
 <script lang="ts">

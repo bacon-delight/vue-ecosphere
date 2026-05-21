@@ -1,19 +1,16 @@
-<template lang="pug">
-DynamicBackground.background
-.container
-	.container__navbar &nbsp;
-	.container__content.content
-		img.content__logo(src="logo.png")
-		.content__header {{ $t("pages.landing.title") }}
-		.content__subheader {{ $t("pages.landing.subtitle") }}
-		.content__description {{ $t("pages.landing.description") }}
-		.content__actions
-			ButtonComponent(
-				label="Get Started",
-				@click="$router.push('/introduction')",
-				icon="ri-arrow-right-line",
-				size="sm"
-			)
+<template>
+	<DynamicBackground class="background"></DynamicBackground>
+	<div class="container">
+		<div class="container__navbar">&nbsp;</div>
+		<div class="container__content content"><img class="content__logo" src="logo.png">
+			<div class="content__header">{{ $t("pages.landing.title") }}</div>
+			<div class="content__subheader">{{ $t("pages.landing.subtitle") }}</div>
+			<div class="content__description">{{ $t("pages.landing.description") }}</div>
+			<div class="content__actions">
+				<ButtonComponent label="Get Started" @click="$router.push('/introduction')" icon="ri-arrow-right-line" size="sm"></ButtonComponent>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

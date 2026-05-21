@@ -1,68 +1,29 @@
-<template lang="pug">
-.dropdown(:class="[{ 'dropdown--disabled': disabled }]")
-	//- Dropdown Label
-	.dropdown__label(:class="[`dropdown__label--${state}`]") {{ label }}
-
-	//- Dropdown Wrapper
-	.dropdown__wrapper(:id="dropdownID")
-		//- Dropdown Field
-		.dropdown__field(
-			:tabindex="disabled ? -1 : 0",
-			:class="[`dropdown__field--${state}`, { 'dropdown__field--outline': outline }]",
-			@click="toggleDropdown",
-			@keypress.enter="toggleDropdown"
-		)
-			//- Value or Placeholder
-			.dropdown__value(v-if="value !== null") {{ options[value].label }}
-			.dropdown__placeholder(v-else) {{ placeholder }}
-
-			//- Icons
-			.dropdown__icons
-				//- Clear Icon
-				SVGIcon.dropdown__icon(
-					v-if="allowClear",
-					name="ri-close-circle-line",
-					:class="[{ 'dropdown__icon--disabled': disabled }]",
-					@click.stop="clearValue"
-				)
-
-				//- Dropdown Arrow Icon
-				SVGIcon.dropdown__icon(
-					:name="showOptions ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"
-				)
-
-		//- Dropdown Options
-		Transition(name="dropdown-options")
-			.dropdown__options(
-				v-if="showOptions",
-				:class="[`dropdown__options--${expand}`, { 'dropdown__field--outline': outline }]"
-			)
-				//- Dropdown Option
-				.dropdown-option(
-					v-for="(option, index) in options",
-					:class="[{ 'dropdown-option--disabled': option.disabled }]",
-					:tabindex="option.disabled ? -1 : 0",
-					@click="handleClick(index)",
-					@keypress.enter="handleClick(index)"
-				)
-					//- Dropdown Option Label
-					.dropdown-option__label(
-						:class="[index === value ? `dropdown-option__label--active` : '']"
-					) {{ option.label }}
-
-					//- Active Icon
-					SVGIcon.dropdown-option__icon(
-						name="ri-checkbox-blank-circle-fill",
-						:class="[`dropdown-option__icon--${hue}`, { 'dropdown-option__icon--hidden': !(index === value) }]"
-					)
-
-	//- Assistive Text & Alert Message
-	.dropdown__texts
-		.dropdown__alert-message(
-			v-if="alertMessage && state !== 'default'",
-			:class="[`dropdown__alert-message--${state}`]"
-		) {{ alertMessage }}
-		.dropdown__assistive-text(v-else) {{ assistiveText }}
+<template>
+	<div class="dropdown" :class="[{ 'dropdown--disabled': disabled }]">
+		<div class="dropdown__label" :class="[`dropdown__label--${state}`]">{{ label }}</div>
+		<div class="dropdown__wrapper" :id="dropdownID">
+			<div class="dropdown__field" :tabindex="disabled ? -1 : 0" :class="[`dropdown__field--${state}`, { 'dropdown__field--outline': outline }]" @click="toggleDropdown" @keypress.enter="toggleDropdown">
+				<div class="dropdown__value" v-if="value !== null">{{ options[value].label }}</div>
+				<div class="dropdown__placeholder" v-else>{{ placeholder }}</div>
+				<div class="dropdown__icons">
+					<SVGIcon class="dropdown__icon" v-if="allowClear" name="ri-close-circle-line" :class="[{ 'dropdown__icon--disabled': disabled }]" @click.stop="clearValue"></SVGIcon>
+					<SVGIcon class="dropdown__icon" :name="showOptions ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></SVGIcon>
+				</div>
+			</div>
+			<Transition name="dropdown-options">
+				<div class="dropdown__options" v-if="showOptions" :class="[`dropdown__options--${expand}`, { 'dropdown__field--outline': outline }]">
+					<div class="dropdown-option" v-for="(option, index) in options" :class="[{ 'dropdown-option--disabled': option.disabled }]" :tabindex="option.disabled ? -1 : 0" @click="handleClick(index)" @keypress.enter="handleClick(index)">
+						<div class="dropdown-option__label" :class="[index === value ? `dropdown-option__label--active` : '']">{{ option.label }}</div>
+						<SVGIcon class="dropdown-option__icon" name="ri-checkbox-blank-circle-fill" :class="[`dropdown-option__icon--${hue}`, { 'dropdown-option__icon--hidden': !(index === value) }]"></SVGIcon>
+					</div>
+				</div>
+			</Transition>
+		</div>
+		<div class="dropdown__texts">
+			<div class="dropdown__alert-message" v-if="alertMessage && state !== 'default'" :class="[`dropdown__alert-message--${state}`]">{{ alertMessage }}</div>
+			<div class="dropdown__assistive-text" v-else>{{ assistiveText }}</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

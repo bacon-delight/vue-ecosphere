@@ -1,12 +1,15 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.checkbox.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				CheckboxField(label="Checkbox Option", :disabled="false")
-		MarkdownParser(:content="$t('pages.data_entry.checkbox.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.checkbox.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<CheckboxField label="Checkbox Option" :disabled="false"></CheckboxField>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.checkbox.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

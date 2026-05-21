@@ -1,38 +1,24 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.miscellaneous.tag.title") }}
-	.wrapper__body
-		.section
-			.section__flex
-				TagComponent(
-					label="Label",
-					:size="sizeAlteration",
-					:allow-clear="attributeAlterations.includes('allowClear')",
-					:outline="attributeAlterations.includes('outline')",
-					:hue="hueAlteration"
-				)
-
-		.section
-			.section__subtitle Playground
-			.section__description Customise the options below to see changes on the tag
-			.section__playground
-				CheckboxGroup(
-					label="Customise the attributes of the tag",
-					:options="attributeAlterationOptions",
-					v-model="attributeAlterations",
-					alignment="flex"
-				)
-				RadioGroup(
-					label="Customise the size of the tag",
-					:options="sizeAlterationOptions",
-					v-model="sizeAlteration"
-				)
-				RadioGroup(
-					label="Customise the hue of the tag",
-					:options="hueAlterationOptions",
-					v-model="hueAlteration"
-				)
-		MarkdownParser(:content="$t('pages.miscellaneous.tag.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.miscellaneous.tag.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<TagComponent label="Label" :size="sizeAlteration" :allow-clear="attributeAlterations.includes('allowClear')" :outline="attributeAlterations.includes('outline')" :hue="hueAlteration"></TagComponent>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">Customise the options below to see changes on the tag</div>
+				<div class="section__playground">
+					<CheckboxGroup label="Customise the attributes of the tag" :options="attributeAlterationOptions" v-model="attributeAlterations" alignment="flex"></CheckboxGroup>
+					<RadioGroup label="Customise the size of the tag" :options="sizeAlterationOptions" v-model="sizeAlteration"></RadioGroup>
+					<RadioGroup label="Customise the hue of the tag" :options="hueAlterationOptions" v-model="hueAlteration"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.miscellaneous.tag.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

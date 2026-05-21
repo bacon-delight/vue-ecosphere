@@ -1,18 +1,15 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.checkbox_group.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				CheckboxGroup(
-					label="Select your favourite fruits",
-					assistive-text="Firethorns are inedible, but they're good source for birds!",
-					:options="options",
-					v-model="selections",
-					:default="[2]"
-				)
-		MarkdownParser(:content="$t('pages.data_entry.checkbox_group.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.checkbox_group.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<CheckboxGroup label="Select your favourite fruits" assistive-text="Firethorns are inedible, but they're good source for birds!" :options="options" v-model="selections" :default="[2]"></CheckboxGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.checkbox_group.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

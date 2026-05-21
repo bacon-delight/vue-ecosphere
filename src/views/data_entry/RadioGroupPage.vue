@@ -1,16 +1,15 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.radio_group.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				RadioGroup(
-					label="Select your favourite fruit",
-					assistive-text="Firethorns are inedible, but they're good source for birds!",
-					:options="options"
-				)
-		MarkdownParser(:content="$t('pages.data_entry.radio_group.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.radio_group.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<RadioGroup label="Select your favourite fruit" assistive-text="Firethorns are inedible, but they're good source for birds!" :options="options"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.radio_group.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

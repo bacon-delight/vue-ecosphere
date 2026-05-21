@@ -1,12 +1,8 @@
-<template lang="pug">
-.checkbox(@click="handleClick", :class="[{ 'checkbox--disabled': disabled }]")
-	SVGIcon.checkbox__icon(
-		:class="[value ? `checkbox__icon--${hue}` : '']",
-		:name="value ? 'ri-checkbox-fill' : 'ri-checkbox-blank-line'",
-		:tabindex="disabled ? -1 : 0",
-		@keypress.enter="handleClick"
-	)
-	.checkbox__label {{ label }}
+<template>
+	<div class="checkbox" @click="handleClick" :class="[{ 'checkbox--disabled': disabled }]">
+		<SVGIcon class="checkbox__icon" :class="[value ? `checkbox__icon--${hue}` : '']" :name="value ? 'ri-checkbox-fill' : 'ri-checkbox-blank-line'" :tabindex="disabled ? -1 : 0" @keypress.enter="handleClick"></SVGIcon>
+		<div class="checkbox__label">{{ label }}</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,12 +1,8 @@
-<template lang="pug">
-.switch(@click="handleClick", :class="[{ 'switch--disabled': disabled }]")
-	SVGIcon.switch__icon(
-		:class="[value ? `switch__icon--${hue}` : '']",
-		:name="value ? 'ri-toggle-fill' : 'ri-toggle-line'",
-		:tabindex="disabled ? -1 : 0",
-		@keypress.enter="handleClick"
-	)
-	.switch__label {{ label }}
+<template>
+	<div class="switch" @click="handleClick" :class="[{ 'switch--disabled': disabled }]">
+		<SVGIcon class="switch__icon" :class="[value ? `switch__icon--${hue}` : '']" :name="value ? 'ri-toggle-fill' : 'ri-toggle-line'" :tabindex="disabled ? -1 : 0" @keypress.enter="handleClick"></SVGIcon>
+		<div class="switch__label">{{ label }}</div>
+	</div>
 </template>
 
 <script lang="ts">

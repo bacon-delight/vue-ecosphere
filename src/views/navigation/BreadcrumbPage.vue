@@ -1,11 +1,13 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.navigation.breadcrumb.title") }}
-	.wrapper__body
-		.section
-			BreadcrumbNavigation(:options="options")
-
-		MarkdownParser(:content="$t('pages.navigation.breadcrumb.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.navigation.breadcrumb.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<BreadcrumbNavigation :options="options"></BreadcrumbNavigation>
+			</div>
+			<MarkdownParser :content="$t('pages.navigation.breadcrumb.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

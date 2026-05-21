@@ -1,32 +1,14 @@
-<template lang="pug">
-.choice-chips
-	//- Label
-	.choice-chips__label(:class="[`choice-chips__label--${state}`]") {{ label }}
-
-	//- Options
-	.choice-chips__options(:class="[`choice-chips__options--${alignment}`]")
-		.choice-chips__field(v-for="(option, index) in options")
-			//- Tag
-			TagComponent.choice-chips__tag(
-				v-if="!option.hidden",
-				:label="option.label",
-				:disabled="option.disabled || disabled",
-				:hue="values.includes(index) ? hue : 'auto'",
-				:outline="outline",
-				:tabindex="option.disabled || disabled ? -1 : 0",
-				:size="size",
-				@click="handleClick(index)",
-				@keypress.enter="handleClick(index)"
-			)
-
-	//- Alert Message
-	.choice-chips__alert-message(
-		v-if="alertMessage && state !== 'default'",
-		:class="[`choice-chips__alert-message--${state}`]"
-	) {{ alertMessage }}
-
-	//- Assistive Text
-	.choice-chips__assistive-text(v-else) {{ assistiveText }}
+<template>
+	<div class="choice-chips">
+		<div class="choice-chips__label" :class="[`choice-chips__label--${state}`]">{{ label }}</div>
+		<div class="choice-chips__options" :class="[`choice-chips__options--${alignment}`]">
+			<div class="choice-chips__field" v-for="(option, index) in options">
+				<TagComponent class="choice-chips__tag" v-if="!option.hidden" :label="option.label" :disabled="option.disabled || disabled" :hue="values.includes(index) ? hue : 'auto'" :outline="outline" :tabindex="option.disabled || disabled ? -1 : 0" :size="size" @click="handleClick(index)" @keypress.enter="handleClick(index)"></TagComponent>
+			</div>
+		</div>
+		<div class="choice-chips__alert-message" v-if="alertMessage && state !== 'default'" :class="[`choice-chips__alert-message--${state}`]">{{ alertMessage }}</div>
+		<div class="choice-chips__assistive-text" v-else>{{ assistiveText }}</div>
+	</div>
 </template>
 
 <script lang="ts">

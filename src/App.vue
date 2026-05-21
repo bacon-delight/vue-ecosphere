@@ -1,5 +1,5 @@
-<template lang="pug">
-RouterView
+<template>
+	<RouterView></RouterView>
 </template>
 
 <script lang="ts">

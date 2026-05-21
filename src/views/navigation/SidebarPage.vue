@@ -1,13 +1,15 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.navigation.sidebar.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				SidebarNavigation(:options="options", hue="error")
-
-		MarkdownParser(:content="$t('pages.navigation.sidebar.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.navigation.sidebar.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<SidebarNavigation :options="options" hue="error"></SidebarNavigation>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.navigation.sidebar.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

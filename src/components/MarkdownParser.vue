@@ -1,5 +1,5 @@
-<template lang="pug">
-markdown.markdown(:source="content")
+<template>
+	<markdown class="markdown" :source="content"></markdown>
 </template>
 
 <script lang="ts">

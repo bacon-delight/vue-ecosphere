@@ -1,29 +1,14 @@
-<template lang="pug">
-.radio-group
-	//- Label
-	.radio-group__label(:class="[`radio-group__label--${state}`]") {{ label }}
-
-	//- Options
-	.radio-group__options(:class="[`radio-group__options--${alignment}`]")
-		.radio-group__field(v-for="(option, index) in options")
-			//- Radio Button
-			RadioField(
-				v-if="!option.hidden",
-				:label="option.label",
-				:disabled="option.disabled || disabled",
-				:default="index === value",
-				:hue="hue",
-				@update="handleClick(index)"
-			)
-
-	//- Alert Message
-	.radio-group__alert-message(
-		v-if="alertMessage && state !== 'default'",
-		:class="[`radio-group__alert-message--${state}`]"
-	) {{ alertMessage }}
-
-	//- Assistive Text
-	.radio-group__assistive-text(v-else) {{ assistiveText }}
+<template>
+	<div class="radio-group">
+		<div class="radio-group__label" :class="[`radio-group__label--${state}`]">{{ label }}</div>
+		<div class="radio-group__options" :class="[`radio-group__options--${alignment}`]">
+			<div class="radio-group__field" v-for="(option, index) in options">
+				<RadioField v-if="!option.hidden" :label="option.label" :disabled="option.disabled || disabled" :default="index === value" :hue="hue" @update="handleClick(index)"></RadioField>
+			</div>
+		</div>
+		<div class="radio-group__alert-message" v-if="alertMessage && state !== 'default'" :class="[`radio-group__alert-message--${state}`]">{{ alertMessage }}</div>
+		<div class="radio-group__assistive-text" v-else>{{ assistiveText }}</div>
+	</div>
 </template>
 
 <script lang="ts">

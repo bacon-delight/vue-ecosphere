@@ -1,15 +1,10 @@
-<template lang="pug">
-.breadcrumb(
-	:class="{ 'breadcrumb--outline': outline, 'breadcrumb--expand': !wrap }"
-)
-	.breadcrumb__item(
-		v-for="option in renderOptions",
-		:class="[{ 'breadcrumb__item--active': option.active, 'breadcrumb__item--disabled': option.disabled || disabled }]",
-		:tabindex="option.disabled ? -1 : 0",
-		@click="handleClick(option)"
-	)
-		SVGIcon.breadcrumb__item-icon(v-if="option.icon", :name="option.icon")
-		.breadcrumb__item-label {{ option.label }}
+<template>
+	<div class="breadcrumb" :class="{ 'breadcrumb--outline': outline, 'breadcrumb--expand': !wrap }">
+		<div class="breadcrumb__item" v-for="option in renderOptions" :class="[{ 'breadcrumb__item--active': option.active, 'breadcrumb__item--disabled': option.disabled || disabled }]" :tabindex="option.disabled ? -1 : 0" @click="handleClick(option)">
+			<SVGIcon class="breadcrumb__item-icon" v-if="option.icon" :name="option.icon"></SVGIcon>
+			<div class="breadcrumb__item-label">{{ option.label }}</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

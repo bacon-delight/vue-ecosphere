@@ -1,18 +1,20 @@
-<template lang="pug">
-.layout
-	.layout__navbar
-		NavigationBar(:options="[]", :branding="branding")
-	.layout__body
-		.layout__sidebar
-			SidebarNavigation(
-				:options="options",
-				:skeleton="true",
-				:responsive="true"
-			)
-		#content.layout__content
-			router-view
-			.layout__footer
-				FooterComponent
+<template>
+	<div class="layout">
+		<div class="layout__navbar">
+			<NavigationBar :options="[]" :branding="branding"></NavigationBar>
+		</div>
+		<div class="layout__body">
+			<div class="layout__sidebar">
+				<SidebarNavigation :options="options" :skeleton="true" :responsive="true"></SidebarNavigation>
+			</div>
+			<div class="layout__content" id="content">
+				<router-view></router-view>
+				<div class="layout__footer">
+					<FooterComponent></FooterComponent>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

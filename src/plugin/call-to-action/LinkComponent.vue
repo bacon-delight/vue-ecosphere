@@ -1,8 +1,8 @@
-<template lang="pug">
-a.link(:class="[`link--${hue}`]")
-	SVGIcon.link__icon(v-if="iconPosition === 'before'", :name="icon")
-	.link__label {{ iconPosition === "before" && icon ? "&nbsp;" : "" }} {{ label }} {{ iconPosition === "after" && icon ? "&nbsp;" : "" }}
-	SVGIcon.link__icon(v-if="iconPosition === 'after'", :name="icon")
+<template>
+	<a class="link" :class="[`link--${hue}`]">
+		<SVGIcon class="link__icon" v-if="iconPosition === 'before'" :name="icon"></SVGIcon>
+		<div class="link__label">{{ iconPosition === "before" && icon ? "&nbsp;" : "" }} {{ label }} {{ iconPosition === "after" && icon ? "&nbsp;" : "" }}</div>
+		<SVGIcon class="link__icon" v-if="iconPosition === 'after'" :name="icon"></SVGIcon></a>
 </template>
 
 <script lang="ts">

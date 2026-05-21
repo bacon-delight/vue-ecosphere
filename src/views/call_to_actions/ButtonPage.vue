@@ -1,55 +1,29 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.call_to_actions.button.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				ButtonComponent(label="Primary", hue="primary")
-				ButtonComponent(label="Cancel", hue="error", icon="ri-close-circle-line")
-				ButtonComponent(label="Accept", hue="success", icon="ri-check-double-line")
-				ButtonComponent(label="Disabled", hue="success", :disabled="true")
-
-		.section
-			.section__subtitle Playground
-			ButtonComponent(
-				label="Customise Me!",
-				:size="sizeAlteration",
-				:hue="hueAlteration",
-				:ghost="otherAlterations.includes('ghost')",
-				:disabled="otherAlterations.includes('disabled')",
-				:icon="otherAlterations.includes('icon') ? 'ri-artboard-2-line' : null",
-				:icon-position="iconPositionAlteration"
-			)
-			.section__description Customise the options below to see changes in the button
-			.section__playground
-				RadioGroup(
-					label="Customise the size of the button",
-					:options="sizeAlterationOptions",
-					v-model="sizeAlteration",
-					alignment="flex"
-				)
-				RadioGroup(
-					label="Customise the hue of the button",
-					:options="hueAlterationOptions",
-					v-model="hueAlteration",
-					alignment="flex"
-				)
-				CheckboxGroup(
-					label="Customise the attributes of the button",
-					:options="otherAlterationOptions",
-					v-model="otherAlterations",
-					alignment="flex"
-				)
-				RadioGroup(
-					v-if="otherAlterations.includes('icon')",
-					label="Customise the position of the icon in the button",
-					:options="iconPositionAlterationOptions",
-					v-model="iconPositionAlteration",
-					alignment="grid"
-				)
-
-		MarkdownParser(:content="$t('pages.call_to_actions.button.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.call_to_actions.button.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<ButtonComponent label="Primary" hue="primary"></ButtonComponent>
+					<ButtonComponent label="Cancel" hue="error" icon="ri-close-circle-line"></ButtonComponent>
+					<ButtonComponent label="Accept" hue="success" icon="ri-check-double-line"></ButtonComponent>
+					<ButtonComponent label="Disabled" hue="success" :disabled="true"></ButtonComponent>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<ButtonComponent label="Customise Me!" :size="sizeAlteration" :hue="hueAlteration" :ghost="otherAlterations.includes('ghost')" :disabled="otherAlterations.includes('disabled')" :icon="otherAlterations.includes('icon') ? 'ri-artboard-2-line' : null" :icon-position="iconPositionAlteration"></ButtonComponent>
+				<div class="section__description">Customise the options below to see changes in the button</div>
+				<div class="section__playground">
+					<RadioGroup label="Customise the size of the button" :options="sizeAlterationOptions" v-model="sizeAlteration" alignment="flex"></RadioGroup>
+					<RadioGroup label="Customise the hue of the button" :options="hueAlterationOptions" v-model="hueAlteration" alignment="flex"></RadioGroup>
+					<CheckboxGroup label="Customise the attributes of the button" :options="otherAlterationOptions" v-model="otherAlterations" alignment="flex"></CheckboxGroup>
+					<RadioGroup v-if="otherAlterations.includes('icon')" label="Customise the position of the icon in the button" :options="iconPositionAlterationOptions" v-model="iconPositionAlteration" alignment="grid"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.call_to_actions.button.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

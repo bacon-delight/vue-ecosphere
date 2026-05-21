@@ -1,22 +1,14 @@
-<template lang="pug">
-.footer
-	img.footer__contributors(
-		src="https://contrib.rocks/image?repo=bacon-delight/vue-ecosphere",
-		@click="navigateTo('https://github.com/bacon-delight/vue-ecosphere/graphs/contributors')"
-	)
-	.footer__edit Caught a mistake or want to improve the content on this page?
-	img.footer__logo(src="/logo.png", @click="navigateTo('/')")
-	.footer__brand Ecosphere Design System
-	.footer__description
-		span Released as Open Source under the &nbsp;
-		LinkComponent(
-			label="MIT License",
-			href="https://opensource.org/license/mit/",
-			target="_blank"
-		)
-	.footer__description
-		span Copyright &copy; 2021 - {{ new Date().getFullYear() }} &nbsp;
-		LinkComponent(label="Team Ecosphere", href="/team")
+<template>
+	<div class="footer"><img class="footer__contributors" src="https://contrib.rocks/image?repo=bacon-delight/vue-ecosphere" @click="navigateTo('https://github.com/bacon-delight/vue-ecosphere/graphs/contributors')">
+		<div class="footer__edit">Caught a mistake or want to improve the content on this page?</div><img class="footer__logo" src="/logo.png" @click="navigateTo('/')">
+		<div class="footer__brand">Ecosphere Design System</div>
+		<div class="footer__description"><span>Released as Open Source under the &nbsp;</span>
+			<LinkComponent label="MIT License" href="https://opensource.org/license/mit/" target="_blank"></LinkComponent>
+		</div>
+		<div class="footer__description"><span>Copyright &copy; 2021 - {{ new Date().getFullYear() }} &nbsp;</span>
+			<LinkComponent label="Team Ecosphere" href="/team"></LinkComponent>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

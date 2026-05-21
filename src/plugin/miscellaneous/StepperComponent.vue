@@ -1,29 +1,18 @@
-<template lang="pug">
-.stepper(:class="`stepper--${responsiveOrientation}`", :id="stepperID")
-	.step(
-		:class="[`step--${responsiveOrientation}`, index <= current ? `step-completed step-completed--${responsiveOrientation}` : '']",
-		v-for="(step, index) in steps"
-	)
-		.step__icon(:class="[`step__icon--${stepHue(index)}`]")
-			SVGIcon(
-				v-if="index < current || (index === current && state === 'completed')",
-				name="ri-check-line"
-			)
-			SVGIcon(
-				v-else-if="index === current && state === 'error'",
-				name="ri-close-line"
-			)
-			SVGIcon(
-				v-else-if="index === current && state === 'warning'",
-				name="ri-error-warning-line"
-			)
-			SVGIcon(v-else-if="step.icon", :name="step.icon")
-			span(v-else) {{ index + 1 }}
-		.step__details(:class="`step__details--${responsiveOrientation}`")
-			.step__label(
-				:class="[current === index ? `step__label--${state}` : '', `step__label--${stepHue(index)}`]"
-			) {{ step.label }}
-			.step__description(:class="`step__description--${responsiveOrientation}`") {{ step.description }}
+<template>
+	<div class="stepper" :class="`stepper--${responsiveOrientation}`" :id="stepperID">
+		<div class="step" :class="[`step--${responsiveOrientation}`, index <= current ? `step-completed step-completed--${responsiveOrientation}` : '']" v-for="(step, index) in steps">
+			<div class="step__icon" :class="[`step__icon--${stepHue(index)}`]">
+				<SVGIcon v-if="index < current || (index === current && state === 'completed')" name="ri-check-line"></SVGIcon>
+				<SVGIcon v-else-if="index === current && state === 'error'" name="ri-close-line"></SVGIcon>
+				<SVGIcon v-else-if="index === current && state === 'warning'" name="ri-error-warning-line"></SVGIcon>
+				<SVGIcon v-else-if="step.icon" :name="step.icon"></SVGIcon><span v-else>{{ index + 1 }}</span>
+			</div>
+			<div class="step__details" :class="`step__details--${responsiveOrientation}`">
+				<div class="step__label" :class="[current === index ? `step__label--${state}` : '', `step__label--${stepHue(index)}`]">{{ step.label }}</div>
+				<div class="step__description" :class="`step__description--${responsiveOrientation}`">{{ step.description }}</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

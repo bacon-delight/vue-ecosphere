@@ -1,15 +1,7 @@
-<template lang="pug">
-.navbar
-	img.navbar__logo(
-		v-if="branding.logo",
-		:src="branding.logo",
-		@click="handleBrandingClick"
-	)
-	.navbar__title(
-		v-if="branding.label",
-		:class="`navbar__title--${hue}`",
-		@click="handleBrandingClick"
-	) {{ branding.label }}
+<template>
+	<div class="navbar"><img class="navbar__logo" v-if="branding.logo" :src="branding.logo" @click="handleBrandingClick">
+		<div class="navbar__title" v-if="branding.label" :class="`navbar__title--${hue}`" @click="handleBrandingClick">{{ branding.label }}</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,8 +1,10 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.installation.title") }}
-	.wrapper__body
-		MarkdownParser(:content="$t('pages.installation.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.installation.title") }}</div>
+		<div class="wrapper__body">
+			<MarkdownParser :content="$t('pages.installation.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

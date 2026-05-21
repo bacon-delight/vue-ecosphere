@@ -1,11 +1,8 @@
-<template lang="pug">
-button.button(
-	:class="[`button--${hue}${ghost ? '-ghost' : ''}`, `button--${size}`, { 'button--disabled': disabled }]",
-	:disabled="disabled"
-)
-	SVGIcon(v-if="icon && iconPosition === 'before'", :name="icon")
-	span {{ label }}
-	SVGIcon(v-if="icon && iconPosition === 'after'", :name="icon")
+<template>
+	<button class="button" :class="[`button--${hue}${ghost ? '-ghost' : ''}`, `button--${size}`, { 'button--disabled': disabled }]" :disabled="disabled">
+		<SVGIcon v-if="icon && iconPosition === 'before'" :name="icon"></SVGIcon><span>{{ label }}</span>
+		<SVGIcon v-if="icon && iconPosition === 'after'" :name="icon"></SVGIcon>
+	</button>
 </template>
 
 <script lang="ts">

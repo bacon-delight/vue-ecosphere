@@ -1,30 +1,22 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.color_picker.title") }}
-	.wrapper__body
-		.section
-			.section__flex
-				ColorPicker(
-					:label="attributeAlterations.includes('label') ? 'What is your favourite color?' : null",
-					:outline="attributeAlterations.includes('outline')",
-					:disabled="attributeAlterations.includes('disabled')",
-					:overlay="attributeAlterations.includes('overlay')",
-					:default="attributeAlterations.includes('default') ? '#ff7878' : null",
-					:overlay-color="attributeAlterations.includes('overlayColor') ? '#ade8f4' : '#ffffff'"
-				)
-
-		.section
-			.section__subtitle Playground
-			.section__description Customise the options below to see changes on the color picker
-			.section__playground
-				CheckboxGroup(
-					label="Customise the attributes of the dropdown",
-					:options="attributeAlterationOptions",
-					v-model="attributeAlterations",
-					alignment="flex"
-				)
-
-		MarkdownParser(:content="$t('pages.data_entry.color_picker.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.color_picker.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<ColorPicker :label="attributeAlterations.includes('label') ? 'What is your favourite color?' : null" :outline="attributeAlterations.includes('outline')" :disabled="attributeAlterations.includes('disabled')" :overlay="attributeAlterations.includes('overlay')" :default="attributeAlterations.includes('default') ? '#ff7878' : null" :overlay-color="attributeAlterations.includes('overlayColor') ? '#ade8f4' : '#ffffff'"></ColorPicker>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">Customise the options below to see changes on the color picker</div>
+				<div class="section__playground">
+					<CheckboxGroup label="Customise the attributes of the dropdown" :options="attributeAlterationOptions" v-model="attributeAlterations" alignment="flex"></CheckboxGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.color_picker.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

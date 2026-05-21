@@ -1,17 +1,15 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.call_to_actions.link.title") }}
-	.wrapper__body
-		.section
-			.section__flex
-				LinkComponent(
-					label="Visit GitHub Page",
-					icon="ri-arrow-right-up-line",
-					href="https://github.com/bacon-delight/vue-ecosphere",
-					target="_blank"
-				)
-
-		MarkdownParser(:content="$t('pages.call_to_actions.link.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.call_to_actions.link.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<LinkComponent label="Visit GitHub Page" icon="ri-arrow-right-up-line" href="https://github.com/bacon-delight/vue-ecosphere" target="_blank"></LinkComponent>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.call_to_actions.link.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

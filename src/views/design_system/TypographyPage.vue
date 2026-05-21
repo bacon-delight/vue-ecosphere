@@ -1,8 +1,10 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.design_system.typography.title") }}
-	.wrapper__body
-		MarkdownParser(:content="$t('pages.design_system.typography.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.design_system.typography.title") }}</div>
+		<div class="wrapper__body">
+			<MarkdownParser :content="$t('pages.design_system.typography.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,12 +1,7 @@
-<template lang="pug">
-.menu
-	MenuItem(
-		v-for="option in options",
-		:option="option",
-		:skeleton="skeleton",
-		:hue="hue",
-		:theme="theme"
-	)
+<template>
+	<div class="menu">
+		<MenuItem v-for="option in options" :option="option" :skeleton="skeleton" :hue="hue" :theme="theme"></MenuItem>
+	</div>
 </template>
 
 <script lang="ts">

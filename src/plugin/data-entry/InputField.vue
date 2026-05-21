@@ -1,56 +1,20 @@
-<template lang="pug">
-.input(:class="[{ 'input--disabled': disabled }]")
-	//- Input Label
-	.input__label(:class="[`input__label--${state}`]") {{ label }}
-
-	//- Input Wrapper
-	.input__wrapper
-		//- Input Field
-		input.input__field(
-			:class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]",
-			:type="inputFieldType",
-			:placeholder="placeholder",
-			:disabled="disabled",
-			v-model="value",
-			@input="handleUpdate",
-			:maxlength="maxLength",
-			@keypress.enter="handleEnterPress"
-		)
-
-		//- Icons
-		.input__icons
-			//- Clear Icon
-			SVGIcon.input__icon(
-				v-if="allowClear",
-				name="ri-close-circle-line",
-				:class="[{ 'input__icon--disabled': disabled }]",
-				@click="clearValue"
-			)
-
-			//- Show or Hide Password Icon
-			SVGIcon.input__icon(
-				v-if="type === 'password'",
-				:name="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'",
-				:class="[{ 'input__icon--disabled': disabled }]",
-				@click="showPassword = !showPassword"
-			)
-
-			//- Search Icon
-			SVGIcon.input__icon(
-				v-if="type === 'search'",
-				name="ri-search-2-line",
-				:class="[{ 'input__icon--disabled': disabled }]",
-				@click="handleSearch"
-			)
-
-	//- Input Length, Assistive Text & Alert Message
-	.input__texts
-		.input__alert-message(
-			v-if="alertMessage && state !== 'default'",
-			:class="[`input__alert-message--${state}`]"
-		) {{ alertMessage }}
-		.input__assistive-text(v-else) {{ assistiveText }}
-		.input__assistive-text.input__length(v-if="showLength") {{ inputLengthInformation }}
+<template>
+	<div class="input" :class="[{ 'input--disabled': disabled }]">
+		<div class="input__label" :class="[`input__label--${state}`]">{{ label }}</div>
+		<div class="input__wrapper">
+			<input class="input__field" :class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]" :type="inputFieldType" :placeholder="placeholder" :disabled="disabled" v-model="value" @input="handleUpdate" :maxlength="maxLength" @keypress.enter="handleEnterPress">
+			<div class="input__icons">
+				<SVGIcon class="input__icon" v-if="allowClear" name="ri-close-circle-line" :class="[{ 'input__icon--disabled': disabled }]" @click="clearValue"></SVGIcon>
+				<SVGIcon class="input__icon" v-if="type === 'password'" :name="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'" :class="[{ 'input__icon--disabled': disabled }]" @click="showPassword = !showPassword"></SVGIcon>
+				<SVGIcon class="input__icon" v-if="type === 'search'" name="ri-search-2-line" :class="[{ 'input__icon--disabled': disabled }]" @click="handleSearch"></SVGIcon>
+			</div>
+		</div>
+		<div class="input__texts">
+			<div class="input__alert-message" v-if="alertMessage && state !== 'default'" :class="[`input__alert-message--${state}`]">{{ alertMessage }}</div>
+			<div class="input__assistive-text" v-else>{{ assistiveText }}</div>
+			<div class="input__assistive-text input__length" v-if="showLength">{{ inputLengthInformation }}</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

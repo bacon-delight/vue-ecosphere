@@ -1,46 +1,20 @@
-<template lang="pug">
-.menu-item(
-	v-if="!option.hidden",
-	@click="handleClick",
-	tabindex="0",
-	@keypress.enter="handleClick"
-)
-	//- Menu Item Icon
-	SVGIcon.menu-item__icon(v-if="option.icon", :name="option.icon")
-
-	//- Menu Item Label
-	.menu-item__label {{ option.label }}
-
-	//- Menu Item Indicators
-	.menu-item__indicators
-		//- Arrow Indicator for Nested Menu
-		SVGIcon.menu-item__icon(
-			v-if="option.children",
-			:name="showChildren ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"
-		)
-
-		//- Active Dot
-		SVGIcon.menu-item__icon.menu-item__status(
-			v-if="option.active || !option.children",
-			:class="[`menu-item__icon--${hue}`, { 'menu-item__icon--hidden': !option.active }]",
-			name="ri-checkbox-blank-circle-fill"
-		)
-
-//- Nested Menu
-Transition(name="nested-children")
-	.children(v-if="option.children && showChildren")
-		//- Vertical Bar
-		.children__bar(
-			:class="[`children__bar--${hue}`, { 'children__bar--hidden': !skeleton }]"
-		)
-
-		//- Children
-		.children__items
-			MenuItem(
-				v-for="child in option.children",
-				:option="child",
-				@action="$emit('action')"
-			)
+<template>
+	<div class="menu-item" v-if="!option.hidden" @click="handleClick" tabindex="0" @keypress.enter="handleClick">
+		<SVGIcon class="menu-item__icon" v-if="option.icon" :name="option.icon"></SVGIcon>
+		<div class="menu-item__label">{{ option.label }}</div>
+		<div class="menu-item__indicators">
+			<SVGIcon class="menu-item__icon" v-if="option.children" :name="showChildren ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></SVGIcon>
+			<SVGIcon class="menu-item__icon menu-item__status" v-if="option.active || !option.children" :class="[`menu-item__icon--${hue}`, { 'menu-item__icon--hidden': !option.active }]" name="ri-checkbox-blank-circle-fill"></SVGIcon>
+		</div>
+	</div>
+	<Transition name="nested-children">
+		<div class="children" v-if="option.children && showChildren">
+			<div class="children__bar" :class="[`children__bar--${hue}`, { 'children__bar--hidden': !skeleton }]"></div>
+			<div class="children__items">
+				<MenuItem v-for="child in option.children" :option="child" @action="$emit('action')"></MenuItem>
+			</div>
+		</div>
+	</Transition>
 </template>
 
 <script lang="ts">

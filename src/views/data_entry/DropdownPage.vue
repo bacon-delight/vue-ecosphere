@@ -1,51 +1,24 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.dropdown.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				DropdownField(
-					:label="inputAttributeAlterations.includes('label') ? 'Select your favourite fruit' : null",
-					:placeholder="inputAttributeAlterations.includes('placeholder') ? 'Select an option' : null",
-					:assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Firethorns are inedible, but they are good source for birds!' : null",
-					:options="options",
-					:state="inputStateAlteration",
-					:allow-clear="inputAttributeAlterations.includes('allowClear')",
-					:disabled="inputAttributeAlterations.includes('disabled')",
-					:outline="inputAttributeAlterations.includes('outline')",
-					:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null",
-					:default="inputAttributeAlterations.includes('default') ? 2 : null",
-					:hue="inputHueAlteration",
-					expand="below"
-				)
-
-		.section
-			.section__subtitle Playground
-			.section__description Customise the options below to see changes on the dropdown
-			.section__playground
-				CheckboxGroup(
-					label="Customise the attributes of the dropdown",
-					:options="inputAttributeAlterationOptions",
-					v-model="inputAttributeAlterations",
-					alignment="flex",
-					:assistive-text="inputAttributeAlterationsAssistiveText"
-				)
-				RadioGroup(
-					label="Customise the state of the dropdown",
-					:options="inputStateAlterationOptions",
-					v-model="inputStateAlteration",
-					alignment="grid",
-					:assistive-text="inputStateAlterationsAssistiveText"
-				)
-				RadioGroup(
-					label="Customise the hue of the dropdown",
-					:options="inputHueAlterationOptions",
-					v-model="inputHueAlteration",
-					alignment="flex",
-					assistive-text="The selected option in the dropdown will be highlighted"
-				)
-		MarkdownParser(:content="$t('pages.data_entry.dropdown.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.dropdown.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<DropdownField :label="inputAttributeAlterations.includes('label') ? 'Select your favourite fruit' : null" :placeholder="inputAttributeAlterations.includes('placeholder') ? 'Select an option' : null" :assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Firethorns are inedible, but they are good source for birds!' : null" :options="options" :state="inputStateAlteration" :allow-clear="inputAttributeAlterations.includes('allowClear')" :disabled="inputAttributeAlterations.includes('disabled')" :outline="inputAttributeAlterations.includes('outline')" :alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null" :default="inputAttributeAlterations.includes('default') ? 2 : null" :hue="inputHueAlteration" expand="below"></DropdownField>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">Customise the options below to see changes on the dropdown</div>
+				<div class="section__playground">
+					<CheckboxGroup label="Customise the attributes of the dropdown" :options="inputAttributeAlterationOptions" v-model="inputAttributeAlterations" alignment="flex" :assistive-text="inputAttributeAlterationsAssistiveText"></CheckboxGroup>
+					<RadioGroup label="Customise the state of the dropdown" :options="inputStateAlterationOptions" v-model="inputStateAlteration" alignment="grid" :assistive-text="inputStateAlterationsAssistiveText"></RadioGroup>
+					<RadioGroup label="Customise the hue of the dropdown" :options="inputHueAlterationOptions" v-model="inputHueAlteration" alignment="flex" assistive-text="The selected option in the dropdown will be highlighted"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.dropdown.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,15 +1,8 @@
-<template lang="pug">
-img.avatar__image(
-	v-if="image",
-	:class="[`avatar__image--${size}`, `avatar__image--${hue}`, `avatar__image--${status}`]",
-	:src="image",
-	:alt="initials"
-)
-.avatar(
-	v-else,
-	:class="[`avatar--${size}`, `avatar--${hue}`, `avatar--${status}`]"
-)
-	.avatar__initials {{ initials }}
+<template>
+	<img class="avatar__image" v-if="image" :class="[`avatar__image--${size}`, `avatar__image--${hue}`, `avatar__image--${status}`]" :src="image" :alt="initials">
+	<div class="avatar" v-else :class="[`avatar--${size}`, `avatar--${hue}`, `avatar--${status}`]">
+		<div class="avatar__initials">{{ initials }}</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,51 +1,24 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.data_entry.input.title") }}
-
-	.wrapper__body
-		.section
-			.section__flex
-				InputField(
-					:label="inputAttributeAlterations.includes('label') ? 'Label' : null",
-					:placeholder="inputAttributeAlterations.includes('placeholder') ? 'Placeholder' : null",
-					:type="inputTypeAlteration",
-					:default="inputAttributeAlterations.includes('default') ? 'Default Value' : null",
-					:state="inputStateAlteration",
-					:allow-clear="inputAttributeAlterations.includes('allowClear')",
-					:disabled="inputAttributeAlterations.includes('disabled')",
-					:outline="inputAttributeAlterations.includes('outline')",
-					:max-length="inputAttributeAlterations.includes('maxLength') ? 15 : null",
-					:show-length="inputAttributeAlterations.includes('showLength')",
-					:alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null",
-					:assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Assistive Text' : null"
-				)
-
-		.section
-			.section__subtitle Playground
-			.section__description Customise the options below to see changes on the input field
-			.section__playground
-				RadioGroup(
-					label="Customise the type of the input field",
-					:options="inputTypeAlterationOptions",
-					v-model="inputTypeAlteration",
-					alignment="grid"
-				)
-				CheckboxGroup(
-					label="Customise the attributes of the input field",
-					:options="inputAttributeAlterationOptions",
-					v-model="inputAttributeAlterations",
-					alignment="flex",
-					:assistive-text="inputAttributeAlterationsAssistiveText"
-				)
-				RadioGroup(
-					label="Customise the state of the input field",
-					:options="inputStateAlterationOptions",
-					v-model="inputStateAlteration",
-					alignment="grid",
-					:assistive-text="inputStateAlterationsAssistiveText"
-				)
-
-		MarkdownParser(:content="$t('pages.data_entry.input.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.data_entry.input.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex">
+					<InputField :label="inputAttributeAlterations.includes('label') ? 'Label' : null" :placeholder="inputAttributeAlterations.includes('placeholder') ? 'Placeholder' : null" :type="inputTypeAlteration" :default="inputAttributeAlterations.includes('default') ? 'Default Value' : null" :state="inputStateAlteration" :allow-clear="inputAttributeAlterations.includes('allowClear')" :disabled="inputAttributeAlterations.includes('disabled')" :outline="inputAttributeAlterations.includes('outline')" :max-length="inputAttributeAlterations.includes('maxLength') ? 15 : null" :show-length="inputAttributeAlterations.includes('showLength')" :alert-message="inputAttributeAlterations.includes('alertMessage') ? 'Alert Message' : null" :assistive-text="inputAttributeAlterations.includes('assistiveText') ? 'Assistive Text' : null"></InputField>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">Customise the options below to see changes on the input field</div>
+				<div class="section__playground">
+					<RadioGroup label="Customise the type of the input field" :options="inputTypeAlterationOptions" v-model="inputTypeAlteration" alignment="grid"></RadioGroup>
+					<CheckboxGroup label="Customise the attributes of the input field" :options="inputAttributeAlterationOptions" v-model="inputAttributeAlterations" alignment="flex" :assistive-text="inputAttributeAlterationsAssistiveText"></CheckboxGroup>
+					<RadioGroup label="Customise the state of the input field" :options="inputStateAlterationOptions" v-model="inputStateAlteration" alignment="grid" :assistive-text="inputStateAlterationsAssistiveText"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.data_entry.input.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

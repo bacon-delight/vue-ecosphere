@@ -1,37 +1,16 @@
-<template lang="pug">
-.input(:class="[{ 'input--disabled': disabled }]")
-	//- Input Label
-	.input__label(:class="[`input__label--${state}`]") {{ label }}
-
-	//- Input Wrapper
-	.input__wrapper
-		//- Input Field
-		textarea.input__field(
-			:class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]",
-			:placeholder="placeholder",
-			:disabled="disabled",
-			v-model="value",
-			@input="handleUpdate",
-			:maxlength="maxLength",
-			:rows="rows"
-		)
-
-		//- Clear Icon
-		SVGIcon.input__icon(
-			v-if="allowClear",
-			name="ri-close-circle-line",
-			:class="[{ 'input__icon--disabled': disabled }]",
-			@click="clearValue"
-		)
-
-	//- Assistive Text
-	.input__texts
-		.input__alert-message(
-			v-if="alertMessage && state !== 'default'",
-			:class="[`input__alert-message--${state}`]"
-		) {{ alertMessage }}
-		.input__assistive-text(v-else) {{ assistiveText }}
-		.input__assistive-text.input__length(v-if="showLength") {{ inputLengthInformation }}
+<template>
+	<div class="input" :class="[{ 'input--disabled': disabled }]">
+		<div class="input__label" :class="[`input__label--${state}`]">{{ label }}</div>
+		<div class="input__wrapper">
+			<textarea class="input__field" :class="[`input__field--${state}`, { 'input__field--outline': outline }, { 'input__field--disabled': disabled }]" :placeholder="placeholder" :disabled="disabled" v-model="value" @input="handleUpdate" :maxlength="maxLength" :rows="rows"></textarea>
+			<SVGIcon class="input__icon" v-if="allowClear" name="ri-close-circle-line" :class="[{ 'input__icon--disabled': disabled }]" @click="clearValue"></SVGIcon>
+		</div>
+		<div class="input__texts">
+			<div class="input__alert-message" v-if="alertMessage && state !== 'default'" :class="[`input__alert-message--${state}`]">{{ alertMessage }}</div>
+			<div class="input__assistive-text" v-else>{{ assistiveText }}</div>
+			<div class="input__assistive-text input__length" v-if="showLength">{{ inputLengthInformation }}</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

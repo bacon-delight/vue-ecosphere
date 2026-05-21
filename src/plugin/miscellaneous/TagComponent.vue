@@ -1,17 +1,8 @@
-<template lang="pug">
-.tag(
-	:class="[`tag--${hue}`, `tag--${size}`, outline ? `tag--outline` : '', disabled ? `tag--disabled` : '']"
-)
-	//- Label
-	.tag__label {{ label }}
-
-	//- Clear Icon
-	SVGIcon.tag__icon.tag__icon-clear(
-		v-if="allowClear",
-		name="ri-close-line",
-		tabindex="0",
-		@click="handleClear"
-	)
+<template>
+	<div class="tag" :class="[`tag--${hue}`, `tag--${size}`, outline ? `tag--outline` : '', disabled ? `tag--disabled` : '']">
+		<div class="tag__label">{{ label }}</div>
+		<SVGIcon class="tag__icon tag__icon-clear" v-if="allowClear" name="ri-close-line" tabindex="0" @click="handleClear"></SVGIcon>
+	</div>
 </template>
 
 <script lang="ts">

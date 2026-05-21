@@ -1,49 +1,26 @@
-<template lang="pug">
-.wrapper
-	.wrapper__title {{ $t("pages.miscellaneous.stepper.title") }}
-	.wrapper__body
-		.section
-			.section__flex.stepper-wrapper
-				StepperComponent(
-					:current="currentStepAlteration",
-					:responsive="attributeAlterations.includes('responsive')",
-					:hue="hueAlteration",
-					:orientation="orientationAlteration",
-					:steps="steps",
-					:state="stateAlteration"
-				)
-
-		.section
-			.section__subtitle Playground
-			.section__description Customise the options below to see changes on the stepper
-			.section__playground
-				CheckboxGroup(
-					label="Customise the attributes of the stepper",
-					:options="attributeAlterationOptions",
-					v-model="attributeAlterations",
-					alignment="flex"
-				)
-				RadioGroup(
-					label="Customise the orientation of the stepper",
-					:options="orientationAlterationOptions",
-					v-model="orientationAlteration"
-				)
-				RadioGroup(
-					label="Select the current step of the stepper",
-					:options="currentStepAlterationOptions",
-					v-model="currentStepAlteration"
-				)
-				RadioGroup(
-					label="Select the state of the current step in the stepper",
-					:options="stateAlterationOptions",
-					v-model="stateAlteration"
-				)
-				RadioGroup(
-					label="Customise the hue of the stepper",
-					:options="hueAlterationOptions",
-					v-model="hueAlteration"
-				)
-		MarkdownParser(:content="$t('pages.miscellaneous.stepper.content')")
+<template>
+	<div class="wrapper">
+		<div class="wrapper__title">{{ $t("pages.miscellaneous.stepper.title") }}</div>
+		<div class="wrapper__body">
+			<div class="section">
+				<div class="section__flex stepper-wrapper">
+					<StepperComponent :current="currentStepAlteration" :responsive="attributeAlterations.includes('responsive')" :hue="hueAlteration" :orientation="orientationAlteration" :steps="steps" :state="stateAlteration"></StepperComponent>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section__subtitle">Playground</div>
+				<div class="section__description">Customise the options below to see changes on the stepper</div>
+				<div class="section__playground">
+					<CheckboxGroup label="Customise the attributes of the stepper" :options="attributeAlterationOptions" v-model="attributeAlterations" alignment="flex"></CheckboxGroup>
+					<RadioGroup label="Customise the orientation of the stepper" :options="orientationAlterationOptions" v-model="orientationAlteration"></RadioGroup>
+					<RadioGroup label="Select the current step of the stepper" :options="currentStepAlterationOptions" v-model="currentStepAlteration"></RadioGroup>
+					<RadioGroup label="Select the state of the current step in the stepper" :options="stateAlterationOptions" v-model="stateAlteration"></RadioGroup>
+					<RadioGroup label="Customise the hue of the stepper" :options="hueAlterationOptions" v-model="hueAlteration"></RadioGroup>
+				</div>
+			</div>
+			<MarkdownParser :content="$t('pages.miscellaneous.stepper.content')"></MarkdownParser>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,29 +1,13 @@
-<template lang="pug">
-.tabs__wrapper
-	.tabs(:class="[{ 'tabs--disabled': disabled }]")
-		//- Option
-		.tabs__option(
-			v-for="(option, index) in options",
-			:class="[{ 'tabs__option--disabled': option.disabled, 'tabs__option--vertical': iconPosition === 'above' }, value === index ? `tabs__option--${hue}` : '']",
-			@click="handleClick(index)",
-			@keypress.enter="handleClick(index)",
-			:tabindex="option.disabled || disabled ? -1 : 0"
-		)
-			//- Before or Above Icon
-			SVGIcon.tabs__option-icon(
-				:class="[{ 'tabs__option-icon--above': iconPosition === 'above' }]",
-				v-if="(iconPosition === 'before' || iconPosition === 'above') && option.icon",
-				:name="option.icon"
-			)
-
-			//- Label
-			.tabs__option-label {{ option.label }}
-
-			//- After Icon
-			SVGIcon.tabs__option-icon(
-				v-if="iconPosition === 'after' && option.icon",
-				:name="option.icon"
-			)
+<template>
+	<div class="tabs__wrapper">
+		<div class="tabs" :class="[{ 'tabs--disabled': disabled }]">
+			<div class="tabs__option" v-for="(option, index) in options" :class="[{ 'tabs__option--disabled': option.disabled, 'tabs__option--vertical': iconPosition === 'above' }, value === index ? `tabs__option--${hue}` : '']" @click="handleClick(index)" @keypress.enter="handleClick(index)" :tabindex="option.disabled || disabled ? -1 : 0">
+				<SVGIcon class="tabs__option-icon" :class="[{ 'tabs__option-icon--above': iconPosition === 'above' }]" v-if="(iconPosition === 'before' || iconPosition === 'above') && option.icon" :name="option.icon"></SVGIcon>
+				<div class="tabs__option-label">{{ option.label }}</div>
+				<SVGIcon class="tabs__option-icon" v-if="iconPosition === 'after' && option.icon" :name="option.icon"></SVGIcon>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

@@ -1,18 +1,11 @@
-<template lang="pug">
-.input(:class="[{ 'input--outline': outline, 'input--disabled': disabled }]")
-	//- Input Field
-	input.input__field(
-		type="color",
-		v-model="value",
-		@change="handleChange",
-		:disabled="disabled",
-		tabindex="0"
-	)
-
-	//- Texts
-	.input__texts(:class="[{ 'input__overlay-texts': overlay }]")
-		.input__label(:style="{ color: overlay ? overlayColor : 'inherit' }") {{ label }}
-		.input__color(:style="{ color: overlay ? overlayColor : '#a1a1a1' }") {{ value ? value.toUpperCase() : "#000000" }}
+<template>
+	<div class="input" :class="[{ 'input--outline': outline, 'input--disabled': disabled }]">
+		<input class="input__field" type="color" v-model="value" @change="handleChange" :disabled="disabled" tabindex="0">
+		<div class="input__texts" :class="[{ 'input__overlay-texts': overlay }]">
+			<div class="input__label" :style="{ color: overlay ? overlayColor : 'inherit' }">{{ label }}</div>
+			<div class="input__color" :style="{ color: overlay ? overlayColor : '#a1a1a1' }">{{ value ? value.toUpperCase() : "#000000" }}</div>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
