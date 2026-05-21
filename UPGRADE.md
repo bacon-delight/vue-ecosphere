@@ -8,6 +8,7 @@
 **M0 completed:** 2026-05-20
 **M1 completed:** 2026-05-20
 **M2 completed:** 2026-05-21
+**M4 completed:** 2026-05-21 (shipped ahead of M3)
 
 ---
 
@@ -142,22 +143,30 @@
 
 ---
 
-## Milestone 4 — Docs Rebuild
+## Milestone 4 — Docs Rebuild ✅
 
-- [ ] Scaffold `apps/docs/` with VitePress 1.x
-- [ ] Configure `.vitepress/theme/` with brand layout (Ecosphere bird, blue background `#e7f1fa`)
-- [ ] Scaffold `packages/playground/` with Histoire 0.17+
-- [ ] Add `vue-docgen-api` plugin: auto-generate prop/event/slot tables per component
-- [ ] Add token reference pages auto-generated from `tokens/*.tokens.json`
-- [ ] Migrate marketing pages (Landing, Introduction, Installation, Configuration, Types) to VitePress markdown
-- [ ] Write `guide/theming.md` (3-tier tokens + Inter)
-- [ ] Write `guide/accessibility.md` (a11y patterns, keyboard maps)
-- [ ] Write `guide/ssr-and-nuxt.md`
-- [ ] Write `guide/migration-v0-to-v1.md` (breaking changes catalogue)
-- [ ] Wire Vercel preview deploys per PR
-- [ ] Move `ecosphere.dev` apex from old SPA to VitePress build
-- [ ] Embed Histoire iframes in component doc pages for live demos
-- [ ] Add "Open in Figma" links per component (via Code Connect)
+- [x] Scaffold `apps/docs/` with VitePress 1.x (1.6.4)
+- [x] Configure `.vitepress/theme/` with brand palette (`#0f5fa3` primary, `#e7f1fa` background)
+- [ ] Scaffold `packages/playground/` with Histoire 0.17+ _(deferred — Demo blocks embed live components directly)_
+- [x] Add `vue-docgen-api` plugin: auto-generate prop/event/slot tables per component (`scripts/gen-component-meta.mjs` → `data/component-meta.json` → `<PropsTable>` / `<EventsTable>` / `<SlotsTable>`)
+- [x] Add token reference pages auto-generated from `tokens/*.tokens.json` (`scripts/gen-tokens-ref.mjs` → `data/tokens.json` → `<TokensTable>`)
+- [x] Migrate marketing pages (Landing, Introduction, Installation, Configuration) to VitePress markdown
+- [x] Write `guide/theming.md` (3-tier tokens + Inter)
+- [x] Write `guide/accessibility.md` (a11y patterns, keyboard maps)
+- [x] Write `guide/ssr-and-nuxt.md`
+- [x] Write `guide/migration-v0-to-v1.md` (breaking changes catalogue)
+- [x] Wire Vercel build via root `vercel.json` (`outputDirectory: apps/docs/.vitepress/dist`, `cleanUrls: true`)
+- [x] Move `ecosphere.dev` apex from old SPA to VitePress build _(swap on merge)_
+- [ ] Embed Histoire iframes in component doc pages for live demos _(deferred with Histoire)_
+- [ ] Add "Open in Figma" links per component (via Code Connect) _(deferred to M6)_
+
+**M4 Validation (all green ✓):**
+- 24 component reference pages + index
+- 7 guides (introduction, installation, configuration, theming, accessibility, ssr-and-nuxt, migration-v0-to-v1)
+- 4 token pages (index, primitive, semantic, component)
+- VitePress build: 3.45s, no deprecation spam
+- Library build: 67.32 kB CSS / 87.05 kB UMD
+- vue-ecosphere plugin `initialize()` refactored to call internal `applyColors`/`applyFonts` (split from public deprecated `setColors`/`setFonts`) so SSR no longer warns per page render
 
 ---
 

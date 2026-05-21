@@ -46,16 +46,9 @@ export function setTheme(theme: theme = "auto"): void {
 	applyTheme(theme === "invert" ? "dark" : theme);
 }
 
-/**
- * @deprecated Override `--ep-color-*` CSS custom properties on `:root` (or any
- * scoped ancestor) instead. Will be removed in a future major release.
- */
-export function setColors(colors: unknown_object): void {
-	if (typeof console !== "undefined") {
-		console.warn(
-			'[vue-ecosphere] setColors() is deprecated. Override --ep-color-* CSS variables on :root (or use <EpConfigProvider :colors="...">) instead.'
-		);
-	}
+// Internal — applies color overrides without the deprecation warning.
+// The plugin uses this to set default colors at install time.
+export function applyColors(colors: unknown_object): void {
 	if (typeof document === "undefined") return;
 	const root = document.documentElement;
 	for (const color in colors) {
@@ -64,16 +57,8 @@ export function setColors(colors: unknown_object): void {
 	}
 }
 
-/**
- * @deprecated Override `--ep-font-family-*` CSS custom properties on `:root`
- * instead. Will be removed in a future major release.
- */
-export function setFonts(fonts: unknown_object): void {
-	if (typeof console !== "undefined") {
-		console.warn(
-			"[vue-ecosphere] setFonts() is deprecated. Override --ep-font-family-* CSS variables on :root instead."
-		);
-	}
+// Internal — applies font overrides without the deprecation warning.
+export function applyFonts(fonts: unknown_object): void {
 	if (typeof document === "undefined") return;
 	const root = document.documentElement;
 	for (const font in fonts) {
@@ -84,6 +69,34 @@ export function setFonts(fonts: unknown_object): void {
 			String(fonts[font])
 		);
 	}
+}
+
+/**
+ * @deprecated Override `--ep-color-*` CSS custom properties on `:root` (or any
+ * scoped ancestor) instead. Will be removed in a future major release.
+ */
+export function setColors(colors: unknown_object): void {
+	if (typeof document === "undefined") return;
+	if (typeof console !== "undefined") {
+		console.warn(
+			'[vue-ecosphere] setColors() is deprecated. Override --ep-color-* CSS variables on :root (or use <EpConfigProvider :colors="...">) instead.'
+		);
+	}
+	applyColors(colors);
+}
+
+/**
+ * @deprecated Override `--ep-font-family-*` CSS custom properties on `:root`
+ * instead. Will be removed in a future major release.
+ */
+export function setFonts(fonts: unknown_object): void {
+	if (typeof document === "undefined") return;
+	if (typeof console !== "undefined") {
+		console.warn(
+			"[vue-ecosphere] setFonts() is deprecated. Override --ep-font-family-* CSS variables on :root instead."
+		);
+	}
+	applyFonts(fonts);
 }
 
 export function getTheme(): theme {

@@ -1,6 +1,7 @@
 {
-        "buildCommand": "pnpm --filter vue-ecosphere build && pnpm --filter @vue-ecosphere/docs build",
-        "outputDirectory": "apps/docs/dist",
-        "installCommand": "pnpm install",
-        "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+	"buildCommand": "pnpm --filter vue-ecosphere build && pnpm --filter @vue-ecosphere/docs build",
+	"outputDirectory": "apps/docs/.vitepress/dist",
+	"installCommand": "pnpm install",
+	"cleanUrls": true,
+	"trailingSlash": false
 }

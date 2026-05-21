@@ -47,3 +47,9 @@ graphify-out/.graphify_python
 
 # TypeScript build info
 *.tsbuildinfo
+
+# VitePress build output and generated data
+apps/docs/.vitepress/dist/
+apps/docs/.vitepress/cache/
+apps/docs/data/component-meta.json
+apps/docs/data/tokens.json
