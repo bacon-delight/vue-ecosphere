@@ -52,11 +52,12 @@ jobs:
                         issue_number: prNumber
                       });
 
+                      // Support both our custom comment and Vercel's native bot comment
                       const urlComment = comments.data.find(c =>
-                        c.body.includes('Preview deployed')
+                        c.body.includes('Preview deployed') || c.body.includes('Visit Preview')
                       );
 
-                      const urlMatch = urlComment?.body.match(/\[view live\]\(([^)]+)\)/);
+                      const urlMatch = urlComment?.body.match(/\[(?:view live|Visit Preview)\]\(([^)]+)\)/);
                       const previewUrl = urlMatch?.[1];
 
                       if (!previewUrl) {

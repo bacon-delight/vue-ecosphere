@@ -1,5 +1,4 @@
 import { chromium } from 'playwright';
-import axe from 'axe-core';
 
 export default class PlaywrightClient {
   constructor() {
