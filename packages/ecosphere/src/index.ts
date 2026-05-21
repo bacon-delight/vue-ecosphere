@@ -13,6 +13,7 @@ import ChoiceChips from "./data-entry/ChoiceChips.vue";
 import ColorPicker from "./data-entry/ColorPicker.vue";
 import DropdownField from "./data-entry/DropdownField.vue";
 import InputField from "./data-entry/InputField.vue";
+import InputNumberField from "./data-entry/InputNumberField.vue";
 import RadioField from "./data-entry/RadioField.vue";
 import RadioGroup from "./data-entry/RadioGroup.vue";
 import SearchDropdown from "./data-entry/SearchDropdown.vue";
@@ -48,6 +49,7 @@ export const EpChoiceChips = ChoiceChips;
 export const EpColorPicker = ColorPicker;
 export const EpDropdown = DropdownField;
 export const EpInput = InputField;
+export const EpInputNumber = InputNumberField;
 export const EpRadio = RadioField;
 export const EpRadioGroup = RadioGroup;
 export const EpSearchDropdown = SearchDropdown;
@@ -75,6 +77,7 @@ export {
 	ColorPicker,
 	DropdownField,
 	InputField,
+	InputNumberField,
 	RadioField,
 	RadioGroup,
 	SearchDropdown,
@@ -112,6 +115,7 @@ declare module "vue" {
 		EpColorPicker: typeof ColorPicker;
 		EpDropdown: typeof DropdownField;
 		EpInput: typeof InputField;
+		EpInputNumber: typeof InputNumberField;
 		EpRadio: typeof RadioField;
 		EpRadioGroup: typeof RadioGroup;
 		EpSearchDropdown: typeof SearchDropdown;
