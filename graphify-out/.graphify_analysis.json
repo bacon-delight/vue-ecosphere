@@ -1,0 +1,849 @@
+{
+  "communities": {
+    "0": [
+      "c_avatar_component",
+      "c_breadcrumb_navigation",
+      "c_button_component",
+      "c_checkbox_field",
+      "c_checkbox_group",
+      "c_choice_chips",
+      "c_color_picker",
+      "c_dropdown_field",
+      "c_footer_component",
+      "c_input_field",
+      "c_link_component",
+      "c_markdown_parser",
+      "c_menu_navigation",
+      "c_navigation_bar",
+      "c_radio_field",
+      "c_radio_group",
+      "c_search_dropdown",
+      "c_sidebar_navigation",
+      "c_stepper_component",
+      "c_svg_icon",
+      "c_switch_component",
+      "c_tab_navigation",
+      "c_tag_component",
+      "c_textarea_field",
+      "f_avatar_page",
+      "f_breadcrumb_page",
+      "f_button_page",
+      "f_checkbox_group_page",
+      "f_checkbox_page",
+      "f_choice_chips_page",
+      "f_color_picker_page",
+      "f_colors_page",
+      "f_common_layout",
+      "f_dropdown_page",
+      "f_input_page",
+      "f_link_page",
+      "f_menu_page",
+      "f_navbar_page",
+      "f_radio_group_page",
+      "f_radio_page",
+      "f_search_dropdown_page",
+      "f_sidebar_page",
+      "f_stepper_page",
+      "f_switch_page",
+      "f_tab_navigation_page",
+      "f_tag_page",
+      "f_team_page",
+      "f_textarea_page",
+      "f_typography_page",
+      "u_default_colors",
+      "u_navigation_options"
+    ],
+    "1": [
+      "data_entry_checkboxfield_data",
+      "data_entry_checkboxfield_default",
+      "data_entry_checkboxfield_mounted",
+      "data_entry_colorpicker_data",
+      "data_entry_colorpicker_mounted",
+      "data_entry_dropdownfield_if",
+      "data_entry_inputfield_if",
+      "data_entry_radiofield_data",
+      "data_entry_radiofield_mounted",
+      "data_entry_radiogroup_if",
+      "data_entry_searchdropdown_if",
+      "data_entry_switchcomponent_data",
+      "data_entry_switchcomponent_default",
+      "data_entry_switchcomponent_mounted",
+      "data_entry_textareafield_if",
+      "menunavigation_menuitem_if",
+      "miscellaneous_steppercomponent_if",
+      "navigation_breadcrumbnavigation_if",
+      "navigation_navigationbar_if",
+      "navigation_sidebarnavigation_respond",
+      "navigation_tabnavigation_data",
+      "navigation_tabnavigation_if",
+      "navigation_tabnavigation_mounted",
+      "plugin_plugin_components_registerplugincomponents",
+      "src_plugin_call_to_action_buttoncomponent_vue",
+      "src_plugin_call_to_action_linkcomponent_vue",
+      "src_plugin_data_entry_checkboxfield_vue",
+      "src_plugin_data_entry_checkboxgroup_vue",
+      "src_plugin_data_entry_choicechips_vue",
+      "src_plugin_data_entry_colorpicker_vue",
+      "src_plugin_data_entry_dropdownfield_vue",
+      "src_plugin_data_entry_inputfield_vue",
+      "src_plugin_data_entry_radiofield_vue",
+      "src_plugin_data_entry_radiogroup_vue",
+      "src_plugin_data_entry_searchdropdown_vue",
+      "src_plugin_data_entry_switchcomponent_vue",
+      "src_plugin_data_entry_textareafield_vue",
+      "src_plugin_general_svgicon_vue",
+      "src_plugin_miscellaneous_avatarcomponent_vue",
+      "src_plugin_miscellaneous_steppercomponent_vue",
+      "src_plugin_miscellaneous_tagcomponent_vue",
+      "src_plugin_navigation_breadcrumbnavigation_vue",
+      "src_plugin_navigation_menunavigation_menuitem_vue",
+      "src_plugin_navigation_menunavigation_vue",
+      "src_plugin_navigation_navigationbar_vue",
+      "src_plugin_navigation_sidebarnavigation_vue",
+      "src_plugin_navigation_tabnavigation_vue",
+      "src_plugin_plugin_components_ts"
+    ],
+    "2": [
+      "avatar_component",
+      "avatar_size_type",
+      "avatar_status_type",
+      "checkbox_component",
+      "checkbox_group_component",
+      "checkbox_group_translations",
+      "checkbox_translations",
+      "choice_chips_component",
+      "choice_chips_translations",
+      "choice_option_alignment_type",
+      "choice_option_nested_type",
+      "choice_option_type",
+      "color_map_type",
+      "color_picker_component",
+      "color_picker_translations",
+      "data_entry_category",
+      "data_entry_state_type",
+      "dropdown_component",
+      "hue_type",
+      "input_component",
+      "input_translations",
+      "input_type_type",
+      "miscellaneous_category",
+      "radio_component",
+      "radio_group_component",
+      "radio_group_translations",
+      "search_dropdown_component",
+      "search_dropdown_translations",
+      "stepper_component",
+      "stepper_orientation_type",
+      "stepper_state_type",
+      "stepper_step_type",
+      "switch_component",
+      "switch_translations",
+      "tag_component",
+      "tag_size_type",
+      "textarea_component",
+      "textarea_translations",
+      "theme_type",
+      "theming_helper",
+      "types_page",
+      "types_translations"
+    ],
+    "3": [
+      "d_local_en_md",
+      "f_colors_util_ts",
+      "f_config_page_vue",
+      "f_en_ts",
+      "f_fonts_util_ts",
+      "f_i18n_ts",
+      "f_install_page_vue",
+      "f_interpolate_ts",
+      "f_intro_page_vue",
+      "f_markdown_parser_vue",
+      "f_nav_options_ts",
+      "f_router_index_ts",
+      "f_tr_avatar_ts",
+      "f_tr_breadcrumb_ts",
+      "f_tr_button_ts",
+      "f_tr_colors_ts",
+      "f_tr_dropdown_ts",
+      "f_tr_link_ts",
+      "f_tr_menu_ts",
+      "f_tr_navbar_ts",
+      "f_tr_radio_ts",
+      "f_tr_sidebar_ts",
+      "f_tr_stepper_ts",
+      "f_tr_tabs_ts",
+      "f_tr_tag_ts",
+      "f_tr_typography_ts",
+      "f_types_interface_ts",
+      "f_types_page_vue",
+      "f_zh_ts"
+    ],
+    "4": [
+      "ecosphere_package_devdependencies",
+      "ecosphere_package_devdependencies_eslint",
+      "ecosphere_package_devdependencies_eslint_plugin_vue",
+      "ecosphere_package_devdependencies_jsdom",
+      "ecosphere_package_devdependencies_npm_run_all",
+      "ecosphere_package_devdependencies_pinia",
+      "ecosphere_package_devdependencies_prettier",
+      "ecosphere_package_devdependencies_prettier_plugin_pug",
+      "ecosphere_package_devdependencies_pug",
+      "ecosphere_package_devdependencies_pug_plain_loader",
+      "ecosphere_package_devdependencies_rushstack_eslint_patch",
+      "ecosphere_package_devdependencies_sass",
+      "ecosphere_package_devdependencies_sass_loader",
+      "ecosphere_package_devdependencies_types_jsdom",
+      "ecosphere_package_devdependencies_types_node",
+      "ecosphere_package_devdependencies_typescript",
+      "ecosphere_package_devdependencies_vite",
+      "ecosphere_package_devdependencies_vitejs_plugin_vue",
+      "ecosphere_package_devdependencies_vitest",
+      "ecosphere_package_devdependencies_volar_vue_language_plugin_pug",
+      "ecosphere_package_devdependencies_vue",
+      "ecosphere_package_devdependencies_vue3_markdown_it",
+      "ecosphere_package_devdependencies_vue_eslint_config_prettier",
+      "ecosphere_package_devdependencies_vue_eslint_config_typescript",
+      "ecosphere_package_devdependencies_vue_i18n",
+      "ecosphere_package_devdependencies_vue_language_plugin_pug",
+      "ecosphere_package_devdependencies_vue_test_utils",
+      "ecosphere_package_devdependencies_vue_tsc",
+      "ecosphere_package_devdependencies_vue_tsconfig"
+    ],
+    "5": [
+      "avatar_component_vue",
+      "breadcrumb_navigation_vue",
+      "button_component_vue",
+      "call_to_actions_interface_ts",
+      "checkbox_field_vue",
+      "data_entry_interface_ts",
+      "dynamic_background_vue",
+      "footer_component_vue",
+      "landing_page_vue",
+      "link_component_vue",
+      "menu_item_vue",
+      "menu_navigation_vue",
+      "miscellaneous_interface_ts",
+      "navigation_bar_vue",
+      "navigation_interface_ts",
+      "sidebar_navigation_vue",
+      "stepper_component_vue",
+      "svg_icon_vue",
+      "switch_component_vue",
+      "tab_navigation_vue",
+      "tag_component_vue",
+      "theme_helper_ts",
+      "types_interface_ts"
+    ],
+    "6": [
+      "ecosphere_package_description",
+      "ecosphere_package_files",
+      "ecosphere_package_homepage",
+      "ecosphere_package_license",
+      "ecosphere_package_main",
+      "ecosphere_package_name",
+      "ecosphere_package_private",
+      "ecosphere_package_repository",
+      "ecosphere_package_repository_type",
+      "ecosphere_package_repository_url",
+      "ecosphere_package_scripts",
+      "ecosphere_package_scripts_build",
+      "ecosphere_package_scripts_build_only",
+      "ecosphere_package_scripts_build_preview",
+      "ecosphere_package_scripts_dev",
+      "ecosphere_package_scripts_lint",
+      "ecosphere_package_scripts_preview",
+      "ecosphere_package_scripts_test_unit",
+      "ecosphere_package_scripts_type_check",
+      "ecosphere_package_title",
+      "ecosphere_package_version",
+      "package_json"
+    ],
+    "7": [
+      "breadcrumb_component",
+      "breadcrumb_guide",
+      "button_component",
+      "button_guide",
+      "call_to_actions_category",
+      "colors_guide",
+      "design_system_category",
+      "link_component",
+      "link_icon_position_type",
+      "menu_component",
+      "menu_guide",
+      "navbar_component",
+      "navbar_guide",
+      "navigation_category",
+      "sidebar_component",
+      "sidebar_guide",
+      "tabs_component",
+      "tabs_guide",
+      "typography_guide"
+    ],
+    "8": [
+      "file_app_vue",
+      "file_env_d_ts",
+      "file_main_ts",
+      "file_package_json",
+      "file_plugin_ts",
+      "file_plugins_d_ts",
+      "file_tsconfig_app",
+      "file_tsconfig_config",
+      "file_tsconfig_json",
+      "file_tsconfig_vitest",
+      "file_types_d_ts",
+      "file_vercel_json",
+      "file_vite_config_ts",
+      "pkg_pinia",
+      "pkg_plugin_vue",
+      "pkg_vite",
+      "pkg_vitest",
+      "pkg_vue",
+      "pkg_vue3_markdown_it"
+    ],
+    "9": [
+      "common_layout",
+      "configuration_page",
+      "configuration_translations",
+      "ecosphere_design_system",
+      "ecosphere_package_devdependencies_vue_router",
+      "ecosphere_project",
+      "installation_page",
+      "installation_translations",
+      "introduction_page",
+      "introduction_translations",
+      "landing_page",
+      "root_category",
+      "router_index_router",
+      "src_router_index_ts",
+      "src_views_landingpage_vue",
+      "vue_ecosphere_plugin",
+      "vue_router"
+    ],
+    "10": [
+      "helpers_theme_gettheme",
+      "helpers_theme_setcolors",
+      "helpers_theme_setfonts",
+      "helpers_theme_settheme",
+      "plugin_plugin_initialize",
+      "src_app_mounted",
+      "src_app_vue",
+      "src_assets_translations_i18n_ts",
+      "src_assets_translations_zh_ts",
+      "src_main_app",
+      "src_main_ts",
+      "src_plugin_plugin_ts",
+      "src_plugin_utilities_helpers_theme_ts",
+      "translations_i18n_i18n"
+    ],
+    "11": [
+      "src_plugin_utilities_types_interface_ts",
+      "utilities_types_interface_data_entry_state",
+      "utilities_types_interface_data_entry_state_options",
+      "utilities_types_interface_ecosphere",
+      "utilities_types_interface_hue",
+      "utilities_types_interface_hue_extended",
+      "utilities_types_interface_hue_extended_options",
+      "utilities_types_interface_hue_limited",
+      "utilities_types_interface_hue_limited_options",
+      "utilities_types_interface_hue_options",
+      "utilities_types_interface_theme",
+      "utilities_types_interface_theme_options",
+      "utilities_types_interface_unknown_object"
+    ],
+    "12": [
+      "src_plugin_utilities_types_miscellaneous_interface_ts",
+      "types_miscellaneous_interface_avatar_size",
+      "types_miscellaneous_interface_avatar_size_options",
+      "types_miscellaneous_interface_avatar_status",
+      "types_miscellaneous_interface_avatar_status_options",
+      "types_miscellaneous_interface_stepper_orientation",
+      "types_miscellaneous_interface_stepper_orientation_options",
+      "types_miscellaneous_interface_stepper_state",
+      "types_miscellaneous_interface_stepper_state_options",
+      "types_miscellaneous_interface_stepper_step",
+      "types_miscellaneous_interface_tag_size",
+      "types_miscellaneous_interface_tag_size_options"
+    ],
+    "13": [
+      "file_checkbox_group_vue",
+      "file_choice_chips_vue",
+      "file_color_picker_vue",
+      "file_dropdown_field_vue",
+      "file_input_field_vue",
+      "file_plugin_components_ts",
+      "file_radio_field_vue",
+      "file_radio_group_vue",
+      "file_search_dropdown_vue",
+      "file_textarea_field_vue"
+    ],
+    "14": [
+      "src_plugin_utilities_types_data_entry_interface_ts",
+      "types_data_entry_interface_choice_option",
+      "types_data_entry_interface_choice_option_alignment",
+      "types_data_entry_interface_choice_option_alignment_options",
+      "types_data_entry_interface_choice_option_expand",
+      "types_data_entry_interface_choice_option_expand_options",
+      "types_data_entry_interface_choice_option_filtered",
+      "types_data_entry_interface_choice_option_nested",
+      "types_data_entry_interface_input_type",
+      "types_data_entry_interface_input_type_options"
+    ],
+    "15": [
+      "ecosphere_tsconfig_app_compileroptions",
+      "ecosphere_tsconfig_app_compileroptions_baseurl",
+      "ecosphere_tsconfig_app_compileroptions_composite",
+      "ecosphere_tsconfig_app_compileroptions_paths",
+      "ecosphere_tsconfig_app_exclude",
+      "ecosphere_tsconfig_app_extends",
+      "ecosphere_tsconfig_app_include",
+      "ecosphere_tsconfig_app_paths",
+      "tsconfig_app_json"
+    ],
+    "16": [
+      "src_plugin_utilities_types_navigation_interface_ts",
+      "types_navigation_interface_breadcrumb_item",
+      "types_navigation_interface_breadcrumb_item_compiled",
+      "types_navigation_interface_menu_item",
+      "types_navigation_interface_navbar_branding",
+      "types_navigation_interface_tab_navigation_option",
+      "types_navigation_interface_tab_navigation_option_icon_position",
+      "types_navigation_interface_tab_navigation_option_icon_position_options"
+    ],
+    "17": [
+      "ecosphere_tsconfig_vitest_compileroptions",
+      "ecosphere_tsconfig_vitest_compileroptions_composite",
+      "ecosphere_tsconfig_vitest_compileroptions_lib",
+      "ecosphere_tsconfig_vitest_compileroptions_types",
+      "ecosphere_tsconfig_vitest_exclude",
+      "ecosphere_tsconfig_vitest_extends",
+      "tsconfig_vitest_json"
+    ],
+    "18": [
+      "button_translations_en",
+      "button_translations_translations",
+      "src_assets_translations_en_ts",
+      "src_assets_translations_pages_call_to_actions_button_translations_ts",
+      "src_assets_translations_pages_data_entry_switch_translations_ts",
+      "switch_translations_en",
+      "switch_translations_translations"
+    ],
+    "19": [
+      "ecosphere_tsconfig_exclude",
+      "ecosphere_tsconfig_files",
+      "ecosphere_tsconfig_include",
+      "ecosphere_tsconfig_references",
+      "ecosphere_tsconfig_vuecompileroptions",
+      "ecosphere_tsconfig_vuecompileroptions_plugins",
+      "tsconfig_json"
+    ],
+    "20": [
+      "ecosphere_tsconfig_config_compileroptions",
+      "ecosphere_tsconfig_config_compileroptions_composite",
+      "ecosphere_tsconfig_config_compileroptions_types",
+      "ecosphere_tsconfig_config_extends",
+      "ecosphere_tsconfig_config_include",
+      "tsconfig_config_json"
+    ],
+    "21": [
+      "src_plugin_utilities_types_call_to_actions_interface_ts",
+      "types_call_to_actions_interface_button_size",
+      "types_call_to_actions_interface_button_size_options",
+      "types_call_to_actions_interface_cta_icon_position",
+      "types_call_to_actions_interface_cta_icon_position_options"
+    ],
+    "22": [
+      "src_views_commonlayout_vue",
+      "views_commonlayout_data",
+      "views_commonlayout_mounted",
+      "views_commonlayout_route"
+    ],
+    "23": [
+      "data_entry_dropdownpage_data",
+      "data_entry_dropdownpage_if",
+      "src_views_data_entry_dropdownpage_vue"
+    ],
+    "24": [
+      "data_entry_inputpage_data",
+      "data_entry_inputpage_if",
+      "src_views_data_entry_inputpage_vue"
+    ],
+    "25": [
+      "data_entry_textareapage_data",
+      "data_entry_textareapage_if",
+      "src_views_data_entry_textareapage_vue"
+    ],
+    "26": [
+      "design_system_colorspage_data",
+      "design_system_colorspage_if",
+      "src_views_design_system_colorspage_vue"
+    ],
+    "27": [
+      "file_vscode_extensions_json",
+      "pkg_volar",
+      "pkg_vue_ts_plugin"
+    ],
+    "28": [
+      "src_assets_translations_interpolateliterals_ts",
+      "translations_interpolateliterals_interpolateliterals",
+      "translations_interpolateliterals_literals"
+    ],
+    "29": [
+      "avatar_translations_en",
+      "avatar_translations_translations",
+      "src_assets_translations_pages_miscellaneous_avatar_translations_ts"
+    ],
+    "30": [
+      "breadcrumb_translations_en",
+      "breadcrumb_translations_translations",
+      "src_assets_translations_pages_navigation_breadcrumb_translations_ts"
+    ],
+    "31": [
+      "checkbox_group_translations_en",
+      "checkbox_group_translations_translations",
+      "src_assets_translations_pages_data_entry_checkbox_group_translations_ts"
+    ],
+    "32": [
+      "introduction_translations_en",
+      "introduction_translations_translations",
+      "src_assets_translations_pages_root_introduction_translations_ts"
+    ],
+    "33": [
+      "link_translations_en",
+      "link_translations_translations",
+      "src_assets_translations_pages_call_to_actions_link_translations_ts"
+    ],
+    "34": [
+      "menu_translations_en",
+      "menu_translations_translations",
+      "src_assets_translations_pages_navigation_menu_translations_ts"
+    ],
+    "35": [
+      "radio_group_translations_en",
+      "radio_group_translations_translations",
+      "src_assets_translations_pages_data_entry_radio_group_translations_ts"
+    ],
+    "36": [
+      "radio_translations_en",
+      "radio_translations_translations",
+      "src_assets_translations_pages_data_entry_radio_translations_ts"
+    ],
+    "37": [
+      "checkbox_translations_en",
+      "checkbox_translations_translations",
+      "src_assets_translations_pages_data_entry_checkbox_translations_ts"
+    ],
+    "38": [
+      "choice_chips_translations_en",
+      "choice_chips_translations_translations",
+      "src_assets_translations_pages_data_entry_choice_chips_translations_ts"
+    ],
+    "39": [
+      "color_picker_translations_en",
+      "color_picker_translations_translations",
+      "src_assets_translations_pages_data_entry_color_picker_translations_ts"
+    ],
+    "40": [
+      "dropdown_translations_en",
+      "dropdown_translations_translations",
+      "src_assets_translations_pages_data_entry_dropdown_translations_ts"
+    ],
+    "41": [
+      "input_translations_en",
+      "input_translations_translations",
+      "src_assets_translations_pages_data_entry_input_translations_ts"
+    ],
+    "42": [
+      "search_dropdown_translations_en",
+      "search_dropdown_translations_translations",
+      "src_assets_translations_pages_data_entry_search_dropdown_translations_ts"
+    ],
+    "43": [
+      "colors_translations_en",
+      "colors_translations_translations",
+      "src_assets_translations_pages_design_system_colors_translations_ts"
+    ],
+    "44": [
+      "navbar_translations_en",
+      "navbar_translations_translations",
+      "src_assets_translations_pages_navigation_navbar_translations_ts"
+    ],
+    "45": [
+      "sidebar_translations_en",
+      "sidebar_translations_translations",
+      "src_assets_translations_pages_navigation_sidebar_translations_ts"
+    ],
+    "46": [
+      "configuration_translations_en",
+      "configuration_translations_translations",
+      "src_assets_translations_pages_root_configuration_translations_ts"
+    ],
+    "47": [
+      "installation_translations_en",
+      "installation_translations_translations",
+      "src_assets_translations_pages_root_installation_translations_ts"
+    ],
+    "48": [
+      "src_assets_translations_pages_root_types_translations_ts",
+      "types_translations_en",
+      "types_translations_translations"
+    ],
+    "49": [
+      "src_assets_translations_pages_miscellaneous_stepper_translations_ts",
+      "stepper_translations_en",
+      "stepper_translations_translations"
+    ],
+    "50": [
+      "src_assets_translations_pages_navigation_tabs_translations_ts",
+      "tabs_translations_en",
+      "tabs_translations_translations"
+    ],
+    "51": [
+      "src_assets_translations_pages_miscellaneous_tag_translations_ts",
+      "tag_translations_en",
+      "tag_translations_translations"
+    ],
+    "52": [
+      "src_assets_translations_pages_data_entry_textarea_translations_ts",
+      "textarea_translations_en",
+      "textarea_translations_translations"
+    ],
+    "53": [
+      "src_assets_translations_pages_design_system_typography_translations_ts",
+      "typography_translations_en",
+      "typography_translations_translations"
+    ],
+    "54": [
+      "call_to_actions_buttonpage_data",
+      "src_views_call_to_actions_buttonpage_vue"
+    ],
+    "55": [
+      "data_entry_searchdropdownpage_if",
+      "src_views_data_entry_searchdropdownpage_vue"
+    ],
+    "56": [
+      "ecosphere_vite_config_filename",
+      "vite_config_ts"
+    ],
+    "57": [
+      "miscellaneous_tagpage_data",
+      "src_views_miscellaneous_tagpage_vue"
+    ],
+    "58": [
+      "navigation_breadcrumbpage_data",
+      "src_views_navigation_breadcrumbpage_vue"
+    ],
+    "59": [
+      "navigation_navbarpage_data",
+      "src_views_navigation_navbarpage_vue"
+    ],
+    "60": [
+      "src_assets_utilities_colors_ts",
+      "utilities_colors_colors"
+    ],
+    "61": [
+      "src_assets_utilities_navigation_options_ts",
+      "utilities_navigation_options_navigation_options"
+    ],
+    "62": [
+      "components_footercomponent_if",
+      "src_components_footercomponent_vue"
+    ],
+    "63": [
+      "src_stores_counter_ts",
+      "stores_counter_usecounterstore"
+    ],
+    "64": [
+      "data_entry_checkboxgrouppage_data",
+      "src_views_data_entry_checkboxgrouppage_vue"
+    ],
+    "65": [
+      "data_entry_choicechipspage_data",
+      "src_views_data_entry_choicechipspage_vue"
+    ],
+    "66": [
+      "data_entry_colorpickerpage_data",
+      "src_views_data_entry_colorpickerpage_vue"
+    ],
+    "67": [
+      "data_entry_radiogrouppage_data",
+      "src_views_data_entry_radiogrouppage_vue"
+    ],
+    "68": [
+      "miscellaneous_stepperpage_data",
+      "src_views_miscellaneous_stepperpage_vue"
+    ],
+    "69": [
+      "navigation_menupage_data",
+      "src_views_navigation_menupage_vue"
+    ],
+    "70": [
+      "navigation_sidebarpage_data",
+      "src_views_navigation_sidebarpage_vue"
+    ],
+    "71": [
+      "navigation_tabnavigationpage_data",
+      "src_views_navigation_tabnavigationpage_vue"
+    ],
+    "72": [
+      "ecosphere_types_d_componentcustomproperties",
+      "types_d_ts"
+    ],
+    "73": [
+      "src_assets_utilities_fonts_ts",
+      "utilities_fonts_fonts"
+    ],
+    "74": [
+      "ecosphere_vercel_rewrites",
+      "vercel_json"
+    ],
+    "75": [
+      "vscode_extensions_json",
+      "vscode_extensions_recommendations"
+    ],
+    "76": [
+      "env_d_ts"
+    ],
+    "77": [
+      "prettierrc_json"
+    ],
+    "78": [
+      "plugins_d_ts"
+    ],
+    "79": [
+      "src_components_markdownparser_vue"
+    ],
+    "80": [
+      "src_components_dynamicbackground_vue"
+    ],
+    "81": [
+      "src_views_design_system_typographypage_vue"
+    ],
+    "82": [
+      "src_views_call_to_actions_linkpage_vue"
+    ],
+    "83": [
+      "src_views_about_teampage_vue"
+    ],
+    "84": [
+      "src_views_miscellaneous_avatarpage_vue"
+    ],
+    "85": [
+      "src_views_data_entry_checkboxpage_vue"
+    ],
+    "86": [
+      "src_views_data_entry_switchpage_vue"
+    ],
+    "87": [
+      "src_views_data_entry_radiopage_vue"
+    ],
+    "88": [
+      "src_views_root_typespage_vue"
+    ],
+    "89": [
+      "src_views_root_introductionpage_vue"
+    ],
+    "90": [
+      "src_views_root_installationpage_vue"
+    ],
+    "91": [
+      "src_views_root_configurationpage_vue"
+    ],
+    "92": [
+      "file_prettierrc_json"
+    ],
+    "93": [
+      "counter_store_ts"
+    ],
+    "94": [
+      "markdown_parser_vue"
+    ]
+  },
+  "cohesion": {},
+  "god_nodes": [
+    {
+      "id": "ecosphere_package_scripts",
+      "label": "scripts",
+      "degree": 9
+    },
+    {
+      "id": "ecosphere_tsconfig_app_compileroptions",
+      "label": "compilerOptions",
+      "degree": 4
+    },
+    {
+      "id": "ecosphere_tsconfig_vitest_compileroptions",
+      "label": "compilerOptions",
+      "degree": 4
+    },
+    {
+      "id": "plugin_plugin_initialize",
+      "label": "initialize()",
+      "degree": 4
+    },
+    {
+      "id": "ecosphere_package_repository",
+      "label": "repository",
+      "degree": 3
+    },
+    {
+      "id": "ecosphere_tsconfig_config_compileroptions",
+      "label": "compilerOptions",
+      "degree": 3
+    },
+    {
+      "id": "helpers_theme_settheme",
+      "label": "setTheme()",
+      "degree": 3
+    },
+    {
+      "id": "helpers_theme_setcolors",
+      "label": "setColors()",
+      "degree": 3
+    },
+    {
+      "id": "helpers_theme_setfonts",
+      "label": "setFonts()",
+      "degree": 3
+    },
+    {
+      "id": "ecosphere_tsconfig_app_compileroptions_paths",
+      "label": "paths",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "initialize()",
+      "target": "setTheme()",
+      "source_files": [
+        "src/plugin/plugin.ts",
+        "src/plugin/utilities/helpers/theme.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "initialize()",
+      "target": "setColors()",
+      "source_files": [
+        "src/plugin/plugin.ts",
+        "src/plugin/utilities/helpers/theme.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "initialize()",
+      "target": "setFonts()",
+      "source_files": [
+        "src/plugin/plugin.ts",
+        "src/plugin/utilities/helpers/theme.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    }
+  ]
+}
